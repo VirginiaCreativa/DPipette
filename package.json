@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@babel/core": "7.2.2",
+    "@babel/plugin-transform-react-jsx": "^7.3.0",
     "@firebase/app-types": "^0.3.7",
     "@firebase/util": "^0.2.11",
     "@svgr/webpack": "4.1.0",
