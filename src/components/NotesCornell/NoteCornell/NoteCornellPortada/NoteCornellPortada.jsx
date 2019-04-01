@@ -8,7 +8,8 @@ import classes from './NoteCornellPortada.module.scss';
 const NoteCornellPortada = () => {
   const [isOnImage, setOnImage] = useState(true);
   const childRef = useRef(null);
-  const handleOnFileChange = () => {
+  const handleOnFileChange = ev => {
+    console.log(ev.target.name);
     setOnImage(!isOnImage);
   };
   return (
@@ -17,7 +18,7 @@ const NoteCornellPortada = () => {
         <div className={classes.BoxFile}>
           <input
             type="file"
-            name="imagen"
+            name="imagendestacada"
             className={classes.InputFile}
             onChange={handleOnFileChange}
             ref={childRef}

@@ -1,16 +1,16 @@
 @import '../../../../styles/variables';
 
 .NoteCornellPortada {
-  display: flex;
-  justify-content: center;
-  align-content: center;
-  background-color: $write_gray_1;
   position: relative;
   height: 200px;
-  border: 2px dotted $write_gray_3;
   border-radius: 4px;
 
   .BoxFile {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    background-color: $write_gray_1;
+    border: 2px dotted $write_gray_3;
     position: absolute;
     top: 0;
     left: 0;
