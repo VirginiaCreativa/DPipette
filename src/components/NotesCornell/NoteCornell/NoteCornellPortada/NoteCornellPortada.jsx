@@ -120,6 +120,7 @@ const NoteCornellPortada = ({
     });
   };
 
+  const classUpload = isUploadValue ? classes.BoxUpload : null;
   return (
     <div className={classes.NoteCornellPortada}>
       {isOnImage ? (
@@ -139,6 +140,7 @@ const NoteCornellPortada = ({
         </div>
       ) : (
         <div className={classes.BoxPortada}>
+          <div className={classUpload} />
           <img src={portada} alt={tema} className="img-fluid" />
           <button
             type="button"
