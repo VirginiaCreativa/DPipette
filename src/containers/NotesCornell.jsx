@@ -22,6 +22,7 @@ class NotesCornell extends Component {
       apuntes: [] || null,
       videoResumen: '',
       cover: 'option2',
+      portada: '',
     };
     this.props.firestore
       .add('notescornell', {

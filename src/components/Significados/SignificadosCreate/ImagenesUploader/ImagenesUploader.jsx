@@ -57,7 +57,7 @@ class ImagenesUploader extends Component {
       firebase: { storage },
     } = this.props;
     const metadata = {
-      contentType: 'image/jpeg',
+      contentType: 'image/jpg',
     };
     const storageRef = storage().ref(
       `significados/${this.props.word}/imagenes/${imgFiles.name}`

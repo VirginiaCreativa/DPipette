@@ -6,7 +6,7 @@ import classes from './NotesCornellHome.module.scss';
 
 import CoverClient from '../UI/CoverClient';
 
-const NotesCornellItem = ({ linked, tema, materia, date, cover }) => {
+const NotesCornellItem = ({ linked, tema, materia, date, cover, portada }) => {
   const [isCover, setCover] = useState(cover);
 
   return (
@@ -14,7 +14,7 @@ const NotesCornellItem = ({ linked, tema, materia, date, cover }) => {
       <div className={classes.NotesCornellItem}>
         <span className={classes.TagMateria}>{materia}</span>
         {isCover === 'option1' ? (
-          <CoverClient src="https://image.shutterstock.com/z/stock-photo-smiling-teen-girl-in-a-checkered-shirt-is-sitting-with-a-pencil-near-her-forehead-and-thinking-she-1022860681.jpg" />
+          <CoverClient src={portada} />
         ) : (
           <span className={classes.CoverEmpty} />
         )}

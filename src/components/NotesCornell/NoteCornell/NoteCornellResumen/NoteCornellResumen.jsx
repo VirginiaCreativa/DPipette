@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { firestoreConnect } from 'react-redux-firebase';
 import SkyLight from 'react-skylight';
 import ReactQuill from 'react-quill';
+import CleanUpSpecialChars from '../../../../scripts/CleanUpSpecialChars';
 import classes from './NoteCornellResumen.module.scss';
 import firebase from '../../../../config/FirebaseConfig';
 
