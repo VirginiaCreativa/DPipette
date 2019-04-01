@@ -3,14 +3,27 @@ import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { firestoreConnect } from 'react-redux-firebase';
 import { withRouter } from 'react-router';
+import CleanUpSpecialChars from '../../../../scripts/CleanUpSpecialChars';
 import classes from './NoteCornellPortada.module.scss';
 
-const NoteCornellPortada = () => {
+const NoteCornellPortada = ({ firebase: { storage }, ID, notescornell }) => {
   const [isOnImage, setOnImage] = useState(true);
   const childRef = useRef(null);
   const handleOnFileChange = ev => {
-    console.log(ev.target.name);
-    setOnImage(!isOnImage);
+    const fileUpload = ev.target.files[0];
+    const id = ID;
+    const materiaFB = notescornell[id].materia.toLowerCase();
+    const materia = CleanUpSpecialChars(materiaFB);
+    console.log(materia);
+    // const metadata = {
+    //   contentType: 'image/jpeg',
+    // };
+    // const storageRef = storage().ref(
+    //   `notescornell/${notescornell[id].materia}/${
+    //     notescornell[id].tema
+    //   }/portada/${fileUpload.name}`
+    // );
+    // setOnImage(!isOnImage);
   };
   return (
     <div className={classes.NoteCornellPortada}>

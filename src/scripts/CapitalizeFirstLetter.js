@@ -1,3 +1,4 @@
-const CapitalizeFirstLetter = string =>
-  string.charAt(0).toUpperCase() + string.slice(1);
+function CapitalizeFirstLetter(string) {
+  return string.charAt(0).toUpperCase() + string.slice(1);
+}
 export default CapitalizeFirstLetter;
