@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { firestoreConnect } from 'react-redux-firebase';
@@ -7,18 +7,24 @@ import classes from './NoteCornellPortada.module.scss';
 
 const NoteCornellPortada = () => {
   const [isOnImage, setOnImage] = useState(true);
-  const handleOnImage = () => {
+  const childRef = useRef(null);
+  const handleOnFileChange = () => {
     setOnImage(!isOnImage);
   };
   return (
     <div className={classes.NoteCornellPortada}>
       {isOnImage ? (
-        <div className={classes.BoxButton}>
-          <button
-            type="button"
-            className="btn btn-primary btn-block"
-            onClick={handleOnImage}>
-            Añadir imagen descatada
+        <div className={classes.BoxFile}>
+          <input
+            type="file"
+            name="imagen"
+            className={classes.InputFile}
+            onChange={handleOnFileChange}
+            ref={childRef}
+            accept="image/*"
+          />
+          <button type="button" className="btn btn-primary btn-block">
+            Añadir imagen destacada
           </button>
           <p>Tamaño de imagen: 400x310</p>
         </div>
