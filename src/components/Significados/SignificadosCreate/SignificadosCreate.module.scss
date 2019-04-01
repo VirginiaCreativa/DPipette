@@ -1,0 +1,97 @@
+@import '../../../styles/variables';
+
+.SignificadosCreate {
+  .WrapperForm {
+    background-color: #fff;
+    box-shadow: 0px 0px 4px 0px rgba(47, 53, 66, 0.17);
+    margin-bottom: 40px;
+
+    .Content {
+      padding: 40px 60px 20px;
+
+      :global {
+        .bx {
+          line-height: 1.5;
+        }
+
+        label {
+          font-size: 16px !important;
+          color: $gray_light;
+          margin-bottom: 0;
+          font-weight: 400 !important;
+        }
+
+        input {
+          background: transparent;
+          border: 0;
+          outline: 0;
+          border-bottom: 1px solid $write_gray_3;
+
+          &:focus {
+            border-bottom: 1px solid $blue;
+          }
+
+          &:disabled {
+            background-color: $write_gray_1;
+          }
+        }
+      }
+
+      label {
+        font-size: 18px;
+        font-weight: 400 !important;
+
+        &:after {
+          content: '*';
+          color: $red;
+        }
+      }
+
+      .spaceingBottom {
+        margin-bottom: 1.7rem;
+      }
+
+      .GroupDescrip {
+        position: relative;
+
+        :global {
+          .form-group {
+            margin-bottom: 0 !important;
+          }
+        }
+      }
+
+      .Info {
+        position: relative;
+        left: 5px;
+        font-style: italic;
+
+        p {
+          font-size: 12px;
+          color: $gray_light;
+          margin-top: 6px;
+          margin-bottom: 0;
+        }
+      }
+    }
+
+    .ContentSubmite {
+      padding: 40px 0;
+    }
+  }
+
+  .WrapperVisual {
+    .Title {
+      display: block;
+      font-size: 14px;
+      color: $blue;
+      margin-bottom: 6px;
+      font-weight: 500;
+    }
+
+    .GroupBox {
+      margin-bottom: 10px;
+      padding-left: 26px;
+    }
+  }
+}

@@ -1,0 +1,196 @@
+@import '../../../styles/variables';
+
+.SignificadosMain {
+  margin-bottom: 40px;
+
+  .GridMultiple {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 20px;
+    grid-auto-rows: minmax(50px, auto);
+  }
+
+  a {
+    transition: all 0.25s ease-in;
+
+    &:hover {
+      .BoxLists {
+        transform: scale(1.03);
+      }
+
+      .GroupParagh {
+        &:before {
+          background-color: $color_significados !important;
+        }
+      }
+    }
+  }
+
+  .BoxLists {
+    padding: 30px 20px;
+    transition: all 0.25s ease-in;
+    border-bottom: 1px solid $write_gray_2;
+    // min-height: 220px;
+    border-bottom: 2px solid #e6ecf3;
+    @extend %boxShadowContent;
+    @extend %boxContent;
+
+    .GroupHeading {
+      margin-bottom: 20px;
+
+      h4 {
+        color: $heading;
+        position: relative;
+        margin-bottom: 0;
+
+        &:before {
+          content: '';
+          background-color: $color_significados;
+          position: absolute;
+          top: 2px;
+          left: -20px;
+          width: 4px;
+          height: 22px;
+        }
+      }
+
+      .GridDate {
+        p {
+          font-size: 0.75rem;
+          text-align: right;
+          color: $write_gray_3;
+          margin-bottom: 0;
+        }
+
+        :global {
+          .bx {
+            color: $gray_light;
+            position: relative;
+            top: 2px;
+            margin-right: 4px;
+          }
+        }
+      }
+    }
+
+    .GroupParagh {
+      position: relative;
+      margin-top: 30px;
+      margin-bottom: 20px;
+
+      &:before {
+        content: '';
+        display: block;
+        background-color: $write_gray_2;
+        position: absolute;
+        top: -15px;
+        margin-bottom: 10px;
+        width: 40px;
+        height: 4px;
+        border-radius: 4px;
+      }
+
+      p {
+        font-size: 0.9rem;
+        color: $gray_medium;
+        position: relative;
+        margin-bottom: 5px;
+        padding-left: 15px;
+
+        &:before {
+          content: '';
+          display: block;
+          background-color: $blue;
+          position: absolute;
+          top: 7px;
+          left: 0;
+          width: 4px;
+          height: 4px;
+          border-radius: 100px;
+        }
+      }
+    }
+
+    .Line {
+      display: block;
+      padding: 10px 0;
+      width: 100%;
+      border-top: 1px solid $write_gray_1;
+    }
+
+    .GroupBox {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      align-content: center;
+    }
+
+    .GroupImgs {
+      display: flex;
+      justify-content: flex-start;
+
+      .imgOverflow {
+        display: inline-block;
+        background-color: rgb(243, 242, 242);
+        position: relative;
+        margin-left: -14px;
+        width: 45px;
+        height: 45px;
+        border: 2px solid rgb(243, 242, 242);
+        border-radius: 100px;
+        overflow: hidden;
+        z-index: 0;
+
+        &:first-child {
+          margin-left: 0;
+        }
+
+        img {
+          position: relative;
+          position: relative;
+          top: -10%;
+          left: -10px;
+          left: -50%;
+          max-width: 200%;
+        }
+      }
+    }
+
+    .GroupSinonimos {
+      ul {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        align-content: center;
+        margin: 0;
+        padding: 0;
+        height: 24px;
+
+        li {
+          font-size: 0.8125rem;
+          color: #fff;
+          background-color: $green;
+          margin-bottom: 4px;
+          margin-right: 2px;
+          padding: 2px 6px;
+          border-radius: 2px;
+          font-weight: 500;
+
+          @media screen and (min-width: 1400px) {
+            font-size: 0.75rem;
+          }
+
+          @media screen and (min-width: 1900px) {
+            &:nth-last-child(-n+2) {
+              display: none;
+            }
+          }
+
+          &:nth-last-child(-n+3) {
+            display: none;
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,41 @@
+@import '../../../styles/variables';
+
+.InputBtnAdd {
+  label {
+    display: block;
+    font-size: 1.15rem;
+    color: $heading;
+    margin-bottom: 0;
+    font-weight: 600;
+  }
+
+  .GroupBox {
+    display: flex;
+    align-items: center;
+    align-content: center;
+
+    input[type="text"] {
+      background-color: $write_gray_1;
+      // width: 90%;
+      margin-right: 10px;
+      padding: 6px 10px;
+      border-radius: 2px;
+      caret-color: $blue;
+      border-top: none;
+      border-left: none;
+      border-right: none;
+      border-bottom: 1px solid $write_gray_2;
+    }
+
+    button {
+      line-height: 1;
+
+      :global {
+        .bx-edit {
+          font-size: 20px;
+          padding: 2px 0;
+        }
+      }
+    }
+  }
+}

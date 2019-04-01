@@ -1,0 +1,46 @@
+@import '../../../styles/variables';
+
+.InputBtnUpdate {
+  label {
+    display: block;
+    font-size: 1.15rem;
+    color: $heading;
+    margin-bottom: 0;
+    font-weight: 600;
+  }
+
+  .GroupBox {
+    display: flex;
+    align-items: center;
+    align-content: center;
+
+    input[type="text"] {
+      background-color: #fff;
+      margin-right: 10px;
+      padding: 6px 10px;
+      width: 100%;
+      border-radius: 2px;
+      caret-color: $blue;
+      border-top: none;
+      border-left: none;
+      border-right: none;
+      border-bottom: 1px solid $write_gray_2;
+    }
+
+    button {
+      line-height: 1;
+
+      :global {
+        .bx-revision {
+          font-size: 20px;
+          padding: 2px;
+        }
+
+        .bx-check {
+          font-size: 20px;
+          padding: 2px;
+        }
+      }
+    }
+  }
+}

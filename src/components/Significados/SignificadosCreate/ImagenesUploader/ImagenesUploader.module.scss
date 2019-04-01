@@ -1,0 +1,70 @@
+@import '../../../../styles/variables';
+
+.Uploader {
+  position: relative;
+  height: 120px;
+  .InputFile {
+    top: 0;
+    left: 0;
+    position: absolute;
+    width: 100%;
+    opacity: 0;
+    cursor: pointer;
+    display: block;
+    height: 120px;
+    z-index: 3;
+  }
+  progress {
+    position: absolute;
+    left: 40%;
+    right: 40%;
+    bottom: 20%;
+  }
+  .boxItems {
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    align-self: center;
+    height: 120px;
+    grid-template-columns: 48px 208px;
+    :global {
+      .bx {
+        z-index: 1;
+        font-size: 40px;
+        color: $gray_light;
+        width: 100%;
+        display: grid;
+        justify-content: center;
+        align-items: center;
+        bottom: 20%;
+        &:hover {
+          color: $gray_dark;
+        }
+      }
+    }
+    h5 {
+      color: $gray_light;
+      font-weight: 400;
+      margin-bottom: 0;
+      &:hover {
+        color: $green;
+      }
+    }
+  }
+  label{
+    pointer-events: none;
+    opacity: 0;
+  }
+}
+
+.activeColor {
+  border: 2px dashed $green;
+} 
+.baseColor {
+  border: 2px dashed $write_gray_3;
+}
+.disabledActive {
+  border: 2px dashed $write_gray_3;
+  background-color: $write_gray_2;
+}

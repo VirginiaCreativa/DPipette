@@ -1,0 +1,137 @@
+@import '../../../../../../styles/variables';
+
+.ButtonCreates {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  position: relative;
+
+  @keyframes fade-on-keyframes {
+    from {
+      opacity: 0;
+      top: 0;
+    }
+
+    to {
+      opacity: 1;
+      top: 60px;
+    }
+  }
+
+  .btnCreate {
+    font-size: 14px;
+    line-height: 2;
+    color: #fff !important;
+    background-color: $blue;
+    position: relative;
+    padding: 0 14px;
+    height: 34px;
+    transition: all ease-in-out 300ms;
+    border: none;
+    border-radius: 2px;
+    cursor: pointer;
+
+    :global {
+      .bx-plus {
+        font-size: 16px !important;
+        color: #fff;
+        margin-left: 8px;
+        transform: translate(0, 2px);
+      }
+    }
+
+    &:active,
+    &:hover {
+      background-color: $blue_medium;
+    }
+  }
+
+  .FadeOn {
+    animation: fade-on-keyframes 0.5s;
+  }
+
+  .FadeOff {
+    animation: fade-off-keyframes 0.5s;
+  }
+
+  .isMenuOpen {
+    background-color: #fff;
+    box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.15);
+    position: absolute;
+    top: 60px;
+    left: -20px;
+    width: 160px;
+    border-radius: 4px;
+    cursor: pointer;
+
+    .Triangule {
+      box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.15);
+      position: absolute;
+      top: -60px;
+      left: 32%;
+      width: 60px;
+      height: 60px;
+      overflow: hidden;
+
+      &:after {
+        content: "";
+        background: #fff;
+        box-shadow: -1px -1px 3px -2px rgba(0, 0, 0, 0.5);
+        position: absolute;
+        top: 60px;
+        left: 5px;
+        width: 50px;
+        height: 50px;
+        transform: rotate(45deg);
+      }
+    }
+
+    ul {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      list-style: none;
+
+      li {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        line-height: 2;
+        padding: 10px 12px;
+        list-style: none;
+
+        a {
+          display: flex;
+          justify-content: flex-start;
+          font-size: 15px;
+          color: $gray_medium;
+          margin-bottom: 0;
+          width: 200px;
+
+          [class^="icon-"] {
+            font-size: 20px;
+            color: $gray_light;
+            position: relative;
+            top: 4px;
+            margin-right: 6px;
+          }
+
+          :global {
+            .bx-user-circle {
+              font-size: 20px !important;
+            }
+          }
+
+          &:hover {
+            color: $blue;
+
+            [class^="icon-"] {
+              color: $blue;
+            }
+          }
+        }
+      }
+    }
+  }
+
+}

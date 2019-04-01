@@ -1,0 +1,73 @@
+@import '../../../../styles/variables';
+
+.GroupHeading_flex {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin-bottom: 16px;
+  z-index: 2;
+}
+
+.GroupHeading_flex_palabra {
+  font-size: 16px;
+  margin-bottom: 0;
+  margin-left: 6px;
+  font-weight: 500;
+}
+
+.GroupHeading_flex_descrip {
+  display: inline-block;
+  font-size: 11px;
+  line-height: 0.5;
+  text-align: center;
+  color: #fff;
+  padding: 8px 7px;
+  width: 20px;
+  height: 20px;
+  border-radius: 100%;
+}
+
+.VisualListGroup {
+  position: relative;
+  margin-bottom: 10px;
+  transition: all 0.2s ease;
+
+  &:before {
+    content: '';
+    display: block;
+    background-color: $write_gray_2;
+    position: absolute;
+    left: 10px;
+    width: 1px;
+    height: 100%;
+    z-index: -1;
+  }
+
+  .GroupHeading_Hide {
+    @extend .GroupHeading_flex;
+
+    h1 {
+      color: $gray_light, ;
+      @extend .GroupHeading_flex_palabra;
+    }
+
+    span {
+      background-color: $gray_light;
+      @extend .GroupHeading_flex_descrip;
+    }
+  }
+
+  .GroupHeading_Show {
+    @extend .GroupHeading_flex;
+
+    h1 {
+      color: $blue_medium, ;
+      @extend .GroupHeading_flex_palabra;
+    }
+
+    span {
+      background-color: $blue_medium;
+      @extend .GroupHeading_flex_descrip;
+    }
+  }
+}

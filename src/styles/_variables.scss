@@ -1,0 +1,25 @@
+$black: #48505a;
+$gray_light: #9ca7b4;
+$gray_medium: #747d8c;
+$gray_dark: #57606f;
+$write_gray_1: #f1f2f6;
+$write_gray_2: #dfe4ea;
+$write_gray_3: #ced6e0;
+$blue: #2572dd;
+$blue_medium: #134fa3;
+$color_significados: #ff6b6b;
+$color_notascornell: #1fd1a1;
+$color_documentos: #5f27cd;
+$red: #f33d48;
+$red_dark: #ca343e;
+$green: #10c78d;
+$heading: #445268;
+
+%boxShadowContent {
+  box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.03);
+}
+
+%boxContent {
+  background-color: #fff;
+  border-radius: 4px;
+}

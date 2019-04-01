@@ -1,0 +1,87 @@
+@import './variables';
+@import url('https://fonts.googleapis.com/css?family=Lato:100,100i,300,300i,400,400i,700,700i,900,900i');
+
+body {
+  font-family: 'HK Grotesk', "Lato", "Arial", sans-serif !important;
+  background-color: #f4f7fc;
+  margin-top: 70px;
+  padding: 22px 0 0;
+}
+
+p,
+li,
+abbr {
+  color: $black;
+  font-weight: 400;
+}
+
+a {
+  &:hover {
+    text-decoration: none !important;
+  }
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: 700;
+}
+
+*:focus {
+  box-shadow: none !important;
+  outline: none !important;
+}
+
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+a,
+li span {
+  &::selection {
+    color: #fff;
+    background-color: $blue;
+
+    @media (max-width: 575.98px) {
+      color: $black;
+      background-color: #fff;
+    }
+  }
+}
+
+:global {
+  input {
+    border-radius: 0.1rem !important;
+  }
+
+  .btn {
+    border: none;
+    border-radius: 0.15rem;
+
+    &:disabled {
+      background-color: $write_gray_3;
+      opacity: 1 !important;
+    }
+  }
+
+  .btn-primary {
+    background-color: $blue;
+  }
+
+  .btn-success {
+    background-color: $green !important;
+    border-color: $green;
+  }
+}
+
+blockquote {
+  margin-bottom: 0;
+  padding-left: 12px;
+  border-left: 6px solid $write_gray_3;
+}

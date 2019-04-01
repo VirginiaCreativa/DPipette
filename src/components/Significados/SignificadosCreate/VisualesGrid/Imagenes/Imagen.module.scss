@@ -1,0 +1,41 @@
+@import '../../../../../styles/_variables';
+
+.Imagen {
+  position: relative;
+  height: 90px;
+  background-size: cover;
+  overflow: hidden;
+
+  img {
+    background-color: $write_gray_3;
+    position: relative;
+    top: -50px;
+    left: -50px;
+    max-height: 220px;
+    z-index: 1;
+  }
+
+  button {
+    font-size: 11px;
+    line-height: 1;
+    text-align: center;
+    color: #fff;
+    background-color: transparent;
+    background-color: $red;
+    opacity: 0.9;
+    position: absolute;
+    top: 2px;
+    right: 4px;
+    padding: 0;
+    width: 20px;
+    height: 20px;
+    border: none;
+    border-radius: 100%;
+    z-index: 2;
+    cursor: pointer;
+
+    &:hover {
+      background-color: #c23616;
+    }
+  }
+}

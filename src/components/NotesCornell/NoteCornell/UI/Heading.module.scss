@@ -1,0 +1,85 @@
+@import '../../../../styles/variables';
+
+.Heading {
+  display: grid;
+  grid-template-columns: 93% 7%;
+  align-content: center;
+  align-items: center;
+  border-bottom: 1px dotted $write_gray_2;
+  margin-bottom: 20px;
+  padding-bottom: 4px;
+  h5 {
+    color: $heading;
+    font-weight: 600;
+    margin-bottom: 0;
+  }
+  .btn {
+    border: none;
+    background-color: transparent;
+    font-size: 20px;
+    padding: 0;
+    text-align: right;
+    &:hover {
+      color: $blue;
+    }
+  }
+  .btnEditable {
+    @extend .btn;
+    color: $gray_light;
+  }
+  .btnActive {
+    @extend .btn;
+    color: $green;
+  }
+}
+.HeadingResumen {
+  display: grid;
+  grid-template-columns: 92% 4% 4%;
+  align-content: center;
+  align-items: center;
+  border-bottom: 1px dotted $write_gray_2;
+  margin-bottom: 20px;
+  padding-bottom: 4px;
+  h5 {
+    color: $heading;
+    font-weight: 600;
+    margin-bottom: 0;
+  }
+  .btn {
+    border: none;
+    background-color: transparent;
+    font-size: 20px;
+    padding: 0;
+    text-align: right;
+    &:hover {
+      color: $blue;
+    }
+  }
+  .btnEditable {
+    @extend .btn;
+    color: $gray_light;
+    position: relative;
+    &:after {
+      content: '';
+      position: absolute;
+      right: -30%;
+      top: 4px;
+      height: 16px;
+      width: 1px;
+      display: block;
+      background-color: $write_gray_3;
+    }
+  }
+  .btnActiveEditor {
+    @extend .btn;
+    color: $green;
+  }
+  .btnVideo {
+    @extend .btn;
+    color: $gray_light;
+  }
+  .btnActiveVideo {
+    @extend .btn;
+    color: $green;
+  }
+}

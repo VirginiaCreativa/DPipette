@@ -1,0 +1,110 @@
+@import '../../../../../styles/variables';
+
+.SenaVideo {
+  display: grid;
+  align-content: center;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  cursor: pointer;
+  width: 100%;
+  height: 160px;
+  &:hover {
+    border: 2px dashed $gray_light;
+  }
+  .Icon {
+    height: 70px;
+    margin: 0 auto;
+  }
+  p {
+    margin-bottom: 0;
+    color: $gray_light;
+  }
+}
+.VideoSena {
+  position: relative;
+  display: grid;
+  height: 100%;
+  align-items: center;
+  justify-items: center;
+
+  video {
+    background-color: #ddd;
+    margin-bottom: 10px;
+  }
+
+  .btnRecord {
+    padding: 0 !important;
+    border-radius: 100%;
+    border: none;
+    height: 40px;
+    width: 40px;
+    cursor: pointer;
+    background-color: $red;
+
+    &:hover {
+      background-color: #b12125;
+    }
+  }
+
+  :global {
+    .bx {
+      font-size: 30px;
+      color: #fff;
+      line-height: 1.35 !important;
+    }
+  }
+
+  .btnStop {
+    padding: 0 !important;
+    border-radius: 100%;
+    border: none;
+    height: 40px;
+    width: 40px;
+    cursor: pointer;
+    background-color: $gray_medium;
+
+    &:hover {
+      background-color: $gray_dark;
+    }
+  }
+}
+
+.VideoGrabado {
+  .btnGroup {
+    display: flex;
+    button {
+      width: 50%;
+    }
+    :global {
+      .bx {
+        margin-right: 4px;
+        font-size: 18px;
+        position: relative;
+        top: 2px;
+      }
+    }
+  }
+}
+
+.baseItem {
+  border: 2px dashed $write_gray_3;
+}
+.activeUpload {
+  border: 2px dashed $green !important;
+}
+.BoxAprobado {
+  border: 2px dotted $write_gray_3;
+  height: 200px;
+  display: flex;
+  align-content: center;
+  align-items: center;
+  justify-content: center;
+  justify-items: center;
+  h5 {
+    color: $write_gray_3;
+    text-align: center;
+    margin-bottom: 0;
+    letter-spacing: -1px;
+  }
+}

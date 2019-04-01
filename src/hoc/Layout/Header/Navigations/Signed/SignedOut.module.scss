@@ -1,0 +1,47 @@
+@import '../../../../../styles/variables';
+
+.SignedOut {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 20px;
+
+  button {
+    font-size: 14px;
+    line-height: 2;
+    color: #fff !important;
+    background-color: $blue;
+    position: relative;
+    padding: 0 14px;
+    height: 34px;
+    border: none;
+    border-radius: 2px;
+    cursor: pointer;
+
+    a {
+      color: #fff;
+
+      :global {
+        .bx {
+          font-size: 20px !important;
+          color: #fff;
+          margin-right: 6px;
+          transform: translate(0, 3px);
+        }
+      }
+    }
+
+    &:active,
+    &:hover {
+      background-color: $blue_medium;
+    }
+  }
+}
+
+.Grid {
+  display: flex;
+  align-items: center;
+  padding: 0 20px;
+  height: 60px;
+  border-left: 1px solid $write_gray_1;
+}

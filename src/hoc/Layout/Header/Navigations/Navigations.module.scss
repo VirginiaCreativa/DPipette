@@ -1,0 +1,12 @@
+.Navigations {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  margin-bottom: 0;
+  height: 60px;
+
+  li {
+    display: inline-block;
+    padding: 0 6px;
+  }
+}

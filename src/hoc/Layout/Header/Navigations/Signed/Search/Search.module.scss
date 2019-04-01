@@ -1,0 +1,24 @@
+@import '../../../../../../styles/variables';
+
+.Search {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  :global {
+    .bx {
+      font-size: 20px;
+      color: $gray_light !important;
+      position: relative;
+      top: -2px;
+      margin-right: 8px;
+    }
+  }
+
+  input[type=text] {
+    color: $gray_dark;
+    width: 120px;
+    border: none;
+    caret-color: $blue;
+  }
+}

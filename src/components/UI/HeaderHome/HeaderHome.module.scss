@@ -1,0 +1,23 @@
+@import '../../../styles/variables';
+
+.HeaderHome {
+  margin-bottom: 20px;
+
+  h5 {
+    display: inline-block;
+    margin-bottom: 0;
+  }
+
+  .iconCircle {
+    display: inline-block;
+    font-size: 14px;
+    line-height: 1.9;
+    text-align: center;
+    color: #fff;
+    background-color: $blue;
+    margin-right: 6px;
+    width: 26px;
+    height: 26px;
+    border-radius: 100%;
+  }
+}

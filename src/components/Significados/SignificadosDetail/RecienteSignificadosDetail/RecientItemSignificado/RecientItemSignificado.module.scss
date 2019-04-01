@@ -1,0 +1,51 @@
+@import '../../../../../styles/variables';
+
+.RecientItemSignificado {
+  transition: all 0.25s ease;
+  border-top: 1px solid $write_gray_1;
+
+  &:hover {
+    background-color: #f7f7f7;
+    border-left: 3px solid $blue;
+  }
+
+  .boxGrid {
+    display: grid;
+    grid-template-columns: 60px 1fr 76px;
+    grid-gap: 12px;
+    align-items: start;
+    padding: 12px 20px;
+    height: 100%;
+  }
+
+  .imgOverflow {
+    width: 60px;
+    height: 60px;
+    border-radius: 4px;
+    overflow: hidden;
+
+    img {
+      max-height: 100%;
+    }
+  }
+
+  h6 {
+    color: $blue_medium;
+    margin-bottom: 0;
+  }
+
+  p {
+    font-size: 0.8125rem;
+    margin-bottom: 0;
+  }
+
+  .RecientDate {
+    p {
+      font-size: 0.75rem;
+      text-align: right;
+      color: $write_gray_3;
+      margin-bottom: 0;
+    }
+  }
+
+}

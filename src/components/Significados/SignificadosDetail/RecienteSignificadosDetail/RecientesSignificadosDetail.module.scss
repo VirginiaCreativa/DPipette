@@ -1,0 +1,17 @@
+@import '../../../../styles/variables';
+
+.RecienteSignificadosDetail {
+  @extend %boxContent;
+  @extend %boxShadowContent;
+  margin-top: 30px;
+  margin-bottom: 30px;
+
+  .Heading {
+    color: $heading;
+    padding: 20px 20px 10px;
+  }
+
+  .BoxSign {
+    margin-top: 20px;
+  }
+}

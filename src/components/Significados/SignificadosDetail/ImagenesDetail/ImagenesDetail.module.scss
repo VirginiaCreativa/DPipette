@@ -1,0 +1,22 @@
+@import '../../../../styles/variables';
+
+.ImagenesDetail {
+  display: inline-grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: 20px;
+  justify-content: center;
+  align-items: center;
+  margin: 30px 0;
+
+  .ImagenOverw {
+    @extend %boxShadowContent;
+    @extend %boxContent;
+    height: 180px;
+    overflow: hidden;
+    background-size: cover;
+
+    img {
+      max-height: 100%;
+    }
+  }
+}

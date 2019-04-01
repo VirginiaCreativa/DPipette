@@ -1,0 +1,53 @@
+@import '../../../../styles/variables';
+
+.NoteCornellApuntes {
+  @extend %boxContent;
+  @extend %boxShadowContent;
+  padding: 20px 30px;
+}
+
+.HeadingApuntes {
+  display: grid;
+  grid-template-columns: 95% 5%;
+  align-items: center;
+  align-content: center;
+  margin-bottom: 60px;
+  padding-bottom: 4px;
+  border-bottom: 1px dotted $write_gray_2;
+
+  h5 {
+    color: $heading;
+    margin-bottom: 0;
+    font-weight: 600;
+  }
+
+  .btnEditableApunte {
+    font-size: 22px;
+    color: $gray_light;
+    background-color: transparent;
+    position: relative;
+    border: none;
+
+    &:hover {
+      color: $blue;
+    }
+  }
+}
+
+.BoxApunte {
+  p {
+    margin: 0;
+  }
+}
+
+:global {
+
+  .ql-toolbar.ql-snow,
+  .ql-container.ql-snow {
+    border: 1px solid $write_gray_2;
+  }
+
+  .ql-color {
+    color: $write_gray_2;
+  }
+}

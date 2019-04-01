@@ -1,0 +1,103 @@
+@import '../../../styles/variables';
+
+.SiginificadosItem {
+  @extend %boxShadowContent;
+  @extend %boxContent;
+  margin-bottom: 20px;
+  padding: 20px;
+  transition: all 0.25s ease;
+  border-bottom: 1px solid $write_gray_2;
+
+  &:hover {
+    transform: scale(1.02);
+  }
+
+  .LinkGrid {
+    display: block;
+    width: 100%;
+    height: 100%;
+    transition: all 0.25s ease;
+
+    &:hover {
+      .GroupParagh {
+        h1 {
+          color: $blue;
+        }
+      }
+
+      .Definicion {
+        &:before {
+          background-color: $color_significados !important;
+        }
+      }
+    }
+  }
+
+  .BoxVideo {
+    margin-bottom: 10px;
+  }
+
+  .GroupParagh {
+    margin-bottom: 15px;
+
+    h1 {
+      font-size: 1.5625rem;
+      color: $heading;
+      position: relative;
+      margin-bottom: 0;
+
+      &:before {
+        content: '';
+        background-color: $color_significados;
+        position: absolute;
+        top: 3px;
+        left: -20px;
+        width: 4px;
+        height: 24px;
+      }
+    }
+
+  }
+
+  .GroupParaghSecun {
+    padding: 10px 0 0;
+
+    .Definicion {
+      font-size: 0.9rem;
+      color: $gray_medium;
+      position: relative;
+      margin-bottom: 5px;
+      padding-left: 15px;
+
+      &:before {
+        content: '';
+        display: block;
+        background-color: $blue;
+        position: absolute;
+        top: 7px;
+        left: 0;
+        width: 4px;
+        height: 4px;
+        border-radius: 100px;
+      }
+    }
+  }
+
+  .GridDate {
+    p {
+      font-size: 0.75rem;
+      text-align: right;
+      color: $write_gray_3;
+      margin-bottom: 0;
+    }
+
+    :global {
+      .bx {
+        color: $gray_light;
+        position: relative;
+        top: 2px;
+        margin-right: 4px;
+      }
+    }
+  }
+}

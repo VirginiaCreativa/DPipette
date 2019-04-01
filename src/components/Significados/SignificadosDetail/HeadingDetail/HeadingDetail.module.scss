@@ -1,0 +1,127 @@
+@import '../../../../styles/variables';
+
+.HeaderDetail {
+  .HeadingDetail {
+    margin-bottom: 30px;
+    padding-left: 20px;
+    border-left: 2px solid $write_gray_3;
+
+    h1 {
+      display: inline-block;
+      color: $heading;
+      position: relative;
+      margin-bottom: 0;
+    }
+
+    .Fecha {
+      display: block;
+      font-weight: 300;
+    }
+
+    .Abreviatura {
+      display: inline-block;
+      font-size: 14px;
+      color: #444;
+      background-color: #ddd;
+      position: relative;
+      top: -14px;
+      margin: 0;
+      margin-left: 12px;
+      padding: 2px 4px;
+      border-radius: 2px;
+      font-weight: 600;
+      cursor: pointer;
+
+      &:hover {
+        .AbrevTitle {
+          opacity: 1;
+        }
+      }
+    }
+
+    .AbrevTitle {
+      display: inline-block;
+      font-size: 14px;
+      color: #ffffff;
+      background-color: $blue_medium;
+      position: relative;
+      top: -14px;
+      left: 10px;
+      padding: 6px 8px;
+      border-radius: 4px;
+      font-weight: 500;
+    }
+  }
+
+  .GroupBtns {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    align-content: center;
+    height: 100%;
+
+    button {
+      background-color: transparent;
+      margin-left: 4px;
+      border: none;
+      border-radius: 4px;
+
+      // &::before {
+      //   content: '';
+      //   width: 1px;
+      //   height: 6px;
+      //   background-color: $gray_light;
+      //   display: inline-block;
+      // }
+      :global {
+        .bx {
+          font-size: 20px;
+          line-height: 1.5;
+        }
+      }
+
+      &.btnEditable {
+        :global {
+          .bx {
+            color: $gray_light;
+          }
+        }
+
+        &:hover {
+          :global {
+            .bx {
+              color: $blue;
+            }
+          }
+        }
+      }
+
+      &.btnDelete {
+        :global {
+          .bx {
+            color: $gray_light;
+          }
+        }
+
+        &::before {
+          content: '';
+          display: inline-block;
+          background-color: $gray_light;
+          opacity: 0.5;
+          position: relative;
+          right: 8px;
+          width: 1px;
+          height: 17px;
+        }
+
+        &:hover {
+          :global {
+            .bx {
+              color: $red;
+            }
+          }
+        }
+      }
+    }
+  }
+}

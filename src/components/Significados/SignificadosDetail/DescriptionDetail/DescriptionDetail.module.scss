@@ -1,0 +1,103 @@
+@import '../../../../styles/variables';
+
+.DescriptionDetail {
+  .Wrapper {
+    @extend %boxContent;
+    @extend %boxShadowContent;
+    padding: 0 40px;
+  }
+
+  .WrapperPalabras {
+    @extend %boxContent;
+    @extend %boxShadowContent;
+    margin-bottom: 10px;
+    padding: 20px;
+  }
+}
+
+.DescriptionsList {
+  ul {
+    margin-bottom: 0;
+    margin-left: 0;
+    padding-left: 0;
+    list-style: circle;
+    padding-inline-start: 0;
+    list-style-position: inside;
+
+    li {
+      padding: 20px 0 20px 0;
+      border-top: 1px solid $write_gray_2;
+      list-style-position: outside;
+
+      &:first-child {
+        border-top: 0;
+      }
+
+      &:before {
+        content: "";
+        display: block;
+        font-size: 12px;
+        background-color: $blue;
+        position: relative;
+        top: 5px;
+        margin-left: -1.2em;
+        border-radius: 100%;
+        border-radius: 100%;
+        font-weight: 700;
+        float: left;
+      }
+
+      p {
+        margin-bottom: 0;
+
+        strong {
+          margin-bottom: 0;
+          font-weight: 500;
+        }
+      }
+    }
+  }
+
+  .Primary {
+    font-size: 1.125rem;
+    margin-bottom: 0;
+  }
+
+  .Secun {
+    font-size: 1rem;
+    color: $gray_medium;
+    font-weight: 300 !important;
+    font-style: italic;
+  }
+}
+
+.PalabrasLists {
+  h6 {
+    font-size: 0.875rem;
+    color: $gray_medium;
+  }
+
+  ul {
+    margin-bottom: 0;
+
+    li {
+      display: inline-block;
+      font-size: 0.9375rem;
+      margin-bottom: 10px;
+      margin-right: 10px;
+      padding: 2px 8px;
+      border-radius: 2px;
+      font-weight: 500;
+    }
+  }
+}
+
+.Sinonimos {
+  color: #fff;
+  background-color: $green;
+}
+
+.Antonimos {
+  color: #fff;
+  background-color: $red;
+}

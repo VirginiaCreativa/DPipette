@@ -1,0 +1,49 @@
+@import '../../../../styles/variables';
+
+.MasEjemplosDetail {
+  @extend %boxContent;
+  @extend %boxShadowContent;
+  margin-bottom: 30px;
+  padding: 20px 30px;
+
+  h5 {
+    color: $heading;
+  }
+
+  ul {
+    margin-bottom: 0;
+    margin-left: 0;
+    padding-left: 20px;
+    list-style: circle;
+    padding-inline-start: 0;
+    list-style-position: inside;
+
+    li {
+      padding: 20px 0 20px 0;
+      border-top: 1px solid $write_gray_2;
+      list-style-position: outside;
+
+      &:first-child {
+        border-top: 0;
+      }
+
+      &:before {
+        content: "";
+        display: block;
+        font-size: 12px;
+        background-color: $blue;
+        position: relative;
+        top: 5px;
+        margin-left: -1.2em;
+        border-radius: 100%;
+        border-radius: 100%;
+        font-weight: 700;
+        float: left;
+      }
+
+      p {
+        margin-bottom: 0;
+      }
+    }
+  }
+}
