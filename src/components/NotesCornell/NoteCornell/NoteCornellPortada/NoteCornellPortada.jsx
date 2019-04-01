@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React, { useState, useRef, useEffect } from 'react';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
@@ -12,8 +13,10 @@ const NoteCornellPortada = ({
   ID,
   notescornell,
   firestore,
+  portada,
+  tema,
 }) => {
-  const [isOnImage, setOnImage] = useState(true);
+  const [isOnImage, setOnImage] = useState(false);
   const [isUploadValue, setUploadValue] = useState(0);
   const [isPortada, setPortada] = useState('');
   const childRef = useRef(null);
@@ -24,7 +27,9 @@ const NoteCornellPortada = ({
     } else {
       setOnImage(false);
     }
-  }, [ID, notescornell]);
+    console.log(isPortada);
+  }, [ID, isPortada, notescornell]);
+
   const handleOnFileChange = ev => {
     const imgFile = ev.target.files[0];
     const id = ID;
@@ -86,6 +91,29 @@ const NoteCornellPortada = ({
     );
     setOnImage(!isOnImage);
   };
+
+  const handleRemoveFile = () => {
+    const materiaFB = notescornell[ID].materia.toLowerCase();
+    const temaFB = notescornell[ID].tema.toLowerCase();
+    const materia = CleanUpSpecialChars(materiaFB);
+    const tema = CleanUpSpecialChars(temaFB);
+    const temaNotSpace = tema.replace(/ +/g, '_');
+
+    const storageRef = storage().ref(`notescornell/${materia}/${temaNotSpace}`);
+    storageRef
+      .delete()
+      .then(() => {
+        console.log('SI DELETE');
+      })
+      .catch(error => {
+        console.error('Error removing document: ', error);
+      });
+    setPortada(null);
+    firestore.update(`notescornell/${ID}`, {
+      portada: '',
+    });
+  };
+
   return (
     <div className={classes.NoteCornellPortada}>
       {isOnImage ? (
@@ -105,11 +133,13 @@ const NoteCornellPortada = ({
         </div>
       ) : (
         <div className={classes.BoxPortada}>
-          <img
-            src={notescornell[ID].portada}
-            alt={notescornell[ID].tema}
-            className="img-fluid"
-          />
+          <img src={portada} alt={tema} className="img-fluid" />
+          <button
+            type="button"
+            className={classes.BtnRemove}
+            onClick={handleRemoveFile}>
+            <i className="bx bxs-x-circle" />
+          </button>
         </div>
       )}
     </div>

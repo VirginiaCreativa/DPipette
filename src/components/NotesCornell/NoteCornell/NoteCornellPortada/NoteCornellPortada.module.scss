@@ -10,12 +10,12 @@
     justify-content: center;
     align-content: center;
     background-color: $write_gray_1;
-    border: 2px dotted $write_gray_3;
     position: absolute;
     top: 0;
     left: 0;
     padding: 80px 20px;
     width: 100%;
+    border: 2px dotted $write_gray_3;
 
     .InputFile {
       display: block;
@@ -51,8 +51,25 @@
   }
 
   .BoxPortada {
-    overflow: hidden;
+    position: relative;
     border-radius: 4px;
+    overflow: hidden;
+    height: 200px;
+    background-color: $write_gray_1;
+
+    .BtnRemove {
+      font-size: 26px;
+      color: $red;
+      background-color: transparent;
+      position: absolute;
+      top: 6px;
+      right: 6px;
+      border: none;
+
+      &:hover {
+        color: $red_dark;
+      }
+    }
   }
 
 }

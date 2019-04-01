@@ -151,7 +151,9 @@ class NoteCornellResumen extends Component {
     const {
       firebase: { storage },
     } = this.props;
-    const storageRef = storage().ref(`notescornell/${materia}/${temaNotSpace}`);
+    const storageRef = storage().ref(
+      `notescornell/${materia}/${temaNotSpace}/resumen`
+    );
 
     const uploadTask = storageRef.put(blob, metadata);
 
