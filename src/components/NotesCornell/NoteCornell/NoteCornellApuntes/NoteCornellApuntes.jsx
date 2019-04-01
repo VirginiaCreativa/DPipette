@@ -1,5 +1,3 @@
-/* eslint-disable no-use-before-define */
-/* eslint-disable react/no-danger */
 import React, { Component } from 'react';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
@@ -13,7 +11,7 @@ import { modules, formats } from '../UI/ControlEditorApunte';
 
 class NoteCornellApuntes extends Component {
   state = {
-    isText: '',
+    isApunteContent: '',
     isOnEditable: false,
     isContents: [],
   };
@@ -37,7 +35,7 @@ class NoteCornellApuntes extends Component {
   };
 
   handleChangeText = value => {
-    this.setState({ isText: value });
+    this.setState({ isApunteContent: value });
 
     const range = this.quillRef.getContents().ops;
     this.setState({ isContents: range });
@@ -45,7 +43,7 @@ class NoteCornellApuntes extends Component {
     const id = this.props.docID;
     const db = this.props.firestore;
     db.update(`notescornell/${id}`, {
-      getContent: this.state.isText,
+      getContent: this.state.isApunteContent,
       setContent: this.state.isContents,
     });
   };
@@ -65,7 +63,7 @@ class NoteCornellApuntes extends Component {
 
   render() {
     const { getContent } = this.props;
-    const { isText, isOnEditable } = this.state;
+    const { isApunteContent, isOnEditable } = this.state;
     const visibleText = (
       <div dangerouslySetInnerHTML={{ __html: getContent }} />
     );
@@ -81,7 +79,7 @@ class NoteCornellApuntes extends Component {
             <>
               <ReactQuill
                 ref={e => (this.reactQuillRef = e)}
-                defaultValue={isText || ''}
+                defaultValue={isApunteContent || ''}
                 onChange={this.handleChangeText}
                 modules={modules}
                 formats={formats}

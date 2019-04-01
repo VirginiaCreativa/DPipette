@@ -3,83 +3,118 @@
 .Heading {
   display: grid;
   grid-template-columns: 93% 7%;
-  align-content: center;
   align-items: center;
-  border-bottom: 1px dotted $write_gray_2;
+  align-content: center;
   margin-bottom: 20px;
   padding-bottom: 4px;
+  border-bottom: 1px dotted $write_gray_2;
+
   h5 {
     color: $heading;
-    font-weight: 600;
     margin-bottom: 0;
+    font-weight: 600;
   }
+
   .btn {
-    border: none;
-    background-color: transparent;
     font-size: 20px;
-    padding: 0;
     text-align: right;
+    background-color: transparent;
+    padding: 0;
+    border: none;
+
     &:hover {
       color: $blue;
     }
   }
+
   .btnEditable {
-    @extend .btn;
     color: $gray_light;
-  }
-  .btnActive {
     @extend .btn;
+  }
+
+  .btnActive {
     color: $green;
+    @extend .btn;
   }
 }
+
 .HeadingResumen {
   display: grid;
   grid-template-columns: 92% 4% 4%;
-  align-content: center;
   align-items: center;
-  border-bottom: 1px dotted $write_gray_2;
+  align-content: center;
   margin-bottom: 20px;
   padding-bottom: 4px;
+  border-bottom: 1px dotted $write_gray_2;
+
   h5 {
     color: $heading;
-    font-weight: 600;
     margin-bottom: 0;
+    font-weight: 600;
   }
+
   .btn {
-    border: none;
-    background-color: transparent;
     font-size: 20px;
-    padding: 0;
     text-align: right;
+    background-color: transparent;
+    padding: 0;
+    border: none;
+
     &:hover {
       color: $blue;
     }
   }
+
   .btnEditable {
-    @extend .btn;
     color: $gray_light;
     position: relative;
+    @extend .btn;
+
     &:after {
       content: '';
-      position: absolute;
-      right: -30%;
-      top: 4px;
-      height: 16px;
-      width: 1px;
       display: block;
       background-color: $write_gray_3;
+      position: absolute;
+      top: 4px;
+      right: -25%;
+      width: 1px;
+      height: 16px;
     }
   }
+
   .btnActiveEditor {
-    @extend .btn;
+    font-size: 20px;
+    text-align: right;
     color: $green;
+    background-color: transparent;
+    position: relative;
+    padding: 0;
+    border: none;
+
+    &:hover {
+      color: $blue;
+    }
+
+    &:after {
+      content: '';
+      display: block;
+      background-color: $write_gray_3;
+      position: absolute;
+      top: 4px;
+      right: -25%;
+      width: 1px;
+      height: 16px;
+    }
+
   }
+
   .btnVideo {
-    @extend .btn;
     color: $gray_light;
-  }
-  .btnActiveVideo {
     @extend .btn;
+  }
+
+  .btnActiveVideo {
     color: $green;
+    @extend .btn;
   }
 }

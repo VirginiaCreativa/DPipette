@@ -1,4 +1,3 @@
-/* eslint-disable react/no-did-update-set-state */
 import React, { Component } from 'react';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
@@ -7,6 +6,7 @@ import SkyLight from 'react-skylight';
 import ReactQuill from 'react-quill';
 import classes from './NoteCornellResumen.module.scss';
 import firebase from '../../../../config/FirebaseConfig';
+
 import HeadingResumen from '../UI/HeadingResumen';
 import { modules, formats } from '../UI/ControlEditorResumen';
 import VideoPlayer from '../../../UI/VideoPlayer/VideoPlayer';
@@ -41,29 +41,12 @@ class NoteCornellResumen extends Component {
     if (uploadValue !== prevState.uploadValue) {
       this.setState({ uploadProgress: uploadValue });
       if (uploadValue === '100') {
-        console.log('FINAL');
         this.setState({ activeSaveVideo: false });
       }
-    } else {
-      console.log('UPLOAD');
     }
   }
 
   // ========== EDITOR ==========
-
-  attachQuillRefs = () => {
-    if (typeof this.reactQuillRef.getEditor !== 'function') return;
-    if (this.quillRef != null) return;
-    const quillRef = this.reactQuillRef.getEditor();
-    if (quillRef != null) {
-      this.quillRef = quillRef;
-    }
-
-    const id = this.props.docID;
-    const setResumenDB = this.props.notescornell[id].setResumen;
-    this.quillRef.setContents(setResumenDB, 'api');
-  };
-
   handleEditable = () => {
     this.setState(prevState => ({
       isOnEditable: !prevState.isOnEditable,
@@ -87,6 +70,19 @@ class NoteCornellResumen extends Component {
       getResumen: this.state.isResumContent,
       setResumen: this.state.isSetContents,
     });
+  };
+
+  attachQuillRefs = () => {
+    if (typeof this.reactQuillRef.getEditor !== 'function') return;
+    if (this.quillRef != null) return;
+    const quillRef = this.reactQuillRef.getEditor();
+    if (quillRef != null) {
+      this.quillRef = quillRef;
+    }
+
+    const id = this.props.docID;
+    const setResumenDB = this.props.notescornell[id].setResumen;
+    this.quillRef.setContents(setResumenDB, 'api');
   };
 
   // ========== VIDEO GRABADO ==========
