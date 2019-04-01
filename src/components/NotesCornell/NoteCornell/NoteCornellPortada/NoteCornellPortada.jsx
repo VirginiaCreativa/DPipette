@@ -18,6 +18,7 @@ const NoteCornellPortada = ({
 }) => {
   const [isOnImage, setOnImage] = useState(false);
   const [isUploadValue, setUploadValue] = useState(0);
+  const [isFileName, setFileName] = useState('');
   const [isPortada, setPortada] = useState('');
   const childRef = useRef(null);
 
@@ -28,7 +29,8 @@ const NoteCornellPortada = ({
       setOnImage(false);
     }
     console.log(isPortada);
-  }, [ID, isPortada, notescornell]);
+    console.log(isFileName);
+  }, [ID, isFileName, isPortada, notescornell]);
 
   const handleOnFileChange = ev => {
     const imgFile = ev.target.files[0];
@@ -81,10 +83,10 @@ const NoteCornellPortada = ({
       () => {
         uploadTask.snapshot.ref.getDownloadURL().then(downloadURL => {
           console.log('imageFile available at', downloadURL);
-          setPortada(downloadURL);
           firestore.update(`notescornell/${ID}`, {
             portada: downloadURL,
             cover: 'option1',
+            filename: imgFile.name,
           });
         });
       }
@@ -95,11 +97,14 @@ const NoteCornellPortada = ({
   const handleRemoveFile = () => {
     const materiaFB = notescornell[ID].materia.toLowerCase();
     const temaFB = notescornell[ID].tema.toLowerCase();
+    const fileName = notescornell[ID].filename;
     const materia = CleanUpSpecialChars(materiaFB);
     const tema = CleanUpSpecialChars(temaFB);
     const temaNotSpace = tema.replace(/ +/g, '_');
 
-    const storageRef = storage().ref(`notescornell/${materia}/${temaNotSpace}`);
+    const storageRef = storage().ref(
+      `notescornell/${materia}/${temaNotSpace}/portada/${fileName}`
+    );
     storageRef
       .delete()
       .then(() => {
@@ -111,6 +116,7 @@ const NoteCornellPortada = ({
     setPortada(null);
     firestore.update(`notescornell/${ID}`, {
       portada: '',
+      filename: '',
     });
   };
 

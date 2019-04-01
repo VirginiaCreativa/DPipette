@@ -144,15 +144,17 @@ class NoteCornellResumen extends Component {
       contentType: videoType,
     };
     const id = this.props.docID;
-    const materia = this.props.notescornell[id].materia.toLowerCase();
-    const tema = this.props.notescornell[id].tema.toLowerCase();
+    const materiaFB = this.props.notescornell[id].materia.toLowerCase();
+    const temaFB = this.props.notescornell[id].tema.toLowerCase();
+    const materia = CleanUpSpecialChars(materiaFB);
+    const tema = CleanUpSpecialChars(temaFB);
     const temaNotSpace = tema.replace(/ +/g, '_');
 
     const {
       firebase: { storage },
     } = this.props;
     const storageRef = storage().ref(
-      `notescornell/${materia}/${temaNotSpace}/resumen`
+      `notescornell/${materia}/${temaNotSpace}/resumen/video`
     );
 
     const uploadTask = storageRef.put(blob, metadata);
@@ -211,10 +213,14 @@ class NoteCornellResumen extends Component {
       firebase: { storage },
     } = this.props;
     const id = this.props.docID;
-    const materia = this.props.notescornell[id].materia.toLowerCase();
-    const tema = this.props.notescornell[id].tema.toLowerCase();
+    const materiaFB = this.props.notescornell[id].materia.toLowerCase();
+    const temaFB = this.props.notescornell[id].tema.toLowerCase();
+    const materia = CleanUpSpecialChars(materiaFB);
+    const tema = CleanUpSpecialChars(temaFB);
     const temaNotSpace = tema.replace(/ +/g, '_');
-    const storageRef = storage().ref(`notescornell/${materia}/${temaNotSpace}`);
+    const storageRef = storage().ref(
+      `notescornell/${materia}/${temaNotSpace}/resumen/video`
+    );
 
     storageRef
       .delete()
