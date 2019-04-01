@@ -253,7 +253,6 @@ class NoteCornellResumen extends Component {
     const viewContent = (
       <div dangerouslySetInnerHTML={{ __html: getResumen }} />
     );
-    console.log(uploadProgress);
     return (
       <div className={classes.NoteCornellResumen}>
         <HeadingResumen

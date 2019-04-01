@@ -1,0 +1,26 @@
+@import '../../../../styles/variables';
+
+.NoteCornellPortada {
+  background-color: $write_gray_2;
+  position: relative;
+  padding: 80px 20px;
+  border-radius: 4px;
+  display: flex;
+  height: 100%;
+  justify-content: center;
+
+  p {
+    font-size: 0.75rem;
+    text-align: center;
+    color: $gray_light;
+    position: absolute;
+    bottom: 0;
+    margin: 0 auto 6px;
+  }
+
+  button {
+    font-size: 0.875rem;
+    border: none;
+    cursor: pointer;
+  }
+}

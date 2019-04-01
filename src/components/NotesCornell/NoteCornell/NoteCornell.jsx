@@ -15,6 +15,7 @@ import NoteCornellHeader from './NoteCornellHeader/NoteCornellHeader';
 import NoteCornellIdeas from './NoteCornellIdeas/NoteCornellIdeas';
 import NoteCornellApuntes from './NoteCornellApuntes/NoteCornellApuntes';
 import NoteCornellResumen from './NoteCornellResumen/NoteCornellResumen';
+import NoteCornellPortada from './NoteCornellPortada/NoteCornellPortada';
 
 class NoteCornell extends Component {
   handleDeleteId = () => {
@@ -72,7 +73,9 @@ class NoteCornell extends Component {
               </div>
             </div>
             <div className="col-2">
-              <h5>Significados</h5>
+              <div className={classes.Sidebar}>
+                <NoteCornellPortada />
+              </div>
             </div>
           </div>
         )}
