@@ -18,9 +18,11 @@ const Filter = ({ notescornell }) => {
   const handleFilteRecient = () => {
     console.log('Funciona');
   };
+  const handleTagFilter = item => {
+    console.log(item);
+  };
   const materia = notescornell && notescornell.map(item => item.materia);
-  const tags = [...new Set(materia)];
-  // const index = array && array.filter(item => item === 'Nueva materia');
+  const tags = [...new Set(materia)].sort();
 
   return (
     <div className={classes.Filter}>
@@ -49,8 +51,10 @@ const Filter = ({ notescornell }) => {
         <h6>Etiquetas</h6>
         <ul>
           {tags.map(item => (
-            <li key={item.id}>
-              <button type="button">{item}</button>
+            <li key={item}>
+              <button type="button" onClick={() => handleTagFilter(item)}>
+                {item}
+              </button>
             </li>
           ))}
         </ul>
