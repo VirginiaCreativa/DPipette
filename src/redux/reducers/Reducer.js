@@ -4,7 +4,7 @@ import { firestoreReducer } from 'redux-firestore';
 import { connectRouter } from 'connected-react-router';
 import createSignificado from './createSignificadoReducer';
 import SearchSignificados from './SearchSignificados';
-import SearchNotesCornell from './SearchNotesCornell_Reducer';
+import NotesCornell from './NotesCornellReducer';
 
 export default history =>
   combineReducers({
@@ -13,5 +13,5 @@ export default history =>
     firestore: firestoreReducer,
     createSing: createSignificado,
     searchSign: SearchSignificados,
-    searchNotesCornell: SearchNotesCornell,
+    NotesCornell,
   });

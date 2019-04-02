@@ -1,7 +1,11 @@
-import { SEARCH_NOTESCORNELL } from '../actions/Types';
+import {
+  SEARCH_NOTESCORNELL,
+  FILTER_MATERIA_NOTESCORNELL,
+} from '../actions/Types';
 
 const initialState = {
   search: '',
+  materia: '',
 };
 
 const SearchNotesCornell = (state = initialState, action) => {
@@ -12,6 +16,11 @@ const SearchNotesCornell = (state = initialState, action) => {
         search: action.payload,
       };
     }
+    case FILTER_MATERIA_NOTESCORNELL:
+      return {
+        ...state,
+        materia: action.payload,
+      };
     default:
       return state;
   }

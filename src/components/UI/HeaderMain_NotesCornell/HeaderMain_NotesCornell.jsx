@@ -6,7 +6,7 @@ import { bindActionCreators, compose } from 'redux';
 import { firebaseConnect } from 'react-redux-firebase';
 import classes from './HeaderMain_NotesCornell.module.scss';
 
-import { SearchNotesCornell } from '../../../redux/actions/ActionNotesCornell';
+import { SearchNotesCornell } from '../../../redux/actions/NotesCornellAction';
 
 const HeaderMainNotesCornell = ({
   iconName,

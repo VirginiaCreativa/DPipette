@@ -9,7 +9,7 @@ import classes from './NotesCornellMain.module.scss';
 
 import Item from './NotesCornellItem';
 
-const NotesCornellMain = ({ notescornell }) => {
+const NotesCornellMain = ({ notescornell, Search, MateriaFilter }) => {
   const breakpointColumnsObj = {
     default: 4,
     1920: 3,
@@ -38,11 +38,17 @@ const NotesCornellMain = ({ notescornell }) => {
           className="my-masonry-grid"
           columnClassName="my-masonry-grid_column">
           {notescornell &&
-            notescornell.map(item => (
-              <div key={item.id}>
-                <Item {...item} linked={`notecornell/${item.id}`} />
-              </div>
-            ))}
+            notescornell
+              .filter(
+                item =>
+                  item.tema.toLowerCase().includes(Search.toLowerCase()) &&
+                  item.materia.includes(MateriaFilter)
+              )
+              .map(item => (
+                <div key={item.id}>
+                  <Item {...item} linked={`notecornell/${item.id}`} />
+                </div>
+              ))}
         </Masonry>
       )}
     </div>
@@ -59,5 +65,7 @@ export default compose(
   ]),
   connect(state => ({
     notescornell: state.firestore.ordered.notescornell,
+    Search: state.NotesCornell.search,
+    MateriaFilter: state.NotesCornell.materia,
   }))
 )(NotesCornellMain);

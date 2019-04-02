@@ -1,11 +1,12 @@
 import React from 'react';
-import { compose } from 'redux';
 import { connect } from 'react-redux';
+import { bindActionCreators, compose } from 'redux';
 import { firestoreConnect } from 'react-redux-firebase';
-
 import classes from './Filter.module.scss';
 
-const Filter = ({ notescornell }) => {
+import { FilterMateriaNC } from '../../../../redux/actions/NotesCornellAction';
+
+const Filter = ({ notescornell, FilterMateriaNC }) => {
   const handleFilteAdd = () => {
     console.log('Funciona');
   };
@@ -20,6 +21,7 @@ const Filter = ({ notescornell }) => {
   };
   const handleTagFilter = item => {
     console.log(item);
+    FilterMateriaNC(item);
   };
   const materia = notescornell && notescornell.map(item => item.materia);
   const tags = [...new Set(materia)].sort();
@@ -63,9 +65,15 @@ const Filter = ({ notescornell }) => {
   );
 };
 
+const mapDispatchToProps = dispatch =>
+  bindActionCreators({ FilterMateriaNC }, dispatch);
+
 export default compose(
   firestoreConnect(['notescornell']),
-  connect(state => ({
-    notescornell: state.firestore.ordered.notescornell,
-  }))
+  connect(
+    state => ({
+      notescornell: state.firestore.ordered.notescornell,
+    }),
+    mapDispatchToProps
+  )
 )(Filter);
