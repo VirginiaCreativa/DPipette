@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import MomentTo from '../../UI/MomentTo/MomentTo';
+import CapitalizeFirstLetter from '../../../scripts/CapitalizeFirstLetter';
 import classes from './NotesCornellMain.module.scss';
 
 import CoverClient from '../UI/CoverClient';
@@ -12,7 +13,9 @@ const Item = ({ linked, tema, materia, date, cover, portada, ID }) => {
   return (
     <Link to={linked}>
       <div className={classes.NotesCornellItem}>
-        <span className={classes.TagMateria}>{materia}</span>
+        <span className={classes.TagMateria}>
+          {CapitalizeFirstLetter(materia)}
+        </span>
         {isCover === 'option2' || portada === '' ? (
           <span className={classes.CoverEmpty} />
         ) : (
