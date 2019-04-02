@@ -14,7 +14,7 @@ const NotesCornellItem = ({ linked, tema, materia, date, cover, portada }) => {
       <div className={classes.NotesCornellItem}>
         <span className={classes.TagMateria}>{materia}</span>
         {isCover === 'option1' ? (
-          <CoverClient src={portada} />
+          <CoverClient src={portada} top="-25" />
         ) : (
           <span className={classes.CoverEmpty} />
         )}

@@ -57,6 +57,18 @@
     height: 200px;
     background-color: $write_gray_1;
 
+    .showUpload {
+      display: block;
+      background-color: $green;
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0%;
+      height: 4px;
+      z-index: 2;
+    }
+
+
     .BtnRemove {
       font-size: 26px;
       color: $red;

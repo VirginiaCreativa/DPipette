@@ -6,7 +6,10 @@ import { firestoreConnect } from 'react-redux-firebase';
 import { withRouter } from 'react-router';
 import firebase from '../../../../config/FirebaseConfig';
 import CleanUpSpecialChars from '../../../../scripts/CleanUpSpecialChars';
+import Spinner from '../../../UI/Spinner/Spinner';
 import classes from './NoteCornellPortada.module.scss';
+
+const Image = React.lazy(() => import('./NoteCornellImage'));
 
 const NoteCornellPortada = ({
   firebase: { storage },
@@ -16,20 +19,22 @@ const NoteCornellPortada = ({
   portada,
   tema,
 }) => {
-  const [isOnImage, setOnImage] = useState(false);
+  const [isOnImage, setOnImage] = useState(true);
   const [isUploadValue, setUploadValue] = useState(0);
   const [isFileName, setFileName] = useState('');
   const [isPortada, setPortada] = useState('');
+  const [isShowImage, setShowImage] = useState(false);
   const childRef = useRef(null);
 
   useEffect(() => {
     if (notescornell[ID].portada === '') {
       setOnImage(true);
+      setShowImage(false);
     } else {
+      setShowImage(true);
       setOnImage(false);
+      setUploadValue(0);
     }
-    console.log(isPortada);
-    console.log(isFileName);
   }, [ID, isFileName, isPortada, notescornell]);
 
   const handleOnFileChange = ev => {
@@ -120,7 +125,9 @@ const NoteCornellPortada = ({
     });
   };
 
-  const classUpload = isUploadValue ? classes.BoxUpload : null;
+  const classProgressUpload = {
+    width: `${isUploadValue}%`,
+  };
   return (
     <div className={classes.NoteCornellPortada}>
       {isOnImage ? (
@@ -140,14 +147,12 @@ const NoteCornellPortada = ({
         </div>
       ) : (
         <div className={classes.BoxPortada}>
-          <div className={classUpload} />
-          <img src={portada} alt={tema} className="img-fluid" />
-          <button
-            type="button"
-            className={classes.BtnRemove}
-            onClick={handleRemoveFile}>
-            <i className="bx bxs-x-circle" />
-          </button>
+          <div className={classes.showUpload} style={classProgressUpload} />
+          {isShowImage && (
+            <React.Suspense fallback={<Spinner />}>
+              <Image src={portada} alt={tema} onClick={handleRemoveFile} />
+            </React.Suspense>
+          )}
         </div>
       )}
     </div>
