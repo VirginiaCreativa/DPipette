@@ -1,7 +1,12 @@
 import React from 'react';
+import { compose } from 'redux';
+import { connect } from 'react-redux';
+import { firestoreConnect } from 'react-redux-firebase';
+import CapitalizeFirstLetter from '../../../../scripts/CapitalizeFirstLetter';
+
 import classes from './Filter.module.scss';
 
-const Filter = () => {
+const Filter = ({ notescornell }) => {
   const handleFilteAdd = () => {
     console.log('Funciona');
   };
@@ -40,19 +45,29 @@ const Filter = () => {
       <div className={classes.Materias}>
         <h6>Etiquetas</h6>
         <ul>
-          <li>
-            <button type="button">Materia 2</button>
-          </li>
-          <li>
-            <button type="button">Materia 3</button>
-          </li>
-          <li>
-            <button type="button">Materia 1</button>
-          </li>
+          {notescornell &&
+            notescornell.map(item => (
+              <li key={item.id}>
+                <button type="button">
+                  {CapitalizeFirstLetter(item.materia)}
+                </button>
+              </li>
+            ))}
         </ul>
       </div>
     </div>
   );
 };
 
-export default Filter;
+export default compose(
+  firestoreConnect([
+    {
+      collection: 'notescornell',
+      orderBy: 'materia',
+      limit: 2,
+    },
+  ]),
+  connect(state => ({
+    notescornell: state.firestore.ordered.notescornell,
+  }))
+)(Filter);

@@ -3,6 +3,7 @@ import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { firestoreConnect } from 'react-redux-firebase';
 import classes from './NoteCornellHeader.module.scss';
+import CapitalizeFirstLetter from '../../../../scripts/CapitalizeFirstLetter';
 
 import InputBtnUpdate from '../../../UI/InputBtnUpdate/InputBtnUpdate';
 import Header from './Header';
@@ -29,7 +30,8 @@ const NoteCornellHeader = ({
 
   const handleChangeUpdateTema = ev => {
     const isValue = ev.target.value;
-    setTema(isValue);
+    const capitValue = CapitalizeFirstLetter(isValue);
+    setTema(capitValue);
     if (isValue.length >= 0) {
       setActiveTema(false);
     }
@@ -37,7 +39,8 @@ const NoteCornellHeader = ({
 
   const handleChangeUpdateMateria = ev => {
     const isValue = ev.target.value;
-    setMateria(isValue);
+    const capitValue = CapitalizeFirstLetter(isValue);
+    setMateria(capitValue);
     if (isValue.length >= 0) {
       setActiveMateria(false);
     }
