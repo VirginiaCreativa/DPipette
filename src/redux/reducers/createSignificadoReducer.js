@@ -1,4 +1,3 @@
-/* eslint-disable prettier/prettier */
 import {
   CREATE_SIGNIFICADO,
   GET_UPLOADER_IMG,
@@ -31,81 +30,81 @@ const initialState = {
 
 export const createSignificadoReducer = (state = initialState, action) => {
   switch (action.type) {
-  case GET_UPLOADER_IMG:
-    return {
-      ...state,
-      imagenes: action.payload,
-    };
-  case GET_UPLOADER_VIDEO_SENA:
-    return {
-      ...state,
-      videoSenaBlob: action.payload,
-    };
-  case ADD_UPLOADER_VIDEO_SENA:
-    return {
-      ...state,
-      videoSena: action.payload || '',
-    };
-  case SHOW_VISUAL_IMAGEN:
-    return {
-      ...state,
-      isVisibleImg: action.isVisibleImagen
-    };
-  case HIDE_VISUAL_IMAGEN:
-    return {
-      ...state,
-      isVisibleImg: action.isVisibleImagen
-    };
-  case SHOW_VISUAL_VIDEO:
-    return {
-      ...state,
-      isVisibleVideo: action.isVisibleVideo
-    };
-  case HIDE_VISUAL_VIDEO:
-    return {
-      ...state,
-      isVisibleVideo: action.isVisibleVideo
-    };
-  case CREATE_SIGNIFICADO:
-    return {
-      ...state,
-      word: action.word
-    };
-  case ADD_IMAGENES_FILES:
-    return {
-      ...state,
-      imgFiles: state.imgFiles.concat(action.payload)
-    };
-  case DELETE_IMAGENES_FILES:
-    return {
-      ...state,
-      imgFiles: [
-        ...state.imgFiles.slice(0, action.index),
-        ...state.imgFiles.slice(action.index + 1)
-      ]
-    };
-  case GET_UPLOADER_VIDEO_DESCRIP:
-    return {
-      ...state,
-      videoDescripBlob: action.payload,
-    };
-  case ADD_UPLOADER_VIDEO_DESCRIP:
-    return {
-      ...state,
-      videoDescrip: action.payload || '',
-    };
-  case SHOW_VISUAL_MASEJEMPLO:
-    return {
-      ...state,
-      isVisibleEjemplo: action.isVisibleEjemplo
-    };
-  case HIDE_VISUAL_MASEJEMPLO:
-    return {
-      ...state,
-      isVisibleEjemplo: action.isVisibleEjemplo
-    };
-  default:
-    return state;
+    case GET_UPLOADER_IMG:
+      return {
+        ...state,
+        imagenes: action.payload,
+      };
+    case GET_UPLOADER_VIDEO_SENA:
+      return {
+        ...state,
+        videoSenaBlob: action.payload,
+      };
+    case ADD_UPLOADER_VIDEO_SENA:
+      return {
+        ...state,
+        videoSena: action.payload || '',
+      };
+    case SHOW_VISUAL_IMAGEN:
+      return {
+        ...state,
+        isVisibleImg: action.isVisibleImagen,
+      };
+    case HIDE_VISUAL_IMAGEN:
+      return {
+        ...state,
+        isVisibleImg: action.isVisibleImagen,
+      };
+    case SHOW_VISUAL_VIDEO:
+      return {
+        ...state,
+        isVisibleVideo: action.isVisibleVideo,
+      };
+    case HIDE_VISUAL_VIDEO:
+      return {
+        ...state,
+        isVisibleVideo: action.isVisibleVideo,
+      };
+    case CREATE_SIGNIFICADO:
+      return {
+        ...state,
+        word: action.word,
+      };
+    case ADD_IMAGENES_FILES:
+      return {
+        ...state,
+        imgFiles: state.imgFiles.concat(action.payload),
+      };
+    case DELETE_IMAGENES_FILES:
+      return {
+        ...state,
+        imgFiles: [
+          ...state.imgFiles.slice(0, action.index),
+          ...state.imgFiles.slice(action.index + 1),
+        ],
+      };
+    case GET_UPLOADER_VIDEO_DESCRIP:
+      return {
+        ...state,
+        videoDescripBlob: action.payload,
+      };
+    case ADD_UPLOADER_VIDEO_DESCRIP:
+      return {
+        ...state,
+        videoDescrip: action.payload || '',
+      };
+    case SHOW_VISUAL_MASEJEMPLO:
+      return {
+        ...state,
+        isVisibleEjemplo: action.isVisibleEjemplo,
+      };
+    case HIDE_VISUAL_MASEJEMPLO:
+      return {
+        ...state,
+        isVisibleEjemplo: action.isVisibleEjemplo,
+      };
+    default:
+      return state;
   }
 };
 export default createSignificadoReducer;

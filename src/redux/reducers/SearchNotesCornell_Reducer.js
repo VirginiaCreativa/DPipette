@@ -1,12 +1,12 @@
-import { SEARCH_SIGNIF } from '../actions/Types';
+import { SEARCH_NOTESCORNELL } from '../actions/Types';
 
 const initialState = {
   search: '',
 };
 
-const SearchSignificados = (state = initialState, action) => {
+const SearchNotesCornell = (state = initialState, action) => {
   switch (action.type) {
-    case SEARCH_SIGNIF: {
+    case SEARCH_NOTESCORNELL: {
       return {
         ...state,
         search: action.payload,
@@ -16,4 +16,4 @@ const SearchSignificados = (state = initialState, action) => {
       return state;
   }
 };
-export default SearchSignificados;
+export default SearchNotesCornell;

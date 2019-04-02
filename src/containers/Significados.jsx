@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import Header from '../components/UI/HeaderMain/HeaderMain';
+import Header from '../components/UI/HeaderMain_Significados/HeaderMain_Significados';
 import SignificadosMain from '../components/Significados/SignificadosMain/SignificadosMain';
 
 class Significados extends Component {

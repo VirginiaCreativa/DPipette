@@ -1,0 +1,147 @@
+@import '../../../styles/variables';
+
+.HeaderMainNotesCornell {
+  margin-bottom: 30px;
+
+  .BoxTitleSearch {
+    display: flex;
+  }
+
+  .Title {
+    h2 {
+      margin-bottom: 0;
+      margin-right: 26px;
+    }
+
+    .iconCircle {
+      display: inline-block;
+      font-size: 18px;
+      line-height: 1.7;
+      text-align: center;
+      color: #fff;
+      background-color: $blue;
+      position: relative;
+      top: -2px;
+      margin-right: 8px;
+      width: 30px;
+      height: 30px;
+      border-radius: 100%;
+    }
+  }
+
+  .SearchBox {
+    position: relative;
+
+    &:after {
+      content: '';
+      display: block;
+      position: absolute;
+      top: 8px;
+      left: -10px;
+      height: 24px;
+      border-left: 2px solid $write_gray_3;
+    }
+
+    .Search {
+      position: relative;
+      top: 10px;
+
+      input[type="text"] {
+        font-size: .9rem;
+        color: transparent;
+        background: none;
+        width: 25px;
+        height: 25px;
+        transition: all .1s ease-in .1s;
+        border: none;
+        z-index: 1;
+        caret-color: $blue;
+
+        // line-height: 25px;
+        &:hover {
+          cursor: pointer;
+
+          &:focus {
+            cursor: text;
+          }
+
+          +span {
+            background: none;
+          }
+        }
+
+        &:focus {
+          color: $black;
+          background: none;
+          position: relative;
+          top: -3px;
+          padding: 0 16px;
+          width: 200px;
+          outline: none;
+
+          +span {
+            position: absolute;
+            top: -5px;
+            width: 200px;
+            height: 28px;
+
+            &::before {
+              opacity: 0;
+              width: 2px;
+              transition: all .1s ease-in;
+            }
+          }
+        }
+
+        +span {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 16px;
+          height: 16px;
+          transition: all .1s ease-in .1s;
+          border: 2px solid $write_gray_3;
+          border-radius: 25px;
+          z-index: -1;
+
+          &::before {
+            content: '';
+            background: $write_gray_3;
+            position: absolute;
+            width: 8px;
+            height: 3px;
+            transition: all .1s ease-in .25s;
+            transform: rotate(45deg) translate(16px, -2px);
+            border-radius: 5px;
+            transform-origin: left top;
+          }
+        }
+      }
+    }
+  }
+
+  .BtnAdd {
+    background-color: $blue;
+    padding: 6px 10px;
+    border-radius: 3px;
+
+    &:hover {
+      background-color: $blue_medium;
+    }
+
+    a {
+      font-size: 0.85rem;
+      color: #ffffff;
+    }
+
+    :global {
+      .bx {
+        font-size: 14px;
+        position: relative;
+        top: -1px;
+        margin-left: 14px;
+        vertical-align: middle;
+      }
+    }
+  }
+}

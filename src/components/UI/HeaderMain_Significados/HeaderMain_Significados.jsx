@@ -4,11 +4,11 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { bindActionCreators, compose } from 'redux';
 import { firebaseConnect } from 'react-redux-firebase';
-import classes from './HeaderMain.module.scss';
+import classes from './HeaderMain_Significados.module.scss';
 
 import { searchSignificados } from '../../../redux/actions/Action';
 
-const HeaderMain = ({
+const HeaderMainSignificados = ({
   iconName,
   linked,
   title,
@@ -23,7 +23,7 @@ const HeaderMain = ({
     backgroundColor: colored,
   };
   return (
-    <div className={classes.HeaderMain}>
+    <div className={classes.HeaderMain_Significados}>
       <div className="row">
         <div className="col-10">
           <div className={classes.BoxTitleSearch}>
@@ -66,4 +66,4 @@ export default compose(
     null,
     mapDispatchToProps
   )
-)(HeaderMain);
+)(HeaderMainSignificados);

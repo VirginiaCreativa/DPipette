@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { history } from '../redux/store/Store';
 import classes from './NotesCornell.module.scss';
 
-import Header from '../components/UI/HeaderMain/HeaderMain';
+import Header from '../components/UI/HeaderMain_NotesCornell/HeaderMain_NotesCornell';
 import Filter from '../components/NotesCornell/NotesCornellMain/Filter/Filter';
 import NotesCornellMain from '../components/NotesCornell/NotesCornellMain/NotesCornellMain';
 

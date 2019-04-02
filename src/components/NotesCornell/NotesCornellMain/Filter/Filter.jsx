@@ -64,12 +64,7 @@ const Filter = ({ notescornell }) => {
 };
 
 export default compose(
-  firestoreConnect([
-    {
-      collection: 'notescornell',
-      orderBy: ['materia'],
-    },
-  ]),
+  firestoreConnect(['notescornell']),
   connect(state => ({
     notescornell: state.firestore.ordered.notescornell,
   }))
