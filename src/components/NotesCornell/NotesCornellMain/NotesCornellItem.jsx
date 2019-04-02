@@ -6,17 +6,17 @@ import classes from './NotesCornellMain.module.scss';
 
 import CoverClient from '../UI/CoverClient';
 
-const Item = ({ linked, tema, materia, date, cover, portada }) => {
+const Item = ({ linked, tema, materia, date, cover, portada, ID }) => {
   const [isCover, setCover] = useState(cover);
 
   return (
     <Link to={linked}>
       <div className={classes.NotesCornellItem}>
         <span className={classes.TagMateria}>{materia}</span>
-        {isCover === 'option1' ? (
-          <CoverClient src={portada} top="-25" />
-        ) : (
+        {isCover === 'option2' || portada === '' ? (
           <span className={classes.CoverEmpty} />
+        ) : (
+          <CoverClient src={portada} top="-25" />
         )}
         <div className={classes.BoxContent}>
           <div className={classes.DateItem}>

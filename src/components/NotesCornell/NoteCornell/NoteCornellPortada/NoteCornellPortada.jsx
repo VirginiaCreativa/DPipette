@@ -25,6 +25,7 @@ const NoteCornellPortada = ({
   const [isPortada, setPortada] = useState('');
   const [isShowImage, setShowImage] = useState(false);
   const childRef = useRef(null);
+  let refPortada = useRef(null);
 
   useEffect(() => {
     if (notescornell[ID].portada === '') {
@@ -150,7 +151,12 @@ const NoteCornellPortada = ({
           <div className={classes.showUpload} style={classProgressUpload} />
           {isShowImage && (
             <React.Suspense fallback={<Spinner />}>
-              <Image src={portada} alt={tema} onClick={handleRemoveFile} />
+              <Image
+                src={portada}
+                alt={tema}
+                onClick={handleRemoveFile}
+                onRef={ref => (refPortada = ref)}
+              />
             </React.Suspense>
           )}
         </div>
