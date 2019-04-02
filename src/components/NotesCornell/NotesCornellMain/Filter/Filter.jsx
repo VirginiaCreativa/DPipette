@@ -2,7 +2,6 @@ import React from 'react';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { firestoreConnect } from 'react-redux-firebase';
-import CapitalizeFirstLetter from '../../../../scripts/CapitalizeFirstLetter';
 
 import classes from './Filter.module.scss';
 
@@ -19,6 +18,10 @@ const Filter = ({ notescornell }) => {
   const handleFilteRecient = () => {
     console.log('Funciona');
   };
+  const materia = notescornell && notescornell.map(item => item.materia);
+  const tags = [...new Set(materia)];
+  // const index = array && array.filter(item => item === 'Nueva materia');
+
   return (
     <div className={classes.Filter}>
       <div className={classes.Menu}>
@@ -45,14 +48,11 @@ const Filter = ({ notescornell }) => {
       <div className={classes.Materias}>
         <h6>Etiquetas</h6>
         <ul>
-          {notescornell &&
-            notescornell.map(item => (
-              <li key={item.id}>
-                <button type="button">
-                  {CapitalizeFirstLetter(item.materia)}
-                </button>
-              </li>
-            ))}
+          {tags.map(item => (
+            <li key={item.id}>
+              <button type="button">{item}</button>
+            </li>
+          ))}
         </ul>
       </div>
     </div>
@@ -63,8 +63,7 @@ export default compose(
   firestoreConnect([
     {
       collection: 'notescornell',
-      orderBy: 'materia',
-      limit: 2,
+      orderBy: ['materia'],
     },
   ]),
   connect(state => ({
