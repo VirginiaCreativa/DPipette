@@ -31,6 +31,7 @@ const ItemsTags = ({
               tags.map((item, index) => (
                 <li key={item} style={classTag}>
                   <div
+                    className={classes.ItemTag}
                     onClick={() => onDelete(item, index)}
                     role="button"
                     tabIndex="0">
