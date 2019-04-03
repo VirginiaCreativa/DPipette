@@ -36,7 +36,7 @@ const NoteCornellPortada = ({
       setOnImage(false);
       setUploadValue(0);
     }
-  }, [ID, isFileName, isPortada, notescornell]);
+  }, [ID, notescornell, portada]);
 
   const handleOnFileChange = ev => {
     const imgFile = ev.target.files[0];

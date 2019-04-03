@@ -10,7 +10,7 @@ import firebase from '../../../../config/FirebaseConfig';
 
 import HeadingResumen from '../UI/HeadingResumen';
 import { modules, formats } from '../UI/ControlEditorResumen';
-import VideoPlayer from '../../../UI/VideoPlayer/VideoPlayer';
+import VideoPlayer from '../../../UI/VideoPlayerAuto/VideoPlayer';
 
 const videoType = 'video/webm;codecs=vp8';
 
@@ -238,7 +238,7 @@ class NoteCornellResumen extends Component {
   };
 
   render() {
-    const { getResumen, videoResumen } = this.props;
+    const { getResumen, videoResumen, tema } = this.props;
     const {
       isResumContent,
       isOnEditable,
@@ -375,7 +375,7 @@ class NoteCornellResumen extends Component {
               <div className={classes.BoxEditorResumen}>{viewContent}</div>
             </div>
             <div className="col">
-              {videoResumen && <VideoPlayer srcVideo={videoResumen} />}
+              {videoResumen && <VideoPlayer src={videoResumen} title={tema} />}
             </div>
           </div>
         </div>
