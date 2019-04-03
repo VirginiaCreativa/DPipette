@@ -24,10 +24,7 @@ class Navigations extends Component {
   }
 }
 
-const mapStateToProps = state => {
-  console.log(state);
-  return {};
-};
+const mapStateToProps = () => ({});
 
 export default compose(
   firebaseConnect(['notescornell']),
