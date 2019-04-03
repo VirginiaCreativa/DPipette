@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import { bindActionCreators, compose } from 'redux';
 import { connect } from 'react-redux';
 import { firebaseConnect } from 'react-redux-firebase';
+import { history } from '../redux/store/Store';
 import classes from './Login.module.scss';
 
 import { SignIn } from '../redux/actions/AuthAction';
@@ -17,11 +18,19 @@ class Login extends Component {
     this.setState({ [ev.target.id]: ev.target.value });
   };
 
-  handleSubmit = () => {
-    this.props.SignIn(this.state);
+  handleSubmit = ev => {
+    ev.preventDefault();
+    this.props.firebase
+      .login({
+        email: this.state.userEmail,
+        password: this.state.userPassword,
+      })
+      .then(() => history.push('/'))
+      .catch(error => console.log(error));
   };
 
   render() {
+    console.log(this.props.firebase);
     return (
       <div className={classes.Login}>
         <div className={classes.BoxForm}>
@@ -47,10 +56,13 @@ class Login extends Component {
                   className="form-control"
                   onChange={this.handleChange}
                   id="userPassword"
-                  autoComplete="current-password"
+                  autoComplete="none"
                 />
               </div>
-              <button type="submit" className="btn btn-success">
+              <button
+                type="submit"
+                className="btn btn-success"
+                onSuccess={() => history.push('/')}>
                 Registrarse
               </button>
             </form>

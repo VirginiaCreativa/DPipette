@@ -1,3 +1,4 @@
+import { getFirebase } from 'react-redux-firebase';
 import { LOGIN_SUCESS, LOGIN_ERROR } from './Types';
 
 export const SignIn = credentials => (dispatch, getState, getFirebase) => {
@@ -9,6 +10,6 @@ export const SignIn = credentials => (dispatch, getState, getFirebase) => {
       dispatch({ type: LOGIN_SUCESS });
     })
     .catch(error => {
-      dispatch({ type: LOGIN_ERROR });
+      dispatch({ type: LOGIN_ERROR, error });
     });
 };
