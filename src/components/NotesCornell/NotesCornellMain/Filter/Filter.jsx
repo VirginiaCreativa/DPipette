@@ -4,11 +4,17 @@ import { bindActionCreators, compose } from 'redux';
 import { firestoreConnect } from 'react-redux-firebase';
 import classes from './Filter.module.scss';
 
-import { FilterMateriaNC } from '../../../../redux/actions/NotesCornellAction';
+import {
+  FilterMateria,
+  FilterAll,
+} from '../../../../redux/actions/NotesCornellAction';
 
-const Filter = ({ notescornell, FilterMateriaNC }) => {
-  const handleFilteAdd = () => {
-    console.log('Funciona');
+const Filter = ({ notescornell, FilterMateria, FilterAll }) => {
+  const handleFilteAll = () => {
+    const materia = notescornell && notescornell.map(item => item.materia);
+    const tags = [...new Set(materia)];
+    console.log(tags);
+    FilterAll(tags);
   };
   const handleFiltePresent = () => {
     console.log('Funciona');
@@ -21,7 +27,7 @@ const Filter = ({ notescornell, FilterMateriaNC }) => {
   };
   const handleTagFilter = item => {
     console.log(item);
-    FilterMateriaNC(item);
+    FilterMateria(item);
   };
   const materia = notescornell && notescornell.map(item => item.materia);
   const tags = [...new Set(materia)].sort();
@@ -31,14 +37,14 @@ const Filter = ({ notescornell, FilterMateriaNC }) => {
       <div className={classes.Menu}>
         <button
           type="button"
-          onClick={handleFilteAdd}
+          onClick={handleFilteAll}
           className={classes.Active}>
           <i className="bx bx-grid-alt" />
           Todas
         </button>
         <button type="button" onClick={handleFiltePresent}>
           <i className="bx bx-calendar-event" />
-          Presentación
+          Hoy
         </button>
         <button type="button" onClick={handleFilteStar}>
           <i className="bx bx-star" />
@@ -66,7 +72,7 @@ const Filter = ({ notescornell, FilterMateriaNC }) => {
 };
 
 const mapDispatchToProps = dispatch =>
-  bindActionCreators({ FilterMateriaNC }, dispatch);
+  bindActionCreators({ FilterMateria, FilterAll }, dispatch);
 
 export default compose(
   firestoreConnect(['notescornell']),

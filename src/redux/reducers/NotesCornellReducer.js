@@ -1,14 +1,16 @@
 import {
   SEARCH_NOTESCORNELL,
   FILTER_MATERIA_NOTESCORNELL,
+  FILTER_ALL_NOTESCORNELL,
 } from '../actions/Types';
 
 const initialState = {
   search: '',
   materia: '',
+  all: [],
 };
 
-const SearchNotesCornell = (state = initialState, action) => {
+const NotesCornellReducer = (state = initialState, action) => {
   switch (action.type) {
     case SEARCH_NOTESCORNELL: {
       return {
@@ -21,8 +23,13 @@ const SearchNotesCornell = (state = initialState, action) => {
         ...state,
         materia: action.payload,
       };
+    case FILTER_ALL_NOTESCORNELL:
+      return {
+        ...state,
+        all: state.all.concat(action.payload),
+      };
     default:
       return state;
   }
 };
-export default SearchNotesCornell;
+export default NotesCornellReducer;
