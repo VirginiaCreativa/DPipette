@@ -5,6 +5,7 @@ import { connectRouter } from 'connected-react-router';
 import createSignificado from './createSignificadoReducer';
 import SearchSignificados from './SearchSignificados';
 import NotesCornell from './NotesCornellReducer';
+import Auth from './AuthReducer';
 
 export default history =>
   combineReducers({
@@ -13,5 +14,6 @@ export default history =>
     firestore: firestoreReducer,
     createSing: createSignificado,
     searchSign: SearchSignificados,
+    Auth,
     NotesCornell,
   });

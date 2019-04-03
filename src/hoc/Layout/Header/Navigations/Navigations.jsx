@@ -1,11 +1,14 @@
 import React, { Component } from 'react';
+import { compose } from 'redux';
+import { connect } from 'react-redux';
+import { firebaseConnect } from 'react-redux-firebase';
 import classes from './Navigations.module.scss';
 import SignedIn from './Signed/SignedIn';
 import SignedOut from './Signed/SignedOut';
 
 class Navigations extends Component {
   state = {
-    login: true,
+    login: false,
     user: true,
   };
 
@@ -21,4 +24,15 @@ class Navigations extends Component {
   }
 }
 
-export default Navigations;
+const mapStateToProps = state => {
+  console.log(state);
+  return {};
+};
+
+export default compose(
+  firebaseConnect(['notescornell']),
+  connect(
+    mapStateToProps,
+    null
+  )
+)(Navigations);
