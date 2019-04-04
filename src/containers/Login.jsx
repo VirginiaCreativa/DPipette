@@ -1,17 +1,16 @@
 /* eslint-disable react/no-unused-state */
 import React, { Component } from 'react';
-import { bindActionCreators, compose } from 'redux';
+import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { firebaseConnect } from 'react-redux-firebase';
 import { history } from '../redux/store/Store';
 import classes from './Login.module.scss';
 
-import { SignIn } from '../redux/actions/AuthAction';
-
 class Login extends Component {
   state = {
     userEmail: '',
     userPassword: '',
+    error: null,
   };
 
   handleChange = ev => {
@@ -30,7 +29,6 @@ class Login extends Component {
   };
 
   render() {
-    console.log(this.props.firebase);
     return (
       <div className={classes.Login}>
         <div className={classes.BoxForm}>
@@ -59,11 +57,8 @@ class Login extends Component {
                   autoComplete="none"
                 />
               </div>
-              <button
-                type="submit"
-                className="btn btn-success"
-                onSuccess={() => history.push('/')}>
-                Registrarse
+              <button type="submit" className="btn btn-success">
+                Entrar
               </button>
             </form>
           </div>
@@ -76,12 +71,7 @@ class Login extends Component {
   }
 }
 
-const mapDispatchToProps = dispatch => bindActionCreators({ SignIn }, dispatch);
-
 export default compose(
-  firebaseConnect(['notescornell']),
-  connect(
-    null,
-    mapDispatchToProps
-  )
+  firebaseConnect(),
+  connect()
 )(Login);

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import { firebaseConnect } from 'react-redux-firebase';
 import classes from './UserProfile.module.scss';
 
 const imgUser = require('../.../../../../../../../assets/images/virginia.jpg');
@@ -39,10 +40,13 @@ class UserProfile extends Component {
     }
   };
 
+  handleLoginOut = () => {
+    this.props.firebase.logout();
+  };
+
   render() {
     const { userSign } = this.props;
     const { isMenu, fade, porcentStorage } = this.state;
-
     let btnShow;
     if (fade) {
       btnShow = { color: '#1948ca' };
@@ -97,7 +101,7 @@ class UserProfile extends Component {
               </Link>
             </li>
             <li>
-              <Link to="/login">
+              <Link to="/login" onClick={this.handleLoginOut}>
                 <i className="bx bx-log-in" />
                 Salir
               </Link>
@@ -137,4 +141,4 @@ class UserProfile extends Component {
   }
 }
 
-export default UserProfile;
+export default firebaseConnect()(UserProfile);

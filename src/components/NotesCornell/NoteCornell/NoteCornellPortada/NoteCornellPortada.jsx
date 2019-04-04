@@ -46,7 +46,6 @@ const NoteCornellPortada = ({
     const materia = CleanUpSpecialChars(materiaFB);
     const tema = CleanUpSpecialChars(temaFB);
     const temaNotSpace = tema.replace(/ +/g, '_');
-    console.log(tema, materia);
     const metadata = {
       contentType: 'image/jpg',
     };

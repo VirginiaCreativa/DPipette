@@ -8,28 +8,28 @@ import SignedOut from './Signed/SignedOut';
 
 class Navigations extends Component {
   state = {
-    login: false,
     user: true,
   };
 
   render() {
-    const { user, login } = this.state;
+    const { user } = this.state;
     return (
-      <>
+      <React.Fragment>
         <div className={classes.Navigations}>
-          {login ? <SignedIn userSign={user} /> : <SignedOut />}
+          {this.props.auth.isEmpty ? (
+            <SignedOut />
+          ) : (
+            <SignedIn userSign={user} />
+          )}
         </div>
-      </>
+      </React.Fragment>
     );
   }
 }
 
-const mapStateToProps = () => ({});
-
 export default compose(
-  firebaseConnect(['notescornell']),
-  connect(
-    mapStateToProps,
-    null
-  )
+  firebaseConnect(),
+  connect(state => ({
+    auth: state.firebase.auth,
+  }))
 )(Navigations);
