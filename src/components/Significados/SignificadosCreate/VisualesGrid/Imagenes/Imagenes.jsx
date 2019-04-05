@@ -23,15 +23,15 @@ class Imagenes extends Component {
     console.log(image);
     console.log(item);
 
-    // const storageRef = storage().ref(`significados/${word}/imagenes/${image}`);
-    // storageRef
-    //   .delete()
-    //   .then(() => {
-    //     console.log('SI DELETE');
-    //   })
-    //   .catch(error => {
-    //     console.error('Error removing document: ', error);
-    //   });
+    const storageRef = storage().ref(`significados/${word}/imagenes/${image}`);
+    storageRef
+      .delete()
+      .then(() => {
+        console.log('SI DELETE');
+      })
+      .catch(error => {
+        console.error('Error removing document: ', error);
+      });
     this.props.deleteImagenesFiles(item);
   };
 
