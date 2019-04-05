@@ -1,12 +1,12 @@
 import React from 'react';
 import classes from './Imagen.module.scss';
 
-const Imagen = ({ Image, onDelete, alt }) => (
+const Imagen = ({ src, onDelete, alt, ref }) => (
   <div className={classes.Imagen}>
     <button onClick={onDelete} type="button">
       <i className="bx bx-x" />
     </button>
-    <img src={Image} alt={alt} className="rounded-0" />
+    <img src={src} alt={alt} className="rounded-0" ref={ref} />
   </div>
 );
 

@@ -8777,7 +8777,7 @@ react-quill@^1.3.3:
     quill "^1.2.6"
     react-dom-factories "^1.0.0"
 
-react-redux-firebase@^3.0.0-alpha.10:
+react-redux-firebase@^3.0.0-alpha.11:
   version "3.0.0-alpha.11"
   resolved "https://registry.yarnpkg.com/react-redux-firebase/-/react-redux-firebase-3.0.0-alpha.11.tgz#1c1a5f9018c9170dc99f5a8a8e4f397d66249f29"
   integrity sha512-n/fTIxezrxFUmBt0/S2nB0vB6tZntp8fVu3erOZBA4cp07WCxmhkaFmFi3b1dV0oxwoBjbXxni05oSWawyOuRQ==

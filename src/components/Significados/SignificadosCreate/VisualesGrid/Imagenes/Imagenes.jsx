@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { firestoreConnect } from 'react-redux-firebase';
 import { connect } from 'react-redux';
 import { bindActionCreators, compose } from 'redux';
+import { throws } from 'assert';
 import classes from './Imagenes.module.scss';
 import Imagen from './Imagen';
 
@@ -11,22 +12,41 @@ import {
 } from '../../../../../redux/actions/Action';
 
 class Imagenes extends Component {
-  deleteImg = index => {
-    this.props.deleteImagenesFiles(index);
+  handleDeleteImg = (item, index) => {
+    const {
+      firebase: { storage },
+      word,
+      imagenes,
+      imgFiles,
+    } = this.props;
+    const image = imagenes[index];
+    console.log(image);
+    console.log(item);
+
+    // const storageRef = storage().ref(`significados/${word}/imagenes/${image}`);
+    // storageRef
+    //   .delete()
+    //   .then(() => {
+    //     console.log('SI DELETE');
+    //   })
+    //   .catch(error => {
+    //     console.error('Error removing document: ', error);
+    //   });
+    this.props.deleteImagenesFiles(item);
   };
 
   render() {
-    const { imgFiles, word } = this.props;
-
+    const { imgFiles, word, imagenes } = this.props;
     return (
       <div className={classes.Imagenes}>
         {imgFiles &&
           imgFiles.map((item, index) => (
             <Imagen
               key={item}
-              Image={item}
-              alt={word}
-              onDelete={() => this.deleteImg(item, index)}
+              src={item}
+              alt={imagenes[index]}
+              ref={this.refImage}
+              onDelete={() => this.handleDeleteImg(item, index)}
             />
           ))}
       </div>

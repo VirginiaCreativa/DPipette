@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators, compose } from 'redux';
-import { firebaseConnect } from 'react-redux-firebase';
+import { firestoreConnect } from 'react-redux-firebase';
 import classes from './ImagenesUploader.module.scss';
 import Progress from '../../../UI/Progress/Progress';
 import firebase from '../../../../config/FirebaseConfig';
@@ -32,8 +32,6 @@ class ImagenesUploader extends Component {
         this.setState({ loader: false });
       }
     }
-    const { imagenes } = this.state;
-    this.props.getUploaderImg(imagenes);
   }
 
   handleOnFileChange = e => {
@@ -41,14 +39,22 @@ class ImagenesUploader extends Component {
     const fileList = [];
     for (let i = 0; i < files.length; i += 1) {
       const imgfiles = e.target.files[i];
+      const changeNameFile = imgfiles.slice(0, imgfiles.size, 'image/jpg');
+      const imgFilesName = new File(
+        [changeNameFile],
+        `${this.props.word}_${i}`,
+        {
+          type: 'image/jpg',
+        }
+      );
       const reader = new FileReader();
       reader.onload = ev => {
         fileList.push(ev.target.result);
       };
-      reader.readAsDataURL(imgfiles);
-      const imgURL = window.URL.createObjectURL(imgfiles);
-      this.props.addImagenesFiles(imgURL);
-      this.handleUploadImageAll(imgfiles);
+      reader.readAsDataURL(imgFilesName);
+      const imgURL = window.URL.createObjectURL(imgFilesName);
+      this.props.getUploaderImg(imgFilesName.name);
+      this.handleUploadImageAll(imgFilesName);
     }
   };
 
@@ -64,7 +70,6 @@ class ImagenesUploader extends Component {
     );
 
     const uploadTask = storageRef.put(imgFiles, metadata);
-
     uploadTask.on(
       firebase.storage.TaskEvent.STATE_CHANGED,
       snapshot => {
@@ -106,9 +111,14 @@ class ImagenesUploader extends Component {
             uploadValue: 100,
             imagenes: prevState.imagenes.concat(downloadURL),
           }));
+          this.props.addImagenesFiles(downloadURL);
         });
       }
     );
+    // uploadTask.then(snapshot => {
+    //   const bucket = snapshot.bucket;
+    //   console.log('ESTE =========>', snapshot);
+    // });
   };
 
   render() {
@@ -123,7 +133,7 @@ class ImagenesUploader extends Component {
           onChange={this.handleOnFileChange}
           ref={this.props.childRef}
           multiple
-          accept="image/*"
+          accept="image/jpg"
         />
         <div className={classes.boxItems}>
           <i className="bx bxs-cloud-upload" />
@@ -140,7 +150,7 @@ const mapDispatchToProps = dispatch =>
   bindActionCreators({ getUploaderImg, addImagenesFiles }, dispatch);
 
 export default compose(
-  firebaseConnect(),
+  firestoreConnect(['significados']),
   connect(
     state => ({
       word: state.createSing.word,

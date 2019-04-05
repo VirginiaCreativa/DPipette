@@ -33,7 +33,7 @@ export const createSignificadoReducer = (state = initialState, action) => {
     case GET_UPLOADER_IMG:
       return {
         ...state,
-        imagenes: action.payload,
+        imagenes: state.imagenes.concat(action.payload),
       };
     case GET_UPLOADER_VIDEO_SENA:
       return {
@@ -76,12 +76,10 @@ export const createSignificadoReducer = (state = initialState, action) => {
         imgFiles: state.imgFiles.concat(action.payload),
       };
     case DELETE_IMAGENES_FILES:
+      console.log('ESTE =========>', action.index);
       return {
         ...state,
-        imgFiles: [
-          ...state.imgFiles.slice(0, action.index),
-          ...state.imgFiles.slice(action.index + 1),
-        ],
+        imgFiles: state.imgFiles.filter(item => item !== action.index),
       };
     case GET_UPLOADER_VIDEO_DESCRIP:
       return {
