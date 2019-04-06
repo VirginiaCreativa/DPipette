@@ -9,18 +9,10 @@ import classes from './Filtering.module.scss';
 import {
   FilterMateria,
   FilterAll,
-  FilteringCateg,
   FilterDate,
 } from '../../../../redux/actions/NotesCornellAction';
 
-const Filter = ({
-  notescornell,
-  FilterMateria,
-  FilterAll,
-  FilteringCateg,
-  FilterDate,
-}) => {
-  let refBtnMateria;
+const Filter = ({ notescornell, FilterMateria, FilterAll, FilterDate }) => {
   const dateNow = moment(Date.now())
     .locale('es')
     .format('LL');
@@ -68,7 +60,6 @@ const Filter = ({
               <button
                 type="button"
                 name="materia"
-                ref={ref => (refBtnMateria = ref)}
                 onClick={() => handleTagFilter(item)}>
                 {item}
               </button>
@@ -81,10 +72,7 @@ const Filter = ({
 };
 
 const mapDispatchToProps = dispatch =>
-  bindActionCreators(
-    { FilterMateria, FilterAll, FilteringCateg, FilterDate },
-    dispatch
-  );
+  bindActionCreators({ FilterMateria, FilterAll, FilterDate }, dispatch);
 
 export default compose(
   firestoreConnect(['notescornell']),

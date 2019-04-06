@@ -1,16 +1,10 @@
-import moment from 'moment';
-import 'moment/locale/es';
 import {
   SEARCH_NOTESCORNELL,
   FILTER_MATERIA_NOTESCORNELL,
   FILTER_ALL_NOTESCORNELL,
-  FILTER_CATEGORIA_NOTESCORNELL,
   FILTER_DATE_NOTESCORNELL,
 } from '../actions/Types';
 
-const dateNow = moment(Date.now())
-  .locale('es')
-  .format('LL');
 const initialState = {
   search: '',
   materia: '',
@@ -37,11 +31,6 @@ const NotesCornellReducer = (state = initialState, action) => {
         ...state,
         materia: state.all,
         date: '',
-      };
-    case FILTER_CATEGORIA_NOTESCORNELL:
-      return {
-        ...state,
-        categoria: action.payload,
       };
     case FILTER_DATE_NOTESCORNELL:
       return {
