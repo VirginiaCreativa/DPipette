@@ -15,6 +15,7 @@ import {
 const Filter = ({ notescornell, FilterMateria, FilterAll, FilterDate }) => {
   const [isActiveCategAll, setActiveCategAll] = useState(1);
   const [isActiveCategToday, setActiveCategToday] = useState(null);
+  const [isActiveCategYesterday, setActiveCategYesterday] = useState(null);
   const [isActiveCategFavor, setActiveCategFavor] = useState(null);
   const [isActiveTag, setActiveTag] = useState(null);
 
@@ -26,6 +27,7 @@ const Filter = ({ notescornell, FilterMateria, FilterAll, FilterDate }) => {
     FilterAll();
     setActiveCategAll(1);
     setActiveCategToday(null);
+    setActiveCategYesterday(null);
     setActiveCategFavor(null);
     setActiveTag(null);
   };
@@ -33,18 +35,29 @@ const Filter = ({ notescornell, FilterMateria, FilterAll, FilterDate }) => {
     FilterDate(dateNow);
     setActiveCategAll(null);
     setActiveCategToday(2);
+    setActiveCategYesterday(null);
+    setActiveCategFavor(null);
+    setActiveTag(null);
+  };
+  const handleFilteYesterday = ev => {
+    setActiveCategAll(null);
+    setActiveCategToday(null);
+    setActiveCategYesterday(3);
     setActiveCategFavor(null);
     setActiveTag(null);
   };
   const handleFilteFavourite = ev => {
     setActiveCategAll(null);
     setActiveCategToday(null);
-    setActiveCategFavor(3);
+    setActiveCategYesterday(null);
+    setActiveCategFavor(4);
     setActiveTag(null);
   };
   const handleTagFilter = (item, index) => {
     FilterMateria(item);
     setActiveCategAll(null);
+    setActiveCategToday(null);
+    setActiveCategYesterday(null);
     setActiveCategFavor(null);
     setActiveTag(null);
     setActiveTag(index);
@@ -54,7 +67,9 @@ const Filter = ({ notescornell, FilterMateria, FilterAll, FilterDate }) => {
 
   const classActiveAll = isActiveCategAll === 1 ? classes.Active : null;
   const classActiveToday = isActiveCategToday === 2 ? classes.Active : null;
-  const classActiveFavor = isActiveCategFavor === 3 ? classes.Active : null;
+  const classActivYesterday =
+    isActiveCategYesterday === 3 ? classes.Active : null;
+  const classActiveFavor = isActiveCategFavor === 4 ? classes.Active : null;
 
   return (
     <div className={classes.Filtering}>
@@ -77,8 +92,16 @@ const Filter = ({ notescornell, FilterMateria, FilterAll, FilterDate }) => {
         </button>
         <button
           type="button"
-          onClick={handleFilteFavourite}
+          onClick={handleFilteYesterday}
           name="3"
+          className={classActivYesterday}>
+          <i className="bx bx-history" />
+          Ayer
+        </button>
+        <button
+          type="button"
+          onClick={handleFilteFavourite}
+          name="4"
           className={classActiveFavor}>
           <i className="bx bx-star" />
           Favoritos

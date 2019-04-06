@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
-import { withFirebase } from 'react-redux-firebase';
+import { firebaseConnect } from 'react-redux-firebase';
 import classes from './Navigations.module.scss';
 import SignedIn from './Signed/SignedIn';
 import SignedOut from './Signed/SignedOut';
@@ -16,6 +16,6 @@ const Navigations = ({ firebase, isEmpty }) => {
 };
 
 export default compose(
-  withFirebase,
+  firebaseConnect(),
   connect(({ firebase: { auth: { isEmpty } } }) => ({ isEmpty }))
 )(Navigations);
