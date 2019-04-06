@@ -38,6 +38,13 @@
   p {
     margin: 0;
   }
+
+  img {
+    float: left;
+    margin-right: 16px;
+    margin-bottom: 0px;
+    overflow: auto;
+  }
 }
 
 :global {

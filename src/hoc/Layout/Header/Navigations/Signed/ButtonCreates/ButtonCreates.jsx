@@ -46,7 +46,7 @@ class ButtonCreates extends Component {
       preguntas: [] || null,
       importantes: [] || null,
       claves: [] || null,
-      date: new Date(),
+      date: this.props.firebase.firestore.FieldValue.serverTimestamp(),
       apuntes: [] || null,
       videoResumen: '',
       cover: 'option2',

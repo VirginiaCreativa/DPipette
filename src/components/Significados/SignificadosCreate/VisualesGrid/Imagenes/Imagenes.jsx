@@ -17,11 +17,8 @@ class Imagenes extends Component {
       firebase: { storage },
       word,
       imagenes,
-      imgFiles,
     } = this.props;
     const image = imagenes[index];
-    console.log(image);
-    console.log(item);
 
     const storageRef = storage().ref(`significados/${word}/imagenes/${image}`);
     storageRef

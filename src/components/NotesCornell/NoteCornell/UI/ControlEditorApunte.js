@@ -8,6 +8,7 @@ export const modules = {
       { list: 'bullet' },
       { indent: '-1' },
       { indent: '+1' },
+      { align: [] },
     ],
     ['link', 'image', 'video'],
     ['clean'],

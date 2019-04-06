@@ -1,58 +1,63 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators, compose } from 'redux';
 import { firestoreConnect } from 'react-redux-firebase';
-import classes from './Filter.module.scss';
+import moment from 'moment';
+import 'moment/locale/es';
+import classes from './Filtering.module.scss';
 
 import {
   FilterMateria,
   FilterAll,
+  FilteringCateg,
+  FilterDate,
 } from '../../../../redux/actions/NotesCornellAction';
 
-const Filter = ({ notescornell, FilterMateria, FilterAll }) => {
+const Filter = ({
+  notescornell,
+  FilterMateria,
+  FilterAll,
+  FilteringCateg,
+  FilterDate,
+}) => {
+  let refBtnMateria;
+  const dateNow = moment(Date.now())
+    .locale('es')
+    .format('LL');
+
   const handleFilteAll = () => {
-    const materia = notescornell && notescornell.map(item => item.materia);
-    const tags = [...new Set(materia)];
-    console.log(tags);
-    FilterAll(tags);
+    FilterAll();
   };
-  const handleFiltePresent = () => {
-    console.log('Funciona');
+  const handleFilteToday = () => {
+    FilterDate(dateNow);
   };
-  const handleFilteStar = () => {
-    console.log('Funciona');
-  };
-  const handleFilteRecient = () => {
-    console.log('Funciona');
+  const handleFilteFavourite = () => {
+    console.log('Favorito');
   };
   const handleTagFilter = item => {
-    console.log(item);
     FilterMateria(item);
   };
   const materia = notescornell && notescornell.map(item => item.materia);
   const tags = [...new Set(materia)].sort();
 
   return (
-    <div className={classes.Filter}>
+    <div className={classes.Filtering}>
       <div className={classes.Menu}>
         <button
           type="button"
           onClick={handleFilteAll}
+          name="materia"
           className={classes.Active}>
           <i className="bx bx-grid-alt" />
           Todas
         </button>
-        <button type="button" onClick={handleFiltePresent}>
+        <button type="button" onClick={handleFilteToday} name="date">
           <i className="bx bx-calendar-event" />
           Hoy
         </button>
-        <button type="button" onClick={handleFilteStar}>
+        <button type="button" onClick={handleFilteFavourite} name="like">
           <i className="bx bx-star" />
           Favoritos
-        </button>
-        <button type="button" onClick={handleFilteRecient}>
-          <i className="bx bx-time" />
-          Recientes
         </button>
       </div>
       <div className={classes.Materias}>
@@ -60,7 +65,11 @@ const Filter = ({ notescornell, FilterMateria, FilterAll }) => {
         <ul>
           {tags.map(item => (
             <li key={item}>
-              <button type="button" onClick={() => handleTagFilter(item)}>
+              <button
+                type="button"
+                name="materia"
+                ref={ref => (refBtnMateria = ref)}
+                onClick={() => handleTagFilter(item)}>
                 {item}
               </button>
             </li>
@@ -72,7 +81,10 @@ const Filter = ({ notescornell, FilterMateria, FilterAll }) => {
 };
 
 const mapDispatchToProps = dispatch =>
-  bindActionCreators({ FilterMateria, FilterAll }, dispatch);
+  bindActionCreators(
+    { FilterMateria, FilterAll, FilteringCateg, FilterDate },
+    dispatch
+  );
 
 export default compose(
   firestoreConnect(['notescornell']),

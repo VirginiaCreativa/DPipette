@@ -6,7 +6,7 @@ import { history } from '../redux/store/Store';
 import classes from './NotesCornell.module.scss';
 
 import Header from '../components/UI/HeaderMain_NotesCornell/HeaderMain_NotesCornell';
-import Filter from '../components/NotesCornell/NotesCornellMain/Filter/Filter';
+import Filtering from '../components/NotesCornell/NotesCornellMain/Filtering/Filtering';
 import NotesCornellMain from '../components/NotesCornell/NotesCornellMain/NotesCornellMain';
 
 class NotesCornell extends Component {
@@ -46,7 +46,7 @@ class NotesCornell extends Component {
         />
         <div className={classes.BoxContent}>
           <div className={classes.Filter}>
-            <Filter />
+            <Filtering />
           </div>
           <div className={classes.Filter}>
             <NotesCornellMain />
