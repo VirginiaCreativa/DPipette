@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators, compose } from 'redux';
 import { firestoreConnect } from 'react-redux-firebase';
@@ -31,15 +31,10 @@ const Filter = ({ notescornell, FilterMateria, FilterAll, FilterDate }) => {
   };
   const materia = notescornell && notescornell.map(item => item.materia);
   const tags = [...new Set(materia)].sort();
-
   return (
     <div className={classes.Filtering}>
       <div className={classes.Menu}>
-        <button
-          type="button"
-          onClick={handleFilteAll}
-          name="materia"
-          className={classes.Active}>
+        <button type="button" onClick={handleFilteAll} name="materia">
           <i className="bx bx-grid-alt" />
           Todas
         </button>
