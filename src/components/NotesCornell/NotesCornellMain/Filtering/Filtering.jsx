@@ -117,7 +117,7 @@ const Filter = ({
           onClick={handleFilteFavourite}
           name="4"
           className={classActiveFavor}>
-          <i className="bx bx-star" />
+          <i className="bx bx-bookmark" />
           Favoritos
         </button>
       </div>

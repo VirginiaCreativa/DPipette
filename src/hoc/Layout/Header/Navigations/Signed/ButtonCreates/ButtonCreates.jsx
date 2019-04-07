@@ -51,6 +51,7 @@ class ButtonCreates extends Component {
       videoResumen: '',
       cover: 'option2',
       portada: '',
+      favorite: false,
     };
     this.props.firestore
       .add('notescornell', {

@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unused-state */
 import React, { Component } from 'react';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
@@ -18,6 +19,10 @@ import NoteCornellResumen from './NoteCornellResumen/NoteCornellResumen';
 import NoteCornellPortada from './NoteCornellPortada/NoteCornellPortada';
 
 class NoteCornell extends Component {
+  state = {
+    isFavorite: false,
+  };
+
   handleDeleteId = () => {
     const id = this.props.match.params.id;
     const db = this.props.firestore;
@@ -34,7 +39,17 @@ class NoteCornell extends Component {
   };
 
   handleFavoriteId = () => {
-    console.log('Favorito');
+    const { isFavorite } = this.state;
+    const id = this.props.match.params.id;
+    const db = this.props.firestore;
+    db.update(`notescornell/${id}`, {
+      favorite: !isFavorite,
+    })
+      .then(() => {
+        console.log('Favorito');
+      })
+      .catch(error => console.log(error));
+    this.setState({ isFavorite: !isFavorite });
   };
 
   render() {

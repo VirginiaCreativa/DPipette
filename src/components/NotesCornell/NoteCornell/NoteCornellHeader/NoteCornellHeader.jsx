@@ -16,6 +16,7 @@ const NoteCornellHeader = ({
   date,
   docID,
   firestore,
+  favorite,
 }) => {
   const [isActiveEditable, setActiveEditable] = useState(false);
   const [isTema, setTema] = useState(tema);
@@ -73,6 +74,7 @@ const NoteCornellHeader = ({
       .catch(error => console.log(error));
   };
   const activeStyle = isActiveEditable ? classes.activeBtnEditable : null;
+
   return (
     <div className={classes.LayoutHeader}>
       <div className="row">
@@ -121,7 +123,11 @@ const NoteCornellHeader = ({
         <div className="col-2">
           <div className={classes.boxButtons}>
             <button type="button" onClick={onFavorite} className="mr-1">
-              <i className="bx bx-bookmark" />
+              {favorite ? (
+                <i className="bx bxs-bookmark" />
+              ) : (
+                <i className="bx bx-bookmark" />
+              )}
             </button>
             <button type="button" onClick={onDelete}>
               <i className="bx bx-trash-alt" />
