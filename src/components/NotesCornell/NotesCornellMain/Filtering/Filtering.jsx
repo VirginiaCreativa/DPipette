@@ -9,10 +9,17 @@ import classes from './Filtering.module.scss';
 import {
   FilterMateria,
   FilterAll,
-  FilterDate,
+  FilterDateNow,
+  FilterDateYesterday,
 } from '../../../../redux/actions/NotesCornellAction';
 
-const Filter = ({ notescornell, FilterMateria, FilterAll, FilterDate }) => {
+const Filter = ({
+  notescornell,
+  FilterMateria,
+  FilterAll,
+  FilterDateNow,
+  FilterDateYesterday,
+}) => {
   const [isActiveCategAll, setActiveCategAll] = useState(1);
   const [isActiveCategToday, setActiveCategToday] = useState(null);
   const [isActiveCategYesterday, setActiveCategYesterday] = useState(null);
@@ -23,8 +30,15 @@ const Filter = ({ notescornell, FilterMateria, FilterAll, FilterDate }) => {
     .locale('es')
     .format('LL');
 
+  const dateYesterday = moment(Date.now())
+    .add(-1, 'days')
+    .locale('es')
+    .format('LL');
+
   const handleFilteAll = ev => {
     FilterAll();
+    FilterDateNow('');
+    FilterDateYesterday('');
     setActiveCategAll(1);
     setActiveCategToday(null);
     setActiveCategYesterday(null);
@@ -32,14 +46,16 @@ const Filter = ({ notescornell, FilterMateria, FilterAll, FilterDate }) => {
     setActiveTag(null);
   };
   const handleFilteToday = ev => {
-    FilterDate(dateNow);
+    FilterDateNow(dateNow);
+    FilterDateYesterday('');
     setActiveCategAll(null);
     setActiveCategToday(2);
     setActiveCategYesterday(null);
     setActiveCategFavor(null);
-    setActiveTag(null);
   };
   const handleFilteYesterday = ev => {
+    FilterDateYesterday(dateYesterday);
+    FilterDateNow('');
     setActiveCategAll(null);
     setActiveCategToday(null);
     setActiveCategYesterday(3);
@@ -56,8 +72,6 @@ const Filter = ({ notescornell, FilterMateria, FilterAll, FilterDate }) => {
   const handleTagFilter = (item, index) => {
     FilterMateria(item);
     setActiveCategAll(null);
-    setActiveCategToday(null);
-    setActiveCategYesterday(null);
     setActiveCategFavor(null);
     setActiveTag(null);
     setActiveTag(index);
@@ -131,7 +145,10 @@ const Filter = ({ notescornell, FilterMateria, FilterAll, FilterDate }) => {
 };
 
 const mapDispatchToProps = dispatch =>
-  bindActionCreators({ FilterMateria, FilterAll, FilterDate }, dispatch);
+  bindActionCreators(
+    { FilterMateria, FilterAll, FilterDateNow, FilterDateYesterday },
+    dispatch
+  );
 
 export default compose(
   firestoreConnect(['notescornell']),

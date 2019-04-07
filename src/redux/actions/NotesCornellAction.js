@@ -2,7 +2,8 @@ import {
   SEARCH_NOTESCORNELL,
   FILTER_MATERIA_NOTESCORNELL,
   FILTER_ALL_NOTESCORNELL,
-  FILTER_DATE_NOTESCORNELL,
+  FILTER_DATE_NOW_NOTESCORNELL,
+  FILTER_DATE_YESTERDAY_NOTESCORNELL,
 } from './Types';
 
 export const SearchNotesCornell = payload => ({
@@ -20,7 +21,12 @@ export const FilterAll = () => ({
   all: '',
 });
 
-export const FilterDate = payload => ({
-  type: FILTER_DATE_NOTESCORNELL,
+export const FilterDateNow = payload => ({
+  type: FILTER_DATE_NOW_NOTESCORNELL,
+  payload,
+});
+
+export const FilterDateYesterday = payload => ({
+  type: FILTER_DATE_YESTERDAY_NOTESCORNELL,
   payload,
 });

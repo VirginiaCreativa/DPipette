@@ -13,6 +13,7 @@ const NoteCornellHeader = ({
   materia,
   onDelete,
   notescornell,
+  date,
   docID,
   firestore,
 }) => {
@@ -107,11 +108,7 @@ const NoteCornellHeader = ({
             </div>
           ) : (
             <div className={classes.BoxHeadingConfirm}>
-              <Header
-                tema={isTema}
-                materia={isMateria}
-                date={notescornell.date}
-              />
+              <Header tema={isTema} materia={isMateria} date={date} />
               <button
                 type="button"
                 onClick={handleEditable}

@@ -6,7 +6,7 @@ import classes from './Navigations.module.scss';
 import SignedIn from './Signed/SignedIn';
 import SignedOut from './Signed/SignedOut';
 
-const Navigations = ({ firebase, isEmpty }) => {
+const Navigations = ({ isEmpty }) => {
   const [isUser] = useState(true);
   return (
     <div className={classes.Navigations}>

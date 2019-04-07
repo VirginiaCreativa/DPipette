@@ -2,7 +2,8 @@ import {
   SEARCH_NOTESCORNELL,
   FILTER_MATERIA_NOTESCORNELL,
   FILTER_ALL_NOTESCORNELL,
-  FILTER_DATE_NOTESCORNELL,
+  FILTER_DATE_NOW_NOTESCORNELL,
+  FILTER_DATE_YESTERDAY_NOTESCORNELL,
 } from '../actions/Types';
 
 const initialState = {
@@ -11,6 +12,7 @@ const initialState = {
   date: '',
   all: '',
   categoria: '',
+  yesterday: '',
 };
 
 const NotesCornellReducer = (state = initialState, action) => {
@@ -30,12 +32,18 @@ const NotesCornellReducer = (state = initialState, action) => {
       return {
         ...state,
         materia: state.all,
-        date: '',
+        yesterday: state.yesterday,
+        date: state.date,
       };
-    case FILTER_DATE_NOTESCORNELL:
+    case FILTER_DATE_NOW_NOTESCORNELL:
       return {
         ...state,
         date: action.payload,
+      };
+    case FILTER_DATE_YESTERDAY_NOTESCORNELL:
+      return {
+        ...state,
+        yesterday: action.payload,
       };
     default:
       return state;

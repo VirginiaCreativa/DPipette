@@ -1,9 +1,7 @@
-/* eslint-disable no-shadow */
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { bindActionCreators, compose } from 'redux';
-import { firebaseConnect } from 'react-redux-firebase';
 import classes from './HeaderMain_NotesCornell.module.scss';
 
 import { SearchNotesCornell } from '../../../redux/actions/NotesCornellAction';
@@ -61,7 +59,6 @@ const mapDispatchToProps = dispatch =>
   bindActionCreators({ SearchNotesCornell }, dispatch);
 
 export default compose(
-  firebaseConnect(),
   connect(
     null,
     mapDispatchToProps

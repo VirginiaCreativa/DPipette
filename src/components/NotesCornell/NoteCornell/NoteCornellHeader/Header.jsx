@@ -1,5 +1,5 @@
 import React from 'react';
-import Moment from '../../../UI/Moment/Moment';
+import Moment from '../../../UI/MomentTo/MomentTo';
 import classes from './NoteCornellHeader.module.scss';
 
 const Header = ({ materia, tema, date }) => (

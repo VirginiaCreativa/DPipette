@@ -16,20 +16,19 @@ const NotesCornellMain = ({
   notescornell,
   FilterMateria,
   Search,
-  FilterDate,
+  FilterDateNow,
+  FilterDateYesterday,
 }) => {
-  const dateItem = item =>
+  const dateItemNow = item =>
     moment(item)
       .locale('es')
       .format('LL');
 
-  const filteder = item => {
-    const dateToday = dateItem(item.date.seconds * 1000);
-    return (
-      item.tema.toLowerCase().includes(Search.toLowerCase()) &&
-      (item.materia.includes(FilterMateria) && dateToday.includes(FilterDate))
-    );
-  };
+  const dateItemYesterday = item =>
+    moment(item)
+      .locale('es')
+      .format('LL');
+
   return (
     <div className={classes.NotesCornellMain}>
       {!isLoaded(notescornell) ? (
@@ -42,11 +41,22 @@ const NotesCornellMain = ({
           className="my-masonry-grid"
           columnClassName="my-masonry-grid_column">
           {notescornell &&
-            notescornell.filter(filteder).map(item => (
-              <div key={item.id}>
-                <Item {...item} linked={`notecornell/${item.id}`} />
-              </div>
-            ))}
+            notescornell
+              .filter(item => {
+                const dateToday = dateItemNow(item.date.toDate());
+                const dateYesterday = dateItemYesterday(item.date.toDate());
+                return (
+                  item.tema.toLowerCase().includes(Search.toLowerCase()) &&
+                  item.materia.includes(FilterMateria) &&
+                  dateToday.includes(FilterDateNow) &&
+                  dateYesterday.includes(FilterDateYesterday)
+                );
+              })
+              .map(item => (
+                <div key={item.id}>
+                  <Item {...item} linked={`notecornell/${item.id}`} />
+                </div>
+              ))}
         </Masonry>
       )}
     </div>
@@ -59,7 +69,8 @@ export default compose(
     notescornell: state.firestore.ordered.notescornell,
     Search: state.NotesCornell.search,
     FilterMateria: state.NotesCornell.materia,
-    FilterDate: state.NotesCornell.date,
+    FilterDateNow: state.NotesCornell.date,
+    FilterDateYesterday: state.NotesCornell.yesterday,
     FilterAll: state.NotesCornell.materia,
     FilteringCateg: state.NotesCornell.categoria,
   }))
