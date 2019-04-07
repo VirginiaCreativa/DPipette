@@ -89,7 +89,8 @@
           color: $gray_light;
         }
 
-        .bx-trash-alt {
+        .bx-bookmark,
+        .bxs-bookmark {
           position: relative;
 
           &:after {
@@ -98,9 +99,23 @@
             background-color: $write_gray_3;
             position: absolute;
             top: 8px;
-            right: -40%;
+            right: -45%;
             width: 1px;
             height: 18px;
+          }
+
+          &:hover {
+            color: $green;
+          }
+        }
+
+        .bxs-bookmark {
+          color: $green;
+        }
+
+        .bx-trash-alt {
+          &:hover {
+            color: $red;
           }
         }
       }

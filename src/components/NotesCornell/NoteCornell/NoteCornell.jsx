@@ -33,6 +33,10 @@ class NoteCornell extends Component {
       });
   };
 
+  handleFavoriteId = () => {
+    console.log('Favorito');
+  };
+
   render() {
     const { notecornell } = this.props;
     return (
@@ -47,6 +51,7 @@ class NoteCornell extends Component {
               <NoteCornellHeader
                 {...notecornell}
                 onDelete={this.handleDeleteId}
+                onFavorite={this.handleFavoriteId}
                 docID={this.props.match.params.id}
               />
             </div>

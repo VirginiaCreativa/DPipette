@@ -12,7 +12,7 @@ const NoteCornellHeader = ({
   tema,
   materia,
   onDelete,
-  notescornell,
+  onFavorite,
   date,
   docID,
   firestore,
@@ -120,11 +120,11 @@ const NoteCornellHeader = ({
         </div>
         <div className="col-2">
           <div className={classes.boxButtons}>
-            <button type="button" onClick={onDelete} className="mr-1">
-              <i className="bx bx-trash-alt" />
+            <button type="button" onClick={onFavorite} className="mr-1">
+              <i className="bx bx-bookmark" />
             </button>
             <button type="button" onClick={onDelete}>
-              <i className="bx bx-cog" />
+              <i className="bx bx-trash-alt" />
             </button>
           </div>
         </div>
