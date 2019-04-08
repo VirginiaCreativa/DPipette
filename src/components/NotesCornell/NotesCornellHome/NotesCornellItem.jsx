@@ -7,12 +7,23 @@ import classes from './NotesCornellHome.module.scss';
 
 import CoverClient from '../UI/CoverClient';
 
-const NotesCornellItem = ({ linked, tema, materia, date, cover, portada }) => {
+const NotesCornellItem = ({
+  linked,
+  tema,
+  materia,
+  date,
+  cover,
+  portada,
+  favorite,
+}) => {
   const [isCover, setCover] = useState(cover);
 
   return (
     <Link to={linked}>
       <div className={classes.NotesCornellItem}>
+        <div className={classes.BookMark}>
+          {favorite ? <i className="bx bxs-bookmark" /> : null}
+        </div>
         <span className={classes.TagMateria}>
           {CapitalizeFirstLetter(materia)}
         </span>
