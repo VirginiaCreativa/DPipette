@@ -4,6 +4,7 @@ import {
   FILTER_ALL_NOTESCORNELL,
   FILTER_DATE_NOW_NOTESCORNELL,
   FILTER_DATE_YESTERDAY_NOTESCORNELL,
+  FILTER_FAVORITE_NOTESCORNELL,
 } from '../actions/Types';
 
 const initialState = {
@@ -13,6 +14,7 @@ const initialState = {
   all: '',
   categoria: '',
   yesterday: '',
+  favorite: null,
 };
 
 const NotesCornellReducer = (state = initialState, action) => {
@@ -44,6 +46,11 @@ const NotesCornellReducer = (state = initialState, action) => {
       return {
         ...state,
         yesterday: action.payload,
+      };
+    case FILTER_FAVORITE_NOTESCORNELL:
+      return {
+        ...state,
+        favorite: action.payload,
       };
     default:
       return state;

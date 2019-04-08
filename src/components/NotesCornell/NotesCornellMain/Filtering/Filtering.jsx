@@ -7,24 +7,33 @@ import 'moment/locale/es';
 import classes from './Filtering.module.scss';
 
 import {
-  FilterMateria,
-  FilterAll,
-  FilterDateNow,
-  FilterDateYesterday,
+  getFilterMateria,
+  getFilterAll,
+  getFilterDateNow,
+  getFilterDateYesterday,
+  getFilterFavorite,
 } from '../../../../redux/actions/NotesCornellAction';
 
 const Filter = ({
   notescornell,
-  FilterMateria,
-  FilterAll,
-  FilterDateNow,
-  FilterDateYesterday,
+  getFilterMateria,
+  getFilterAll,
+  getFilterDateNow,
+  getFilterDateYesterday,
+  getFilterFavorite,
 }) => {
   const [isActiveCategAll, setActiveCategAll] = useState(1);
   const [isActiveCategToday, setActiveCategToday] = useState(null);
   const [isActiveCategYesterday, setActiveCategYesterday] = useState(null);
   const [isActiveCategFavor, setActiveCategFavor] = useState(null);
   const [isActiveTag, setActiveTag] = useState(null);
+
+  useEffect(
+    () => () => {
+      getFilterFavorite(null);
+    },
+    [getFilterFavorite]
+  );
 
   const dateNow = moment(Date.now())
     .locale('es')
@@ -36,9 +45,10 @@ const Filter = ({
     .format('LL');
 
   const handleFilteAll = ev => {
-    FilterAll();
-    FilterDateNow('');
-    FilterDateYesterday('');
+    getFilterAll();
+    getFilterDateNow('');
+    getFilterDateYesterday('');
+    getFilterFavorite(null);
     setActiveCategAll(1);
     setActiveCategToday(null);
     setActiveCategYesterday(null);
@@ -46,23 +56,26 @@ const Filter = ({
     setActiveTag(null);
   };
   const handleFilteToday = ev => {
-    FilterDateNow(dateNow);
-    FilterDateYesterday('');
+    getFilterDateNow(dateNow);
+    getFilterDateYesterday('');
+    getFilterFavorite(null);
     setActiveCategAll(null);
     setActiveCategToday(2);
     setActiveCategYesterday(null);
     setActiveCategFavor(null);
   };
   const handleFilteYesterday = ev => {
-    FilterDateYesterday(dateYesterday);
-    FilterDateNow('');
+    getFilterDateYesterday(dateYesterday);
+    getFilterDateNow('');
+    getFilterFavorite(null);
     setActiveCategAll(null);
     setActiveCategToday(null);
     setActiveCategYesterday(3);
     setActiveCategFavor(null);
     setActiveTag(null);
   };
-  const handleFilteFavourite = ev => {
+  const handleFilteFavorite = ev => {
+    getFilterFavorite(false);
     setActiveCategAll(null);
     setActiveCategToday(null);
     setActiveCategYesterday(null);
@@ -70,7 +83,7 @@ const Filter = ({
     setActiveTag(null);
   };
   const handleTagFilter = (item, index) => {
-    FilterMateria(item);
+    getFilterMateria(item);
     setActiveCategAll(null);
     setActiveCategFavor(null);
     setActiveTag(null);
@@ -114,7 +127,7 @@ const Filter = ({
         </button>
         <button
           type="button"
-          onClick={handleFilteFavourite}
+          onClick={handleFilteFavorite}
           name="4"
           className={classActiveFavor}>
           <i className="bx bx-bookmark" />
@@ -146,7 +159,13 @@ const Filter = ({
 
 const mapDispatchToProps = dispatch =>
   bindActionCreators(
-    { FilterMateria, FilterAll, FilterDateNow, FilterDateYesterday },
+    {
+      getFilterMateria,
+      getFilterAll,
+      getFilterDateNow,
+      getFilterDateYesterday,
+      getFilterFavorite,
+    },
     dispatch
   );
 

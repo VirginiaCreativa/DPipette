@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { firestoreConnect, isLoaded, isEmpty } from 'react-redux-firebase';
@@ -14,10 +14,11 @@ import { breakpointColumnsObj } from './breakpointColumnsObj';
 
 const NotesCornellMain = ({
   notescornell,
-  FilterMateria,
+  getFilterMateria,
   Search,
-  FilterDateNow,
-  FilterDateYesterday,
+  getFilterDateNow,
+  getFilterDateYesterday,
+  getFilterFavorite,
 }) => {
   const dateItemNow = item =>
     moment(item)
@@ -45,11 +46,13 @@ const NotesCornellMain = ({
               .filter(item => {
                 const dateToday = dateItemNow(item.date.toDate());
                 const dateYesterday = dateItemYesterday(item.date.toDate());
+                console.log(getFilterFavorite);
                 return (
                   item.tema.toLowerCase().includes(Search.toLowerCase()) &&
-                  item.materia.includes(FilterMateria) &&
-                  dateToday.includes(FilterDateNow) &&
-                  dateYesterday.includes(FilterDateYesterday)
+                  item.materia.includes(getFilterMateria) &&
+                  dateToday.includes(getFilterDateNow) &&
+                  dateYesterday.includes(getFilterDateYesterday) &&
+                  item.favorite !== getFilterFavorite
                 );
               })
               .map(item => (
@@ -68,10 +71,9 @@ export default compose(
   connect(state => ({
     notescornell: state.firestore.ordered.notescornell,
     Search: state.NotesCornell.search,
-    FilterMateria: state.NotesCornell.materia,
-    FilterDateNow: state.NotesCornell.date,
-    FilterDateYesterday: state.NotesCornell.yesterday,
-    FilterAll: state.NotesCornell.materia,
-    FilteringCateg: state.NotesCornell.categoria,
+    getFilterMateria: state.NotesCornell.materia,
+    getFilterDateNow: state.NotesCornell.date,
+    getFilterDateYesterday: state.NotesCornell.yesterday,
+    getFilterFavorite: state.NotesCornell.favorite,
   }))
 )(NotesCornellMain);
