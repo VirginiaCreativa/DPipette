@@ -467,37 +467,9 @@ class SignificadosCreate extends Component {
                     </form>
                   </div>
                 </div>
-                {/* ====== IMAGENES ====== */}
-                <div className={classes.Group}>
-                  <BoxGroupFormHeading title="Imagenes" number="2" />
-                  <div className={classes.Content}>
-                    <form ref={ref => (this.FormImagenes = ref)}>
-                      <div className={classes.GroupImagenes}>
-                        <div className="form-group">
-                          <ImagenesUploader
-                            childRef={ref => (this.InputFileImg = ref)}
-                          />
-                        </div>
-                      </div>
-                    </form>
-                  </div>
-                </div>
-                {/* ====== VIDEOS ====== */}
-                <div className={classes.Group}>
-                  <BoxGroupFormHeading title="Videos" number="3" />
-                  <div className={classes.Content}>
-                    <form ref={ref => (this.FormVideos = ref)}>
-                      <div className={classes.GroupVideos}>
-                        <div className="form-group">
-                          <VideosUploaders />
-                        </div>
-                      </div>
-                    </form>
-                  </div>
-                </div>
                 {/* ====== MAS EJEMPLOS ====== */}
                 <div className={classes.Group}>
-                  <BoxGroupFormHeading title="Más ejemplos" number="4" />
+                  <BoxGroupFormHeading title="Más ejemplos" number="2" />
                   <div className={classes.Content}>
                     <form ref={ref => (this.FormMasEjemplos = ref)}>
                       <div className={classes.GroupMasEjemplos}>
@@ -529,6 +501,35 @@ class SignificadosCreate extends Component {
                     </form>
                   </div>
                 </div>
+                {/* ====== IMAGENES ====== */}
+                <div className={classes.Group}>
+                  <BoxGroupFormHeading title="Imagenes" number="3" />
+                  <div className={classes.Content}>
+                    <form ref={ref => (this.FormImagenes = ref)}>
+                      <div className={classes.GroupImagenes}>
+                        <div className="form-group">
+                          <ImagenesUploader
+                            childRef={ref => (this.InputFileImg = ref)}
+                          />
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+                {/* ====== VIDEOS ====== */}
+                <div className={classes.Group}>
+                  <BoxGroupFormHeading title="Videos" number="4" />
+                  <div className={classes.Content}>
+                    <form ref={ref => (this.FormVideos = ref)}>
+                      <div className={classes.GroupVideos}>
+                        <div className="form-group">
+                          <VideosUploaders />
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+
                 {/* ====== GROUP FINAL ====== */}
                 <div className={classes.ContentSubmite}>
                   <div className="d-flex justify-content-center">
@@ -598,24 +599,8 @@ class SignificadosCreate extends Component {
                   </div>
                 </BoxGroupVisualListGroup>
                 <BoxGroupVisualListGroup
-                  title="Imagenes"
-                  number="2"
-                  isVisible={this.props.isVisibleImg}>
-                  <div ref={ref => (this.boxResultImagenes = ref)}>
-                    <Imagenes />
-                  </div>
-                </BoxGroupVisualListGroup>
-                <BoxGroupVisualListGroup
-                  title="Videos"
-                  number="3"
-                  isVisible={this.props.isVisibleVideo}>
-                  <div ref={ref => (this.boxResultItemVideos = ref)}>
-                    <Videos />
-                  </div>
-                </BoxGroupVisualListGroup>
-                <BoxGroupVisualListGroup
                   title="Más ejemplos"
-                  number="4"
+                  number="2"
                   isVisible={this.props.isVisibleEjemplo}>
                   <div ref={ref => (this.boxResultItemEjemplos = ref)}>
                     <MasEjemplosLists
@@ -624,7 +609,24 @@ class SignificadosCreate extends Component {
                     />
                   </div>
                 </BoxGroupVisualListGroup>
-                <BoxGroupVisualListGroup title="Conjugación" number="5" />
+                <BoxGroupVisualListGroup
+                  title="Imagenes"
+                  number="3"
+                  isVisible={this.props.isVisibleImg}>
+                  <div ref={ref => (this.boxResultImagenes = ref)}>
+                    <Imagenes />
+                  </div>
+                </BoxGroupVisualListGroup>
+                <BoxGroupVisualListGroup
+                  title="Videos"
+                  number="4"
+                  isVisible={this.props.isVisibleVideo}>
+                  <div ref={ref => (this.boxResultItemVideos = ref)}>
+                    <Videos />
+                  </div>
+                </BoxGroupVisualListGroup>
+
+                <BoxGroupVisualListGroup title="Conjugación" number="4" />
               </div>
             </div>
           </div>

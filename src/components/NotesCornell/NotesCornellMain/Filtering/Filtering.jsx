@@ -12,6 +12,7 @@ import {
   getFilterDateNow,
   getFilterDateYesterday,
   getFilterFavorite,
+  SearchNotesCornell,
 } from '../../../../redux/actions/NotesCornellAction';
 
 const Filter = ({
