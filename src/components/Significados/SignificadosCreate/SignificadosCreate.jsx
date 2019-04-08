@@ -7,14 +7,14 @@ import { withFirestore } from 'react-redux-firebase';
 import { history } from '../../../redux/store/Store';
 import classes from './SignificadosCreate.module.scss';
 import CapitalizeFirstLetter from '../../../scripts/CapitalizeFirstLetter';
-import AbreviaturaTag from '../../../scripts/AbreviaturaToTag';
+import GramaticalesCateg from '../../../scripts/GramaticalesCateg';
 import BoxGroupFormHeading from '../../UI/CreateForm/Form/Form_Heading';
 import BoxGroupVisualListGroup from '../../UI/CreateForm/Visual/Visual_ListGroup';
 import DescriptionsLists from './VisualesGrid/DescriptionsLists/DescriptionsLists';
 import SinonimosLists from './VisualesGrid/SinonimosLists/SinonimosLists';
 import Imagenes from './VisualesGrid/Imagenes/Imagenes';
 import Videos from './VisualesGrid/Videos/Videos';
-import Abreviaturas from './Abreviaturas/Abreviaturas';
+import Gramaticales from './Gramaticales/Gramaticales';
 import VideosUploaders from './VideosUploaders/VideosUploaders';
 import ImagenesUploader from './ImagenesUploader/ImagenesUploader';
 import MasEjemplosLists from './VisualesGrid/MasEjemplosLists/MasEjemplosLists';
@@ -206,9 +206,9 @@ class SignificadosCreate extends Component {
     this.setState({ descriptions: descriptionDelete });
   };
 
-  handleAbreviaturas = ev => {
+  handleGramaticales = ev => {
     this.boxResultItemAbrev.style.display = 'block';
-    const abrev = AbreviaturaTag(ev.target.selectedIndex);
+    const abrev = GramaticalesCateg(ev.target.selectedIndex);
     this.setState({
       abreviatura: ev.target.value,
       abrev,
@@ -462,7 +462,7 @@ class SignificadosCreate extends Component {
                           classes.GroupAbrev,
                           classes.spaceingBottom,
                         ].join(' ')}>
-                        <Abreviaturas onSelects={this.handleAbreviaturas} />
+                        <Gramaticales onSelects={this.handleGramaticales} />
                       </div>
                     </form>
                   </div>

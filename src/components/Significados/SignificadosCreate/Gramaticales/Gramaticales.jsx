@@ -1,12 +1,12 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 /* eslint-disable jsx-a11y/label-has-for */
 import React from 'react';
-import classes from './Abreviaturas.module.scss';
+import classes from './Gramaticales.module.scss';
 
-const Abreviaturas = ({ onSelects, ref }) => (
-  <div className={classes.Abreviaturas}>
+const Gramaticales = ({ onSelects, ref }) => (
+  <div className={classes.Gramaticales}>
     <div className="form-group">
-      <label>Abreviaturas</label>
+      <label>Gramaticales</label>
       <i className="bx bx-chevron-down" />
       <select className="form-control select" onChange={onSelects} ref={ref}>
         <option value="....">Por favor, elija una opción</option>
@@ -20,4 +20,4 @@ const Abreviaturas = ({ onSelects, ref }) => (
   </div>
 );
 
-export default Abreviaturas;
+export default Gramaticales;

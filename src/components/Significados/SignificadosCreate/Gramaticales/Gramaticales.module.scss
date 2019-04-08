@@ -1,40 +1,44 @@
 @import '../../../../styles/variables';
 
-.Abreviaturas {
+.Gramaticales {
   position: relative;
+
   :global {
     select {
+      background: transparent;
+      box-shadow: none;
+      height: calc(3rem + 2px);
+      border-radius: 0 !important;
       -webkit-appearance: none;
       -moz-appearance: none;
       -ms-appearance: none;
       appearance: none;
       outline: 0;
-      box-shadow: none;
       border-top: 0 !important;
       border-left: 0 !important;
       border-right: 0 !important;
       border-bottom: 1px solid $write_gray_3;
-      border-radius: 0 !important;
-      background: transparent;
       background-image: none;
       cursor: pointer;
-      height: calc(3rem + 2px);
+
       &::-ms-expand {
         display: none;
       }
     }
+
     .select {
-      overflow: hidden;
-      position: relative;
       display: block;
+      position: relative;
+      overflow: hidden;
     }
+
     .bx-chevron-down {
-      transition: .25s all ease;
+      font-size: 24px;
       color: $gray_dark;
       position: absolute;
       right: 0;
       bottom: 14px;
-      font-size: 24px;
+      transition: .25s all ease;
     }
   }
 }
