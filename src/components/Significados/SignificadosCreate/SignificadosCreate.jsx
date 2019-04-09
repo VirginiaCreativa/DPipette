@@ -63,7 +63,7 @@ class SignificadosCreate extends Component {
 
   componentWillReceiveProps(nextProps) {
     this.setState({
-      imagenes: nextProps.imagenes,
+      imagenes: nextProps.imgFiles,
       videoSena: nextProps.videoSena,
       videoDescripcion: nextProps.videoDescrip,
     });

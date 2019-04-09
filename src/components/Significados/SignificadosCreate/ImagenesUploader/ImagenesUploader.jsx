@@ -115,10 +115,6 @@ class ImagenesUploader extends Component {
         });
       }
     );
-    // uploadTask.then(snapshot => {
-    //   const bucket = snapshot.bucket;
-    //   console.log('ESTE =========>', snapshot);
-    // });
   };
 
   render() {

@@ -12,8 +12,10 @@ import {
   addUploaderVideoDescrip,
 } from '../../../../../redux/actions/Action';
 
-const videoType = 'video/webm;codecs=vp8';
+const videoType = 'video/webm;codecs=vp9';
 let localstream;
+let chunks;
+let mediaRecorder;
 class DescripciónVideo extends Component {
   state = {
     recording: false,
@@ -54,13 +56,13 @@ class DescripciónVideo extends Component {
         }
         localstream = stream;
         this.video.play();
-        this.mediaRecorder = new MediaRecorder(stream, {
+        mediaRecorder = new MediaRecorder(stream, {
           mimeType: videoType,
         });
-        this.chunks = [];
-        this.mediaRecorder.ondataavailable = e => {
+        chunks = [];
+        mediaRecorder.ondataavailable = e => {
           if (e.data && e.data.size > 0) {
-            this.chunks.push(e.data);
+            chunks.push(e.data);
           }
         };
       })
@@ -76,27 +78,27 @@ class DescripciónVideo extends Component {
 
   startRecording = e => {
     e.preventDefault();
-    this.chunks = [];
-    this.mediaRecorder.start(10);
+    chunks = [];
+    mediaRecorder.start(10);
     this.setState({ recording: true });
   };
 
   stopRecording = e => {
     e.preventDefault();
-    this.mediaRecorder.stop();
+    mediaRecorder.stop();
     this.setState({ recording: false });
     this.getVideo();
   };
 
   getVideo = () => {
-    const blob = new Blob(this.chunks, { type: videoType });
+    const blob = new Blob(chunks, { type: videoType });
     const videoURL = window.URL.createObjectURL(blob);
     this.setState({ videoDescripBlob: videoURL });
   };
 
   saveVideoClosedSena = () => {
     this.descripVideo.hide();
-    const blob = new Blob(this.chunks, { type: videoType });
+    const blob = new Blob(chunks, { type: videoType });
     const {
       firebase: { storage },
     } = this.props;

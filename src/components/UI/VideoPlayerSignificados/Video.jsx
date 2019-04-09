@@ -33,7 +33,6 @@ const Video = ({ title, srcVideo }) => {
         isDuration={isDuration}
       />
       <video
-        src={srcVideo}
         tabIndex="0"
         ref={ref => (refVideo = ref)}
         onMouseOver={handleVideoOver}
@@ -41,8 +40,11 @@ const Video = ({ title, srcVideo }) => {
         onTimeUpdate={handleTimeUpdate}
         title={title}
         className="img-fluid"
-        muted
-      />
+        muted>
+        <source type="video/mp4" src={srcVideo} />
+        <source type="video/flv" src={srcVideo} />
+        <source type="video/webm" src={srcVideo} />
+      </video>
     </div>
   );
 };
