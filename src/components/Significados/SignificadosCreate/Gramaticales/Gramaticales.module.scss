@@ -93,9 +93,9 @@
 
       .Verbos {
         position: relative;
+        top: -5px;
         width: 86px;
         height: 69px;
-        top: -5px;
         background-image: url(../../../../assets/icons/verbos.svg);
         @extend .Icon;
       }
