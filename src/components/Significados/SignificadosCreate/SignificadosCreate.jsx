@@ -1,5 +1,3 @@
-/* eslint-disable jsx-a11y/label-has-associated-control */
-/* eslint-disable jsx-a11y/label-has-for */
 import React, { Component } from 'react';
 import { bindActionCreators, compose } from 'redux';
 import { connect } from 'react-redux';
@@ -208,7 +206,12 @@ class SignificadosCreate extends Component {
 
   handleGramaticales = ev => {
     this.boxResultItemAbrev.style.display = 'block';
-    const abrev = GramaticalesCateg(ev.target.selectedIndex);
+    let selectIndex;
+    if (ev.target.value === 'Adjetivo') selectIndex = 1;
+    if (ev.target.value === 'Adverbio') selectIndex = 2;
+    if (ev.target.value === 'Verbos') selectIndex = 3;
+    const abrev = GramaticalesCateg(selectIndex);
+    console.log(abrev);
     this.setState({
       abreviatura: ev.target.value,
       abrev,
@@ -351,7 +354,7 @@ class SignificadosCreate extends Component {
       <React.Fragment>
         <div className={classes.SignificadosCreate}>
           <div className="row">
-            <div className="col-8">
+            <div className="col-9">
               <div className={classes.WrapperForm}>
                 {/* ====== DEFINICIÓN ====== */}
                 <div className={classes.Group}>
@@ -456,7 +459,7 @@ class SignificadosCreate extends Component {
                           </div>
                         </div>
                       </div>
-                      {/* ====== GROUP ABREVITURAS ====== */}
+                      {/* ====== GROUP GRAMATICALES ====== */}
                       <div
                         className={[
                           classes.GroupAbrev,
@@ -548,7 +551,7 @@ class SignificadosCreate extends Component {
               </div>
             </div>
             {/* ====== VISUAL ====== */}
-            <div className="col-4">
+            <div className="col-3">
               <div className={classes.WrapperVisual}>
                 <BoxGroupVisualListGroup
                   title="Definición"

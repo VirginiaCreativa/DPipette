@@ -1,22 +1,51 @@
-/* eslint-disable jsx-a11y/label-has-associated-control */
-/* eslint-disable jsx-a11y/label-has-for */
 import React from 'react';
 import classes from './Gramaticales.module.scss';
 
 const Gramaticales = ({ onSelects, ref }) => (
   <div className={classes.Gramaticales}>
-    <div className="form-group">
-      <label>Gramaticales</label>
-      <i className="bx bx-chevron-down" />
-      <select className="form-control select" onChange={onSelects} ref={ref}>
-        <option value="....">Por favor, elija una opción</option>
-        <option value="Adjetivo">Adjetivo (adj.)</option>
-        <option value="Adverbio">Adverbio (adv.)</option>
-        <option value="Preposición">Preposición (prep.)</option>
-        <option value="Verbo Intransitivo">Verbo Intransitivo (intr.)</option>
-        <option value="Verbo Transitivo">Verbo Transitivo (tr.)</option>
-      </select>
-    </div>
+    <h5>Gramáticales</h5>
+    <label>
+      <input
+        type="radio"
+        name="gramaticales"
+        value="Adjetivo"
+        onChange={onSelects}
+      />
+      <div className={classes.Box}>
+        <div className={classes.IconBox}>
+          <div className={classes.Adjetivo} />
+        </div>
+        <span>Adjetivo</span>
+      </div>
+    </label>
+    <label>
+      <input
+        type="radio"
+        name="gramaticales"
+        value="Adverbio"
+        onChange={onSelects}
+      />
+      <div className={classes.Box}>
+        <div className={classes.IconBox}>
+          <div className={classes.Adverbio} />
+        </div>
+        <span>Adverbio</span>
+      </div>
+    </label>
+    <label>
+      <input
+        type="radio"
+        name="gramaticales"
+        value="Verbos"
+        onChange={onSelects}
+      />
+      <div className={classes.Box}>
+        <div className={classes.IconBox}>
+          <div className={classes.Verbos} />
+        </div>
+        <span>Verbo</span>
+      </div>
+    </label>
   </div>
 );
 
