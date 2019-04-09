@@ -207,10 +207,16 @@ class SignificadosCreate extends Component {
   handleGramaticales = ev => {
     this.boxResultItemAbrev.style.display = 'block';
     let selectIndex;
-    if (ev.target.value === 'Adjetivo') selectIndex = 1;
-    if (ev.target.value === 'Adverbio') selectIndex = 2;
-    if (ev.target.value === 'Verbos') selectIndex = 3;
-    const abrev = GramaticalesCateg(selectIndex);
+    const index =
+      ev.target.value === 'Adjetivo'
+        ? (selectIndex = 1)
+        : ev.target.value === 'Adverbio'
+        ? (selectIndex = 2)
+        : ev.target.value === 'Verbos'
+        ? (selectIndex = 3)
+        : null;
+
+    const abrev = GramaticalesCateg(index);
     console.log(abrev);
     this.setState({
       abreviatura: ev.target.value,
