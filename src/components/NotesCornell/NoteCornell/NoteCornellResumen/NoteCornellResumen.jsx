@@ -1,25 +1,30 @@
+/* eslint-disable no-var */
 import React, { Component } from 'react';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { firestoreConnect } from 'react-redux-firebase';
 import SkyLight from 'react-skylight';
-import ReactQuill from 'react-quill';
+import { EditorState, convertFromRaw, convertToRaw } from 'draft-js';
+import { Editor } from 'react-draft-wysiwyg';
+import { stateToHTML } from 'draft-js-export-html';
 import CleanUpSpecialChars from '../../../../scripts/CleanUpSpecialChars';
+import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 import classes from './NoteCornellResumen.module.scss';
 import firebase from '../../../../config/FirebaseConfig';
 
 import HeadingResumen from '../UI/HeadingResumen';
-import { modules, formats } from '../UI/ControlEditorResumen';
 import VideoPlayer from '../../../UI/VideoPlayerAuto/VideoPlayer';
 
-const videoType = 'video/webm;codecs=vp8';
-
+const videoType = 'video/webm;codecs=vp9';
 let localstream;
+var mediaRecorder;
+var chunks;
 class NoteCornellResumen extends Component {
   state = {
-    isResumContent: '',
     isOnEditable: false,
-    isSetContents: [],
+    readOnly: true,
+    editorState: EditorState.createEmpty(),
+    setResumen: '',
     recording: false,
     videoBlob: '',
     uploadValue: 0,
@@ -29,16 +34,25 @@ class NoteCornellResumen extends Component {
   };
 
   componentDidMount() {
-    if (this.state.isOnEditable) {
-      this.attachQuillRefs();
+    const { readOnly } = this.state;
+    const id = this.props.docID;
+    const getResumen = this.props.notescornell[id].getResumen;
+    const setResumen = this.props.notescornell[id].setResumen;
+    const content = convertFromRaw(getResumen);
+    if (this.state.setResumen === null) {
+      this.setState({ editorState: EditorState.createEmpty() });
+    } else {
+      this.setState({
+        editorState: EditorState.createWithContent(content),
+        readOnly: !readOnly,
+        setResumen,
+      });
     }
   }
 
   componentDidUpdate(prevProps, prevState) {
-    const { isOnEditable, uploadValue } = this.state;
-    if (isOnEditable) {
-      this.attachQuillRefs();
-    }
+    const { uploadValue, readOnly } = this.state;
+
     if (uploadValue !== prevState.uploadValue) {
       this.setState({ uploadProgress: uploadValue });
       if (uploadValue === '100') {
@@ -48,42 +62,23 @@ class NoteCornellResumen extends Component {
   }
 
   // ========== EDITOR ==========
-  handleEditable = () => {
-    this.setState(prevState => ({
-      isOnEditable: !prevState.isOnEditable,
-    }));
-    if (this.state.isOnEditable) {
-      this.refView.style.display = 'block';
-    } else {
-      this.refView.style.display = 'none';
-    }
-  };
-
-  handleChangeText = value => {
-    this.setState({ isResumContent: value });
-
-    const range = this.quillRef.getContents().ops;
-    this.setState({ isSetContents: range });
-
-    const id = this.props.docID;
-    const db = this.props.firestore;
-    db.update(`notescornell/${id}`, {
-      getResumen: this.state.isResumContent,
-      setResumen: this.state.isSetContents,
+  onEditorStateChange = editorState => {
+    const contentState = editorState.getCurrentContent();
+    this.onContentSave(contentState);
+    this.setState({
+      editorState,
     });
   };
 
-  attachQuillRefs = () => {
-    if (typeof this.reactQuillRef.getEditor !== 'function') return;
-    if (this.quillRef != null) return;
-    const quillRef = this.reactQuillRef.getEditor();
-    if (quillRef != null) {
-      this.quillRef = quillRef;
-    }
-
+  onContentSave = contentSave => {
     const id = this.props.docID;
-    const setResumenDB = this.props.notescornell[id].setResumen;
-    this.quillRef.setContents(setResumenDB, 'api');
+    const db = this.props.firestore;
+    const content = convertToRaw(contentSave);
+    const html = stateToHTML(contentSave);
+    db.update(`notescornell/${id}`, {
+      getResumen: content,
+      setResumen: html,
+    });
   };
 
   // ========== VIDEO GRABADO ==========
@@ -103,13 +98,13 @@ class NoteCornellResumen extends Component {
         }
         localstream = stream;
         this.videoGrabado.play();
-        this.mediaRecorder = new MediaRecorder(stream, {
+        mediaRecorder = new MediaRecorder(stream, {
           mimeType: videoType,
         });
-        this.chunks = [];
-        this.mediaRecorder.ondataavailable = e => {
+        chunks = [];
+        mediaRecorder.ondataavailable = e => {
           if (e.data && e.data.size > 0) {
-            this.chunks.push(e.data);
+            chunks.push(e.data);
           }
         };
       })
@@ -125,19 +120,20 @@ class NoteCornellResumen extends Component {
 
   startRecording = e => {
     e.preventDefault();
-    this.mediaRecorder.start(10);
+    chunks = [];
+    mediaRecorder.start(10);
     this.setState({ recording: true });
   };
 
   stopRecording = e => {
     e.preventDefault();
-    this.mediaRecorder.stop();
+    mediaRecorder.stop();
     this.setState({ recording: false });
     this.getGrabado();
   };
 
   getGrabado = () => {
-    const blob = new Blob(this.chunks, { type: videoType });
+    const blob = new Blob(chunks, { type: videoType });
     const videoURL = window.URL.createObjectURL(blob);
     this.setState({ videoBlob: videoURL });
     const metadata = {
@@ -192,7 +188,7 @@ class NoteCornellResumen extends Component {
       },
       () => {
         uploadTask.snapshot.ref.getDownloadURL().then(downloadURL => {
-          console.log('imageFile AVAILABLE SENA>>>>', downloadURL);
+          console.log('Aprobado DownloadURL', downloadURL);
           this.setState({ videoResumen: downloadURL });
         });
       }
@@ -237,15 +233,31 @@ class NoteCornellResumen extends Component {
     });
   };
 
+  handleEditable = () => {
+    const id = this.props.docID;
+    const setResumenDB = this.props.notescornell[id].setResumen;
+    this.setState(prevState => ({
+      isOnEditable: !prevState.isOnEditable,
+      setResumen: setResumenDB,
+    }));
+    if (this.state.isOnEditable) {
+      this.refView.style.display = 'block';
+    } else {
+      this.refView.style.display = 'none';
+    }
+  };
+
   render() {
-    const { getResumen, videoResumen, tema } = this.props;
+    const { videoResumen, tema } = this.props;
     const {
-      isResumContent,
       isOnEditable,
       recording,
       videoBlob,
       uploadProgress,
       activeSaveVideo,
+      editorState,
+      setResumen,
+      readOnly,
     } = this.state;
 
     const classPopup = {
@@ -260,7 +272,7 @@ class NoteCornellResumen extends Component {
       width: `${uploadProgress}%`,
     };
     const viewContent = (
-      <div dangerouslySetInnerHTML={{ __html: getResumen }} />
+      <div dangerouslySetInnerHTML={{ __html: setResumen }} />
     );
     return (
       <div className={classes.NoteCornellResumen}>
@@ -273,14 +285,15 @@ class NoteCornellResumen extends Component {
         {/* CONFIG */}
         <div className={classes.BoxGroup}>
           {isOnEditable ? (
-            <ReactQuill
-              ref={e => (this.reactQuillRef = e)}
-              defaultValue={isResumContent || ''}
-              onChange={this.handleChangeText}
-              className={classes.BoxEditor}
-              modules={modules}
-              formats={formats}
-            />
+            <div className={classes.BoxEditorResumen}>
+              <Editor
+                readOnly={readOnly}
+                editorState={editorState}
+                wrapperClassName="demo-wrapper"
+                editorClassName="demo-editor"
+                onEditorStateChange={this.onEditorStateChange}
+              />
+            </div>
           ) : null}
           <SkyLight
             hideOnOverlayClicked

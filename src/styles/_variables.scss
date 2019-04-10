@@ -23,3 +23,32 @@ $heading: #445268;
   background-color: #fff;
   border-radius: 4px;
 }
+
+%boxEditor {
+  :global {
+    .rdw-editor-toolbar {
+      margin-bottom: 0;
+      padding: 6px;
+      border: 1px solid $write_gray_1;
+    }
+
+    .rdw-editor-main {
+      margin-bottom: 0;
+      padding: 0 20px;
+      border-top: none;
+      border-right: 1px solid $write_gray_1;
+      border-left: 1px solid $write_gray_1;
+      border-bottom: 1px solid $write_gray_1;
+    }
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  strong {
+    color: #1a1a1b;
+  }
+}

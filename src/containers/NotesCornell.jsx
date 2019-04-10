@@ -39,8 +39,10 @@ class NotesCornell extends Component {
       cover: 'option2',
       portada: '',
       getContent: content,
+      getResumen: content,
       setContent:
         '<p>El icono de lapiz  <span class="bx bx-pencil"></span> para escribir</p>',
+      setResumen: null,
     };
     this.props.firestore
       .add('notescornell', {

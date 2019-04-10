@@ -68,8 +68,10 @@ class ButtonCreates extends Component {
       portada: '',
       favorite: false,
       getContent: content,
+      getResumen: content,
       setContent:
-        '<p>El icono de lapiz  <i className="bx bx-pencil" /> para escribir</p>',
+        '<p>El icono de lapiz  <span class="bx bx-pencil"></span> para escribir</p>',
+      setResumen: null,
     };
     this.props.firestore
       .add('notescornell', {

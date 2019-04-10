@@ -36,24 +36,14 @@
 
 .BoxApuntes {
   min-height: 400px;
+  @extend %boxEditor;
 
   :global {
-    .rdw-editor-toolbar {
-      border: 1px solid $write_gray_1;
-      margin-bottom: 0;
-      padding: 6px;
-    }
-
     .rdw-editor-main {
-      padding: 0 20px;
-      border-top: none;
-      border-right: 1px solid $write_gray_1;
-      border-left: 1px solid $write_gray_1;
-      border-bottom: 1px solid $write_gray_1;
       min-height: 400px;
-      margin-bottom: 0;
     }
   }
+
 }
 
 :global {
