@@ -53,7 +53,7 @@ const NoteCornellHeader = ({
     const db = firestore;
     db.update(`notescornell/${id}`, {
       tema: isTema,
-      date: new Date(),
+      date: Date.now(),
     })
       .then(() => {
         setActiveTema(true);
@@ -66,7 +66,7 @@ const NoteCornellHeader = ({
     const db = firestore;
     db.update(`notescornell/${id}`, {
       materia: isMateria,
-      date: new Date(),
+      date: Date.now(),
     })
       .then(() => {
         setActiveMateria(true);

@@ -11,7 +11,7 @@ const MomentTo = ({ onColor, onFontsize, onType, onDisplay, date }) => {
   return (
     <>
       <span style={styleDate}>
-        {moment(date.ToDate())
+        {moment(date)
           .locale('es')
           .format(onType)}
       </span>

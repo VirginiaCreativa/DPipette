@@ -143,7 +143,7 @@ const NoteCornellPortada = ({
           <button type="button" className="btn btn-primary btn-block">
             Añadir imagen destacada
           </button>
-          <p>Tamaño de imagen: 400x310</p>
+          <p>Tamaño de imagen: 650x320</p>
         </div>
       ) : (
         <div className={classes.BoxPortada}>

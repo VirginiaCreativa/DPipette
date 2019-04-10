@@ -9,6 +9,21 @@ import Header from '../components/UI/HeaderMain_NotesCornell/HeaderMain_NotesCor
 import Filtering from '../components/NotesCornell/NotesCornellMain/Filtering/Filtering';
 import NotesCornellMain from '../components/NotesCornell/NotesCornellMain/NotesCornellMain';
 
+const content = {
+  entityMap: {},
+  blocks: [
+    {
+      key: '637gr',
+      text: '',
+      type: 'unstyled',
+      depth: 0,
+      inlineStyleRanges: [],
+      entityRanges: [],
+      data: {},
+    },
+  ],
+};
+
 class NotesCornell extends Component {
   handleNewIDNotaCornell = ev => {
     ev.preventDefault();
@@ -18,11 +33,14 @@ class NotesCornell extends Component {
       preguntas: [] || null,
       importantes: [] || null,
       claves: [] || null,
-      date: new Date(),
+      date: Date.now(),
       apuntes: [] || null,
       videoResumen: '',
       cover: 'option2',
       portada: '',
+      getContent: content,
+      setContent:
+        '<p>El icono de lapiz  <span class="bx bx-pencil"></span> para escribir</p>',
     };
     this.props.firestore
       .add('notescornell', {

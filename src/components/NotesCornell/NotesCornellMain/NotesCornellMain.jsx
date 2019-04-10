@@ -44,8 +44,8 @@ const NotesCornellMain = ({
           {notescornell &&
             notescornell
               .filter(item => {
-                const dateToday = dateItemNow(item.date.toDate());
-                const dateYesterday = dateItemYesterday(item.date.toDate());
+                const dateToday = dateItemNow(item.date);
+                const dateYesterday = dateItemYesterday(item.date);
                 console.log(getFilterFavorite);
                 return (
                   item.tema.toLowerCase().includes(Search.toLowerCase()) &&

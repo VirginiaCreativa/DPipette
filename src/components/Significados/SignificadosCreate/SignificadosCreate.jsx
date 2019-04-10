@@ -337,7 +337,7 @@ class SignificadosCreate extends Component {
     this.props.firestore
       .add('significados', {
         ...project,
-        date: new Date(),
+        date: Date.now(),
       })
       .then(doc => {
         history.push(`/significado/${doc.id}`);

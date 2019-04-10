@@ -6,6 +6,21 @@ import { withFirestore } from 'react-redux-firebase';
 import { history } from '../../../../../../redux/store/Store';
 import classes from './ButtonCreates.module.scss';
 
+const content = {
+  entityMap: {},
+  blocks: [
+    {
+      key: '637gr',
+      text: '',
+      type: 'unstyled',
+      depth: 0,
+      inlineStyleRanges: [],
+      entityRanges: [],
+      data: {},
+    },
+  ],
+};
+
 class ButtonCreates extends Component {
   state = {
     isMenu: false,
@@ -52,6 +67,9 @@ class ButtonCreates extends Component {
       cover: 'option2',
       portada: '',
       favorite: false,
+      getContent: content,
+      setContent:
+        '<p>El icono de lapiz  <i className="bx bx-pencil" /> para escribir</p>',
     };
     this.props.firestore
       .add('notescornell', {

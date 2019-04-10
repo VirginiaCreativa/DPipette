@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import MomentTo from '../../UI/MomentTo/MomentTo';
+import Moment from '../../UI/Moment/Moment';
 import CapitalizeFirstLetter from '../../../scripts/CapitalizeFirstLetter';
 import classes from './NotesCornellHome.module.scss';
 
@@ -35,7 +35,7 @@ const NotesCornellItem = ({
         <div className={classes.BoxContent}>
           <div className={classes.DateItem}>
             <i className="bx bx-time" />
-            <MomentTo
+            <Moment
               onColor="#9ca7b4"
               onFontsize="0.775rem"
               date={date}

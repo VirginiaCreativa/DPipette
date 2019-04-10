@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import MomentTo from '../../../UI/MomentTo/MomentTo';
+import Moment from '../../../UI/Moment/Moment';
 import classes from './HeadingDetail.module.scss';
 
 const HeadingDetail = ({ word, date, abrev, abreviatura, onDeleted }) => {
@@ -16,7 +16,7 @@ const HeadingDetail = ({ word, date, abrev, abreviatura, onDeleted }) => {
       <div className="row">
         <div className="col-9">
           <div className={classes.HeadingDetail}>
-            <MomentTo
+            <Moment
               onColor="#747d8c"
               onFontsize="0.775rem"
               date={date}

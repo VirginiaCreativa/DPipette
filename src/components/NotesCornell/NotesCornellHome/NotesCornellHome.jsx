@@ -1,5 +1,3 @@
-/* eslint-disable prettier/prettier */
-/* eslint-disable no-nested-ternary */
 import React from 'react';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
@@ -8,9 +6,9 @@ import Spinner from './Spinner/Spinner';
 import Empty from '../../UI/Empty/Empty';
 import classes from './NotesCornellHome.module.scss';
 
-import Item from './NotesCornellItem'
+import Item from './NotesCornellItem';
 
-const NotesCornellHome = ({ notescornell }) =>  (
+const NotesCornellHome = ({ notescornell }) => (
   <div className={classes.NotesCornellHome}>
     {!isLoaded(notescornell) ? (
       <Spinner />
@@ -19,24 +17,25 @@ const NotesCornellHome = ({ notescornell }) =>  (
     ) : (
       <div className={classes.GridMultiple}>
         {notescornell &&
-            notescornell.map(item => (
-              <div key={item.id}>
-                <Item {...item} linked={`notecornell/${item.id}`} />
-              </div>
-            ))
-        }
-      </div>)
-    }
+          notescornell.map(item => (
+            <div key={item.id}>
+              <Item {...item} linked={`notecornell/${item.id}`} />
+            </div>
+          ))}
+      </div>
+    )}
   </div>
 );
 
 export default compose(
-  firestoreConnect([{
-    collection: 'notescornell',
-    orderBy: ['date', 'desc'],
-    limit: 4
-  }]),
+  firestoreConnect([
+    {
+      collection: 'notescornell',
+      orderBy: ['date', 'desc'],
+      limit: 4,
+    },
+  ]),
   connect(state => ({
     notescornell: state.firestore.ordered.notescornell,
-  })),
+  }))
 )(NotesCornellHome);
