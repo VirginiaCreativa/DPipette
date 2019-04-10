@@ -11,7 +11,7 @@ import Heading from '../UI/Heading';
 
 class NoteCornellApuntes extends Component {
   state = {
-    isOnEditable: true,
+    isOnEditable: false,
     contentState: {},
     readOnly: true,
     editorState: EditorState.createEmpty(),
@@ -45,6 +45,10 @@ class NoteCornellApuntes extends Component {
     db.update(`notescornell/${id}`, {
       getContent: content,
     });
+  };
+
+  handleEditable = () => {
+    this.setState(prevState => ({ isOnEditable: !prevState.isOnEditable }));
   };
 
   render() {
