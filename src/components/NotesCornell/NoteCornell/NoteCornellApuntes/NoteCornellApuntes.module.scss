@@ -1,9 +1,9 @@
 @import '../../../../styles/variables';
 
 .NoteCornellApuntes {
+  padding: 20px 30px;
   @extend %boxContent;
   @extend %boxShadowContent;
-  padding: 20px 30px;
 }
 
 .HeadingApuntes {
@@ -34,16 +34,20 @@
   }
 }
 
-.BoxApunte {
-  p {
-    margin: 0;
-  }
+.BoxApuntes {
+  border: 1px solid #f1f1f1;
+  min-height: 400px;
 
-  img {
-    float: left;
-    margin-right: 16px;
-    margin-bottom: 6px;
-    overflow: auto;
+  :global {
+    .rdw-editor-toolbar {
+      border-top: none;
+      border-right: none;
+      border-left: none;
+    }
+
+    .rdw-editor-main {
+      padding: 0 20px;
+    }
   }
 }
 

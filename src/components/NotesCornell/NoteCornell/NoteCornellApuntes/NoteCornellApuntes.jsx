@@ -2,71 +2,53 @@ import React, { Component } from 'react';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { firestoreConnect } from 'react-redux-firebase';
-import ReactQuill from 'react-quill';
-import 'react-quill/dist/quill.snow.css';
+import { EditorState, convertFromRaw, convertToRaw } from 'draft-js';
+import { Editor } from 'react-draft-wysiwyg';
+import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 import classes from './NoteCornellApuntes.module.scss';
 
 import Heading from '../UI/Heading';
-import { modules, formats } from '../UI/ControlEditorApunte';
 
 class NoteCornellApuntes extends Component {
   state = {
-    isApunteContent: '',
-    isOnEditable: false,
-    isContents: [],
+    isOnEditable: true,
+    contentState: {},
+    readOnly: true,
+    editorState: EditorState.createEmpty(),
   };
 
   componentDidMount() {
-    if (this.state.isOnEditable) {
-      this.attachQuillRefs();
-    }
-  }
-
-  componentDidUpdate() {
-    if (this.state.isOnEditable) {
-      this.attachQuillRefs();
-    }
-  }
-
-  handleEditable = () => {
-    this.setState(prevState => ({
-      isOnEditable: !prevState.isOnEditable,
-    }));
-  };
-
-  handleChangeText = value => {
-    this.setState({ isApunteContent: value });
-
-    const range = this.quillRef.getContents().ops;
-    this.setState({ isContents: range });
-
+    const { contentState, readOnly, editorState } = this.state;
     const id = this.props.docID;
-    const db = this.props.firestore;
-    db.update(`notescornell/${id}`, {
-      getContent: this.state.isApunteContent,
-      setContent: this.state.isContents,
+    const getContentDB = this.props.notescornell[id].getContent;
+    const content = convertFromRaw(JSON.parse(getContentDB));
+    if (getContentDB) {
+      this.state.editorState = EditorState.createWithContent(content);
+      this.setState({ contentState, readOnly: !readOnly });
+    } else {
+      this.state.editorState = EditorState.createEmpty();
+    }
+  }
+
+  onEditorStateChange = editorState => {
+    const contentState = editorState.getCurrentContent();
+    this.onContentSave(contentState);
+    this.setState({
+      editorState,
     });
   };
 
-  attachQuillRefs() {
-    if (typeof this.reactQuillRef.getEditor !== 'function') return;
-    if (this.quillRef != null) return;
-    const quillRef = this.reactQuillRef.getEditor();
-    if (quillRef != null) {
-      this.quillRef = quillRef;
-    }
-
+  onContentSave = contentSave => {
     const id = this.props.docID;
-    const setContentDB = this.props.notescornell[id].setContent;
-    this.quillRef.setContents(setContentDB, 'api');
-  }
+    const db = this.props.firestore;
+    const content = JSON.stringify(convertToRaw(contentSave));
+    db.update(`notescornell/${id}`, {
+      getContent: content,
+    });
+  };
 
   render() {
-    const { getContent } = this.props;
-    const { isApunteContent, isOnEditable } = this.state;
-    const visibleText = (
-      <div dangerouslySetInnerHTML={{ __html: getContent }} />
-    );
+    const { isOnEditable, editorState, contentState, readOnly } = this.state;
     return (
       <div className={classes.NoteCornellApuntes}>
         <Heading
@@ -77,20 +59,17 @@ class NoteCornellApuntes extends Component {
         <div className={classes.BoxApuntes}>
           {isOnEditable ? (
             <>
-              <ReactQuill
-                ref={e => (this.reactQuillRef = e)}
-                defaultValue={isApunteContent || ''}
-                onChange={this.handleChangeText}
-                modules={modules}
-                formats={formats}
-                className={classes.BoxEditor}
+              <Editor
+                readOnly={readOnly}
+                editorState={editorState}
+                wrapperClassName="demo-wrapper"
+                editorClassName="demo-editor"
+                onEditorStateChange={this.onEditorStateChange}
               />
             </>
           ) : (
             <>
-              <div className={classes.BoxApunte} ref={e => (this.btnRef = e)}>
-                {visibleText}
-              </div>
+              <div className={classes.BoxApunte} ref={e => (this.btnRef = e)} />
             </>
           )}
         </div>
