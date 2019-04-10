@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { firestoreConnect } from 'react-redux-firebase';
 import { EditorState, convertFromRaw, convertToRaw } from 'draft-js';
 import { Editor } from 'react-draft-wysiwyg';
+import { stateToHTML } from 'draft-js-export-html';
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 import classes from './NoteCornellApuntes.module.scss';
 
@@ -12,21 +13,25 @@ import Heading from '../UI/Heading';
 class NoteCornellApuntes extends Component {
   state = {
     isOnEditable: false,
-    contentState: {},
     readOnly: true,
     editorState: EditorState.createEmpty(),
+    setContent: '',
   };
 
   componentDidMount() {
-    const { contentState, readOnly, editorState } = this.state;
+    const { readOnly } = this.state;
     const id = this.props.docID;
     const getContentDB = this.props.notescornell[id].getContent;
-    const content = convertFromRaw(JSON.parse(getContentDB));
-    if (getContentDB) {
-      this.state.editorState = EditorState.createWithContent(content);
-      this.setState({ contentState, readOnly: !readOnly });
+    const setContent = this.props.notescornell[id].setContent;
+    const content = convertFromRaw(getContentDB);
+    if (this.state.setContent === null) {
+      this.setState({ editorState: EditorState.createEmpty() });
     } else {
-      this.state.editorState = EditorState.createEmpty();
+      this.setState({
+        editorState: EditorState.createWithContent(content),
+        readOnly: !readOnly,
+        setContent,
+      });
     }
   }
 
@@ -41,18 +46,28 @@ class NoteCornellApuntes extends Component {
   onContentSave = contentSave => {
     const id = this.props.docID;
     const db = this.props.firestore;
-    const content = JSON.stringify(convertToRaw(contentSave));
+    const content = convertToRaw(contentSave);
+    const html = stateToHTML(contentSave);
     db.update(`notescornell/${id}`, {
       getContent: content,
+      setContent: html,
     });
   };
 
   handleEditable = () => {
-    this.setState(prevState => ({ isOnEditable: !prevState.isOnEditable }));
+    const id = this.props.docID;
+    const setContentDB = this.props.notescornell[id].setContent;
+    this.setState(prevState => ({
+      isOnEditable: !prevState.isOnEditable,
+      setContent: setContentDB,
+    }));
   };
 
   render() {
-    const { isOnEditable, editorState, contentState, readOnly } = this.state;
+    const { isOnEditable, editorState, setContent, readOnly } = this.state;
+    const visibleText = (
+      <div dangerouslySetInnerHTML={{ __html: setContent }} />
+    );
     return (
       <div className={classes.NoteCornellApuntes}>
         <Heading
@@ -73,7 +88,9 @@ class NoteCornellApuntes extends Component {
             </>
           ) : (
             <>
-              <div className={classes.BoxApunte} ref={e => (this.btnRef = e)} />
+              <div className={classes.BoxApunte} ref={e => (this.btnRef = e)}>
+                {visibleText}
+              </div>
             </>
           )}
         </div>
