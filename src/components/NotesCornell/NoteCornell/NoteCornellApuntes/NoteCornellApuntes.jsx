@@ -2,10 +2,8 @@ import React, { Component } from 'react';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { firestoreConnect } from 'react-redux-firebase';
-import { EditorState, convertFromRaw, convertToRaw } from 'draft-js';
-import { Editor } from 'react-draft-wysiwyg';
-import { stateToHTML } from 'draft-js-export-html';
-import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
+import { EditorState, convertToRaw, convertFromRaw } from 'draft-js';
+import Editor from './RichTextEditor';
 import classes from './NoteCornellApuntes.module.scss';
 
 import Heading from '../UI/Heading';
@@ -21,21 +19,20 @@ class NoteCornellApuntes extends Component {
   componentDidMount() {
     const { readOnly } = this.state;
     const id = this.props.docID;
-    const getContentDB = this.props.notescornell[id].getContent;
-    const setContent = this.props.notescornell[id].setContent;
-    const content = convertFromRaw(getContentDB);
+    const getContent = this.props.notescornell[id].getContent;
+    const content = convertFromRaw(getContent);
     if (this.state.setContent === null) {
       this.setState({ editorState: EditorState.createEmpty() });
     } else {
       this.setState({
         editorState: EditorState.createWithContent(content),
         readOnly: !readOnly,
-        setContent,
       });
     }
   }
 
   onEditorStateChange = editorState => {
+    console.log(editorState);
     const contentState = editorState.getCurrentContent();
     this.onContentSave(contentState);
     this.setState({
@@ -47,10 +44,8 @@ class NoteCornellApuntes extends Component {
     const id = this.props.docID;
     const db = this.props.firestore;
     const content = convertToRaw(contentSave);
-    const html = stateToHTML(contentSave);
     db.update(`notescornell/${id}`, {
       getContent: content,
-      setContent: html,
     });
   };
 
@@ -65,9 +60,6 @@ class NoteCornellApuntes extends Component {
 
   render() {
     const { isOnEditable, editorState, setContent, readOnly } = this.state;
-    const visibleText = (
-      <div dangerouslySetInnerHTML={{ __html: setContent }} />
-    );
     return (
       <div className={classes.NoteCornellApuntes}>
         <Heading
@@ -76,23 +68,10 @@ class NoteCornellApuntes extends Component {
           onActive={isOnEditable}
         />
         <div className={classes.BoxApuntes}>
-          {isOnEditable ? (
-            <>
-              <Editor
-                readOnly={readOnly}
-                editorState={editorState}
-                wrapperClassName="demo-wrapper"
-                editorClassName="demo-editor"
-                onEditorStateChange={this.onEditorStateChange}
-              />
-            </>
-          ) : (
-            <>
-              <div className={classes.BoxApunte} ref={e => (this.btnRef = e)}>
-                {visibleText}
-              </div>
-            </>
-          )}
+          <Editor
+            editorState={editorState}
+            onChange={this.onEditorStateChange}
+          />
         </div>
       </div>
     );

@@ -1,0 +1,36 @@
+@import '../../../../styles/variables';
+
+.RichTextEditor {
+  :global {
+    .public-DraftEditorPlaceholder-root {
+      padding: 10px;
+      font-style: italic;
+    }
+
+    .draftJsToolbar__toolbar__dNtBH {
+      box-shadow: none;
+      border: none;
+      margin-bottom: 10px;
+    }
+
+    .draftJsToolbar__button__qi1gf {
+      padding-top: 0;
+    }
+
+    .DraftEditor-editorContainer {
+      padding: 10px;
+      border: 2px solid $write_gray_1;
+      border-radius: 4px;
+    }
+
+    .public-DraftEditor-content {
+      position: relative;
+      top: -16px;
+    }
+
+    .RichTextEditor :global(.public-DraftEditor-content) {
+      min-height: 140px;
+    }
+
+  }
+}
