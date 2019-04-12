@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import Editor from 'draft-js-plugins-editor';
-import createToolbarPlugin, { Separator } from 'draft-js-static-toolbar-plugin';
 import {
   ItalicButton,
   BoldButton,
@@ -10,18 +9,25 @@ import {
   OrderedListButton,
   BlockquoteButton,
   CodeBlockButton,
+  addImageButtonContent,
 } from 'draft-js-buttons';
+import createToolbarPlugin, { Separator } from 'draft-js-static-toolbar-plugin';
+import createImagePlugin from 'draft-js-image-plugin';
+
 import HeadlinesButton from './Toolbar/HeadlinesButton';
+import ImageAdd from './Toolbar/AddImageEditor';
 
 import 'draft-js-static-toolbar-plugin/lib/plugin.css';
 import classes from './RichTextEditor.module.scss';
 
+const imagePlugin = createImagePlugin();
 const staticToolbarPlugin = createToolbarPlugin();
 const { Toolbar } = staticToolbarPlugin;
-const plugins = [staticToolbarPlugin];
+const plugins = [staticToolbarPlugin, imagePlugin];
 
 class RichTextEditor extends Component {
   render() {
+    const { editorState, onChange } = this.props;
     return (
       <div className={classes.RichTextEditor}>
         <Toolbar>
@@ -37,12 +43,19 @@ class RichTextEditor extends Component {
               <OrderedListButton {...externalProps} />
               <BlockquoteButton {...externalProps} />
               <CodeBlockButton {...externalProps} />
+              <addImageButtonContent {...externalProps} />
+              <Separator {...externalProps} />
+              <ImageAdd
+                editorState={editorState}
+                onChange={onChange}
+                modifier={imagePlugin.addImage}
+              />
             </React.Fragment>
           )}
         </Toolbar>
         <Editor
-          editorState={this.props.editorState}
-          onChange={this.props.onChange}
+          editorState={editorState}
+          onChange={onChange}
           plugins={plugins}
         />
       </div>

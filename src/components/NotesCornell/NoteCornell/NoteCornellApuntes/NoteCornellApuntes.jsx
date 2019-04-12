@@ -53,7 +53,6 @@ class NoteCornellApuntes extends Component {
     const id = this.props.docID;
     const db = this.props.firestore;
     const content = convertToRaw(contentSave);
-    // console.log(content.blocks[0].text);
     this.setState({ isTextActive: content.blocks[0].text });
     db.update(`notescornell/${id}`, {
       getContent: content,
@@ -71,7 +70,6 @@ class NoteCornellApuntes extends Component {
 
   render() {
     const { isOnEditable, editorState, isTextActive } = this.state;
-    console.log(isTextActive.length);
     return (
       <div className={classes.NoteCornellApuntes}>
         <Heading
