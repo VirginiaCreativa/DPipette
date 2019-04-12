@@ -11,28 +11,37 @@ import Heading from '../UI/Heading';
 class NoteCornellApuntes extends Component {
   state = {
     isOnEditable: false,
-    readOnly: true,
     editorState: EditorState.createEmpty(),
     setContent: '',
+    isTextActive: '',
   };
 
   componentDidMount() {
-    const { readOnly } = this.state;
     const id = this.props.docID;
     const getContent = this.props.notescornell[id].getContent;
     const content = convertFromRaw(getContent);
+    const editorState = EditorState.createWithContent(content);
     if (this.state.setContent === null) {
       this.setState({ editorState: EditorState.createEmpty() });
     } else {
       this.setState({
-        editorState: EditorState.createWithContent(content),
-        readOnly: !readOnly,
+        editorState,
       });
     }
   }
 
+  componentDidUpdate(prevProps, prevState) {
+    const { isTextActive, isOnEditable } = this.state;
+    if (isTextActive !== prevState.isTextActive) {
+      if (isTextActive.length >= 1) {
+        this.setState({ isOnEditable: true });
+      } else {
+        this.setState({ isOnEditable: false });
+      }
+    }
+  }
+
   onEditorStateChange = editorState => {
-    console.log(editorState);
     const contentState = editorState.getCurrentContent();
     this.onContentSave(contentState);
     this.setState({
@@ -44,6 +53,8 @@ class NoteCornellApuntes extends Component {
     const id = this.props.docID;
     const db = this.props.firestore;
     const content = convertToRaw(contentSave);
+    // console.log(content.blocks[0].text);
+    this.setState({ isTextActive: content.blocks[0].text });
     db.update(`notescornell/${id}`, {
       getContent: content,
     });
@@ -59,7 +70,8 @@ class NoteCornellApuntes extends Component {
   };
 
   render() {
-    const { isOnEditable, editorState, setContent, readOnly } = this.state;
+    const { isOnEditable, editorState, isTextActive } = this.state;
+    console.log(isTextActive.length);
     return (
       <div className={classes.NoteCornellApuntes}>
         <Heading
