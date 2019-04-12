@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import editorStyles from './editorStyles.module.css';
+import classes from './HeadlinesPicker.module.scss';
 import HeadlinesPicker from './HeadlinesPicker';
 
 class HeadlinesButton extends Component {
@@ -7,10 +7,10 @@ class HeadlinesButton extends Component {
 
   render() {
     return (
-      <div className={editorStyles.headlineButtonWrapper}>
+      <div className={classes.headlineButtonWrapper}>
         <button
           onClick={this.onClick}
-          className={editorStyles.headlineButton}
+          className={classes.headlineButton}
           type="button">
           H
         </button>

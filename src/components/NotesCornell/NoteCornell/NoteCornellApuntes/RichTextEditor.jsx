@@ -9,7 +9,6 @@ import {
   OrderedListButton,
   BlockquoteButton,
   CodeBlockButton,
-  addImageButtonContent,
 } from 'draft-js-buttons';
 import createToolbarPlugin, { Separator } from 'draft-js-static-toolbar-plugin';
 import createImagePlugin from 'draft-js-image-plugin';

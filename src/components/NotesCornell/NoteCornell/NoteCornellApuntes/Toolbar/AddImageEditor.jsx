@@ -68,6 +68,7 @@ export default class ImageAdd extends Component {
           onClick={this.onPopoverClick}
           role="button"
           tabIndex={0}>
+          <div className={classes.Triangule} />
           <input
             type="text"
             placeholder="Pegar la URL de la imagen..."
