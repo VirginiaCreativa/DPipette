@@ -1,13 +1,18 @@
 import React, { Component } from 'react';
+import Editor from 'draft-js-plugins-editor';
+import createToolbarPlugin, { Separator } from 'draft-js-static-toolbar-plugin';
 import {
-  EditorState,
-  RichUtils,
-  convertToRaw,
-  convertFromRaw,
-  CompositeDecorator,
-} from 'draft-js';
-import Editor, { createEditorStateWithText } from 'draft-js-plugins-editor';
-import createToolbarPlugin from 'draft-js-static-toolbar-plugin';
+  ItalicButton,
+  BoldButton,
+  UnderlineButton,
+  CodeButton,
+  UnorderedListButton,
+  OrderedListButton,
+  BlockquoteButton,
+  CodeBlockButton,
+} from 'draft-js-buttons';
+import HeadlinesButton from './Toolbar/HeadlinesButton';
+
 import 'draft-js-static-toolbar-plugin/lib/plugin.css';
 import classes from './RichTextEditor.module.scss';
 
@@ -19,9 +24,23 @@ class RichTextEditor extends Component {
   render() {
     return (
       <div className={classes.RichTextEditor}>
-        <Toolbar />
+        <Toolbar>
+          {externalProps => (
+            <React.Fragment>
+              <HeadlinesButton {...externalProps} />
+              <BoldButton {...externalProps} />
+              <ItalicButton {...externalProps} />
+              <UnderlineButton {...externalProps} />
+              <CodeButton {...externalProps} />
+              <Separator {...externalProps} />
+              <UnorderedListButton {...externalProps} />
+              <OrderedListButton {...externalProps} />
+              <BlockquoteButton {...externalProps} />
+              <CodeBlockButton {...externalProps} />
+            </React.Fragment>
+          )}
+        </Toolbar>
         <Editor
-          placeholder="Escribir aquí"
           editorState={this.props.editorState}
           onChange={this.props.onChange}
           plugins={plugins}

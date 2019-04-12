@@ -9,8 +9,8 @@
 
     .draftJsToolbar__toolbar__dNtBH {
       box-shadow: none;
-      border: none;
       margin-bottom: 10px;
+      border: none;
     }
 
     .draftJsToolbar__button__qi1gf {
@@ -18,18 +18,42 @@
     }
 
     .DraftEditor-editorContainer {
-      padding: 10px;
+      padding: 16px 20px;
       border: 2px solid $write_gray_1;
       border-radius: 4px;
-    }
-
-    .public-DraftEditor-content {
-      position: relative;
-      top: -16px;
+      min-height: 346px;
     }
 
     .RichTextEditor :global(.public-DraftEditor-content) {
       min-height: 140px;
+    }
+
+    ul {
+      li {
+        .public-DraftStyleDefault-block {
+          margin: 0;
+        }
+      }
+    }
+
+    .public-DraftStyleDefault-block {
+      margin: 0.2em 0;
+    }
+
+    .draftJsToolbar__button__qi1gf {
+      background-color: transparent;
+
+      &:hover {
+        background: #f3f3f3;
+      }
+
+      &.draftJsToolbar__active__3qcpF {
+        background: #f3f3f3;
+      }
+
+      svg {
+        fill: #5c6b72;
+      }
     }
 
   }
