@@ -24,8 +24,16 @@
       min-height: 346px;
     }
 
+
     .RichTextEditor :global(.public-DraftEditor-content) {
       min-height: 140px;
+    }
+
+    span[data-text] {
+      &::selection {
+        color: #fff !important;
+        background-color: $blue !important;
+      }
     }
 
     ul {

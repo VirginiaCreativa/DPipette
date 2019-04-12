@@ -56,4 +56,11 @@
   .ql-color {
     color: $write_gray_2;
   }
+
+  span[data-text] {
+    &::selection {
+      color: #fff !important;
+      background-color: $blue !important;
+    }
+  }
 }

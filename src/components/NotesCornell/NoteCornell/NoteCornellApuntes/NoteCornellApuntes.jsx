@@ -14,16 +14,22 @@ class NoteCornellApuntes extends Component {
   state = {
     isOnEditable: false,
     editorState: EditorState.createEmpty(),
-    isTextActive: '',
+    isTextActive: 0,
   };
 
   componentDidMount() {
+    const { isTextActive } = this.state;
     if (this.state.getContent === null) {
       this.setState({ editorState: EditorState.createEmpty() });
     } else {
       this.setState({
         editorState: this.onContentData(),
       });
+    }
+    if (isTextActive.length >= 1) {
+      this.setState({ isOnEditable: true });
+    } else {
+      this.setState({ isOnEditable: false });
     }
   }
 

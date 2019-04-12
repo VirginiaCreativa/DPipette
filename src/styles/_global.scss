@@ -47,8 +47,8 @@ input,
 label,
 li span {
   &::selection {
-    color: #fff;
-    background-color: $blue;
+    color: #fff !important;
+    background-color: $blue !important;
 
     @media (max-width: 575.98px) {
       color: $black;
