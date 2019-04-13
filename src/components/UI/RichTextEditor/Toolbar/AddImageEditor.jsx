@@ -2,6 +2,11 @@ import React, { Component } from 'react';
 import classes from './AddImageEditor.module.scss';
 
 export default class ImageAdd extends Component {
+  constructor(props) {
+    super(props);
+    this.InputText = React.createRef();
+  }
+
   state = {
     url: '',
     open: false,
@@ -9,6 +14,10 @@ export default class ImageAdd extends Component {
 
   componentDidMount() {
     document.addEventListener('click', this.closePopover);
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    this.InputText.current.value = '';
   }
 
   componentWillUnmount() {
@@ -75,7 +84,7 @@ export default class ImageAdd extends Component {
             className={classes.addImageInput}
             onChange={this.changeUrl}
             value={this.state.url}
-            ref={ref => (this.InputTextEj = ref)}
+            ref={this.InputText}
           />
           <button
             className={classes.addImageConfirmButton}
