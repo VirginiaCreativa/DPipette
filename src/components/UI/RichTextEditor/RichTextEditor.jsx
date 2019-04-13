@@ -42,7 +42,6 @@ class RichTextEditor extends Component {
               <OrderedListButton {...externalProps} />
               <BlockquoteButton {...externalProps} />
               <CodeBlockButton {...externalProps} />
-              <addImageButtonContent {...externalProps} />
               <Separator {...externalProps} />
               <ImageAdd
                 editorState={editorState}
@@ -53,6 +52,7 @@ class RichTextEditor extends Component {
           )}
         </Toolbar>
         <Editor
+          placeholder="Escribir aquí..."
           editorState={editorState}
           onChange={onChange}
           plugins={plugins}

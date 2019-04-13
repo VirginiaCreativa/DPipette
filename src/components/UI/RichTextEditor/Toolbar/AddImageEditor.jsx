@@ -41,6 +41,7 @@ export default class ImageAdd extends Component {
   addImage = () => {
     const { editorState, onChange } = this.props;
     onChange(this.props.modifier(editorState, this.state.url));
+    this.refInput.value = '';
   };
 
   changeUrl = evt => {
@@ -75,6 +76,7 @@ export default class ImageAdd extends Component {
             className={classes.addImageInput}
             onChange={this.changeUrl}
             value={this.state.url}
+            ref={ref => (this.InputTextEj = ref)}
           />
           <button
             className={classes.addImageConfirmButton}
