@@ -25,8 +25,8 @@
       caret-color: $blue;
 
       img {
-        margin-right: 10px;
         margin-bottom: 10px;
+        margin-right: 10px;
       }
     }
 
@@ -75,8 +75,8 @@
     }
 
     .draftJsEmojiPlugin__alignmentTool__2mkQr {
-      border: 1px solid $write_gray_1;
       box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.1);
+      border: 1px solid $write_gray_1;
       @extend %boxContent;
     }
 
@@ -95,5 +95,37 @@
         fill: #485358;
       }
     }
+  }
+
+  .UndoButton {
+    color: #485358;
+    position: relative;
+    border: none;
+    cursor: pointer;
+    font-size: 22px;
+    background-color: transparent;
+    padding: 6px 6px 3px;
+    display: inline-block;
+    line-height: 1;
+
+    &:focus {
+      color: #999;
+      outline: 0;
+    }
+
+    &:hover {
+      color: #485358;
+      background-color: #f3f3f3;
+    }
+
+    &:active {
+      color: #485358;
+      background-color: #f3f3f3;
+    }
+
+    &:disabled {
+      color: $gray_light;
+    }
+
   }
 }

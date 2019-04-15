@@ -17,12 +17,20 @@ import createFocusPlugin from 'draft-js-focus-plugin';
 import createResizeablePlugin from 'draft-js-resizeable-plugin';
 import createBlockDndPlugin from 'draft-js-drag-n-drop-plugin';
 import createDragNDropUploadPlugin from '@mikeljames/draft-js-drag-n-drop-upload-plugin';
+import createUndoPlugin from 'draft-js-undo-plugin';
+
 import HeadlinesButton from './Toolbar/HeadlinesButton';
 import ImageAdd from './Toolbar/AddImageEditor';
 import createColorBlockPlugin from './Toolbar/colorBlockPlugin';
+
 import 'draft-js-alignment-plugin/lib/plugin.css';
 import 'draft-js-static-toolbar-plugin/lib/plugin.css';
 import classes from './RichTextEditor.module.scss';
+
+const theme = {
+  undo: classes.UndoButton,
+  redo: classes.UndoButton,
+};
 
 const focusPlugin = createFocusPlugin();
 const resizeablePlugin = createResizeablePlugin();
@@ -31,6 +39,11 @@ const alignmentPlugin = createAlignmentPlugin();
 const { AlignmentTool } = alignmentPlugin;
 const staticToolbarPlugin = createToolbarPlugin();
 const { Toolbar } = staticToolbarPlugin;
+const undoPlugin = createUndoPlugin({
+  undoContent: <i className="bx bx-rotate-left" />,
+  redoContent: <i className="bx bx-rotate-right" />,
+  theme,
+});
 
 const decorator = composeDecorators(
   resizeablePlugin.decorator,
@@ -41,6 +54,7 @@ const decorator = composeDecorators(
 
 const imagePlugin = createImagePlugin({ decorator });
 const colorBlockPlugin = createColorBlockPlugin({ decorator });
+const { UndoButton, RedoButton } = undoPlugin;
 
 const dragNDropFileUploadPlugin = createDragNDropUploadPlugin({
   addImage: imagePlugin.addImage,
@@ -55,6 +69,7 @@ const plugins = [
   alignmentPlugin,
   resizeablePlugin,
   colorBlockPlugin,
+  undoPlugin,
 ];
 
 class RichTextEditor extends Component {
@@ -81,6 +96,9 @@ class RichTextEditor extends Component {
                 onChange={onChange}
                 modifier={imagePlugin.addImage}
               />
+              <Separator {...externalProps} />
+              <UndoButton />
+              <RedoButton />
               <AlignmentTool />
             </React.Fragment>
           )}
