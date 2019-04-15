@@ -95,18 +95,36 @@
         fill: #485358;
       }
     }
+
+    .draftJsEmojiPlugin__emojiSelectButton__3sPol,
+    .draftJsEmojiPlugin__emojiSelectButtonPressed__2Tezu {
+      width: 36px;
+      height: 34px;
+      border: none;
+      line-height: 1;
+      color: #5c6b72;
+      border-radius: 0;
+      position: relative;
+      top: -3px;
+    }
+
+    .draftJsEmojiPlugin__emojiSelectPopover__1J1s0 {
+      box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.1);
+      border: 1px solid $write_gray_1;
+      @extend %boxContent;
+    }
   }
 
   .UndoButton {
+    display: inline-block;
+    font-size: 22px;
+    line-height: 1;
     color: #485358;
+    background-color: transparent;
     position: relative;
+    padding: 6px 6px 3px;
     border: none;
     cursor: pointer;
-    font-size: 22px;
-    background-color: transparent;
-    padding: 6px 6px 3px;
-    display: inline-block;
-    line-height: 1;
 
     &:focus {
       color: #999;

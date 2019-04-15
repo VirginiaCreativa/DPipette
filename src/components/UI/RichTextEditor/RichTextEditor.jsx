@@ -18,6 +18,7 @@ import createResizeablePlugin from 'draft-js-resizeable-plugin';
 import createBlockDndPlugin from 'draft-js-drag-n-drop-plugin';
 import createDragNDropUploadPlugin from '@mikeljames/draft-js-drag-n-drop-upload-plugin';
 import createUndoPlugin from 'draft-js-undo-plugin';
+import createEmojiPlugin from 'draft-js-emoji-plugin';
 
 import HeadlinesButton from './Toolbar/HeadlinesButton';
 import ImageAdd from './Toolbar/AddImageEditor';
@@ -25,6 +26,8 @@ import createColorBlockPlugin from './Toolbar/colorBlockPlugin';
 
 import 'draft-js-alignment-plugin/lib/plugin.css';
 import 'draft-js-static-toolbar-plugin/lib/plugin.css';
+import 'draft-js-emoji-plugin/lib/plugin.css';
+
 import classes from './RichTextEditor.module.scss';
 
 const theme = {
@@ -38,6 +41,8 @@ const blockDndPlugin = createBlockDndPlugin();
 const alignmentPlugin = createAlignmentPlugin();
 const { AlignmentTool } = alignmentPlugin;
 const staticToolbarPlugin = createToolbarPlugin();
+const emojiPlugin = createEmojiPlugin();
+const { EmojiSuggestions, EmojiSelect } = emojiPlugin;
 const { Toolbar } = staticToolbarPlugin;
 const undoPlugin = createUndoPlugin({
   undoContent: <i className="bx bx-rotate-left" />,
@@ -70,6 +75,7 @@ const plugins = [
   resizeablePlugin,
   colorBlockPlugin,
   undoPlugin,
+  emojiPlugin,
 ];
 
 class RichTextEditor extends Component {
@@ -96,6 +102,8 @@ class RichTextEditor extends Component {
                 onChange={onChange}
                 modifier={imagePlugin.addImage}
               />
+              <EmojiSuggestions />
+              <EmojiSelect />
               <Separator {...externalProps} />
               <UndoButton />
               <RedoButton />
