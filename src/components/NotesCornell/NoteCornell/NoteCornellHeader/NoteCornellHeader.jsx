@@ -17,12 +17,14 @@ const NoteCornellHeader = ({
   docID,
   firestore,
   favorite,
+  onPortada,
 }) => {
   const [isActiveEditable, setActiveEditable] = useState(false);
   const [isTema, setTema] = useState(tema);
   const [isMateria, setMateria] = useState(materia);
   const [isActiveTema, setActiveTema] = useState(false);
   const [isActiveMateria, setActiveMateria] = useState(false);
+  const [isOpenPortada, setOpenPortada] = useState(true);
   let textInputTema = useRef(null);
   let textInputMateria = useRef(null);
 
@@ -122,6 +124,9 @@ const NoteCornellHeader = ({
         </div>
         <div className="col-2">
           <div className={classes.boxButtons}>
+            <button type="button" onClick={onPortada} className="mr-1">
+              <i className="bx bx-image" />
+            </button>
             <button type="button" onClick={onFavorite} className="mr-1">
               {favorite ? (
                 <i className="bx bxs-bookmark" />
@@ -132,6 +137,9 @@ const NoteCornellHeader = ({
             <button type="button" onClick={onDelete}>
               <i className="bx bx-trash-alt" />
             </button>
+            <div className={classes.OpenPopever}>
+              <h6>Portada</h6>
+            </div>
           </div>
         </div>
       </div>

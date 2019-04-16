@@ -76,6 +76,7 @@
     justify-content: flex-end;
     align-items: center;
     align-content: center;
+    position: relative;
     height: 100%;
 
     button {
@@ -90,7 +91,8 @@
         }
 
         .bx-bookmark,
-        .bxs-bookmark {
+        .bxs-bookmark,
+        .bx-image {
           position: relative;
 
           &:after {
@@ -118,7 +120,24 @@
             color: $red;
           }
         }
+
+        .bx-image {
+          font-size: 24px;
+          transition: all ease-in-out 0.25s;
+        }
       }
+    }
+
+    .OpenPopever {
+      position: absolute;
+      top: 65px;
+      right: 70px;
+      padding: 20px;
+      width: 280px;
+      height: 100px;
+      z-index: 999;
+      @extend %boxShadowContent;
+      @extend %boxContent;
     }
   }
 
