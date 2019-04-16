@@ -113,6 +113,14 @@
       border: 1px solid $write_gray_1;
       @extend %boxContent;
     }
+
+    .draftJsLinkifyPlugin__link__2ittM {
+      color: $blue;
+
+      &:hover {
+        color: $blue_medium;
+      }
+    }
   }
 
   .UndoButton {
