@@ -1,4 +1,5 @@
-import React, { useState, useRef } from 'react';
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, { useState, useRef, useEffect } from 'react';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { firestoreConnect } from 'react-redux-firebase';
@@ -24,9 +25,24 @@ const NoteCornellHeader = ({
   const [isMateria, setMateria] = useState(materia);
   const [isActiveTema, setActiveTema] = useState(false);
   const [isActiveMateria, setActiveMateria] = useState(false);
-  const [isOpenPortada, setOpenPortada] = useState(true);
+  const [isOpenPortada, setOpenPortada] = useState(false);
   let textInputTema = useRef(null);
   let textInputMateria = useRef(null);
+
+  const closePopover = e => {
+    const xClose = e.offsetX;
+    const yClose = e.offsetY;
+    if (xClose >= '800' || yClose >= '120') {
+      setOpenPortada(false);
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener('click', closePopover);
+    return () => {
+      window.removeEventListener('click', closePopover);
+    };
+  }, []);
 
   const handleEditable = () => {
     setActiveEditable(!isActiveEditable);
@@ -75,6 +91,11 @@ const NoteCornellHeader = ({
       })
       .catch(error => console.log(error));
   };
+
+  const handleOpenPoprever = () => {
+    setOpenPortada(!isOpenPortada);
+  };
+
   const activeStyle = isActiveEditable ? classes.activeBtnEditable : null;
 
   return (
@@ -124,7 +145,10 @@ const NoteCornellHeader = ({
         </div>
         <div className="col-2">
           <div className={classes.boxButtons}>
-            <button type="button" onClick={onPortada} className="mr-1">
+            <button
+              type="button"
+              onMouseOver={handleOpenPoprever}
+              className={[classes.btnPoprever, 'mr-1'].join(' ')}>
               <i className="bx bx-image" />
             </button>
             <button type="button" onClick={onFavorite} className="mr-1">
@@ -137,9 +161,11 @@ const NoteCornellHeader = ({
             <button type="button" onClick={onDelete}>
               <i className="bx bx-trash-alt" />
             </button>
-            <div className={classes.OpenPopever}>
-              <h6>Portada</h6>
-            </div>
+            {isOpenPortada ? (
+              <div className={classes.OpenPopever}>
+                <h6>Portada</h6>
+              </div>
+            ) : null}
           </div>
         </div>
       </div>
