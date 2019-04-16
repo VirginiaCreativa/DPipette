@@ -67,8 +67,8 @@ class ButtonCreates extends Component {
       cover: 'option2',
       portada: '',
       favorite: false,
-      getContent: content,
-      getResumen: content,
+      getContent: JSON.stringify(content),
+      getResumen: '',
       setContent: null,
       setResumen: null,
     };

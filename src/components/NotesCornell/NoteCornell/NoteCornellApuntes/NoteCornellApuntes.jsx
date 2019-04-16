@@ -6,7 +6,6 @@ import { EditorState, convertToRaw, convertFromRaw } from 'draft-js';
 import classes from './NoteCornellApuntes.module.scss';
 
 import Spinner from '../../../UI/Spinner/Spinner';
-import Heading from '../UI/Heading';
 
 const Editor = React.lazy(() =>
   import('../../../UI/RichTextEditor/RichTextEditor')
@@ -27,11 +26,20 @@ class NoteCornellApuntes extends Component {
     }
   }
 
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.editorState == null && !!this.state.editorState) {
+      this.setState({
+        editorState: this.onContentData(),
+      });
+    }
+  }
+
   onContentData = () => {
     const id = this.props.docID;
     const getContent = this.props.notescornell[id].getContent;
-    const content = convertFromRaw(getContent);
-    const editorState = EditorState.createWithContent(content);
+    const editorState = EditorState.createWithContent(
+      convertFromRaw(JSON.parse(getContent))
+    );
     return editorState;
   };
 
@@ -46,7 +54,8 @@ class NoteCornellApuntes extends Component {
   onContentSave = contentSave => {
     const id = this.props.docID;
     const db = this.props.firestore;
-    const content = convertToRaw(contentSave);
+    const content = JSON.stringify(convertToRaw(contentSave));
+    console.log(content);
     db.update(`notescornell/${id}`, {
       getContent: content,
     });

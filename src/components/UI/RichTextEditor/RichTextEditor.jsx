@@ -19,6 +19,7 @@ import createBlockDndPlugin from 'draft-js-drag-n-drop-plugin';
 import createDragNDropUploadPlugin from '@mikeljames/draft-js-drag-n-drop-upload-plugin';
 import createUndoPlugin from 'draft-js-undo-plugin';
 import createEmojiPlugin from 'draft-js-emoji-plugin';
+import createLinkifyPlugin from 'draft-js-linkify-plugin';
 
 import HeadlinesButton from './Toolbar/HeadlinesButton';
 import ImageAdd from './Toolbar/AddImageEditor';
@@ -27,6 +28,7 @@ import createColorBlockPlugin from './Toolbar/colorBlockPlugin';
 import 'draft-js-alignment-plugin/lib/plugin.css';
 import 'draft-js-static-toolbar-plugin/lib/plugin.css';
 import 'draft-js-emoji-plugin/lib/plugin.css';
+import 'draft-js-linkify-plugin/lib/plugin.css';
 
 import classes from './RichTextEditor.module.scss';
 
@@ -49,6 +51,7 @@ const undoPlugin = createUndoPlugin({
   redoContent: <i className="bx bx-rotate-right" />,
   theme,
 });
+const linkifyPlugin = createLinkifyPlugin();
 
 const decorator = composeDecorators(
   resizeablePlugin.decorator,
@@ -76,6 +79,7 @@ const plugins = [
   colorBlockPlugin,
   undoPlugin,
   emojiPlugin,
+  linkifyPlugin,
 ];
 
 class RichTextEditor extends Component {

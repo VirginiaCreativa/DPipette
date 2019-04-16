@@ -284,7 +284,7 @@ class NoteCornellResumen extends Component {
         />
         {/* CONFIG */}
         <div className={classes.BoxGroup}>
-          {isOnEditable ? (
+          {/* {isOnEditable ? (
             <div className={classes.BoxEditorResumen}>
               <Editor
                 readOnly={readOnly}
@@ -294,7 +294,7 @@ class NoteCornellResumen extends Component {
                 onEditorStateChange={this.onEditorStateChange}
               />
             </div>
-          ) : null}
+          ) : null} */}
           <SkyLight
             hideOnOverlayClicked
             dialogStyles={classPopup}
@@ -385,7 +385,7 @@ class NoteCornellResumen extends Component {
         <div className={classes.BoxView} ref={e => (this.refView = e)}>
           <div className="row">
             <div className="col">
-              <div className={classes.BoxEditorResumen}>{viewContent}</div>
+              {/* <div className={classes.BoxEditorResumen}>{viewContent}</div> */}
             </div>
             <div className="col">
               {videoResumen && <VideoPlayer src={videoResumen} title={tema} />}
