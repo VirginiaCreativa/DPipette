@@ -94,10 +94,10 @@ class NoteCornell extends Component {
             </div>
             <div className="col-2">
               <div className={classes.Sidebar}>
-                <NoteCornellPortada
+                {/* <NoteCornellPortada
                   {...notecornell}
                   ID={this.props.match.params.id}
-                />
+                /> */}
               </div>
             </div>
           </div>

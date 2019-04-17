@@ -17,6 +17,10 @@
     width: 100%;
     border: 2px dotted $write_gray_3;
 
+    &:hover {
+      background-color: $write_gray_2;
+    }
+
     .InputFile {
       display: block;
       opacity: 0;
@@ -46,6 +50,11 @@
       font-size: 0.875rem;
       border: none;
       cursor: pointer;
+      background-color: #007bff;
+
+      &:hover {
+        background-color: $blue_medium;
+      }
     }
 
   }

@@ -3,10 +3,12 @@ import React, { useState, useRef, useEffect } from 'react';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { firestoreConnect } from 'react-redux-firebase';
+import { ID } from 'postcss-selector-parser';
 import classes from './NoteCornellHeader.module.scss';
 import CapitalizeFirstLetter from '../../../../scripts/CapitalizeFirstLetter';
 
 import InputBtnUpdate from '../../../UI/InputBtnUpdate/InputBtnUpdate';
+import NoteCornellPortada from '../NoteCornellPortada/NoteCornellPortada';
 import Header from './Header';
 
 const NoteCornellHeader = ({
@@ -18,7 +20,8 @@ const NoteCornellHeader = ({
   docID,
   firestore,
   favorite,
-  onPortada,
+  portada,
+  notescornell,
 }) => {
   const [isActiveEditable, setActiveEditable] = useState(false);
   const [isTema, setTema] = useState(tema);
@@ -28,21 +31,6 @@ const NoteCornellHeader = ({
   const [isOpenPortada, setOpenPortada] = useState(false);
   let textInputTema = useRef(null);
   let textInputMateria = useRef(null);
-
-  const closePopover = e => {
-    const xClose = e.offsetX;
-    const yClose = e.offsetY;
-    if (xClose >= '800' || yClose >= '120') {
-      setOpenPortada(false);
-    }
-  };
-
-  useEffect(() => {
-    window.addEventListener('click', closePopover);
-    return () => {
-      window.removeEventListener('click', closePopover);
-    };
-  }, []);
 
   const handleEditable = () => {
     setActiveEditable(!isActiveEditable);
@@ -147,7 +135,7 @@ const NoteCornellHeader = ({
           <div className={classes.boxButtons}>
             <button
               type="button"
-              onMouseOver={handleOpenPoprever}
+              onClick={handleOpenPoprever}
               className={[classes.btnPoprever, 'mr-1'].join(' ')}>
               <i className="bx bx-image" />
             </button>
@@ -163,7 +151,7 @@ const NoteCornellHeader = ({
             </button>
             {isOpenPortada ? (
               <div className={classes.OpenPopever}>
-                <h6>Portada</h6>
+                <NoteCornellPortada ID={docID} tema={tema} portada={portada} />
               </div>
             ) : null}
           </div>
