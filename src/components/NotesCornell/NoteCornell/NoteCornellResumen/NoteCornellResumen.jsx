@@ -3,8 +3,10 @@ import React, { Component } from 'react';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { firestoreConnect } from 'react-redux-firebase';
-import SkyLight from 'react-skylight';
 import { EditorState, convertFromRaw, convertToRaw } from 'draft-js';
+import { stateToHTML } from 'draft-js-export-html';
+import { stateFromHTML } from 'draft-js-import-html';
+import SkyLight from 'react-skylight';
 import CleanUpSpecialChars from '../../../../scripts/CleanUpSpecialChars';
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 import classes from './NoteCornellResumen.module.scss';
@@ -26,6 +28,7 @@ class NoteCornellResumen extends Component {
   state = {
     isOnEditable: false,
     editorState: EditorState.createEmpty(),
+    preview: null,
     recording: false,
     videoBlob: '',
     uploadValue: 0,
@@ -35,16 +38,18 @@ class NoteCornellResumen extends Component {
   };
 
   componentDidMount() {
+    const id = this.props.docID;
+    const previewDB = this.props.notescornell[id].preview;
     if (this.state.setResumen === null) {
       this.setState({ editorState: EditorState.createEmpty() });
     } else {
       this.setContentData();
-      this.setState({ editorState: this.onContentData() });
+      this.setState({ editorState: this.onContentData(), preview: previewDB });
     }
   }
 
   componentDidUpdate(prevProps, prevState) {
-    const { uploadValue, editorState } = this.state;
+    const { uploadValue, editorState, preview } = this.state;
     if (editorState !== prevState.editorState) {
       this.setContentData();
     }
@@ -77,20 +82,19 @@ class NoteCornellResumen extends Component {
   onEditorStateChange = editorState => {
     const contentState = editorState.getCurrentContent();
     this.onContentSave(contentState);
-    this.setState({ editorState });
-    if (this.state.isOnEditable) {
-      this.refView.style.display = 'block';
-    } else {
-      this.refView.style.display = 'none';
-    }
+    this.setState({
+      editorState,
+    });
   };
 
   onContentSave = contentSave => {
     const id = this.props.docID;
     const db = this.props.firestore;
     const content = JSON.stringify(convertToRaw(contentSave));
+    const html = stateToHTML(contentSave);
     db.update(`notescornell/${id}`, {
       getResumen: content,
+      preview: html,
     });
   };
 
@@ -246,8 +250,18 @@ class NoteCornellResumen extends Component {
     });
   };
 
+  handleEditable = () => {
+    const { isOnEditable } = this.state;
+    this.setState({ isOnEditable: !isOnEditable });
+    if (this.state.isOnEditable) {
+      this.refView.style.display = 'block';
+    } else {
+      this.refView.style.display = 'none';
+    }
+  };
+
   render() {
-    const { videoResumen, tema } = this.props;
+    const { videoResumen, tema, docID } = this.props;
     const {
       isOnEditable,
       recording,
@@ -255,7 +269,10 @@ class NoteCornellResumen extends Component {
       uploadProgress,
       activeSaveVideo,
       editorState,
+      preview,
     } = this.state;
+    const id = docID;
+    const previewDB = this.props.notescornell[id].preview;
 
     const classPopup = {
       width: '65%',
@@ -268,6 +285,8 @@ class NoteCornellResumen extends Component {
     const classVideoUpload = {
       width: `${uploadProgress}%`,
     };
+
+    const viewContent = <div dangerouslySetInnerHTML={{ __html: previewDB }} />;
 
     return (
       <div className={classes.NoteCornellResumen}>
@@ -379,7 +398,7 @@ class NoteCornellResumen extends Component {
         <div className={classes.BoxView} ref={e => (this.refView = e)}>
           <div className="row">
             <div className="col">
-              {/* <div className={classes.BoxEditorResumen}>{viewContent}</div> */}
+              <div className={classes.BoxEditorResumen}>{viewContent}</div>
             </div>
             <div className="col">
               {videoResumen && <VideoPlayer src={videoResumen} title={tema} />}
