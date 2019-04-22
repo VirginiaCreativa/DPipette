@@ -1,3 +1,4 @@
+/* eslint-disable react/no-access-state-in-setstate */
 import React, { Component } from 'react';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
@@ -17,45 +18,47 @@ class NoteCornellApuntes extends Component {
   };
 
   componentDidMount() {
-    if (this.state.getContent === null) {
+    if (this.state.setContent === null) {
       this.setState({ editorState: EditorState.createEmpty() });
     } else {
-      this.setState({
-        editorState: this.onContentData(),
-      });
+      this.setContentData();
+      this.setState({ editorState: this.onContentData() });
     }
   }
 
   componentDidUpdate(prevProps, prevState) {
-    if (prevState.editorState == null && !!this.state.editorState) {
-      this.setState({
-        editorState: this.onContentData(),
-      });
+    if (this.state.editorState !== prevState.editorState) {
+      this.setContentData();
     }
   }
 
   onContentData = () => {
     const id = this.props.docID;
     const getContent = this.props.notescornell[id].getContent;
-    const editorState = EditorState.createWithContent(
-      convertFromRaw(JSON.parse(getContent))
-    );
+    const blocks = convertFromRaw(JSON.parse(getContent));
+    const editorState = EditorState.createWithContent(blocks, null);
     return editorState;
+  };
+
+  setContentData = () => {
+    const id = this.props.docID;
+    const db = this.props.firestore;
+    const getContent = this.props.notescornell[id].getContent;
+    db.update(`notescornell/${id}`, {
+      setContent: getContent,
+    });
   };
 
   onEditorStateChange = editorState => {
     const contentState = editorState.getCurrentContent();
     this.onContentSave(contentState);
-    this.setState({
-      editorState,
-    });
+    this.setState({ editorState });
   };
 
   onContentSave = contentSave => {
     const id = this.props.docID;
     const db = this.props.firestore;
     const content = JSON.stringify(convertToRaw(contentSave));
-    console.log(content);
     db.update(`notescornell/${id}`, {
       getContent: content,
     });

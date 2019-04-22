@@ -68,7 +68,7 @@ class ButtonCreates extends Component {
       portada: '',
       favorite: false,
       getContent: JSON.stringify(content),
-      getResumen: '',
+      getResumen: JSON.stringify(content),
       setContent: null,
       setResumen: null,
     };

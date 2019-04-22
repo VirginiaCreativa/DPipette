@@ -1,177 +1,179 @@
 @import '../../../../styles/variables';
 
 .LayoutHeader {
-  display: grid;
-  align-items: center;
-  margin-bottom: 30px;
-  height: 72px;
+	display: grid;
+	align-items: center;
+	margin-bottom: 30px;
+	height: 72px;
 
-  .BoxHeadingConfirm {
-    display: flex;
-    align-items: center;
-    align-content: center;
+	.BoxHeadingConfirm {
+		display: flex;
+		align-items: center;
+		align-content: center;
 
-    .btnEditable {
-      position: relative;
-      top: 10px;
-    }
-  }
+		.btnEditable {
+			position: relative;
+			top: 10px;
+		}
+	}
 
-  .TitleHeader {
-    padding-left: 15px;
-    border-left: 2px solid $write_gray_3;
+	.TitleHeader {
+		padding-left: 15px;
+		border-left: 2px solid $write_gray_3;
 
-    .textDate {
-      font-size: 0.775rem;
-      color: $gray_light;
-    }
+		.textDate {
+			font-size: 0.775rem;
+			color: $gray_light;
+		}
 
-    .GroupTitle {
-      display: flex;
-      align-items: center;
-      align-content: center;
+		.GroupTitle {
+			display: flex;
+			align-items: center;
+			align-content: center;
 
-      .Tema {
-        color: $heading;
-        margin-bottom: 0;
-        // font-size: 2rem;
-      }
+			.Tema {
+				color: $heading;
+				margin-bottom: 0;
+				// font-size: 2rem;
+			}
 
-      .Materia {
-        display: inline-block;
-        font-size: 0.875rem;
-        color: $blue;
-        background-color: #daeafd;
-        margin-left: 10px;
-        padding: 2px 8px;
-        border-radius: 2px;
-        font-weight: 700;
-      }
-    }
-  }
+			.Materia {
+				display: inline-block;
+				font-size: 0.875rem;
+				color: $blue;
+				background-color: #daeafd;
+				margin-left: 10px;
+				padding: 2px 8px;
+				border-radius: 2px;
+				font-weight: 700;
+			}
+		}
+	}
 
-  .BoxHeadingForm {
-    display: grid;
-    grid-template-columns: 75% 25%;
-    align-items: center;
-    align-content: center;
+	.BoxHeadingForm {
+		display: grid;
+		grid-template-columns: 75% 25%;
+		align-items: center;
+		align-content: center;
 
-    .GroupForm {
-      display: grid;
-      grid-template-columns: 49% 49%;
-      grid-gap: 10px;
-      align-items: center;
-      align-content: center;
-    }
+		.GroupForm {
+			display: grid;
+			grid-template-columns: 49% 49%;
+			grid-gap: 10px;
+			align-items: center;
+			align-content: center;
+		}
 
-    .btnEditable {
-      text-align: left;
-      position: relative;
-      top: 10px;
-    }
-  }
+		.btnEditable {
+			text-align: left;
+			position: relative;
+			top: 10px;
+		}
+	}
 
-  .boxButtons {
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    align-content: center;
-    position: relative;
-    height: 100%;
+	.boxButtons {
+		display: flex;
+		justify-content: flex-end;
+		align-items: center;
+		align-content: center;
+		position: relative;
+		height: 100%;
 
-    .btnPoprever {
-      transition: all ease-in-out 0.25s;
-    }
+		button {
+			background: transparent;
+			border: none;
 
-    button {
-      background: transparent;
-      border: none;
+			:global {
+				.bx {
+					font-size: 22px;
+					line-height: 1.5;
+					color: $gray_light;
+				}
 
-      :global {
-        .bx {
-          font-size: 22px;
-          line-height: 1.5;
-          color: $gray_light;
-        }
+				.bx-bookmark,
+				.bxs-bookmark,
+				.bx-image {
+					position: relative;
 
-        .bx-bookmark,
-        .bxs-bookmark,
-        .bx-image {
-          position: relative;
+					&:after {
+						content: '';
+						display: block;
+						background-color: $write_gray_3;
+						position: absolute;
+						top: 8px;
+						right: -45%;
+						width: 1px;
+						height: 18px;
+					}
 
-          &:after {
-            content: '';
-            display: block;
-            background-color: $write_gray_3;
-            position: absolute;
-            top: 8px;
-            right: -45%;
-            width: 1px;
-            height: 18px;
-          }
+					&:hover {
+						color: $green;
+					}
+				}
 
-          &:hover {
-            color: $green;
-          }
-        }
+				.bxs-bookmark {
+					color: $green;
+				}
 
-        .bxs-bookmark {
-          color: $green;
-        }
+				.bx-trash-alt {
+					&:hover {
+						color: $red;
+					}
+				}
 
-        .bx-trash-alt {
-          &:hover {
-            color: $red;
-          }
-        }
+				.bx-image {
+					font-size: 24px;
+				}
+			}
+		}
 
-        .bx-image {
-          font-size: 24px;
-        }
-      }
+		.OpenPopever {
+			position: absolute;
+			top: 65px;
+			right: 70px;
+			padding: 20px;
+			width: 280px;
+			z-index: 999;
+			@extend %boxShadowContent;
+			@extend %boxContent;
 
-    }
+			&:after {
+				content: '';
+				background: #fff;
+				box-shadow: -1px -1px 3px -2px rgba(0, 0, 0, 0.03);
+				position: absolute;
+				top: -8px;
+				right: 25px;
+				width: 15px;
+				height: 15px;
+				transform: rotate(45deg);
+				z-index: 998;
+			}
+		}
+	}
 
-    .OpenPopever {
-      position: absolute;
-      top: 65px;
-      right: 70px;
-      padding: 20px;
-      width: 280px;
-      z-index: 999;
-      @extend %boxShadowContent;
-      @extend %boxContent;
+	.btnEditable {
+		color: $gray_light;
+		background-color: transparent !important;
+		border: none;
 
-      &:after {
-        content: "";
-        background: #fff;
-        box-shadow: -1px -1px 3px -2px rgba(0, 0, 0, 0.03);
-        position: absolute;
-        top: -8px;
-        right: 25px;
-        width: 15px;
-        height: 15px;
-        transform: rotate(45deg);
-        z-index: 998;
-      }
-    }
-
-  }
-
-  .btnEditable {
-    color: $gray_light;
-    background-color: transparent !important;
-    border: none;
-
-    :global {
-      .bx {
-        font-size: 20px;
-        line-height: 1.5;
-      }
-    }
-  }
+		:global {
+			.bx {
+				font-size: 20px;
+				line-height: 1.5;
+			}
+		}
+	}
 }
 
 .activeBtnEditable {
-  color: $green !important;
+	color: $green !important;
+}
+
+.activeBtnPopever {
+	:global {
+		.bx-image {
+			color: $green !important;
+		}
+	}
 }

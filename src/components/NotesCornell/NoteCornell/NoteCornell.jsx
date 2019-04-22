@@ -85,10 +85,10 @@ class NoteCornell extends Component {
                   />
                 </div>
                 <div className="col-12">
-                  {/* <NoteCornellResumen
+                  <NoteCornellResumen
                     {...notecornell}
                     docID={this.props.match.params.id}
-                  /> */}
+                  />
                 </div>
               </div>
             </div>

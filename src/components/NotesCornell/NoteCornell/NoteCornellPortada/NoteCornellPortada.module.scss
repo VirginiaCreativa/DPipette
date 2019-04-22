@@ -2,8 +2,8 @@
 
 .NoteCornellPortada {
   position: relative;
-  height: 200px;
   border-radius: 4px;
+  min-height: 180px;
 
   .BoxFile {
     display: flex;
@@ -13,7 +13,7 @@
     position: absolute;
     top: 0;
     left: 0;
-    padding: 80px 20px;
+    padding: 70px 20px;
     width: 100%;
     border: 2px dotted $write_gray_3;
 
@@ -48,9 +48,9 @@
 
     button {
       font-size: 0.875rem;
+      background-color: #007bff;
       border: none;
       cursor: pointer;
-      background-color: #007bff;
 
       &:hover {
         background-color: $blue_medium;
@@ -61,9 +61,8 @@
 
   .BoxPortada {
     position: relative;
-    border-radius: 4px;
     overflow: hidden;
-    height: 200px;
+    height: 180px;
 
     .showUpload {
       display: block;

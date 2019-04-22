@@ -9,7 +9,7 @@ import CleanUpSpecialChars from '../../../../scripts/CleanUpSpecialChars';
 import Spinner from '../../../UI/Spinner/Spinner';
 import classes from './NoteCornellPortada.module.scss';
 
-const Image = React.lazy(() => import('./NoteCornellImage'));
+import Image from './NoteCornellImage';
 
 const NoteCornellPortada = ({
   firebase: { storage },
@@ -149,14 +149,12 @@ const NoteCornellPortada = ({
         <div className={classes.BoxPortada}>
           <div className={classes.showUpload} style={classProgressUpload} />
           {isShowImage && (
-            <React.Suspense fallback={<Spinner />}>
-              <Image
-                src={portada}
-                alt={tema}
-                onClick={handleRemoveFile}
-                onRef={ref => (refPortada = ref)}
-              />
-            </React.Suspense>
+            <Image
+              src={portada}
+              alt={tema}
+              onClick={handleRemoveFile}
+              onRef={ref => (refPortada = ref)}
+            />
           )}
         </div>
       )}

@@ -24,6 +24,7 @@ const NoteCornellHeader = ({
   notescornell,
 }) => {
   const [isActiveEditable, setActiveEditable] = useState(false);
+  const [isActivePopever, setActivePopever] = useState(false);
   const [isTema, setTema] = useState(tema);
   const [isMateria, setMateria] = useState(materia);
   const [isActiveTema, setActiveTema] = useState(false);
@@ -82,9 +83,11 @@ const NoteCornellHeader = ({
 
   const handleOpenPoprever = () => {
     setOpenPortada(!isOpenPortada);
+    setActivePopever(!isActivePopever);
   };
 
-  const activeStyle = isActiveEditable ? classes.activeBtnEditable : null;
+  const cssActiveEditable = isActiveEditable ? classes.activeBtnEditable : null;
+  const cssActivePopever = isActivePopever ? classes.activeBtnPopever : null;
 
   return (
     <div className={classes.LayoutHeader}>
@@ -115,7 +118,7 @@ const NoteCornellHeader = ({
               <button
                 type="button"
                 onClick={handleEditable}
-                className={[classes.btnEditable, activeStyle].join(' ')}>
+                className={[classes.btnEditable, cssActiveEditable].join(' ')}>
                 <i className="bx bx-pencil" />
               </button>
             </div>
@@ -125,7 +128,7 @@ const NoteCornellHeader = ({
               <button
                 type="button"
                 onClick={handleEditable}
-                className={[classes.btnEditable, activeStyle].join(' ')}>
+                className={[classes.btnEditable, cssActiveEditable].join(' ')}>
                 <i className="bx bx-pencil" />
               </button>
             </div>
@@ -136,7 +139,9 @@ const NoteCornellHeader = ({
             <button
               type="button"
               onClick={handleOpenPoprever}
-              className={[classes.btnPoprever, 'mr-1'].join(' ')}>
+              className={[classes.btnPoprever, 'mr-1', cssActivePopever].join(
+                ' '
+              )}>
               <i className="bx bx-image" />
             </button>
             <button type="button" onClick={onFavorite} className="mr-1">

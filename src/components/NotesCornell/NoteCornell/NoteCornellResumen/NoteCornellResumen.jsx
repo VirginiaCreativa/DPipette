@@ -5,8 +5,6 @@ import { connect } from 'react-redux';
 import { firestoreConnect } from 'react-redux-firebase';
 import SkyLight from 'react-skylight';
 import { EditorState, convertFromRaw, convertToRaw } from 'draft-js';
-import { Editor } from 'react-draft-wysiwyg';
-import { stateToHTML } from 'draft-js-export-html';
 import CleanUpSpecialChars from '../../../../scripts/CleanUpSpecialChars';
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 import classes from './NoteCornellResumen.module.scss';
@@ -14,6 +12,11 @@ import firebase from '../../../../config/FirebaseConfig';
 
 import HeadingResumen from '../UI/HeadingResumen';
 import VideoPlayer from '../../../UI/VideoPlayerAuto/VideoPlayer';
+import Spinner from '../../../UI/Spinner/Spinner';
+
+const Editor = React.lazy(() =>
+  import('../../../UI/RichTextEditor/RichTextEditor')
+);
 
 const videoType = 'video/webm;codecs=vp9';
 let localstream;
@@ -22,9 +25,7 @@ var chunks;
 class NoteCornellResumen extends Component {
   state = {
     isOnEditable: false,
-    readOnly: true,
     editorState: EditorState.createEmpty(),
-    setResumen: '',
     recording: false,
     videoBlob: '',
     uploadValue: 0,
@@ -34,25 +35,19 @@ class NoteCornellResumen extends Component {
   };
 
   componentDidMount() {
-    const { readOnly } = this.state;
-    const id = this.props.docID;
-    const getResumen = this.props.notescornell[id].getResumen;
-    const setResumen = this.props.notescornell[id].setResumen;
-    const content = convertFromRaw(getResumen);
     if (this.state.setResumen === null) {
       this.setState({ editorState: EditorState.createEmpty() });
     } else {
-      this.setState({
-        editorState: EditorState.createWithContent(content),
-        readOnly: !readOnly,
-        setResumen,
-      });
+      this.setContentData();
+      this.setState({ editorState: this.onContentData() });
     }
   }
 
   componentDidUpdate(prevProps, prevState) {
-    const { uploadValue, readOnly } = this.state;
-
+    const { uploadValue, editorState } = this.state;
+    if (editorState !== prevState.editorState) {
+      this.setContentData();
+    }
     if (uploadValue !== prevState.uploadValue) {
       this.setState({ uploadProgress: uploadValue });
       if (uploadValue === '100') {
@@ -62,22 +57,40 @@ class NoteCornellResumen extends Component {
   }
 
   // ========== EDITOR ==========
+  onContentData = () => {
+    const id = this.props.docID;
+    const getResumen = this.props.notescornell[id].getResumen;
+    const blocks = convertFromRaw(JSON.parse(getResumen));
+    const editorState = EditorState.createWithContent(blocks, null);
+    return editorState;
+  };
+
+  setContentData = () => {
+    const id = this.props.docID;
+    const db = this.props.firestore;
+    const getResumen = this.props.notescornell[id].getResumen;
+    db.update(`notescornell/${id}`, {
+      setResume: getResumen,
+    });
+  };
+
   onEditorStateChange = editorState => {
     const contentState = editorState.getCurrentContent();
     this.onContentSave(contentState);
-    this.setState({
-      editorState,
-    });
+    this.setState({ editorState });
+    if (this.state.isOnEditable) {
+      this.refView.style.display = 'block';
+    } else {
+      this.refView.style.display = 'none';
+    }
   };
 
   onContentSave = contentSave => {
     const id = this.props.docID;
     const db = this.props.firestore;
-    const content = convertToRaw(contentSave);
-    const html = stateToHTML(contentSave);
+    const content = JSON.stringify(convertToRaw(contentSave));
     db.update(`notescornell/${id}`, {
       getResumen: content,
-      setResumen: html,
     });
   };
 
@@ -233,20 +246,6 @@ class NoteCornellResumen extends Component {
     });
   };
 
-  handleEditable = () => {
-    const id = this.props.docID;
-    const setResumenDB = this.props.notescornell[id].setResumen;
-    this.setState(prevState => ({
-      isOnEditable: !prevState.isOnEditable,
-      setResumen: setResumenDB,
-    }));
-    if (this.state.isOnEditable) {
-      this.refView.style.display = 'block';
-    } else {
-      this.refView.style.display = 'none';
-    }
-  };
-
   render() {
     const { videoResumen, tema } = this.props;
     const {
@@ -256,8 +255,6 @@ class NoteCornellResumen extends Component {
       uploadProgress,
       activeSaveVideo,
       editorState,
-      setResumen,
-      readOnly,
     } = this.state;
 
     const classPopup = {
@@ -271,9 +268,7 @@ class NoteCornellResumen extends Component {
     const classVideoUpload = {
       width: `${uploadProgress}%`,
     };
-    const viewContent = (
-      <div dangerouslySetInnerHTML={{ __html: setResumen }} />
-    );
+
     return (
       <div className={classes.NoteCornellResumen}>
         <HeadingResumen
@@ -284,17 +279,16 @@ class NoteCornellResumen extends Component {
         />
         {/* CONFIG */}
         <div className={classes.BoxGroup}>
-          {/* {isOnEditable ? (
+          {isOnEditable ? (
             <div className={classes.BoxEditorResumen}>
-              <Editor
-                readOnly={readOnly}
-                editorState={editorState}
-                wrapperClassName="demo-wrapper"
-                editorClassName="demo-editor"
-                onEditorStateChange={this.onEditorStateChange}
-              />
+              <React.Suspense fallback={<Spinner />}>
+                <Editor
+                  editorState={editorState}
+                  onChange={this.onEditorStateChange}
+                />
+              </React.Suspense>
             </div>
-          ) : null} */}
+          ) : null}
           <SkyLight
             hideOnOverlayClicked
             dialogStyles={classPopup}
