@@ -28,25 +28,32 @@ class NoteCornellResumen extends Component {
     recording: false,
     videoBlob: '',
     uploadValue: 0,
-    videoResumen: '',
+    videoResumen: null,
     activeSaveVideo: true,
     uploadProgress: 0,
-    isShowVideo: true,
+    isShowVideo: false,
   };
 
   componentDidMount() {
+    const { videoResumen } = this.state;
     const id = this.props.docID;
-    const previewDB = this.props.notescornell[id].preview;
+    const videoResumenDB = this.props.notescornell[id].videoResumen;
     if (this.state.setResumen === null) {
       this.setState({ editorState: EditorState.createEmpty() });
     } else {
       this.setContentData();
-      this.setState({ editorState: this.onContentData(), preview: previewDB });
+      this.setState({ editorState: this.onContentData() });
+    }
+    console.log('====>', this.state.videoResumen);
+    if (videoResumen === videoResumenDB) {
+      this.setState({ isShowVideo: true });
+    } else {
+      this.setState({ isShowVideo: false });
     }
   }
 
   componentDidUpdate(prevProps, prevState) {
-    const { uploadValue, editorState, preview } = this.state;
+    const { uploadValue, editorState, videoResumen } = this.state;
     if (editorState !== prevState.editorState) {
       this.setContentData();
     }
@@ -55,6 +62,9 @@ class NoteCornellResumen extends Component {
       if (uploadValue === '100') {
         this.setState({ activeSaveVideo: false });
       }
+    }
+    if (videoResumen !== prevState.videoResumen) {
+      this.setState({ isShowVideo: false });
     }
   }
 
@@ -235,11 +245,11 @@ class NoteCornellResumen extends Component {
       .delete()
       .then(() => {
         console.log('SI DELETE SENA');
+        this.setState({ videoBlob: null, isShowVideo: true });
       })
       .catch(error => {
         console.error('Error removing document: ', error);
       });
-    this.setState({ videoBlob: null, isShowVideo: true });
     const db = this.props.firestore;
     db.update(`notescornell/${id}`, {
       videoResumen: null,
