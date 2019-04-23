@@ -4,20 +4,31 @@ import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { firestoreConnect } from 'react-redux-firebase';
 import { EditorState, convertFromRaw, convertToRaw } from 'draft-js';
+import createInlineToolbarPlugin, {
+  Separator,
+} from 'draft-js-inline-toolbar-plugin';
+import Editor from 'draft-js-plugins-editor';
 import SkyLight from 'react-skylight';
+import {
+  ItalicButton,
+  BoldButton,
+  UnderlineButton,
+  CodeButton,
+  UnorderedListButton,
+  OrderedListButton,
+  BlockquoteButton,
+  CodeBlockButton,
+} from 'draft-js-buttons';
 import CleanUpSpecialChars from '../../../../scripts/CleanUpSpecialChars';
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 import classes from './NoteCornellResumen.module.scss';
 import firebase from '../../../../config/FirebaseConfig';
-
 import HeadingResumen from '../UI/HeadingResumen';
 import VideoPlayer from '../../../UI/VideoPlayerAuto/VideoPlayer';
-import Spinner from '../../../UI/Spinner/Spinner';
 
-const Editor = React.lazy(() =>
-  import('../../../UI/RichTextEditor/RichTextEditor')
-);
-
+const inlineToolbarPlugin = createInlineToolbarPlugin();
+const { InlineToolbar } = inlineToolbarPlugin;
+const plugins = [inlineToolbarPlugin];
 const videoType = 'video/webm;codecs=vp9';
 let localstream;
 var mediaRecorder;
@@ -284,7 +295,29 @@ class NoteCornellResumen extends Component {
         <HeadingResumen title="Resumen" />
         <div className={classes.BoxGroup}>
           <div className="row">
-            <div className="col" />
+            <div className="col">
+              <div className={classes.Editor}>
+                <Editor
+                  editorState={editorState}
+                  onChange={this.onEditorStateChange}
+                  plugins={plugins}
+                  placeholder="Escribir aquí..."
+                />
+                <InlineToolbar>
+                  {externalProps => (
+                    <div>
+                      <BoldButton {...externalProps} />
+                      <ItalicButton {...externalProps} />
+                      <UnderlineButton {...externalProps} />
+                      <Separator {...externalProps} />
+                      <UnorderedListButton {...externalProps} />
+                      <OrderedListButton {...externalProps} />
+                      <BlockquoteButton {...externalProps} />
+                    </div>
+                  )}
+                </InlineToolbar>
+              </div>
+            </div>
             <div className="col">
               {isShowVideo ? (
                 <div className={classes.BoxVideoClick}>
