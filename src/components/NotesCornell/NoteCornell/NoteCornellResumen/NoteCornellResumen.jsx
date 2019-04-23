@@ -49,13 +49,13 @@ class NoteCornellResumen extends Component {
     const { videoResumen } = this.state;
     const id = this.props.docID;
     const videoResumenDB = this.props.notescornell[id].videoResumen;
+    this.setContentData();
     if (this.state.setResumen === null) {
       this.setState({ editorState: EditorState.createEmpty() });
     } else {
-      this.setContentData();
       this.setState({ editorState: this.onContentData() });
     }
-    console.log('====>', this.state.videoResumen);
+
     if (videoResumen === videoResumenDB) {
       this.setState({ isShowVideo: true });
     } else {
@@ -65,9 +65,6 @@ class NoteCornellResumen extends Component {
 
   componentDidUpdate(prevProps, prevState) {
     const { uploadValue, editorState, videoResumen } = this.state;
-    if (editorState !== prevState.editorState) {
-      this.setContentData();
-    }
     if (uploadValue !== prevState.uploadValue) {
       this.setState({ uploadProgress: uploadValue });
       if (uploadValue === '100') {
@@ -76,6 +73,9 @@ class NoteCornellResumen extends Component {
     }
     if (videoResumen !== prevState.videoResumen) {
       this.setState({ isShowVideo: false });
+    }
+    if (this.state.editorState !== prevState.editorState) {
+      this.setContentData();
     }
   }
 
@@ -93,8 +93,9 @@ class NoteCornellResumen extends Component {
     const db = this.props.firestore;
     const getResumen = this.props.notescornell[id].getResumen;
     db.update(`notescornell/${id}`, {
-      setResume: getResumen,
+      setResumen: getResumen,
     });
+    return getResumen;
   };
 
   onEditorStateChange = editorState => {
@@ -267,6 +268,10 @@ class NoteCornellResumen extends Component {
     });
   };
 
+  focus = () => {
+    this.editor.focus();
+  };
+
   render() {
     const { videoResumen, tema, docID } = this.props;
     const {
@@ -302,6 +307,9 @@ class NoteCornellResumen extends Component {
                   onChange={this.onEditorStateChange}
                   plugins={plugins}
                   placeholder="Escribir aquí..."
+                  ref={element => {
+                    this.editor = element;
+                  }}
                 />
                 <InlineToolbar>
                   {externalProps => (
