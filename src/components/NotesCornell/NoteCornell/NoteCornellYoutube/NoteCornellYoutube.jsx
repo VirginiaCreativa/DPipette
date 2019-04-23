@@ -8,22 +8,32 @@ import classes from './NoteCornellYoutube.module.scss';
 
 const VideoIframe = React.lazy(() => import('./VideoIframe'));
 
-const NoteCornellYoutube = ({ docID, notescornell }) => {
+const NoteCornellYoutube = ({ docID, notescornell, firestore }) => {
   const [isVideoShow, setVideoShow] = useState(false);
   const [isVideoURL, setVideoURL] = useState(null);
   const [isVideoYoutube, setVideoYoutube] = useState(null);
 
   useEffect(() => {
-    if (isVideoYoutube === null) {
+    const id = docID;
+    const urlVideoYoutube = notescornell[id].videoURLYoutube;
+    if (urlVideoYoutube === null) {
       setVideoShow(false);
     } else {
       setVideoShow(true);
     }
-  }, [isVideoYoutube]);
+  }, [docID, notescornell]);
 
   const handleChangeVideoURL = ev => {
     console.log(ev.target.value);
     setVideoURL(ev.target.value);
+  };
+
+  const handleAddYoutube = () => {
+    const id = docID;
+    firestore.update(`notescornell/${id}`, {
+      videoURLYoutube: isVideoURL,
+    });
+    setVideoShow(true);
   };
   return (
     <div className={classes.NoteCornellYoutube}>
@@ -40,7 +50,10 @@ const NoteCornellYoutube = ({ docID, notescornell }) => {
               onChange={handleChangeVideoURL}
               placeholder="Añadir URL de Youtube"
             />
-            <button className="btn btn-danger" type="button">
+            <button
+              className="btn btn-danger"
+              type="button"
+              onClick={handleAddYoutube}>
               <i className="bx bxl-youtube" />
             </button>
           </div>
