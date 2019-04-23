@@ -16,7 +16,7 @@ import NoteCornellHeader from './NoteCornellHeader/NoteCornellHeader';
 import NoteCornellIdeas from './NoteCornellIdeas/NoteCornellIdeas';
 import NoteCornellApuntes from './NoteCornellApuntes/NoteCornellApuntes';
 import NoteCornellResumen from './NoteCornellResumen/NoteCornellResumen';
-import NoteCornellPortada from './NoteCornellPortada/NoteCornellPortada';
+import NoteCornellYoutube from './NoteCornellYoutube/NoteCornellYoutube';
 
 class NoteCornell extends Component {
   state = {
@@ -94,10 +94,10 @@ class NoteCornell extends Component {
             </div>
             <div className="col-3">
               <div className={classes.Sidebar}>
-                {/* <NoteCornellPortada
+                <NoteCornellYoutube
                   {...notecornell}
-                  ID={this.props.match.params.id}
-                /> */}
+                  docID={this.props.match.params.id}
+                />
               </div>
             </div>
           </div>
