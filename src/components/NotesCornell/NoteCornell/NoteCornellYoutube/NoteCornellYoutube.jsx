@@ -11,27 +11,40 @@ const VideoIframe = React.lazy(() => import('./VideoIframe'));
 const NoteCornellYoutube = ({ docID, notescornell }) => {
   const [isVideoShow, setVideoShow] = useState(false);
   const [isVideoURL, setVideoURL] = useState(null);
+  const [isVideoYoutube, setVideoYoutube] = useState(null);
 
   useEffect(() => {
-    if (isVideoURL === null) {
+    if (isVideoYoutube === null) {
       setVideoShow(false);
     } else {
       setVideoShow(true);
     }
-  }, [isVideoURL]);
+  }, [isVideoYoutube]);
 
   const handleChangeVideoURL = ev => {
     console.log(ev.target.value);
+    setVideoURL(ev.target.value);
   };
   return (
-    <div>
+    <div className={classes.NoteCornellYoutube}>
       {isVideoShow ? (
         <React.Suspense fallback={<Spinner />}>
           <VideoIframe src={isVideoURL} />
         </React.Suspense>
       ) : (
         <div className={classes.GetVideo}>
-          <input type="text" name="" id="" onChange={handleChangeVideoURL} />
+          <h6>Video de un intérprete o traducción</h6>
+          <div className={classes.Form}>
+            <input
+              type="text"
+              onChange={handleChangeVideoURL}
+              placeholder="Añadir URL de Youtube"
+            />
+            <button className="btn btn-danger" type="button">
+              <i className="bx bxl-youtube" />
+            </button>
+          </div>
+          <p>Benefición: Graba Youtube en Movil</p>
         </div>
       )}
     </div>

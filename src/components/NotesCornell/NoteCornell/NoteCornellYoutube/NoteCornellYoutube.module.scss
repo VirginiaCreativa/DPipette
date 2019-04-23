@@ -1,0 +1,58 @@
+@import '../../../../styles/variables';
+
+.NoteCornellYoutube {
+  .GetVideo {
+    display: grid;
+    justify-content: center;
+    justify-items: center;
+    align-items: center;
+    align-content: center;
+    background-color: $write_gray_1;
+    padding: 20px 0;
+    height: 200px;
+    border: 2px dashed $write_gray_3;
+    position: relative;
+    h6 {
+      font-size: 0.925rem;
+      color: $black;
+      margin-bottom: 20px;
+      text-transform: uppercase;
+    }
+    .Form {
+      display: grid;
+      grid-template-columns: auto 44px;
+      width: 100%;
+      input[type="text"] {
+        background-color: #fff;
+        margin-right: 12px;  
+        padding: 6px 10px;
+        border-radius: 2px;
+        caret-color: $blue;
+        border-top: none; 
+        border-left: none;
+        border-right: none;
+        border-bottom: 1px solid $write_gray_2;
+      }
+      button {
+        padding: 0 6px;
+      } 
+      :global {
+        .bxl-youtube {
+          font-size: 26px;
+          line-height: 1.5;
+        }
+      }
+    }
+    p {
+      grid-template-columns: 100%;
+      font-size: 0.8rem;
+      color: $gray_medium;
+      margin-top: 6px;
+      margin-bottom: 0;
+      font-style: italic;
+      position: absolute;
+      bottom: 10px;
+    }
+
+  }
+}
