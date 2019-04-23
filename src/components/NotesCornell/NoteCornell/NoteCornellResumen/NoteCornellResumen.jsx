@@ -4,8 +4,6 @@ import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { firestoreConnect } from 'react-redux-firebase';
 import { EditorState, convertFromRaw, convertToRaw } from 'draft-js';
-import { stateToHTML } from 'draft-js-export-html';
-import { stateFromHTML } from 'draft-js-import-html';
 import SkyLight from 'react-skylight';
 import CleanUpSpecialChars from '../../../../scripts/CleanUpSpecialChars';
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
@@ -26,15 +24,14 @@ var mediaRecorder;
 var chunks;
 class NoteCornellResumen extends Component {
   state = {
-    isOnEditable: false,
     editorState: EditorState.createEmpty(),
-    preview: null,
     recording: false,
     videoBlob: '',
     uploadValue: 0,
     videoResumen: '',
     activeSaveVideo: true,
     uploadProgress: 0,
+    isShowVideo: true,
   };
 
   componentDidMount() {
@@ -91,10 +88,8 @@ class NoteCornellResumen extends Component {
     const id = this.props.docID;
     const db = this.props.firestore;
     const content = JSON.stringify(convertToRaw(contentSave));
-    const html = stateToHTML(contentSave);
     db.update(`notescornell/${id}`, {
       getResumen: content,
-      preview: html,
     });
   };
 
@@ -250,29 +245,16 @@ class NoteCornellResumen extends Component {
     });
   };
 
-  handleEditable = () => {
-    const { isOnEditable } = this.state;
-    this.setState({ isOnEditable: !isOnEditable });
-    if (this.state.isOnEditable) {
-      this.refView.style.display = 'block';
-    } else {
-      this.refView.style.display = 'none';
-    }
-  };
-
   render() {
     const { videoResumen, tema, docID } = this.props;
     const {
-      isOnEditable,
       recording,
       videoBlob,
       uploadProgress,
       activeSaveVideo,
       editorState,
-      preview,
+      isShowVideo,
     } = this.state;
-    const id = docID;
-    const previewDB = this.props.notescornell[id].preview;
 
     const classPopup = {
       width: '65%',
@@ -286,113 +268,23 @@ class NoteCornellResumen extends Component {
       width: `${uploadProgress}%`,
     };
 
-    const viewContent = <div dangerouslySetInnerHTML={{ __html: previewDB }} />;
-
     return (
       <div className={classes.NoteCornellResumen}>
-        <HeadingResumen
-          title="Resumen"
-          onClickEditable={this.handleEditable}
-          onClickVideo={this.handleVideoRecord}
-          onActiveEditable={isOnEditable}
-        />
-        {/* CONFIG */}
+        <HeadingResumen title="Resumen" />
         <div className={classes.BoxGroup}>
-          {isOnEditable ? <div className={classes.BoxEditorResumen} /> : null}
-          <SkyLight
-            hideOnOverlayClicked
-            dialogStyles={classPopup}
-            closeButtonStyle={classClosedNone}
-            afterClose={this.executeAfterModalClose}
-            ref={ref => (this.modalVideo = ref)}>
-            <div className="row">
-              <div className="col-8">
-                <div className={classes.BoxVideGrabado}>
-                  <video width="100%" ref={ref => (this.videoGrabado = ref)} />
-                  <div className={classes.ControlVideo}>
-                    {!recording ? (
-                      <button
-                        type="button"
-                        onClick={e => this.startRecording(e)}
-                        className={classes.btnRecord}>
-                        <i className="bx bx-radio-circle-marked" />
-                      </button>
-                    ) : (
-                      <button
-                        type="button"
-                        onClick={e => this.stopRecording(e)}
-                        className={classes.btnStop}>
-                        <i className="bx bx-stop" />
-                      </button>
-                    )}
-                  </div>
-                </div>
-              </div>
-              <div className="col-4">
-                <div className={classes.BoxVideoResult}>
-                  {videoBlob ? (
-                    <>
-                      <div className={classes.BoxVideo}>
-                        <div
-                          className={classes.showUpload}
-                          style={classVideoUpload}
-                        />
-                        <video
-                          width="100%"
-                          src={videoBlob}
-                          ref={ref => (this.videoDownd = ref)}
-                          muted
-                          autoPlay
-                          loop
-                        />
-                      </div>
-                      <div className={classes.GroupBtns}>
-                        <button
-                          type="button"
-                          onClick={() => this.deleteVideoSena()}
-                          className="btn btn-danger mr-1">
-                          <i className="bx bx-trash-alt" />
-                          Eliminar
-                        </button>
-                        {activeSaveVideo ? (
-                          <button
-                            type="button"
-                            disabled={activeSaveVideo}
-                            onClick={() => this.saveVideoClosedSena()}
-                            className="btn btn-light">
-                            <i className="bx bxs-cloud-upload" />
-                            Progreso
-                          </button>
-                        ) : (
-                          <button
-                            type="button"
-                            disabled={activeSaveVideo}
-                            onClick={() => this.saveVideoClosedSena()}
-                            className="btn btn-success">
-                            <i className="bx bx-check" />
-                            Guardar
-                          </button>
-                        )}
-                      </div>
-                    </>
-                  ) : (
-                    <div className={classes.BoxAprobado}>
-                      <h5>APROBACIÓN DE ESTE VIDEO</h5>
-                    </div>
-                  )}
-                </div>
-              </div>
-            </div>
-          </SkyLight>
-        </div>
-        {/* VIEW RESUMEN */}
-        <div className={classes.BoxView} ref={e => (this.refView = e)}>
           <div className="row">
+            <div className="col" />
             <div className="col">
-              <div className={classes.BoxEditorResumen}>{viewContent}</div>
-            </div>
-            <div className="col">
-              {videoResumen && <VideoPlayer src={videoResumen} title={tema} />}
+              {isShowVideo ? (
+                <div className={classes.BoxVideoClick}>
+                  <button type="button" onClick={this.handleVideoRecord}>
+                    <i className="bx bx-video" />
+                  </button>
+                  <p>Grabado para expresar tu resumen</p>
+                </div>
+              ) : (
+                <VideoPlayer src={videoResumen} title={tema} />
+              )}
             </div>
           </div>
         </div>

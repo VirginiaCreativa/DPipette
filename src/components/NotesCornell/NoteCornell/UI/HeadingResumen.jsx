@@ -17,7 +17,7 @@ const HeadingResumen = ({
   return (
     <div className={classes.HeadingResumen}>
       <h5>{title}</h5>
-      <button
+      {/* <button
         type="button"
         onClick={onClickEditable}
         className={classActiveEditor}>
@@ -25,7 +25,7 @@ const HeadingResumen = ({
       </button>
       <button type="button" onClick={onClickVideo} className={classActiveVideo}>
         <i className="bx bx-video" />
-      </button>
+      </button> */}
     </div>
   );
 };
