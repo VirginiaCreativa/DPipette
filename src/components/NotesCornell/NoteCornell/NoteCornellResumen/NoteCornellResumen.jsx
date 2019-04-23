@@ -298,16 +298,7 @@ class NoteCornellResumen extends Component {
         />
         {/* CONFIG */}
         <div className={classes.BoxGroup}>
-          {isOnEditable ? (
-            <div className={classes.BoxEditorResumen}>
-              <React.Suspense fallback={<Spinner />}>
-                <Editor
-                  editorState={editorState}
-                  onChange={this.onEditorStateChange}
-                />
-              </React.Suspense>
-            </div>
-          ) : null}
+          {isOnEditable ? <div className={classes.BoxEditorResumen} /> : null}
           <SkyLight
             hideOnOverlayClicked
             dialogStyles={classPopup}
