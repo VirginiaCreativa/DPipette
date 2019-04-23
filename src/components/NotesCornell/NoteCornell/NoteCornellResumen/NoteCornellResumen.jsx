@@ -201,22 +201,23 @@ class NoteCornellResumen extends Component {
       () => {
         uploadTask.snapshot.ref.getDownloadURL().then(downloadURL => {
           console.log('Aprobado DownloadURL', downloadURL);
-          this.setState({ videoResumen: downloadURL });
+          this.setState({ videoResumen: downloadURL, isShowVideo: false });
         });
       }
     );
   };
 
-  saveVideoClosedSena = () => {
+  saveVideoClosedResumen = () => {
     this.modalVideo.hide();
     const id = this.props.docID;
     const db = this.props.firestore;
     db.update(`notescornell/${id}`, {
       videoResumen: this.state.videoResumen,
     });
+    this.setState({ isShowVideo: false });
   };
 
-  deleteVideoSena = () => {
+  deleteVideoResumen = () => {
     const {
       firebase: { storage },
     } = this.props;
@@ -238,7 +239,7 @@ class NoteCornellResumen extends Component {
       .catch(error => {
         console.error('Error removing document: ', error);
       });
-    this.setState({ videoBlob: null });
+    this.setState({ videoBlob: null, isShowVideo: true });
     const db = this.props.firestore;
     db.update(`notescornell/${id}`, {
       videoResumen: null,
@@ -283,11 +284,103 @@ class NoteCornellResumen extends Component {
                   <p>Grabado para expresar tu resumen</p>
                 </div>
               ) : (
-                <VideoPlayer src={videoResumen} title={tema} />
+                <div className={classes.VideoResumen}>
+                  <button
+                    type="button"
+                    onClick={() => this.deleteVideoResumen()}>
+                    <i className="bx bxs-x-circle" />
+                  </button>
+                  <VideoPlayer src={videoResumen} title={tema} />
+                </div>
               )}
             </div>
           </div>
         </div>
+        <SkyLight
+          hideOnOverlayClicked
+          dialogStyles={classPopup}
+          closeButtonStyle={classClosedNone}
+          afterClose={this.executeAfterModalClose}
+          ref={ref => (this.modalVideo = ref)}>
+          <div className="row">
+            <div className="col-8">
+              <div className={classes.BoxVideGrabado}>
+                <video width="100%" ref={ref => (this.videoGrabado = ref)} />
+                <div className={classes.ControlVideo}>
+                  {!recording ? (
+                    <button
+                      type="button"
+                      onClick={e => this.startRecording(e)}
+                      className={classes.btnRecord}>
+                      <i className="bx bx-radio-circle-marked" />
+                    </button>
+                  ) : (
+                    <button
+                      type="button"
+                      onClick={e => this.stopRecording(e)}
+                      className={classes.btnStop}>
+                      <i className="bx bx-stop" />
+                    </button>
+                  )}
+                </div>
+              </div>
+            </div>
+            <div className="col-4">
+              <div className={classes.BoxVideoResult}>
+                {videoBlob ? (
+                  <>
+                    <div className={classes.BoxVideo}>
+                      <div
+                        className={classes.showUpload}
+                        style={classVideoUpload}
+                      />
+                      <video
+                        width="100%"
+                        src={videoBlob}
+                        ref={ref => (this.videoDownd = ref)}
+                        muted
+                        autoPlay
+                        loop
+                      />
+                    </div>
+                    <div className={classes.GroupBtns}>
+                      <button
+                        type="button"
+                        onClick={() => this.deleteVideoResumen()}
+                        className="btn btn-danger mr-1">
+                        <i className="bx bx-trash-alt" />
+                        Eliminar
+                      </button>
+                      {activeSaveVideo ? (
+                        <button
+                          type="button"
+                          disabled={activeSaveVideo}
+                          onClick={() => this.saveVideoClosedResumen()}
+                          className="btn btn-light">
+                          <i className="bx bxs-cloud-upload" />
+                          Progreso
+                        </button>
+                      ) : (
+                        <button
+                          type="button"
+                          disabled={activeSaveVideo}
+                          onClick={() => this.saveVideoClosedResumen()}
+                          className="btn btn-success">
+                          <i className="bx bx-check" />
+                          Guardar
+                        </button>
+                      )}
+                    </div>
+                  </>
+                ) : (
+                  <div className={classes.BoxAprobado}>
+                    <h5>APROBACIÓN DE ESTE VIDEO</h5>
+                  </div>
+                )}
+              </div>
+            </div>
+          </div>
+        </SkyLight>
       </div>
     );
   }

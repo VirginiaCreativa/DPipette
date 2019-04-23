@@ -32,12 +32,30 @@
     :global {
       .bx-video {
         font-size: 48px;
-        color: $write_gray_3
+        color: $write_gray_3;
       }
     }
 
     &:hover {
       border: 2px dashed $green;
+    }
+  }
+
+  .VideoResumen {
+    >button {
+      background-color: transparent;
+      border: none;
+      position: absolute;
+      right: 20px;
+      top: 10px;
+      z-index: 4;
+    }
+
+    :global {
+      .bxs-x-circle {
+        font-size: 28px;
+        color: $red;
+      }
     }
   }
 
