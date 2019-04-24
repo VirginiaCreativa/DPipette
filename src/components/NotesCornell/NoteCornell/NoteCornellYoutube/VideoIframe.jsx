@@ -1,19 +1,27 @@
 import React from 'react';
+import YouTube from 'react-youtube';
 
-const VideoIframe = ({ src }) => (
-  <div>
-    <iframe
-      src={src}
-      frameBorder="0"
-      allow="autoplay; encrypted-media"
-      allowFullScreen
-      title="video"
-      style={{
-        width: '100%',
-        height: '100%',
-      }}
+const VideoIframe = ({ videoID }) => {
+  const opts = {
+    height: '390',
+    width: '640',
+    playerVars: {
+      autoplay: 1,
+    },
+  };
+
+  const _onReady = event => {
+    event.target.pauseVideo();
+  };
+
+  return (
+    <YouTube
+      videoId={videoID}
+      opts={opts}
+      onReady={_onReady}
+      className="img-fluid"
     />
-  </div>
-);
+  );
+};
 
 export default VideoIframe;

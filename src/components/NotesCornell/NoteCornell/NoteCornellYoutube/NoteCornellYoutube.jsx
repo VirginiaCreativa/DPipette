@@ -3,6 +3,7 @@ import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { firestoreConnect } from 'react-redux-firebase';
 import { withRouter } from 'react-router';
+
 import Spinner from '../../../UI/Spinner/Spinner';
 import classes from './NoteCornellYoutube.module.scss';
 
@@ -11,20 +12,17 @@ const VideoIframe = React.lazy(() => import('./VideoIframe'));
 const NoteCornellYoutube = ({ docID, notescornell, firestore }) => {
   const [isVideoShow, setVideoShow] = useState(false);
   const [isVideoURL, setVideoURL] = useState(null);
-  const [isVideoYoutube, setVideoYoutube] = useState(null);
 
   useEffect(() => {
     const id = docID;
     const urlVideoYoutube = notescornell[id].videoURLYoutube;
     console.log('====>', urlVideoYoutube);
-    if (urlVideoYoutube === undefined || urlVideoYoutube === null) {
+    if (urlVideoYoutube === null) {
       setVideoShow(false);
-      console.log('====> FALSE', isVideoShow);
     } else {
       setVideoShow(true);
-      console.log('====> TRUE', isVideoShow);
     }
-  }, [docID, isVideoShow, notescornell]);
+  }, [docID, notescornell]);
 
   const handleChangeVideoURL = ev => {
     setVideoURL(ev.target.value);
@@ -51,12 +49,12 @@ const NoteCornellYoutube = ({ docID, notescornell, firestore }) => {
     <div className={classes.NoteCornellYoutube}>
       {isVideoShow ? (
         <React.Suspense fallback={<Spinner />}>
-          <VideoIframe src={notescornell[docID].videoURLYoutube} />
+          <VideoIframe videoID={notescornell[docID].videoURLYoutube} />
           <button
             type="button"
-            className="btn btn-danger"
+            className={[classes.btnDelete, 'justify-content-end'].join(' ')}
             onClick={handleDeleteYoutbe}>
-            Eliminar
+            <i className="bx bx-trash" />
           </button>
         </React.Suspense>
       ) : (
@@ -66,7 +64,7 @@ const NoteCornellYoutube = ({ docID, notescornell, firestore }) => {
             <input
               type="text"
               onChange={handleChangeVideoURL}
-              placeholder="Añadir URL de Youtube"
+              placeholder="Añadir ID de Youtube"
             />
             <button
               className="btn btn-danger"

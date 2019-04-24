@@ -42,7 +42,7 @@
           line-height: 1.5;
         }
       }
-    }
+    } 
     p {
       grid-template-columns: 100%;
       font-size: 0.8rem;
@@ -52,6 +52,26 @@
       font-style: italic;
       position: absolute;
       bottom: 10px;
+    }
+    
+  }
+  .btnDelete{
+    color: $red;
+    background-color: transparent;
+    border: none;
+    float: right;
+    line-height: 1;
+    border-radius: 2px;
+    padding: 4px;
+    width: 30px;
+    &:hover {
+      color: #fff;
+      background-color: $red;
+
+    }
+    :global {
+      .bx-trash {
+      }
     }
 
   }
