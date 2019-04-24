@@ -49,10 +49,10 @@ class NoteCornellResumen extends Component {
     const { videoResumen } = this.state;
     const id = this.props.docID;
     const videoResumenDB = this.props.notescornell[id].videoResumen;
-    this.setContentData();
     if (this.state.setResumen === null) {
       this.setState({ editorState: EditorState.createEmpty() });
     } else {
+      this.setContentData();
       this.setState({ editorState: this.onContentData() });
     }
 
