@@ -8,8 +8,6 @@ const MomentTo = ({ onColor, onFontsize, onType, onDisplay, date }) => {
     fontSize: onFontsize,
     display: onDisplay,
   };
-  const b = moment(date).unix();
-  console.log(date.toDate());
   return (
     <>
       <span style={styleDate}>

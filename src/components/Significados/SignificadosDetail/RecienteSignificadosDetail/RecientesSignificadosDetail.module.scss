@@ -4,7 +4,7 @@
   @extend %boxContent;
   @extend %boxShadowContent;
   margin-top: 30px;
-  margin-bottom: 30px;
+  margin-bottom: 10px;
 
   .Heading {
     color: $heading;
@@ -13,5 +13,8 @@
 
   .BoxSign {
     margin-top: 20px;
+  }
+  input[type="text"] {
+    margin-bottom: 0;
   }
 }
