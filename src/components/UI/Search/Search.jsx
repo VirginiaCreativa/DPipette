@@ -12,13 +12,13 @@ const Search = props => {
   };
   return (
     <div className={classes.Search}>
-      <i className="bx bx-search" title="El icono de Buscador" />
       <input
         type="text"
-        placeholder="Buscador"
+        placeholder="Buscador significado"
         title="Search"
         onChange={handleSearch}
       />
+      <i className="bx bx-search" title="El icono de Buscador" />
     </div>
   );
 };
