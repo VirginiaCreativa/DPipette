@@ -16,15 +16,17 @@ const NoteCornellYoutube = ({ docID, notescornell, firestore }) => {
   useEffect(() => {
     const id = docID;
     const urlVideoYoutube = notescornell[id].videoURLYoutube;
-    if (urlVideoYoutube === null) {
+    console.log('====>', urlVideoYoutube);
+    if (urlVideoYoutube === undefined || urlVideoYoutube === null) {
       setVideoShow(false);
+      console.log('====> FALSE', isVideoShow);
     } else {
       setVideoShow(true);
+      console.log('====> TRUE', isVideoShow);
     }
-  }, [docID, notescornell]);
+  }, [docID, isVideoShow, notescornell]);
 
   const handleChangeVideoURL = ev => {
-    console.log(ev.target.value);
     setVideoURL(ev.target.value);
   };
 
@@ -35,11 +37,27 @@ const NoteCornellYoutube = ({ docID, notescornell, firestore }) => {
     });
     setVideoShow(true);
   };
+
+  const handleDeleteYoutbe = () => {
+    const id = docID;
+    firestore.update(`notescornell/${id}`, {
+      videoURLYoutube: null,
+    });
+    setVideoShow(false);
+    console.log('DELETE');
+  };
+
   return (
     <div className={classes.NoteCornellYoutube}>
       {isVideoShow ? (
         <React.Suspense fallback={<Spinner />}>
-          <VideoIframe src={isVideoURL} />
+          <VideoIframe src={notescornell[docID].videoURLYoutube} />
+          <button
+            type="button"
+            className="btn btn-danger"
+            onClick={handleDeleteYoutbe}>
+            Eliminar
+          </button>
         </React.Suspense>
       ) : (
         <div className={classes.GetVideo}>

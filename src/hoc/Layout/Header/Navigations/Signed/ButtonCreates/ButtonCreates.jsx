@@ -71,6 +71,7 @@ class ButtonCreates extends Component {
       getResumen: JSON.stringify(content),
       setContent: null,
       setResumen: null,
+      videoURLYoutube: null,
     };
     this.props.firestore
       .add('notescornell', {
