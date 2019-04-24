@@ -17,6 +17,7 @@ import NoteCornellIdeas from './NoteCornellIdeas/NoteCornellIdeas';
 import NoteCornellApuntes from './NoteCornellApuntes/NoteCornellApuntes';
 import NoteCornellResumen from './NoteCornellResumen/NoteCornellResumen';
 import NoteCornellYoutube from './NoteCornellYoutube/NoteCornellYoutube';
+import BuscadorSignficado from '../../Significados/BuscadorSignficado/BuscadorSignficado';
 
 class NoteCornell extends Component {
   state = {
@@ -98,6 +99,7 @@ class NoteCornell extends Component {
                   {...notecornell}
                   docID={this.props.match.params.id}
                 />
+                <BuscadorSignficado />
               </div>
             </div>
           </div>
