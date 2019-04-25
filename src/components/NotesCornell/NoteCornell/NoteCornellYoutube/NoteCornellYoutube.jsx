@@ -49,13 +49,13 @@ const NoteCornellYoutube = ({ docID, notescornell, firestore }) => {
     <div className={classes.NoteCornellYoutube}>
       {isVideoShow ? (
         <React.Suspense fallback={<Spinner />}>
-          <VideoIframe videoID={notescornell[docID].videoURLYoutube} />
           <button
             type="button"
             className={[classes.btnDelete, 'justify-content-end'].join(' ')}
             onClick={handleDeleteYoutbe}>
             <i className="bx bx-trash" />
           </button>
+          <VideoIframe videoID={notescornell[docID].videoURLYoutube} />
         </React.Suspense>
       ) : (
         <div className={classes.GetVideo}>

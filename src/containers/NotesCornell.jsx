@@ -35,7 +35,7 @@ class NotesCornell extends Component {
       claves: [] || null,
       date: Date.now(),
       apuntes: [] || null,
-      videoResumen: '',
+      videoResumen: null,
       cover: 'option2',
       portada: '',
       getContent: JSON.stringify(content),

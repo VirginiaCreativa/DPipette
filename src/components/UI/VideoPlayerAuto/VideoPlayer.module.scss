@@ -4,4 +4,19 @@
   video {
     display: block;
   }
+  :global {
+    .video-react-big-play-button {
+      line-height: 1.8;
+      top: 40%;
+      left: 45%;
+      width: 80px;
+      height: 80px;
+      border: none;
+      border-radius: 100%;
+      background-color: rgba(225, 225, 225, 0.2);;
+      &::before {
+        font-size: 48px;
+      }   
+    }
+  }
 }

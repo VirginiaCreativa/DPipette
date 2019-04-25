@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import Moment from '../../UI/Moment/Moment';
+import MomentTo from '../../UI/MomentTo/MomentTo';
 import VideoPlayer from '../../UI/VideoPlayerHome/VideoPlayerHome';
 import classes from './SiginificadosItem.module.scss';
 
@@ -22,7 +22,7 @@ const SignificadoItem = ({
             <div className="col-6 d-flex align-items-center justify-content-end">
               <div className={classes.GridDate}>
                 <i className="bx bx-time" />
-                <Moment
+                <MomentTo
                   onColor="#9ca7b4"
                   onFontsize="0.775rem"
                   date={date}
