@@ -7,6 +7,7 @@ import {
   isLoaded,
   isEmpty,
 } from 'react-redux-firebase';
+import firebase from '../../../config/FirebaseConfig';
 import { history } from '../../../redux/store/Store';
 import Spinner from './Spinner/Spinner';
 import classes from './NoteCornell.module.scss';
@@ -26,16 +27,59 @@ class NoteCornell extends Component {
 
   handleDeleteId = () => {
     const id = this.props.match.params.id;
-    const db = this.props.firestore;
-    const notescornell = this.props.notescornell;
-    const materiaFB = notescornell[id].materia.toLowerCase();
-    const temaFB = notescornell[id].tema.toLowerCase();
-    const fileName = notescornell[id].filename;
-    const materia = CleanUpSpecialChars(materiaFB);
-    const tema = CleanUpSpecialChars(temaFB);
-    const temaNotSpace = tema.replace(/ +/g, '_');
+    const firestore = this.props.firestore;
+    const notecornell = this.props.notecornell;
+    const {
+      firebase: { storage },
+    } = this.props;
+    const filenamePortadaImagen = notecornell.filenamePortadaImagen;
+    const filenameVideoNote = notecornell.filenameVideoNote;
+    const materiaFB = notecornell.materia.toLowerCase();
+    const temaFB = notecornell.tema.toLowerCase();
+    const materiaStorage = CleanUpSpecialChars(materiaFB);
+    const temaStorage = CleanUpSpecialChars(temaFB);
+    const temaNotSpace = temaStorage.replace(/ +/g, '_');
 
-    db.collection('notescornell')
+    const storageRefPortada = storage().ref(
+      `notescornell/${materiaFB}/${temaNotSpace}/portada/${filenamePortadaImagen}`
+    );
+    const storageRefVideNote = storage().ref(
+      `notescornell/${materiaFB}/${temaNotSpace}/videoNote/${filenameVideoNote}`
+    );
+
+    const storageRefVideResuemen = storage().ref(
+      `notescornell/${materiaFB}/${temaNotSpace}/resumen/`
+    );
+
+    storageRefPortada
+      .delete()
+      .then(() => {
+        console.log('SI DELETE PORTADA');
+      })
+      .catch(error => {
+        console.error('Error removing document: ', error);
+      });
+
+    storageRefVideNote
+      .delete()
+      .then(() => {
+        console.log('SI DELETE VIDEO NOTE');
+      })
+      .catch(error => {
+        console.error('Error removing document: ', error);
+      });
+
+    storageRefVideResuemen
+      .delete()
+      .then(() => {
+        console.log('SI DELETE RESUMEN');
+      })
+      .catch(error => {
+        console.error('Error removing document: ', error);
+      });
+
+    firestore
+      .collection('notescornell')
       .doc(id)
       .delete()
       .then(() => {

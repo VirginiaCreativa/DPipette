@@ -43,6 +43,8 @@ class NotesCornell extends Component {
       setContent: null,
       setResumen: null,
       videoNote: null,
+      filenameVideoNote: '',
+      filenamePortadaImagen: '',
     };
     this.props.firestore
       .add('notescornell', {

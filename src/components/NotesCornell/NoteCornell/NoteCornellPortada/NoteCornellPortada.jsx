@@ -91,7 +91,7 @@ const NoteCornellPortada = ({
           firestore.update(`notescornell/${ID}`, {
             portada: downloadURL,
             cover: 'option1',
-            filenameVideoResumen: imgFile.name,
+            filenamePortadaImagen: imgFile.name,
           });
         });
       }
@@ -121,7 +121,7 @@ const NoteCornellPortada = ({
     setPortada(null);
     firestore.update(`notescornell/${ID}`, {
       portada: '',
-      filename: '',
+      filenamePortadaImagen: '',
     });
   };
 

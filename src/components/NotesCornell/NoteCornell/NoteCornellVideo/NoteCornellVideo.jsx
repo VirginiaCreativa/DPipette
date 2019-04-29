@@ -31,8 +31,7 @@ const NoteCornellVideo = ({
 
   useEffect(
     () => () => {
-      console.log('===>', videoNote);
-      if (videoNote === '') {
+      if (videoNote === '' || videoNote === null) {
         setVideoShow(true);
       } else {
         setVideoShow(false);
@@ -99,7 +98,6 @@ const NoteCornellVideo = ({
   };
 
   useEffect(() => () => {
-    console.log('===> 2', videoNote);
     if (videoNote) {
       setVideoShow(false);
       setUploadValue(0);
