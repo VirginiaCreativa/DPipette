@@ -300,7 +300,7 @@ class NoteCornellResumen extends Component {
         <HeadingResumen title="Resumen" />
         <div className={classes.BoxGroup}>
           <div className="row">
-            <div className="col">
+            <div className="col-4">
               <div className={classes.Editor}>
                 <Editor
                   editorState={editorState}
@@ -326,7 +326,7 @@ class NoteCornellResumen extends Component {
                 </InlineToolbar>
               </div>
             </div>
-            <div className="col">
+            <div className="col-8">
               {isShowVideo ? (
                 <div className={classes.BoxVideoClick}>
                   <button type="button" onClick={this.handleVideoRecord}>
