@@ -1,10 +1,10 @@
 @import '../../../../styles/variables';
 
 .NoteCornellIdeas {
-  @extend %boxContent;
-  @extend %boxShadowContent;
   padding: 20px;
   min-height: 105px;
+  @extend %boxContent;
+  @extend %boxShadowContent;
 
   .BoxHeading {
     display: grid;
@@ -112,25 +112,34 @@
 
 .GroupForm {
   margin-bottom: 20px;
-  padding-bottom: 20px;
-  border-bottom: 2px solid $write_gray_1;
 
-  input[type="text"] {
-    background-color: #fff;
-    margin-right: 10px;
-    padding: 6px 10px;
-    width: 100%;
-    border-radius: 2px;
-    caret-color: $blue;
-    border-top: none;
-    border-left: none;
-    border-right: none;
-    border-bottom: 1px solid $write_gray_2;
-  }
-
-  .GroupCheckbox {
+  .BoxSelects {
     display: flex;
-    margin: 8px 0 2px;
+    position: relative;
+    margin-bottom: 10px;
+    .SelectArrow {
+      font-size: 22px;
+      position: absolute;
+      right: 5px;
+      top: 2px;
+      color: $blue;
+      padding: 0;
+    }
+    select {
+      color: $black;
+      background-color: $write_gray_1;
+      padding: 4px 6px;
+      width: 100%;
+      border: none !important;
+      border-radius: 4px;
+      appearance: none;
+      outline: none;
+      font-size: 0.845rem;
+      option {
+        margin-top: 10px;
+        border: none !important;
+      }
+    }
   }
 
   .BoxResultTag {

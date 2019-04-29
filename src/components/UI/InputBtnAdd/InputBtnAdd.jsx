@@ -1,4 +1,3 @@
-/* eslint-disable jsx-a11y/label-has-for */
 import React from 'react';
 import classes from './InputBtnAdd.module.scss';
 
@@ -10,26 +9,28 @@ const InputBtnAdd = ({
   onRefInput,
   onDisabled,
   onFocus,
-}) => (
-  <div className={classes.InputBtnAdd}>
-    <label htmlFor={label}>{label}</label>
-    <div className={classes.GroupBox}>
-      <input
-        type="text"
-        onChange={onChange}
-        value={onValue}
-        ref={onRefInput}
-        onFocus={onFocus}
-      />
-      <button
-        type="button"
-        disabled={onDisabled}
-        className="btn btn-primary"
-        onClick={onClick}>
-        <i className="bx bx-edit" />
-      </button>
+  onActiveBtn,
+}) => {
+  const activeBtn = onActiveBtn ? classes.cssBtnActive : null;
+  console.log(onActiveBtn);
+  return (
+    <div className={classes.InputBtnAdd}>
+      <label htmlFor={label}>{label}</label>
+      <div className={classes.GroupBox}>
+        <input
+          type="text"
+          onChange={onChange}
+          value={onValue}
+          ref={onRefInput}
+          onFocus={onFocus}
+          placeholder="Añadir palabra o frase corto"
+        />
+        <button type="button" disabled={onDisabled} onClick={onClick}>
+          <i className={['bx bx-edit', activeBtn].join(' ')} />
+        </button>
+      </div>
     </div>
-  </div>
-);
+  );
+};
 
 export default InputBtnAdd;

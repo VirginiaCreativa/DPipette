@@ -22,6 +22,7 @@ const NoteCornellIdeas = ({
 }) => {
   const [isActiveEditable, setActiveEditable] = useState(false);
   const [isBtnDisable, setBtnDisable] = useState(true);
+  const [isActiveBtn, setActiveBtn] = useState(false);
 
   const [isTag, setTag] = useState('');
   const [isChangeTag, setChangeTag] = useState('');
@@ -79,7 +80,8 @@ const NoteCornellIdeas = ({
     });
   };
 
-  const handleCheckTags = ev => {
+  const handleSelectsTags = ev => {
+    console.log(ev.target.value);
     setChangeTag(ev.target.value);
     if (ev.target.value === '') {
       setBtnDisable(true);
@@ -89,6 +91,7 @@ const NoteCornellIdeas = ({
     const { value } = ev.target;
     if (value.length >= 2) {
       setBtnDisable(false);
+      setActiveBtn(true);
     }
     setTag(CapitalizeFirstLetter(value));
   };
@@ -101,11 +104,13 @@ const NoteCornellIdeas = ({
     });
     textInputTag.value = '';
     setBtnDisable(true);
+    setActiveBtn(false);
   };
 
   const handleEditable = () => {
     setActiveEditable(!isActiveEditable);
   };
+
   return (
     <div className={classes.NoteCornellIdeas}>
       <Heading
@@ -117,28 +122,18 @@ const NoteCornellIdeas = ({
         <div className={classes.BoxActiveEditable}>
           {isActiveEditable ? (
             <div className={classes.GroupForm}>
-              <div className={classes.GroupCheckbox}>
-                <InputRadioIcon
-                  onValue="claves"
-                  onChange={handleCheckTags}
-                  typeIcon="bx-flag"
-                  colorIcon="#10c78d"
-                  label="Clave"
-                />
-                <InputRadioIcon
-                  onValue="importantes"
-                  onChange={handleCheckTags}
-                  typeIcon="bx-star"
-                  colorIcon="#f33d48"
-                  label="Importante"
-                />
-                <InputRadioIcon
-                  onValue="preguntas"
-                  onChange={handleCheckTags}
-                  typeIcon="bx-question-mark"
-                  colorIcon="#925ae1"
-                  label="Pregunta"
-                />
+              <div className={classes.BoxSelects}>
+                <div className={classes.SelectArrow}>
+                  <i className="bx bx-chevron-down" />
+                </div>
+                <select onChange={handleSelectsTags} defaultValue="DEFAULT">
+                  <option value="DEFAULT" disabled>
+                    Elige tu opción
+                  </option>
+                  <option value="claves">Clave</option>
+                  <option value="importantes">Importantes</option>
+                  <option value="preguntas">Preguntas</option>
+                </select>
               </div>
               <InputBtnAdd
                 label=""
@@ -146,6 +141,7 @@ const NoteCornellIdeas = ({
                 onClick={handleSubmitUpdate}
                 onRefInput={ref => (textInputTag = ref)}
                 onDisabled={isBtnDisable}
+                onActiveBtn={isActiveBtn}
               />
             </div>
           ) : null}

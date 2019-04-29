@@ -10,34 +10,45 @@
   }
 
   .GroupBox {
-    display: grid;
-    grid-template-columns: 1fr 18%;
-    grid-gap: 10px;
-    align-items: center;
-    align-content: center;
+    position: relative;
+    @media (min-width: 1440px) {
+      grid-template-columns: auto 22%;
+    }
 
     input[type="text"] {
-      background-color: $write_gray_1;
-      // width: 90%;
+      width: 100%;
       margin-right: 10px;
-      padding: 6px 10px;
-      border-radius: 2px;
+      padding: 6px 22px 6px 2px;
+      border-radius: 4px;
       caret-color: $blue;
       border-top: none;
       border-left: none;
       border-right: none;
-      border-bottom: 1px solid $write_gray_2;
+      border-bottom: 2px solid $write_gray_1;
+      &::placeholder{
+        font-size: 0.7rem;
+        color: $gray_medium;
+      } 
     }
 
     button {
-      line-height: 1;
-
+      line-height: 0;
+      position: absolute;
+      background-color: transparent;
+      border: none;
+      right: 0;
+      padding: 0;
+      top: 5px;
       :global {
         .bx-edit {
           font-size: 20px;
           padding: 2px 0;
+          color: $write_gray_3;
         }
       }
     }
   }
+}
+.cssBtnActive {
+  color: $blue !important;
 }
