@@ -200,10 +200,15 @@
 
       .draftJsToolbar__toolbar__dNtBH {
         top: 0 !important;
-        left: 0 !important;
+        left: 10% !important;
         width: 52.7%;
         border: none;
         border-radius: 4px;
+        z-index: 9999 !important;
+        @media (min-width: 1440px) {
+          width: 54.4%;
+          left: 300px !important;
+        }
       }
 
       .draftJsToolbar__button__qi1gf {

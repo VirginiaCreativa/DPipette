@@ -123,7 +123,7 @@ class NoteCornell extends Component {
                 docID={this.props.match.params.id}
               />
             </div>
-            <div className="col-9">
+            <div className="col-8">
               <div className="row">
                 <div className="col-3">
                   <NoteCornellIdeas
@@ -145,7 +145,7 @@ class NoteCornell extends Component {
                 </div>
               </div>
             </div>
-            <div className="col-3">
+            <div className="col-4">
               <div className={classes.Sidebar}>
                 <NoteCornellVideo
                   {...notecornell}
