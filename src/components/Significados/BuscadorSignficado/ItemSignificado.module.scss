@@ -3,7 +3,6 @@
 .ItemSignificado {
   transition: all 0.25s ease;
   border-bottom: 2px solid $write_gray_1;
-
   &:hover {
     border-bottom: 2px solid $blue;
   }

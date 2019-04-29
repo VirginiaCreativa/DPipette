@@ -9,7 +9,6 @@
 
   .Heading {
     display: grid;
-    grid-template-rows: 100% 100%;
     color: $heading;
     a {
       font-size: 0.7rem;
@@ -18,7 +17,7 @@
     }
   }
 
-  input[type="text"] {
-    margin-bottom: 10px;
-  }
+  // input[type="text"] {
+  //   margin-bottom: 2px;
+  // }
 } 
