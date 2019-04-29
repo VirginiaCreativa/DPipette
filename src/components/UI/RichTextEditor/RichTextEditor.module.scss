@@ -1,6 +1,8 @@
 @import '../../../styles/variables';
 
 .RichTextEditor {
+  position: relative;
+
   :global {
     .public-DraftEditorPlaceholder-root {
       padding: 22px 21px;
@@ -24,7 +26,6 @@
       min-height: 346px;
       caret-color: $blue;
       overflow: auto;
-
       img {
         margin-bottom: 10px;
         margin-right: 10px;

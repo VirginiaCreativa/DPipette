@@ -42,7 +42,7 @@ class NotesCornell extends Component {
       getResumen: JSON.stringify(content),
       setContent: null,
       setResumen: null,
-      videoURLYoutube: null,
+      videoNote: null,
     };
     this.props.firestore
       .add('notescornell', {

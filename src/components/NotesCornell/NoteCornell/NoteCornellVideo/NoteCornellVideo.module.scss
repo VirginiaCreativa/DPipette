@@ -1,24 +1,29 @@
 @import '../../../../styles/variables';
 
-.NoteCornellPortada {
+.NoteCornellVideo {
   position: relative;
-  border-radius: 4px;
-  min-height: 180px;
+  min-height: 233px;
 
   .BoxFile {
-    display: flex;
+    display: grid;
+    grid-template-rows: auto auto;
     justify-content: center;
     align-content: center;
     background-color: $write_gray_1;
     position: absolute;
     top: 0;
     left: 0;
-    padding: 70px 20px;
+    padding: 96px 20px;
     width: 100%;
     border: 2px dotted $write_gray_3;
-
+    height: 233px;
     &:hover {
       background-color: $write_gray_2;
+    }
+    h6 {
+      text-transform: uppercase;
+      color: $black;
+      font-size: 0.8rem;
     }
 
     .InputFile {
@@ -58,37 +63,36 @@
     }
 
   }
-
-  .BoxPortada {
-    position: relative;
-    overflow: hidden;
-    height: 180px;
-
-    .showUpload {
-      display: block;
-      background-color: $green;
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      width: 0%;
-      height: 4px;
-      z-index: 4;
+  .btnDelete{
+    line-height: 1;
+    color: $red;
+    background-color: transparent;
+    padding: 4px;
+    border: none;
+    border-radius: 2px;
+    position: absolute;
+    z-index: 3;
+    right: 10px;
+    top: 6px;
+    &:hover {
+      color: $red_dark;
     }
-
-
-    .BtnRemove {
-      font-size: 26px;
-      color: $red;
-      background-color: transparent;
-      position: absolute;
-      top: 6px;
-      right: 6px;
-      border: none;
-
-      &:hover {
-        color: $red_dark;
+    :global {
+      .bxs-x-circle{
+        font-size: 28px;
       }
     }
+
+  }
+  .showUpload {
+    display: block;
+    background-color: $green;
+    position: absolute;
+    bottom: -1.5px;
+    left: 0;
+    width: 0%;
+    height: 4px;
+    z-index: 2;
   }
 
 }

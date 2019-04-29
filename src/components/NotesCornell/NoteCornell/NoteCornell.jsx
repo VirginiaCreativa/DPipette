@@ -1,4 +1,3 @@
-/* eslint-disable react/no-unused-state */
 import React, { Component } from 'react';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
@@ -16,8 +15,9 @@ import NoteCornellHeader from './NoteCornellHeader/NoteCornellHeader';
 import NoteCornellIdeas from './NoteCornellIdeas/NoteCornellIdeas';
 import NoteCornellApuntes from './NoteCornellApuntes/NoteCornellApuntes';
 import NoteCornellResumen from './NoteCornellResumen/NoteCornellResumen';
-import NoteCornellYoutube from './NoteCornellYoutube/NoteCornellYoutube';
+import NoteCornellVideo from './NoteCornellVideo/NoteCornellVideo';
 import BuscadorSignficado from '../../Significados/BuscadorSignficado/BuscadorSignficado';
+import CleanUpSpecialChars from '../../../scripts/CleanUpSpecialChars';
 
 class NoteCornell extends Component {
   state = {
@@ -27,6 +27,14 @@ class NoteCornell extends Component {
   handleDeleteId = () => {
     const id = this.props.match.params.id;
     const db = this.props.firestore;
+    const notescornell = this.props.notescornell;
+    const materiaFB = notescornell[id].materia.toLowerCase();
+    const temaFB = notescornell[id].tema.toLowerCase();
+    const fileName = notescornell[id].filename;
+    const materia = CleanUpSpecialChars(materiaFB);
+    const tema = CleanUpSpecialChars(temaFB);
+    const temaNotSpace = tema.replace(/ +/g, '_');
+
     db.collection('notescornell')
       .doc(id)
       .delete()
@@ -95,7 +103,7 @@ class NoteCornell extends Component {
             </div>
             <div className="col-3">
               <div className={classes.Sidebar}>
-                <NoteCornellYoutube
+                <NoteCornellVideo
                   {...notecornell}
                   docID={this.props.match.params.id}
                 />

@@ -84,7 +84,7 @@ const plugins = [
 
 class RichTextEditor extends Component {
   render() {
-    const { editorState, onChange, ref } = this.props;
+    const { editorState, onChange } = this.props;
     return (
       <div className={classes.RichTextEditor}>
         <Toolbar>
@@ -116,7 +116,6 @@ class RichTextEditor extends Component {
           )}
         </Toolbar>
         <Editor
-          ref={ref}
           placeholder="Escribir aquí..."
           editorState={editorState}
           onChange={onChange}

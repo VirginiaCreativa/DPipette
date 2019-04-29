@@ -5,15 +5,22 @@
     display: block;
   }
   :global {
+    .video-react {
+      display: grid;
+      justify-content: center;
+      align-content: center;
+      align-items: center;
+
+    }
     .video-react-big-play-button {
-      line-height: 1.8;
-      top: 40%;
+      line-height: 1.5;
+      background-color: rgba(225, 225, 225, 0.3);
+      top: 35%;
       left: 45%;
-      width: 80px;
-      height: 80px;
+      width: 66px;
+      height: 66px;
       border: none;
-      border-radius: 100%;
-      background-color: rgba(225, 225, 225, 0.2);;
+      border-radius: 100%;;
       &::before {
         font-size: 48px;
       }   

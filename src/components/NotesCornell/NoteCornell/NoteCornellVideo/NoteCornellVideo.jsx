@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import React, { useState, useRef, useEffect } from 'react';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
@@ -6,53 +5,53 @@ import { firestoreConnect } from 'react-redux-firebase';
 import { withRouter } from 'react-router';
 import firebase from '../../../../config/FirebaseConfig';
 import CleanUpSpecialChars from '../../../../scripts/CleanUpSpecialChars';
-import Spinner from '../../../UI/Spinner/Spinner';
-import classes from './NoteCornellPortada.module.scss';
 
-import Image from './NoteCornellImage';
+import classes from './NoteCornellVideo.module.scss';
 
-const NoteCornellPortada = ({
-  firebase: { storage },
-  ID,
+import VideoPlayer from '../../../UI/VideoPlayerAuto/VideoPlayer';
+
+const NoteCornellVideo = ({
+  docID,
   notescornell,
   firestore,
-  portada,
-  tema,
+  videoNote,
+  firebase: { storage },
 }) => {
-  const [isOnImage, setOnImage] = useState(true);
+  const [isVideoShow, setVideoShow] = useState(true);
   const [isUploadValue, setUploadValue] = useState(0);
-  const [isFileName, setFileName] = useState('');
-  const [isPortada, setPortada] = useState('');
-  const [isShowImage, setShowImage] = useState(false);
   const childRef = useRef(null);
-  let refPortada = useRef(null);
+  let refVideoNote = useRef(null);
 
-  useEffect(() => {
-    if (portada === '') {
-      setOnImage(true);
-      setShowImage(false);
-    } else {
-      setShowImage(true);
-      setOnImage(false);
-      setUploadValue(0);
-    }
-  }, [ID, notescornell, portada]);
+  const fileName = notescornell[docID].filenameVideoNote;
+  const materiaFB = notescornell[docID].materia.toLowerCase();
+  const temaFB = notescornell[docID].tema.toLowerCase();
+  const materia = CleanUpSpecialChars(materiaFB);
+  const tema = CleanUpSpecialChars(temaFB);
+  const temaNotSpace = tema.replace(/ +/g, '_');
+
+  useEffect(
+    () => () => {
+      console.log('===>', videoNote);
+      if (videoNote === '') {
+        setVideoShow(true);
+      } else {
+        setVideoShow(false);
+        setUploadValue(0);
+      }
+    },
+    [docID, notescornell, videoNote]
+  );
 
   const handleOnFileChange = ev => {
-    const imgFile = ev.target.files[0];
-    const id = ID;
-    const materiaFB = notescornell[id].materia.toLowerCase();
-    const temaFB = notescornell[id].tema.toLowerCase();
-    const materia = CleanUpSpecialChars(materiaFB);
-    const tema = CleanUpSpecialChars(temaFB);
-    const temaNotSpace = tema.replace(/ +/g, '_');
+    const videoFile = ev.target.files[0];
     const metadata = {
-      contentType: 'image/jpg',
+      contentType: 'video/mp4, video/webm;codecs=vp9',
     };
+
     const storageRef = storage().ref(
-      `notescornell/${materia}/${temaNotSpace}/portada/${imgFile.name}`
+      `notescornell/${materia}/${temaNotSpace}/videoNote/${videoFile.name}`
     );
-    const uploadTask = storageRef.put(imgFile, metadata);
+    const uploadTask = storageRef.put(videoFile, metadata);
 
     uploadTask.on(
       firebase.storage.TaskEvent.STATE_CHANGED,
@@ -88,84 +87,90 @@ const NoteCornellPortada = ({
       () => {
         uploadTask.snapshot.ref.getDownloadURL().then(downloadURL => {
           console.log('imageFile available at', downloadURL);
-          firestore.update(`notescornell/${ID}`, {
-            portada: downloadURL,
-            cover: 'option1',
-            filenameVideoResumen: imgFile.name,
+          firestore.update(`notescornell/${docID}`, {
+            videoNote: downloadURL,
+            filenameVideoNote: videoFile.name,
           });
+          console.log('=====> YA PROBAR');
+          setVideoShow(false);
         });
       }
     );
-    setOnImage(!isOnImage);
   };
 
-  const handleRemoveFile = () => {
-    const materiaFB = notescornell[ID].materia.toLowerCase();
-    const temaFB = notescornell[ID].tema.toLowerCase();
-    const fileName = notescornell[ID].filenameVideoResumen;
-    const materia = CleanUpSpecialChars(materiaFB);
-    const tema = CleanUpSpecialChars(temaFB);
-    const temaNotSpace = tema.replace(/ +/g, '_');
+  useEffect(() => () => {
+    console.log('===> 2', videoNote);
+    if (videoNote) {
+      setVideoShow(false);
+      setUploadValue(0);
+    }
+  });
 
+  const handleRemoveFile = () => {
+    console.log('delete');
     const storageRef = storage().ref(
-      `notescornell/${materia}/${temaNotSpace}/portada/${fileName}`
+      `notescornell/${materia}/${temaNotSpace}/videoNote/${fileName}`
     );
     storageRef
       .delete()
       .then(() => {
         console.log('SI DELETE');
+        setVideoShow(true);
       })
       .catch(error => {
         console.error('Error removing document: ', error);
       });
-    setPortada(null);
-    firestore.update(`notescornell/${ID}`, {
-      portada: '',
-      filename: '',
+    firestore.update(`notescornell/${docID}`, {
+      videoNote: '',
+      filenameVideoNote: '',
     });
   };
 
   const classProgressUpload = {
     width: `${isUploadValue}%`,
   };
+
   return (
-    <div className={classes.NoteCornellPortada}>
-      {isOnImage ? (
+    <div className={classes.NoteCornellVideo}>
+      {isVideoShow ? (
         <div className={classes.BoxFile}>
+          <h6>Subir un video del intérprete o traducción</h6>
           <input
             type="file"
             name="imagendestacada"
             className={classes.InputFile}
             onChange={handleOnFileChange}
             ref={childRef}
-            accept="image/*"
+            accept="video/mp4, video/webm"
           />
           <button type="button" className="btn btn-primary btn-block">
-            Añadir imagen destacada
+            Añadir un video
           </button>
-          <p>Tamaño de imagen: 650x320</p>
+          <p>Obligación un archivo de video => mp4 o webm</p>
+          <div className={classes.showUpload} style={classProgressUpload} />
         </div>
       ) : (
-        <div className={classes.BoxPortada}>
-          <div className={classes.showUpload} style={classProgressUpload} />
-          {isShowImage && (
-            <Image
-              src={portada}
-              alt={tema}
-              onClick={handleRemoveFile}
-              onRef={ref => (refPortada = ref)}
-            />
-          )}
+        <div className={classes.videoNote}>
+          <button
+            type="button"
+            onClick={handleRemoveFile}
+            className={classes.btnDelete}>
+            <i className="bx bxs-x-circle" />
+          </button>
+          <VideoPlayer
+            src={videoNote}
+            onClick={handleRemoveFile}
+            onRef={ref => (refVideoNote = ref)}
+          />
         </div>
       )}
     </div>
   );
 };
-
 export default compose(
   firestoreConnect(['notescornell']),
   withRouter,
   connect(state => ({
     notescornell: state.firestore.data.notescornell,
   }))
-)(NoteCornellPortada);
+)(NoteCornellVideo);
