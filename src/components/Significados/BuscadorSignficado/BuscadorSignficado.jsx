@@ -27,6 +27,7 @@ const BuscadorSignficado = ({ significados, search }) => {
             .filter(item =>
               item.word.toLowerCase().includes(search.toLowerCase())
             )
+            .sort((a, b) => (a.date > b.date ? -1 : a.date < b.date ? 1 : 0))
             .slice(0, 4)
             .map(item => (
               <ItemSignificado
