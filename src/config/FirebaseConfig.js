@@ -16,4 +16,5 @@ const configKey = {
 firebase.initializeApp(configKey);
 firebase.storage();
 firebase.firestore();
+
 export default firebase;

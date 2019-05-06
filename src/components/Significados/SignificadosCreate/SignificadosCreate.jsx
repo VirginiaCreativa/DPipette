@@ -1,3 +1,4 @@
+/* eslint-disable react/no-access-state-in-setstate */
 import React, { Component } from 'react';
 import { bindActionCreators, compose } from 'redux';
 import { connect } from 'react-redux';
@@ -78,7 +79,7 @@ class SignificadosCreate extends Component {
     const updateVideoDescrip = this.props.videoDescripBlob;
     const updateEjemplos = this.state.ejemplos;
 
-    if (updateDescri.length >= 3) {
+    if (updateDescri.length >= 6) {
       this.InputTextEj.disabled = true;
       this.InputTextDefin.disabled = true;
       this.btnDes.disabled = true;
@@ -87,12 +88,15 @@ class SignificadosCreate extends Component {
       this.InputTextDefin.disabled = false;
       this.btnDes.disabled = false;
     }
-
-    if (updateSin.length >= 6 || updateAnt.length >= 6) {
+    if (updateSin.length === 6) {
       this.InputTextSin.disabled = true;
-      this.InputTextAnt.disabled = true;
     } else {
       this.InputTextSin.disabled = false;
+    }
+
+    if (updateAnt.length === 6) {
+      this.InputTextAnt.disabled = true;
+    } else {
       this.InputTextAnt.disabled = false;
     }
 
@@ -124,7 +128,7 @@ class SignificadosCreate extends Component {
       this.props.hideVisibleVideoVisual();
     }
 
-    if (updateEjemplos.length >= 6) {
+    if (updateEjemplos.length === 6) {
       this.boxResultItemEjemplos.style.display = 'block';
       this.InputTextMasEjemplo.disabled = true;
     } else if (updateEjemplos.length >= 1) {
@@ -182,9 +186,9 @@ class SignificadosCreate extends Component {
     this.setState(prevState => ({
       descriptions: prevState.descriptions.concat({ definicion, ejemplo }),
     }));
-    if (definicion.length >= 3) {
+    if (definicion.length >= 6) {
       this.boxResultItemDesc.style.display = 'block';
-      if (ejemplo.length >= 3) {
+      if (ejemplo.length >= 6) {
         this.boxResultItemDesc.style.display = 'block';
       }
     } else {
@@ -199,7 +203,7 @@ class SignificadosCreate extends Component {
   };
 
   handleDeleteDesription = index => {
-    const { descriptionDelete } = this.state.descriptions;
+    const descriptionDelete = this.state.descriptions;
     descriptionDelete.splice(index, 1);
     this.setState({ descriptions: descriptionDelete });
   };
@@ -275,13 +279,14 @@ class SignificadosCreate extends Component {
   };
 
   handleDeleteSinonimos = index => {
-    const { sinonimosDelete } = this.state.sinonimos;
+    const sinonimosDelete = this.state.sinonimos;
     sinonimosDelete.splice(index, 1);
+    console.log(sinonimosDelete);
     this.setState({ sinonimos: sinonimosDelete });
   };
 
   handleDeleteAntonimos = index => {
-    const { antonimosDelete } = this.state.antonimos;
+    const antonimosDelete = this.state.antonimos;
     antonimosDelete.splice(index, 1);
     this.setState({ antonimos: antonimosDelete });
   };
@@ -315,7 +320,7 @@ class SignificadosCreate extends Component {
   };
 
   handleDeleteEjemplos = index => {
-    const { ejemplosDelete } = this.state.ejemplos;
+    const ejemplosDelete = this.state.ejemplos;
     ejemplosDelete.splice(index, 1);
     this.setState({ ejemplos: ejemplosDelete });
   };

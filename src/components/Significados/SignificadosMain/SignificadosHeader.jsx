@@ -1,5 +1,6 @@
 import React from 'react';
 import classes from './SignificadosMain.module.scss';
+import Moment from '../../UI/Moment/Moment';
 import MomentTo from '../../UI/MomentTo/MomentTo';
 
 const SignificadosHeader = ({ date, word }) => (
@@ -11,12 +12,21 @@ const SignificadosHeader = ({ date, word }) => (
       <div className="col-6 d-flex align-items-center justify-content-end">
         <div className={classes.GridDate}>
           <i className="bx bx-time" />
-          <MomentTo
-            onColor="#9ca7b4"
-            onFontsize="0.775rem"
-            date={date}
-            onType="LL"
-          />
+          {(
+            <Moment
+              onColor="#9ca7b4"
+              onFontsize="0.775rem"
+              date={date}
+              onType="LL"
+            />
+          ) || (
+            <MomentTo
+              onColor="#9ca7b4"
+              onFontsize="0.775rem"
+              date={date}
+              onType="LL"
+            />
+          )}
         </div>
       </div>
     </div>

@@ -3,7 +3,7 @@ import classes from './MasEjemplosDetail.module.scss';
 
 const MasEjemplosDetail = ({ ejemplos }) => (
   <div className={classes.MasEjemplosDetail}>
-    <h5>Más ejemplos</h5>
+    <h6>Más ejemplos</h6>
     <ul>
       {ejemplos &&
         ejemplos.map(item => (

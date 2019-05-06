@@ -9,34 +9,37 @@ import ItemSignificado from './ItemSignificado';
 import Spinner from './Spinner/Spinner';
 import classes from './BuscadorSignficado.module.scss';
 
-const BuscadorSignficado = ({ significados, search }) => (
-  <div className={classes.BuscadorSignficado}>
-    <div className={classes.Heading}>
-      <Search />
-      <Link to="/significadocreate"> + Añadir nueva palabra</Link>
+const BuscadorSignficado = ({ significados, search }) => {
+  console.log(significados);
+  return (
+    <div className={classes.BuscadorSignficado}>
+      <div className={classes.Heading}>
+        <Search />
+        <Link to="/significadocreate"> + Añadir nueva palabra</Link>
+      </div>
+      <div className={classes.BoxSign}>
+        {!isLoaded(significados) ? (
+          <Spinner />
+        ) : isEmpty(significados) ? (
+          <Spinner />
+        ) : (
+          significados
+            .filter(item =>
+              item.word.toLowerCase().includes(search.toLowerCase())
+            )
+            .slice(0, 4)
+            .map(item => (
+              <ItemSignificado
+                key={item.id}
+                linked={`${item.id}/${item.word}`}
+                {...item}
+              />
+            ))
+        )}
+      </div>
     </div>
-    <div className={classes.BoxSign}>
-      {!isLoaded(significados) ? (
-        <Spinner />
-      ) : isEmpty(significados) ? (
-        <Spinner />
-      ) : (
-        significados
-          .filter(item =>
-            item.word.toLowerCase().includes(search.toLowerCase())
-          )
-          .slice(0, 4)
-          .map(item => (
-            <ItemSignificado
-              key={item.id}
-              linked={`${item.id}/${item.word}`}
-              {...item}
-            />
-          ))
-      )}
-    </div>
-  </div>
-);
+  );
+};
 
 export default compose(
   firestoreConnect([

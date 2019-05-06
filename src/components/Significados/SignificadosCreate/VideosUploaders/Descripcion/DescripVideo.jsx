@@ -104,6 +104,7 @@ class DescripciónVideo extends Component {
     } = this.props;
     const metadata = {
       contentType: videoType,
+      name: this.props.word,
     };
     const storageRef = storage().ref(
       `significados/${this.props.word}/videoDescripcion/descripcion_${

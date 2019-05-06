@@ -155,7 +155,7 @@ class NoteCornellResumen extends Component {
   startRecording = e => {
     e.preventDefault();
     chunks = [];
-    mediaRecorder.start(10);
+    mediaRecorder.start(100);
     this.setState({ recording: true });
   };
 
@@ -170,24 +170,26 @@ class NoteCornellResumen extends Component {
     const blob = new Blob(chunks, { type: videoType });
     const videoURL = window.URL.createObjectURL(blob);
     this.setState({ videoBlob: videoURL });
-    const metadata = {
-      contentType: videoType,
-    };
     const id = this.props.docID;
     const materiaFB = this.props.notescornell[id].materia.toLowerCase();
     const temaFB = this.props.notescornell[id].tema.toLowerCase();
     const materia = CleanUpSpecialChars(materiaFB);
     const tema = CleanUpSpecialChars(temaFB);
     const temaNotSpace = tema.replace(/ +/g, '_');
+    const metadata = {
+      contentType: videoType,
+    };
 
     const {
       firebase: { storage },
     } = this.props;
     const storageRef = storage().ref(
-      `notescornell/${materia}/${temaNotSpace}/resumen/`
+      `notescornell/${materia}/${temaNotSpace}/`
     );
 
-    const uploadTask = storageRef.put(blob, metadata);
+    const uploadTask = storageRef
+      .child(`resumen/${temaNotSpace}`)
+      .put(blob, metadata);
 
     uploadTask.on(
       firebase.storage.TaskEvent.STATE_CHANGED,
@@ -250,7 +252,7 @@ class NoteCornellResumen extends Component {
     const tema = CleanUpSpecialChars(temaFB);
     const temaNotSpace = tema.replace(/ +/g, '_');
     const storageRef = storage().ref(
-      `notescornell/${materia}/${temaNotSpace}/resumen/video`
+      `notescornell/${materia}/${temaNotSpace}/resumen/${temaNotSpace}`
     );
 
     storageRef

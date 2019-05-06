@@ -10,7 +10,7 @@ const VideosDetail = ({ videoDescripcion, videoSena }) => {
   return (
     <div className={classes.VideosDetail}>
       <div className={classes.VideoItem}>
-        {isVideo ? (
+        {!isVideo ? (
           <VideoPlayer srcVideo={videoDescripcion} />
         ) : (
           <VideoPlayer srcVideo={videoSena} />
@@ -26,23 +26,23 @@ const VideosDetail = ({ videoDescripcion, videoSena }) => {
             id="toggle-on"
             className={[classes.Toggle, classes.toggleLeft].join(' ')}
             name="prop1"
-            value="isActiveSena"
+            value="isActiveDescrip"
             type="radio"
             defaultChecked
           />
           <label htmlFor="toggle-on" className={classes.LabelBtn}>
-            Seña
+            Descripción
           </label>
           <input
             onChange={handleCheckbox}
             id="toggle-off"
             className={[classes.Toggle, classes.toggleRight].join(' ')}
             name="prop1"
-            value="isActiveDescrip"
+            value="isActiveSena"
             type="radio"
           />
           <label htmlFor="toggle-off" className={classes.LabelBtn}>
-            Descripción
+            Seña
           </label>
         </div>
       </div>

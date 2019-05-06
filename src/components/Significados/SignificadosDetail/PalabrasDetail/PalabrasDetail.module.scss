@@ -1,0 +1,37 @@
+@import '../../../../styles/variables';
+
+.PalabrasDetail {
+  .WrapperPalabras {
+    padding: 20px;
+    @extend %boxContent;
+    @extend %boxShadowContent;
+  }
+  h6 {
+    font-size: 0.875rem;
+    color: $gray_medium;
+  }
+
+  ul {
+    margin-bottom: 0;
+
+    li {
+      display: inline-block;
+      font-size: 0.9375rem;
+      margin-bottom: 10px;
+      margin-right: 10px;
+      padding: 2px 8px;
+      border-radius: 2px;
+      font-weight: 500;
+    }
+  }
+}
+
+.Sinonimos {
+  color: #fff;
+  background-color: $green;
+}
+
+.Antonimos {
+  color: #fff;
+  background-color: $red;
+}

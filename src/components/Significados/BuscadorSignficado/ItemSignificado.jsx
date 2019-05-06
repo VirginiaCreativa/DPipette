@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import MomentTo from '../../UI/MomentTo/MomentTo';
+import Moment from '../../UI/Moment/Moment';
 import classes from './ItemSignificado.module.scss';
 
 const ItemSignificado = ({ linked, word, imagenes, descriptions, date }) => (
@@ -16,7 +16,7 @@ const ItemSignificado = ({ linked, word, imagenes, descriptions, date }) => (
             <p>{descriptions[0].definicion}</p>
           </div>
           <div className={classes.RecientDate}>
-            <MomentTo
+            <Moment
               onColor="#9ca7b4"
               onFontsize="0.7rem"
               date={date}
