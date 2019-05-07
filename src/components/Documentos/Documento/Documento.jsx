@@ -5,7 +5,50 @@ import Video from './DocumentoVideo/DocumentoVideo';
 import classes from './Documento.module.scss';
 
 class Documento extends Component {
+  constructor(props) {
+    super(props);
+    this.refPage = React.createRef();
+  }
+
+  state = {
+    addTimeline: [],
+    isTimeline: '',
+  };
+
+  componentDidMount() {
+    // document.addEventListener("mousemove", () => console.log(this.clientY));
+    // const heightDoc = this.refDocument.addEventListener('resize', () =>
+    //   console.log(this.innerHeight)
+    // );
+    console.log(this.refPage);
+    console.log(this.refPage.clientHeight);
+
+    // console.log((this.refPage.scrollHeight = 0));
+  }
+
+  componentDidUpdate() {
+    const { isTimeline, addTimeline } = this.state;
+    console.log('===>', isTimeline);
+    console.log('===>', addTimeline);
+    console.log(this.refPage.scrollTop);
+  }
+
+  handleChangeValueTimeline = ev => {
+    this.setState({ isTimeline: ev.target.value });
+  };
+
+  handleAddTimeline = ev => {
+    const { isTimeline, addTimeline } = this.state;
+    this.setState(prevState => ({
+      addTimeline: [...prevState.addTimeline, { isTimeline }],
+    }));
+    this.refInputValue.value = '';
+  };
+
   render() {
+    const { addTimeline } = this.state;
+    let title;
+    if (this.refPage.scrollTop >= 0) title += 'dfsñldfñds';
     return (
       <div className={classes.Documento}>
         <div className={classes.formAddMarker}>
@@ -25,8 +68,8 @@ class Documento extends Component {
           </div>
         </div>
         <div className={classes.Wrapper}>
-          <Marker />
-          <Page />
+          <Marker markers={addTimeline} />
+          <Page onRef={ref => (this.refPage = ref)}> {title} </Page>
           <Video />
         </div>
       </div>

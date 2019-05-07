@@ -1,9 +1,15 @@
 import React from 'react';
 import classes from './DocumentoMarker.module.scss';
 
-const DocumentoMarker = () => (
+const DocumentoMarker = ({ markers }) => (
   <div className={classes.DocumentoMarker}>
-    <div className={classes.pageMarker} />
+    <ul className="list-unstyled">
+      {markers.map((item, index) => (
+        <li key={index}>
+          <div className={classes.pageMarker} />
+        </li>
+      ))}
+    </ul>
   </div>
 );
 
