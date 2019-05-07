@@ -1,36 +1,53 @@
+@import '../../../../styles/variables';
+
 .DocumentoMarker {
   position: relative;
-  padding: 28px 0;
+  padding: 22px 0;
   .pageMarker {
-    display: block;
-    height: 16px;
-    width: 28px;
+    display: block; 
+    background-color: $red;
+    box-shadow: -2px 2px 1px 0px rgba(100, 100, 100, 0.2);
     position: relative;
-    right: -20px;
+    right: -16px;
+    padding: 0px;
+    width: 24px;
+    height: 20px;
+    border-top-left-radius: 2px;
+    border-bottom-left-radius: 2px;
     z-index: 100;
-    padding: 0px; 
-    background-color:#f33d48;
-    border-radius: 2px;
     cursor: pointer;
     &:before {
       content: '';
-      height: 10px;
-      width: 0px;
       display: block;
       position: absolute;
-      right: -10px;
       top: 3px;
+      right: -16px;
+      width: 10px;
+      height: 14px;
       transform: rotate(-90deg) skew(0deg); 
-      border-left: 8px solid #f33d48; 
-      border-right: 8px solid #f33d48; 
+      border-left: 10px solid $red; 
+      border-right: 10px solid $red; 
       border-bottom: 4px solid transparent;
+      z-index: 2;
+    }
+    &:after {
+      content: '';
+      display: block;
+      background-color: $red;
+      position: absolute;
+      top: 0;
+      right: -5px;
+      width: 5px;
+      height: 20px;
+      z-index: 2;
+      box-shadow: -2px 0px 1px 0px rgba(0, 0, 0, 0.1);
     }
     &:hover {
-      background-color: #b12125;
+      background-color: $red_dark;
       &:before {
-        border-left: 8px solid #b12125; 
-      border-right: 8px solid #b12125; 
-      border-bottom: 4px solid transparent;
+        border-left: 10px solid $red_dark; 
+        border-right: 10px solid $red_dark; 
+        border-bottom: 4px solid transparent;
       }
     }
   }

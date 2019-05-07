@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Page from './DocumentoPage/DocumentoPage';
 import Marker from './DocumentoMarker/DocumentoMarker';
-import Video from './DocumentVideo/DocumentVideo';
+import Video from './DocumentoVideo/DocumentoVideo';
 import classes from './Documento.module.scss';
 
 class Documento extends Component {

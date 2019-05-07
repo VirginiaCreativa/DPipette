@@ -1,5 +1,5 @@
 import React from 'react';
-import classes from './DocumentVideo.module.scss';
+import classes from './DocumentoVideo.module.scss';
 
 const DocumentVideo = () => (
   <div className={classes.DocumentVideo}>

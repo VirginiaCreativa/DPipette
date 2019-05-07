@@ -14,7 +14,8 @@ const NotesCornell = Loadable({
 });
 
 const Documentos = Loadable({
-  loader: () => import('../components/Documentos/Documento/Documento'),
+  loader: () =>
+    import('../components/Documentos/DocumentosHome/DocumentosHome'),
   loading: Spinner,
 });
 
