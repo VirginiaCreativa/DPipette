@@ -1,0 +1,9 @@
+.Documento {
+  .formAddMarker {
+    margin-bottom: 40px;
+  }
+  .Wrapper {
+    display: grid;
+    grid-template-columns: 40px auto 25%;
+  }
+}

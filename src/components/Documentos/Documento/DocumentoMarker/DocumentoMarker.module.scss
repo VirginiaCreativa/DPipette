@@ -1,0 +1,37 @@
+.DocumentoMarker {
+  position: relative;
+  padding: 28px 0;
+  .pageMarker {
+    display: block;
+    height: 16px;
+    width: 28px;
+    position: relative;
+    right: -20px;
+    z-index: 100;
+    padding: 0px; 
+    background-color:#f33d48;
+    border-radius: 2px;
+    cursor: pointer;
+    &:before {
+      content: '';
+      height: 10px;
+      width: 0px;
+      display: block;
+      position: absolute;
+      right: -10px;
+      top: 3px;
+      transform: rotate(-90deg) skew(0deg); 
+      border-left: 8px solid #f33d48; 
+      border-right: 8px solid #f33d48; 
+      border-bottom: 4px solid transparent;
+    }
+    &:hover {
+      background-color: #b12125;
+      &:before {
+        border-left: 8px solid #b12125; 
+      border-right: 8px solid #b12125; 
+      border-bottom: 4px solid transparent;
+      }
+    }
+  }
+}

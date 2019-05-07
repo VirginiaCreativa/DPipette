@@ -1,0 +1,7 @@
+@import '../../../../styles/variables';
+
+.DocumentoPage {
+  padding: 20px 30px;
+  @extend %boxContent;
+  @extend %boxShadowContent;
+}
