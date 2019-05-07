@@ -7,6 +7,7 @@ import SignificadoDetail from '../components/Significados/SignificadosDetail/Sig
 import NotesCornell from '../containers/NotesCornell';
 import NoteCornell from '../components/NotesCornell/NoteCornell/NoteCornell';
 import Documentos from '../containers/Documentos';
+import Documento from '../components/Documentos/Documento/Documento';
 import Foros from '../containers/Foros';
 import NotFound from '../containers/NotFound';
 import Login from '../containers/Login';
@@ -22,6 +23,7 @@ const Routers = () => (
       <Route path="/notescornell" component={NotesCornell} />
       <Route path="/notecornell/:id" component={NoteCornell} />
       <Route path="/documentos" component={Documentos} />
+      <Route path="/Documento" component={Documento} />
       <Route path="/login" component={Login} />
       <Route component={NotFound} />
     </Switch>

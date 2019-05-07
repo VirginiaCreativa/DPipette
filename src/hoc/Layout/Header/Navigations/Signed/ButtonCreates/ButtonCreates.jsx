@@ -121,12 +121,12 @@ class ButtonCreates extends Component {
               </Link>
             </li>
             <li>
-              <Link to="/documentos">
+              <Link to="/documento">
                 <i
                   className="icon-file-text-outline"
                   title="El icono de Documentos"
                 />
-                Doucmentos
+                Doucmento
               </Link>
             </li>
           </ul>
