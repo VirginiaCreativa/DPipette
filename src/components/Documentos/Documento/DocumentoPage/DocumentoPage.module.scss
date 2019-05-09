@@ -4,4 +4,9 @@
   padding: 20px 30px;
   @extend %boxContent;
   @extend %boxShadowContent;
+  p {
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
 }

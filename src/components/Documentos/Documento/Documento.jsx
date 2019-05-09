@@ -8,6 +8,7 @@ class Documento extends Component {
   constructor(props) {
     super(props);
     this.refPage = React.createRef();
+    this.refMarke = React.createRef();
   }
 
   state = {
@@ -16,10 +17,6 @@ class Documento extends Component {
   };
 
   componentDidMount() {
-    // document.addEventListener("mousemove", () => console.log(this.clientY));
-    // const heightDoc = this.refDocument.addEventListener('resize', () =>
-    //   console.log(this.innerHeight)
-    // );
     console.log(this.refPage);
     console.log(this.refPage.clientHeight);
 
@@ -30,7 +27,7 @@ class Documento extends Component {
     const { isTimeline, addTimeline } = this.state;
     console.log('===>', isTimeline);
     console.log('===>', addTimeline);
-    console.log(this.refPage.scrollTop);
+    // console.log(this.refPage.scrollTop);
   }
 
   handleChangeValueTimeline = ev => {
@@ -39,8 +36,14 @@ class Documento extends Component {
 
   handleAddTimeline = ev => {
     const { isTimeline, addTimeline } = this.state;
+    const pageSizeH = this.refPage.clientHeight;
+    // const resultNumbTime = Math.floor(isTimeline);
+    // const resultNumbPage = pageSizeH / isTimeline;
+    // console.log(isTimeline, resultNumbTime, resultNumbPage);
+    const timeline = Math.floor((pageSizeH / 180.0) * isTimeline);
+    console.log(timeline);
     this.setState(prevState => ({
-      addTimeline: [...prevState.addTimeline, { isTimeline }],
+      addTimeline: [...prevState.addTimeline, { timeline }],
     }));
     this.refInputValue.value = '';
   };
@@ -48,7 +51,7 @@ class Documento extends Component {
   render() {
     const { addTimeline } = this.state;
     let title;
-    if (this.refPage.scrollTop >= 0) title += 'dfsñldfñds';
+    if (this.refPage.offsetHeight === 0) title += 'dfsñldfñds';
     return (
       <div className={classes.Documento}>
         <div className={classes.formAddMarker}>
@@ -68,7 +71,11 @@ class Documento extends Component {
           </div>
         </div>
         <div className={classes.Wrapper}>
-          <Marker markers={addTimeline} />
+          <Marker
+            markers={addTimeline}
+            onRef={ref => (this.refMarke = ref)}
+            onRefUl={ref => (this.refMarkeUl = ref)}
+          />
           <Page onRef={ref => (this.refPage = ref)}> {title} </Page>
           <Video />
         </div>
