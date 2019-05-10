@@ -56,7 +56,6 @@ class Documento extends Component {
         <div className={classes.Wrapper}>
           <Marker
             markers={addTimeline}
-            onRef={ref => (this.refMarke = ref)}
             onRefUl={ref => (this.refMarkeUl = ref)}
           />
           <Page onRef={ref => (this.refPage = ref)}> {title} </Page>
