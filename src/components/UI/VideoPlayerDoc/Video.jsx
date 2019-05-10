@@ -5,26 +5,35 @@ import { firebaseConnect } from 'react-redux-firebase';
 import Controls from './Controls';
 import classes from './Video.module.scss';
 
-import { getTimelineVideoDoc } from '../../../redux/actions/DocumentosAction';
+import {
+  getTimelineVideoDoc,
+  getDurationVideoDoc,
+} from '../../../redux/actions/DocumentosAction';
 
 const VideoDoc = ({ title, srcVideo, getTimelineVideoDoc }) => {
   let refVideo = useRef(null);
   const [isPlayer, setIsPlayer] = useState(true);
   const [isDuration, setIsDuration] = useState(0);
   const [isCurrentTimeNumber, setIsCurrentTimeNumber] = useState(0);
-
-  useEffect(() => {
-    setIsDuration(refVideo.duration);
-    console.log('====>', refVideo.duration, refVideo.currentTime);
-  }, []);
+  const [isControlPlay, setControlPlay] = useState(true);
 
   const onPlay = () => {
     refVideo.play();
     setIsPlayer(false);
+    setControlPlay(!isControlPlay);
+    getDurationVideoDoc(57.573);
+    setIsDuration(refVideo.duration);
+    setIsCurrentTimeNumber(refVideo.currentTime);
+    console.log('====>', refVideo.duration, refVideo.currentTime);
   };
+
+  useEffect(() => {
+    getDurationVideoDoc(57.573);
+  });
 
   const onPause = () => {
     refVideo.pause();
+    setControlPlay(!isControlPlay);
   };
 
   const onMarker = () => {
@@ -35,6 +44,8 @@ const VideoDoc = ({ title, srcVideo, getTimelineVideoDoc }) => {
   const handleTimeUpdate = () => {
     setIsCurrentTimeNumber(refVideo.currentTime);
   };
+
+  console.log(isDuration);
   return (
     <div className={classes.Video}>
       <Controls
@@ -44,12 +55,12 @@ const VideoDoc = ({ title, srcVideo, getTimelineVideoDoc }) => {
         onPlay={onPlay}
         onPause={onPause}
         onMarker={onMarker}
+        controlPlay={isControlPlay}
       />
       <video
         src={srcVideo}
         tabIndex="0"
         ref={ref => (refVideo = ref)}
-        onMouseOver={onPlay}
         title={title}
         className="img-fluid"
         muted
@@ -59,7 +70,7 @@ const VideoDoc = ({ title, srcVideo, getTimelineVideoDoc }) => {
 };
 
 const mapDispatchToProps = dispatch =>
-  bindActionCreators({ getTimelineVideoDoc }, dispatch);
+  bindActionCreators({ getDurationVideoDoc, getTimelineVideoDoc }, dispatch);
 
 export default compose(
   firebaseConnect(),
