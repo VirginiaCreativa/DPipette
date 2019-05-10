@@ -16,20 +16,6 @@ class Documento extends Component {
     isTimeline: '',
   };
 
-  componentDidMount() {
-    console.log(this.refPage);
-    console.log(this.refPage.clientHeight);
-
-    // console.log((this.refPage.scrollHeight = 0));
-  }
-
-  componentDidUpdate() {
-    const { isTimeline, addTimeline } = this.state;
-    console.log('===>', isTimeline);
-    console.log('===>', addTimeline);
-    // console.log(this.refPage.scrollTop);
-  }
-
   handleChangeValueTimeline = ev => {
     this.setState({ isTimeline: ev.target.value });
   };
@@ -37,9 +23,6 @@ class Documento extends Component {
   handleAddTimeline = ev => {
     const { isTimeline, addTimeline } = this.state;
     const pageSizeH = this.refPage.clientHeight;
-    // const resultNumbTime = Math.floor(isTimeline);
-    // const resultNumbPage = pageSizeH / isTimeline;
-    // console.log(isTimeline, resultNumbTime, resultNumbPage);
     const timeline = Math.floor((pageSizeH / 180.0) * isTimeline);
     console.log(timeline);
     this.setState(prevState => ({
