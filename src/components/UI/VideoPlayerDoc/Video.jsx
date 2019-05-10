@@ -1,9 +1,13 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect, useRef } from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators, compose } from 'redux';
+import { firebaseConnect } from 'react-redux-firebase';
 import Controls from './Controls';
 import classes from './Video.module.scss';
 
-const Video = ({ title, srcVideo }) => {
+import { getTimelineVideoDoc } from '../../../redux/actions/DocumentosAction';
+
+const VideoDoc = ({ title, srcVideo, getTimelineVideoDoc }) => {
   let refVideo = useRef(null);
   const [isPlayer, setIsPlayer] = useState(true);
   const [isDuration, setIsDuration] = useState(0);
@@ -11,16 +15,23 @@ const Video = ({ title, srcVideo }) => {
 
   useEffect(() => {
     setIsDuration(refVideo.duration);
-  });
-  const handleVideoOver = () => {
+    console.log('====>', refVideo.duration, refVideo.currentTime);
+  }, []);
+
+  const onPlay = () => {
     refVideo.play();
     setIsPlayer(false);
   };
-  const handleVideoOut = () => {
+
+  const onPause = () => {
     refVideo.pause();
-    refVideo.currentTime = 0;
-    setIsPlayer(true);
   };
+
+  const onMarker = () => {
+    refVideo.pause();
+    getTimelineVideoDoc(refVideo.currentTime);
+  };
+
   const handleTimeUpdate = () => {
     setIsCurrentTimeNumber(refVideo.currentTime);
   };
@@ -30,21 +41,30 @@ const Video = ({ title, srcVideo }) => {
         Played={isPlayer}
         isCurrentTime={isCurrentTimeNumber}
         isDuration={isDuration}
+        onPlay={onPlay}
+        onPause={onPause}
+        onMarker={onMarker}
       />
       <video
         src={srcVideo}
         tabIndex="0"
         ref={ref => (refVideo = ref)}
-        onMouseOver={handleVideoOver}
-        onMouseOut={handleVideoOut}
-        onTimeUpdate={handleTimeUpdate}
+        onMouseOver={onPlay}
         title={title}
         className="img-fluid"
-        // autoPlay
         muted
       />
     </div>
   );
 };
 
-export default Video;
+const mapDispatchToProps = dispatch =>
+  bindActionCreators({ getTimelineVideoDoc }, dispatch);
+
+export default compose(
+  firebaseConnect(),
+  connect(
+    null,
+    mapDispatchToProps
+  )
+)(VideoDoc);

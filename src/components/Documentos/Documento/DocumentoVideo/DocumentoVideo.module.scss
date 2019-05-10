@@ -1,3 +1,5 @@
+@import '../../../../styles/variables';
+
 .DocumentVideo {
 	margin-left: 20px;
 	.boxVideo {
@@ -5,20 +7,16 @@
 	}
 	.boxAddTimeVideo {
 		display: grid;
-		grid-template-columns: 40px auto;
+		grid-template-columns: 26px auto;
 		button {
 			border-radius: 100%;
 			width: 25px;
 			height: 25px;
 		}
 		:global {
-			.bx-plus {
-				font-size: 14px;
-				position: relative;
-				top: -4px;
-				padding: 0;
-				margin: 0;
-				left: -6.5px;
+			.bxs-bookmark {
+				font-size: 22px;
+				color: $blue;
 			}
 		}
 	}
