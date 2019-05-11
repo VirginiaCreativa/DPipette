@@ -6,10 +6,13 @@ const Controls = ({
   errored,
   isCurrentTime,
   isDuration,
-  onPlay,
+  onPlayControl,
   onPause,
   onMarker,
   controlPlay,
+  onRange,
+  nameRange,
+  maxTimeVideo,
 }) => {
   const handleProgress = (current, duration) => {
     const isCurrentTime = parseFloat(current).toFixed(2);
@@ -32,7 +35,7 @@ const Controls = ({
         </div>
         <div className={classes.Control}>
           {controlPlay ? (
-            <button type="button" onClick={onPlay}>
+            <button type="button" onClick={onPlayControl}>
               <i className="bx bx-play" />
             </button>
           ) : (
@@ -45,6 +48,13 @@ const Controls = ({
             <i className="bx bxs-bookmark" />
           </button>
         </div>
+        <input
+          type="range"
+          min="0"
+          max={maxTimeVideo}
+          onChange={onRange}
+          name={nameRange}
+        />
         {errored && <i className="bx bx-error" />}
       </div>
     </>

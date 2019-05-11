@@ -39,19 +39,21 @@
 .Progress {
 	display: block;
 	position: absolute;
-	bottom: 10px;
-	width: 83%;
+	width: 80%;
+	position: absolute;
+	bottom: 9px;
+	height: 36px;
 
 	.ProgressBar,
 	.ProgressFilled {
+		height: 36px;
 		position: absolute;
 		bottom: 0;
-		height: 31px;
 		transition: all 0.3s ease-in;
 	}
 
 	.ProgressBar {
-		background-color: $blue;
+		background-color: $blue_medium;
 		width: 0;
 		transition: all 0.3s ease-in;
 		z-index: 2;

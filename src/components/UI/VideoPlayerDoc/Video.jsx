@@ -17,7 +17,11 @@ const VideoDoc = ({ title, srcVideo, getTimelineVideoDoc }) => {
   const [isCurrentTimeNumber, setIsCurrentTimeNumber] = useState(0);
   const [isControlPlay, setControlPlay] = useState(true);
 
-  const onPlay = () => {
+  useEffect(() => {
+    console.log('====>', refVideo.duration, refVideo.currentTime);
+  });
+
+  const onPlayControl = () => {
     refVideo.play();
     setIsPlayer(false);
     setControlPlay(!isControlPlay);
@@ -27,17 +31,12 @@ const VideoDoc = ({ title, srcVideo, getTimelineVideoDoc }) => {
     console.log('====>', refVideo.duration, refVideo.currentTime);
   };
 
-  useEffect(() => {
-    getDurationVideoDoc(57.573);
-  });
-
   const onPause = () => {
     refVideo.pause();
     setControlPlay(!isControlPlay);
   };
 
   const onMarker = () => {
-    refVideo.pause();
     getTimelineVideoDoc(refVideo.currentTime);
   };
 
@@ -45,24 +44,32 @@ const VideoDoc = ({ title, srcVideo, getTimelineVideoDoc }) => {
     setIsCurrentTimeNumber(refVideo.currentTime);
   };
 
-  console.log(isDuration);
+  const handleRange = ev => {
+    console.log('******>', ev.target.value);
+    refVideo[ev.target.name] = ev.target.value;
+
+    refVideo.play();
+  };
+
   return (
     <div className={classes.Video}>
       <Controls
-        Played={isPlayer}
         isCurrentTime={isCurrentTimeNumber}
         isDuration={isDuration}
-        onPlay={onPlay}
+        onPlayControl={onPlayControl}
         onPause={onPause}
         onMarker={onMarker}
         controlPlay={isControlPlay}
+        onRange={handleRange}
+        nameRange="currentTime"
+        maxTimeVideo={isDuration}
       />
       <video
-        src={srcVideo}
-        tabIndex="0"
         ref={ref => (refVideo = ref)}
+        onTimeUpdate={handleTimeUpdate}
         title={title}
         className="img-fluid"
+        src={srcVideo}
         muted
       />
     </div>
