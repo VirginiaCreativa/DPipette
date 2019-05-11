@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators, compose } from 'redux';
 import { firebaseConnect } from 'react-redux-firebase';
@@ -10,72 +10,84 @@ import {
   getDurationVideoDoc,
 } from '../../../redux/actions/DocumentosAction';
 
-const VideoDoc = ({ title, srcVideo, getTimelineVideoDoc }) => {
-  let refVideo = useRef(null);
-  const [isPlayer, setIsPlayer] = useState(true);
-  const [isDuration, setIsDuration] = useState(0);
-  const [isCurrentTimeNumber, setIsCurrentTimeNumber] = useState(0);
-  const [isControlPlay, setControlPlay] = useState(true);
+class VideoDoc extends Component {
+  constructor(props) {
+    super(props);
+    this.refVideo = React.createRef();
+    this.refProgress = React.createRef();
+  }
 
-  useEffect(() => {
-    console.log('====>', refVideo.duration, refVideo.currentTime);
-  });
-
-  const onPlayControl = () => {
-    refVideo.play();
-    setIsPlayer(false);
-    setControlPlay(!isControlPlay);
-    getDurationVideoDoc(57.573);
-    setIsDuration(refVideo.duration);
-    setIsCurrentTimeNumber(refVideo.currentTime);
-    console.log('====>', refVideo.duration, refVideo.currentTime);
+  state = {
+    isPlayer: 0,
+    isDuration: 0,
+    isCurrentTime: 0,
+    isControlPlay: true,
   };
 
-  const onPause = () => {
-    refVideo.pause();
-    setControlPlay(!isControlPlay);
+  componentDidMount() {
+    const { isDuration, isCurrentTime } = this.state;
+    console.log('----->', isDuration, isCurrentTime);
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    const { isDuration, isCurrentTime } = this.state;
+    console.log('......>', isDuration, isCurrentTime);
+    // this.props.getDurationVideoDoc(this.state.isDuration);
+  }
+
+  onPlay = () => {
+    this.refVideo.play();
+    const { isControlPlay } = this.state;
+    this.setState({
+      isControlPlay: !isControlPlay,
+      isDuration: this.refVideo.duration,
+      isCurrentTime: this.refVideo.currentTime,
+    });
   };
 
-  const onMarker = () => {
-    getTimelineVideoDoc(refVideo.currentTime);
+  onPause = () => {
+    const { isControlPlay } = this.state;
+    this.refVideo.pause();
+    this.setState({ isControlPlay: !isControlPlay });
   };
 
-  const handleTimeUpdate = ev => {
-    console.log(ev);
-    setIsCurrentTimeNumber(refVideo.currentTime);
+  onMarker = () => {
+    this.props.getTimelineVideoDoc(this.refVideo.currentTime);
   };
 
-  const handleRange = ev => {
-    console.log('******>', ev.target.value);
-    refVideo[ev.target.name] = ev.target.value;
-
-    refVideo.play();
+  handleTimeUpdate = () => {
+    this.setState({
+      isCurrentTime: this.refVideo.currentTime,
+    });
   };
 
-  return (
-    <div className={classes.Video}>
-      <Controls
-        isCurrentTime={isCurrentTimeNumber}
-        isDuration={isDuration}
-        onPlayControl={onPlayControl}
-        onPause={onPause}
-        onMarker={onMarker}
-        controlPlay={isControlPlay}
-        onRange={handleRange}
-        nameRange="currentTime"
-        maxTimeVideo={isDuration}
-      />
-      <video
-        ref={ref => (refVideo = ref)}
-        onTimeUpdate={handleTimeUpdate}
-        title={title}
-        className="img-fluid"
-        src={srcVideo}
-        muted
-      />
-    </div>
-  );
-};
+  render() {
+    const { title, srcVideo } = this.props;
+    const { isCurrentTime, isDuration, isControlPlay } = this.state;
+    return (
+      <div className={classes.Video}>
+        <Controls
+          isCurrentTime={isCurrentTime}
+          isDuration={isDuration}
+          onPlay={this.onPlay}
+          onPause={this.onPause}
+          onMarker={this.onMarker}
+          controlPlay={isControlPlay}
+          clickProgress={this.handleScrub}
+          refProgress={this.refProgress}
+        />
+        <video
+          ref={ref => (this.refVideo = ref)}
+          onTimeUpdate={this.handleTimeUpdate}
+          title={title}
+          className="img-fluid"
+          src={srcVideo}
+          muted
+        />
+      </div>
+    );
+  }
+}
 
 const mapDispatchToProps = dispatch =>
   bindActionCreators({ getDurationVideoDoc, getTimelineVideoDoc }, dispatch);

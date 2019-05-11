@@ -1,19 +1,16 @@
 /* eslint-disable no-shadow */
-import React from 'react';
+import React, { useEffect } from 'react';
 import classes from './Controls.module.scss';
 
 const Controls = ({
-  errored,
   isCurrentTime,
   isDuration,
-  onPlayControl,
+  onPlay,
   onPause,
   onMarker,
   controlPlay,
-  onRange,
-  nameRange,
-  maxTimeVideo,
-  onProgress,
+  clickProgress,
+  refProgress,
 }) => {
   const handleProgress = (current, duration) => {
     const float = parseFloat(current / duration).toFixed(2);
@@ -27,19 +24,18 @@ const Controls = ({
 
   return (
     <div className={classes.Controls}>
-      <div className={classes.Progress}>
-        <div
-          className={classes.ProgressBar}
-          role="button"
-          tabIndex="0"
-          onClick={onProgress}>
-          <div className={classes.ProgressFilled} style={progressClass} />
-        </div>
+      <div
+        className={classes.Progress}
+        ref={refProgress}
+        role="button"
+        tabIndex="0"
+        onClick={clickProgress}>
+        <div className={classes.ProgressFilled} style={progressClass} />
       </div>
 
       <div className={classes.Control}>
         {controlPlay ? (
-          <button type="button" onClick={onPlayControl}>
+          <button type="button" onClick={onPlay}>
             <i className="bx bx-play" />
           </button>
         ) : (
