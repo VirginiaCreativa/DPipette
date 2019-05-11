@@ -40,7 +40,8 @@ const VideoDoc = ({ title, srcVideo, getTimelineVideoDoc }) => {
     getTimelineVideoDoc(refVideo.currentTime);
   };
 
-  const handleTimeUpdate = () => {
+  const handleTimeUpdate = ev => {
+    console.log(ev);
     setIsCurrentTimeNumber(refVideo.currentTime);
   };
 

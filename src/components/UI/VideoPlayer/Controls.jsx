@@ -4,10 +4,8 @@ import classes from './Controls.module.scss';
 
 const Controls = ({ Played, errored, isCurrentTime, isDuration }) => {
   const handleProgress = (current, duration) => {
-    const isCurrentTime = parseFloat(current).toFixed(2);
-    const isDuration = parseFloat(duration).toFixed(2);
-
-    const percent = (isCurrentTime / isDuration) * 100;
+    const float = parseFloat(current / duration).toFixed(2);
+    const percent = float * 100;
     return percent;
   };
 

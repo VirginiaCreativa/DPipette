@@ -13,12 +13,11 @@ const Controls = ({
   onRange,
   nameRange,
   maxTimeVideo,
+  onProgress,
 }) => {
   const handleProgress = (current, duration) => {
-    const isCurrentTime = parseFloat(current).toFixed(2);
-    const isDuration = parseFloat(duration).toFixed(2);
-
-    const percent = (isCurrentTime / isDuration) * 100;
+    const float = parseFloat(current / duration).toFixed(2);
+    const percent = float * 100;
     return percent;
   };
 
@@ -27,37 +26,33 @@ const Controls = ({
   };
 
   return (
-    <>
-      <div className={classes.Controls}>
-        <div className={classes.Progress}>
-          <div className={classes.ProgressBar} style={progressClass} />
-          <div className={classes.ProgressFilled} />
+    <div className={classes.Controls}>
+      <div className={classes.Progress}>
+        <div
+          className={classes.ProgressBar}
+          role="button"
+          tabIndex="0"
+          onClick={onProgress}>
+          <div className={classes.ProgressFilled} style={progressClass} />
         </div>
-        <div className={classes.Control}>
-          {controlPlay ? (
-            <button type="button" onClick={onPlayControl}>
-              <i className="bx bx-play" />
-            </button>
-          ) : (
-            <button type="button" onClick={onPause}>
-              <i className="bx bx-pause" />
-            </button>
-          )}
-
-          <button type="button" onClick={onMarker}>
-            <i className="bx bxs-bookmark" />
-          </button>
-        </div>
-        <input
-          type="range"
-          min="0"
-          max={maxTimeVideo}
-          onChange={onRange}
-          name={nameRange}
-        />
-        {errored && <i className="bx bx-error" />}
       </div>
-    </>
+
+      <div className={classes.Control}>
+        {controlPlay ? (
+          <button type="button" onClick={onPlayControl}>
+            <i className="bx bx-play" />
+          </button>
+        ) : (
+          <button type="button" onClick={onPause}>
+            <i className="bx bx-pause" />
+          </button>
+        )}
+
+        <button type="button" onClick={onMarker}>
+          <i className="bx bxs-bookmark" />
+        </button>
+      </div>
+    </div>
   );
 };
 
