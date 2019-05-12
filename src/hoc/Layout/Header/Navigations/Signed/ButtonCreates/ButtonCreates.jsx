@@ -85,6 +85,23 @@ class ButtonCreates extends Component {
       .catch(error => console.log(error));
   };
 
+  handleNewIDDocumentos = ev => {
+    ev.preventDefault();
+    const project = {
+      tema: 'Nueva tema',
+      materia: 'Nueva materia',
+      addTimeline: [],
+    };
+    this.props.firestore
+      .add('documentos', {
+        ...project,
+      })
+      .then(doc => {
+        history.push(`/documento/${doc.id}`);
+      })
+      .catch(error => console.log(error));
+  };
+
   render() {
     const { isMenu, fade } = this.state;
     let btnHover;
@@ -121,7 +138,7 @@ class ButtonCreates extends Component {
               </Link>
             </li>
             <li>
-              <Link to="/documento">
+              <Link to="/documento/:id" onClick={this.handleNewIDDocumentos}>
                 <i
                   className="icon-file-text-outline"
                   title="El icono de Documentos"

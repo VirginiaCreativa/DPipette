@@ -34,11 +34,13 @@ class VideoDoc extends Component {
     console.log('......>', isDuration, isCurrentTime);
     const progress = this.refProgress.current;
     progress.addEventListener('click', ev => {
-      const scrubTime = (ev.offsetX / progress.offsetWidth) * isDuration;
+      const scrubTime = parseFloat(
+        (ev.offsetX / progress.offsetWidth) * isDuration
+      );
       console.log(scrubTime);
       this.refVideo.currentTime = scrubTime;
     });
-    // this.props.getDurationVideoDoc(this.state.isDuration);
+    this.props.getDurationVideoDoc(this.state.isDuration);
   }
 
   onPlay = () => {
@@ -66,13 +68,6 @@ class VideoDoc extends Component {
       isCurrentTime: this.refVideo.currentTime,
     });
   };
-
-  // handleScrub = ev => {
-  //   // const scrubTime =
-  //   //   (ev.offsetX / this.refProgress.current.offsetWidth) * isDuration;
-  //   // console.log(scrubTime);
-  //   console.log(':::::::>', ev.offsetX);
-  // };
 
   render() {
     const { title, srcVideo } = this.props;

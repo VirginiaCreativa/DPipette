@@ -7,10 +7,10 @@ import classes from './DocumentoVideo.module.scss';
 
 import { getTimelineVideoDoc } from '../../../../redux/actions/DocumentosAction';
 
-const DocumentVideo = ({ timeline, getTimelineVideoDoc }) => {
+const DocumentVideo = ({ timelineVideo, getTimelineVideoDoc }) => {
   const [isTimelineAdd, setisTimelineAdd] = useState(0);
-  const handleTimeline = () => {
-    setisTimelineAdd(timeline);
+  const handleAddTimeline = () => {
+    setisTimelineAdd(timelineVideo);
   };
   return (
     <div className={classes.DocumentVideo}>
@@ -21,9 +21,12 @@ const DocumentVideo = ({ timeline, getTimelineVideoDoc }) => {
         <i className="bx bxs-bookmark" />
         <div className={classes.timeVideo}>
           <p>
-            <strong>{timeline}</strong>
+            <strong>{timelineVideo}</strong>
           </p>
         </div>
+        <button type="button" className="btn" onClick={handleAddTimeline}>
+          Guardar
+        </button>
       </div>
     </div>
   );
@@ -33,9 +36,11 @@ const mapDispatchToProps = dispatch =>
   bindActionCreators({ getTimelineVideoDoc }, dispatch);
 
 export default compose(
-  firebaseConnect(),
+  firebaseConnect(['documentos']),
   connect(
-    state => ({ timeline: state.Documentos.timeline }),
+    state => ({
+      timelineVideo: state.Documentos.timeline,
+    }),
     mapDispatchToProps
   )
 )(DocumentVideo);

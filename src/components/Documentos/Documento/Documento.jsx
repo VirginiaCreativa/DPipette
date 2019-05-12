@@ -1,69 +1,35 @@
-import React, { Component } from 'react';
-import Page from './DocumentoPage/DocumentoPage';
-import Marker from './DocumentoMarker/DocumentoMarker';
-import Video from './DocumentoVideo/DocumentoVideo';
-import classes from './Documento.module.scss';
+import React, { useEffect } from 'react';
+import { compose } from 'redux';
+import { connect } from 'react-redux';
+import { firestoreConnect, isLoaded, isEmpty } from 'react-redux-firebase';
+import Spinner from './Spinner/Spinner';
+import Empty from '../../UI/Empty/Empty';
 
-class Documento extends Component {
-  constructor(props) {
-    super(props);
-    this.refPage = React.createRef();
-    this.refMarke = React.createRef();
-  }
-
-  state = {
-    addTimeline: [],
-    isTimeline: '',
-  };
-
-  handleChangeValueTimeline = ev => {
-    this.setState({ isTimeline: ev.target.value });
-  };
-
-  handleAddTimeline = ev => {
-    const { isTimeline, addTimeline } = this.state;
-    const pageSizeH = this.refPage.clientHeight;
-    const timeline = Math.floor((pageSizeH / 180.0) * isTimeline);
-    console.log(timeline);
-    this.setState(prevState => ({
-      addTimeline: [...prevState.addTimeline, { timeline }],
-    }));
-    this.refInputValue.value = '';
-  };
-
-  render() {
-    const { addTimeline } = this.state;
-    let title;
-    if (this.refPage.offsetHeight === 0) title += 'dfsñldfñds';
-    return (
-      <div className={classes.Documento}>
-        <div className={classes.formAddMarker}>
-          <div className="row justify-content-start">
-            <input
-              type="text"
-              name="time"
-              ref={ref => (this.refInputValue = ref)}
-              onChange={this.handleChangeValueTimeline}
-            />
-            <button
-              type="button"
-              className="btn btn-primary"
-              onClick={this.handleAddTimeline}>
-              Crear un marcador
-            </button>
-          </div>
-        </div>
-        <div className={classes.Wrapper}>
-          <Marker
-            markers={addTimeline}
-            onRefUl={ref => (this.refMarkeUl = ref)}
-          />
-          <Page onRef={ref => (this.refPage = ref)}> {title} </Page>
-          <Video />
-        </div>
+const Documento = ({ documento }) => (
+  <div>
+    {!isLoaded(documento) ? (
+      <Spinner />
+    ) : isEmpty(documento) ? (
+      <Empty />
+    ) : (
+      <div>
+        <h1>{documento.tema}</h1>
       </div>
-    );
-  }
-}
+    )}
+  </div>
+);
 
-export default Documento;
+export default compose(
+  firestoreConnect(['documentos']),
+  connect((state, ownProps) => {
+    const id = ownProps.match.params.id;
+    console.log(id);
+    const documentos = state.firestore.data.documentos;
+    const documento = documentos ? documentos[id] : null;
+    return {
+      documento,
+      durationVideo: state.Documentos.duration,
+      timelineVideo: state.Documentos.timeline,
+    };
+  })
+)(Documento);

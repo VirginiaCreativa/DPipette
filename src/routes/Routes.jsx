@@ -23,7 +23,7 @@ const Routers = () => (
       <Route path="/notescornell" component={NotesCornell} />
       <Route path="/notecornell/:id" component={NoteCornell} />
       <Route path="/documentos" component={Documentos} />
-      <Route path="/Documento" component={Documento} />
+      <Route path="/Documento/:id" component={Documento} />
       <Route path="/login" component={Login} />
       <Route component={NotFound} />
     </Switch>

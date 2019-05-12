@@ -7,11 +7,16 @@
 	}
 	.boxAddTimeVideo {
 		display: grid;
-		grid-template-columns: 26px auto;
+		grid-template-columns: 26px auto 12%;
 		button {
-			border-radius: 100%;
-			width: 25px;
-			height: 25px;
+			padding: 0 !important;
+			line-height: 0 !important;
+			font-size: 0.8rem;
+			height: 24px;
+			background-color: $green;
+			border-radius: 14px;
+			color: #fff;
+			font-weight: 600;
 		}
 		:global {
 			.bxs-bookmark {
