@@ -8,10 +8,11 @@ import classes from './DocumentoVideo.module.scss';
 import { getTimelineVideoDoc } from '../../../../redux/actions/DocumentosAction';
 
 const DocumentVideo = ({ timelineVideo, getTimelineVideoDoc }) => {
-  const [isTimelineAdd, setisTimelineAdd] = useState(0);
+  const [isTimelineAdd, setTimelineAdd] = useState([]);
   const handleAddTimeline = () => {
-    setisTimelineAdd(timelineVideo);
+    setTimelineAdd([...isTimelineAdd, timelineVideo]);
   };
+  console.log('----->', isTimelineAdd);
   return (
     <div className={classes.DocumentVideo}>
       <div className={classes.boxVideo}>
