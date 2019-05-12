@@ -1,18 +1,29 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators, compose } from 'redux';
-import { firebaseConnect } from 'react-redux-firebase';
+import { firestoreConnect } from 'react-redux-firebase';
+import { withRouter } from 'react-router';
 import VideoPlayer from '../../../UI/VideoPlayerDoc/VideoPlayer';
 import classes from './DocumentoVideo.module.scss';
 
 import { getTimelineVideoDoc } from '../../../../redux/actions/DocumentosAction';
 
-const DocumentVideo = ({ timelineVideo, getTimelineVideoDoc }) => {
-  const [isTimelineAdd, setTimelineAdd] = useState([]);
+const DocumentVideo = ({
+  ID,
+  firestore,
+  documentos,
+  timelineVideo,
+  durationVideo,
+  pageHeight,
+}) => {
   const handleAddTimeline = () => {
-    setTimelineAdd([...isTimelineAdd, timelineVideo]);
+    const arrayTimelines = documentos[ID].addTimeline;
+
+    const timeline = Math.floor((pageHeight / durationVideo) * timelineVideo);
+    firestore.update(`documentos/${ID}`, {
+      addTimeline: arrayTimelines.concat(timeline),
+    });
   };
-  console.log('----->', isTimelineAdd);
   return (
     <div className={classes.DocumentVideo}>
       <div className={classes.boxVideo}>
@@ -37,10 +48,14 @@ const mapDispatchToProps = dispatch =>
   bindActionCreators({ getTimelineVideoDoc }, dispatch);
 
 export default compose(
-  firebaseConnect(['documentos']),
+  firestoreConnect(['documentos']),
+  withRouter,
   connect(
     state => ({
       timelineVideo: state.Documentos.timeline,
+      durationVideo: state.Documentos.duration,
+      pageHeight: state.Documentos.pageHeight,
+      documentos: state.firestore.data.documentos,
     }),
     mapDispatchToProps
   )

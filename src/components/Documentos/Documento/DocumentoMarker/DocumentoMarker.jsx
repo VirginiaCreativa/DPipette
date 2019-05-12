@@ -7,7 +7,7 @@ const DocumentoMarker = ({ markers, onRef }) => (
       {markers.map((item, index) => (
         <li
           key={index}
-          style={{ top: `${item.timeline}px` }}
+          style={{ top: `${item}px` }}
           ref={onRef}
           className="listMarkers">
           <div className={classes.pinMarker} />

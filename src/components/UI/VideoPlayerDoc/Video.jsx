@@ -26,7 +26,7 @@ class VideoDoc extends Component {
 
   componentDidMount() {
     const { isDuration, isCurrentTime } = this.state;
-    // console.log('----->', isDuration, isCurrentTime);
+    // console.log('---->', isDuration, isCurrentTime);
   }
 
   componentDidUpdate(prevProps, prevState) {
