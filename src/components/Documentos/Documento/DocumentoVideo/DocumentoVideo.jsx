@@ -7,6 +7,7 @@ import VideoPlayer from '../../../UI/VideoPlayerDoc/VideoPlayer';
 import classes from './DocumentoVideo.module.scss';
 
 import { getTimelineVideoDoc } from '../../../../redux/actions/DocumentosAction';
+import msToTime from '../../../../scripts/msToTime';
 
 const DocumentVideo = ({
   ID,
@@ -24,16 +25,17 @@ const DocumentVideo = ({
       addTimeline: arrayTimelines.concat(timeline),
     });
   };
+
   return (
     <div className={classes.DocumentVideo}>
       <div className={classes.boxVideo}>
-        <VideoPlayer srcVideo="https://firebasestorage.googleapis.com/v0/b/dpipette-ff5ee.appspot.com/o/notescornell%2Feconomia%2Fciencia_economica%2Fresumen?alt=media&token=14e72533-38ae-4715-94fd-327846c32410" />
+        <VideoPlayer srcVideo="https://firebasestorage.googleapis.com/v0/b/dpipette-ff5ee.appspot.com/o/notescornell%2Feducacion%2Fdiscapacidad_auditiva_e_inteligencias_mutilpes..%2FvideoNote%2FIMpropuestaintervencion.webm?alt=media&token=23396e09-d3b3-4bcd-a2c3-0948e6293e13" />
       </div>
       <div className={classes.boxAddTimeVideo}>
         <i className="bx bxs-bookmark" />
         <div className={classes.timeVideo}>
           <p>
-            <strong>{timelineVideo}</strong>
+            <strong>{msToTime(timelineVideo)}</strong>
           </p>
         </div>
         <button type="button" className="btn" onClick={handleAddTimeline}>

@@ -35,21 +35,20 @@ class Documento extends Component {
     return (
       <div className={classes.Documento}>
         {!isLoaded(documento) ? (
-          <Spinner />
-        ) : isEmpty(documento) ? (
           <Empty />
+        ) : isEmpty(documento) ? (
+          <Spinner />
         ) : (
-          <div>
-            <h1>{documento.tema}</h1>
-            <div className={classes.Wrapper}>
+          <>
+            <Video ID={this.props.match.params.id} />
+            <div className={classes.Page}>
               <Marker
                 markers={documento.addTimeline}
                 onRefUl={ref => (this.refMarkeUl = ref)}
               />
               <Page onRef={c => (this.refPage = c)} />
-              <Video ID={this.props.match.params.id} />
             </div>
-          </div>
+          </>
         )}
       </div>
     );

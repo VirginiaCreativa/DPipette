@@ -48,7 +48,6 @@ class VideoDoc extends Component {
     const { isControlPlay } = this.state;
     this.setState({
       isControlPlay: !isControlPlay,
-      isDuration: this.refVideo.duration,
       isCurrentTime: this.refVideo.currentTime,
     });
   };
@@ -60,13 +59,20 @@ class VideoDoc extends Component {
   };
 
   onMarker = () => {
-    this.props.getTimelineVideoDoc(this.refVideo.currentTime);
+    const duration = parseInt(this.refVideo.currentTime);
+    const nt = this.refVideo.currentTime * (100 / this.refVideo.duration);
+    console.log('---->', nt);
+    this.props.getTimelineVideoDoc(duration);
   };
 
   handleTimeUpdate = () => {
     this.setState({
       isCurrentTime: this.refVideo.currentTime,
     });
+  };
+
+  handleMetada = ev => {
+    console.log(ev);
   };
 
   render() {
@@ -87,6 +93,9 @@ class VideoDoc extends Component {
         <video
           ref={ref => (this.refVideo = ref)}
           onTimeUpdate={this.handleTimeUpdate}
+          onLoadedMetadata={event =>
+            this.setState({ isDuration: event.target.duration })
+          }
           title={title}
           className="img-fluid"
           src={srcVideo}
