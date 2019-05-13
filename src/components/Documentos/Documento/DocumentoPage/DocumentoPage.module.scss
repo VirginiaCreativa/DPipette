@@ -1,12 +1,13 @@
 @import '../../../../styles/variables';
 
 .DocumentoPage {
-  padding: 20px 30px;
-  @extend %boxContent;
-  @extend %boxShadowContent;
-  p {
-    &:last-child {
-      margin-bottom: 0;
-    }
-  }
+	padding: 20px 30px;
+	margin-bottom: 40px;
+	@extend %boxContent;
+	@extend %boxShadowContent;
+	p {
+		&:last-child {
+			margin-bottom: 0;
+		}
+	}
 }

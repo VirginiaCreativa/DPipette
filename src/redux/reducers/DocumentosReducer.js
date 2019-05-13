@@ -2,12 +2,15 @@ import {
   GET_TIMELINE_VIDEO_DOC,
   GET_DURATION_VIDEO_DOC,
   GET_PAGE_HEIGHT_DOC,
+  SHOW_TAKER_MARKER_DOC,
+  HIDE_TAKER_MARKER_DOC,
 } from '../actions/Types';
 
 const initialState = {
   timeline: 0,
   duration: 0,
   pageHeight: 0,
+  viewTakeTimeline: false,
 };
 
 const DocumentosReducer = (state = initialState, action) => {
@@ -28,6 +31,18 @@ const DocumentosReducer = (state = initialState, action) => {
       return {
         ...state,
         pageHeight: action.payload,
+      };
+    }
+    case SHOW_TAKER_MARKER_DOC: {
+      return {
+        ...state,
+        viewTakeTimeline: action.viewTakeTimeline,
+      };
+    }
+    case HIDE_TAKER_MARKER_DOC: {
+      return {
+        ...state,
+        viewTakeTimeline: action.viewTakeTimeline,
       };
     }
     default:

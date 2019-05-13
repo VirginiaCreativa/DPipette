@@ -16,6 +16,7 @@
 	height: 36px;
 	z-index: 77;
 	cursor: ew-resize;
+	overflow: hidden;
 	.ProgressFilled {
 		display: block;
 		background-color: $blue_medium;

@@ -45,7 +45,7 @@ const NoteCornellVideo = ({
   const handleOnFileChange = ev => {
     const videoFile = ev.target.files[0];
     const metadata = {
-      contentType: 'video/mp4, video/webm;codecs=vp9',
+      contentType: 'video/webm;codecs=vp9',
     };
 
     const storageRef = storage().ref(

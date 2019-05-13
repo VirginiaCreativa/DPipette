@@ -7,15 +7,14 @@
 	}
 	.boxAddTimeVideo {
 		display: grid;
-		grid-template-columns: 26px auto 12%;
+		grid-template-columns: 26px auto 12% 12%;
 		button {
-			padding: 0 !important;
-			line-height: 0 !important;
 			font-size: 0.8rem;
-			height: 24px;
-			background-color: $green;
-			border-radius: 14px;
+			line-height: 0 !important;
 			color: #fff;
+			padding: 0 !important;
+			height: 24px;
+			border-radius: 14px;
 			font-weight: 600;
 		}
 		:global {

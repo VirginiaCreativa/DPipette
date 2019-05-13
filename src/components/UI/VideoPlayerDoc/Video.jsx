@@ -8,6 +8,7 @@ import classes from './Video.module.scss';
 import {
   getTimelineVideoDoc,
   getDurationVideoDoc,
+  isShowTakerMarkerDoc,
 } from '../../../redux/actions/DocumentosAction';
 
 class VideoDoc extends Component {
@@ -59,10 +60,8 @@ class VideoDoc extends Component {
   };
 
   onMarker = () => {
-    const duration = parseInt(this.refVideo.currentTime);
-    const nt = this.refVideo.currentTime * (100 / this.refVideo.duration);
-    console.log('---->', nt);
-    this.props.getTimelineVideoDoc(duration);
+    this.props.getTimelineVideoDoc(this.refVideo.currentTime);
+    this.props.isShowTakerMarkerDoc();
   };
 
   handleTimeUpdate = () => {
@@ -100,6 +99,7 @@ class VideoDoc extends Component {
           className="img-fluid"
           src={srcVideo}
           muted
+          preload="true"
         />
       </div>
     );
@@ -107,7 +107,10 @@ class VideoDoc extends Component {
 }
 
 const mapDispatchToProps = dispatch =>
-  bindActionCreators({ getDurationVideoDoc, getTimelineVideoDoc }, dispatch);
+  bindActionCreators(
+    { getDurationVideoDoc, getTimelineVideoDoc, isShowTakerMarkerDoc },
+    dispatch
+  );
 
 export default compose(
   firebaseConnect(),

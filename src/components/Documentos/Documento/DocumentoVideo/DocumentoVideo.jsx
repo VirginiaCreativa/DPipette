@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators, compose } from 'redux';
 import { firestoreConnect } from 'react-redux-firebase';
@@ -6,48 +6,70 @@ import { withRouter } from 'react-router';
 import VideoPlayer from '../../../UI/VideoPlayerDoc/VideoPlayer';
 import classes from './DocumentoVideo.module.scss';
 
-import { getTimelineVideoDoc } from '../../../../redux/actions/DocumentosAction';
+import { isHideTakerMarkerDoc } from '../../../../redux/actions/DocumentosAction';
 import msToTime from '../../../../scripts/msToTime';
 
-const DocumentVideo = ({
-  ID,
-  firestore,
-  documentos,
-  timelineVideo,
-  durationVideo,
-  pageHeight,
-}) => {
-  const handleAddTimeline = () => {
+class DocumentVideo extends Component {
+  handleAddTimeline = () => {
+    this.props.isHideTakerMarkerDoc();
+    const {
+      documentos,
+      ID,
+      durationVideo,
+      pageHeight,
+      timelineVideo,
+      firestore,
+    } = this.props;
     const arrayTimelines = documentos[ID].addTimeline;
-
     const timeline = Math.floor((pageHeight / durationVideo) * timelineVideo);
     firestore.update(`documentos/${ID}`, {
       addTimeline: arrayTimelines.concat(timeline),
     });
   };
 
-  return (
-    <div className={classes.DocumentVideo}>
-      <div className={classes.boxVideo}>
-        <VideoPlayer srcVideo="https://firebasestorage.googleapis.com/v0/b/dpipette-ff5ee.appspot.com/o/notescornell%2Feducacion%2Fdiscapacidad_auditiva_e_inteligencias_mutilpes..%2FvideoNote%2FIMpropuestaintervencion.webm?alt=media&token=23396e09-d3b3-4bcd-a2c3-0948e6293e13" />
-      </div>
-      <div className={classes.boxAddTimeVideo}>
-        <i className="bx bxs-bookmark" />
-        <div className={classes.timeVideo}>
-          <p>
-            <strong>{msToTime(timelineVideo)}</strong>
-          </p>
+  handleCancelMarker = () => {
+    this.props.isHideTakerMarkerDoc();
+  };
+
+  render() {
+    const { viewTakeTimeline, timelineVideo } = this.props;
+    console.log(viewTakeTimeline);
+    return (
+      <div className={classes.DocumentVideo}>
+        <div className={classes.boxVideo}>
+          <VideoPlayer srcVideo="https://firebasestorage.googleapis.com/v0/b/dpipette-ff5ee.appspot.com/o/notescornell%2Fprueba%20materia%201%2Fprueba_1%2Fresumen%2Fprueba_1?alt=media&token=37705e96-54d5-44a6-a6a6-8cd3555a5015" />
         </div>
-        <button type="button" className="btn" onClick={handleAddTimeline}>
-          Guardar
-        </button>
+        {viewTakeTimeline && (
+          <div className={classes.boxAddTimeVideo}>
+            <i className="bx bxs-bookmark" />
+            <div className={classes.timeVideo}>
+              <p>
+                <strong>{msToTime(timelineVideo)}</strong>
+              </p>
+            </div>
+            <button
+              type="button"
+              className="btn"
+              style={{ backgroundColor: '#10c78d' }}
+              onClick={this.handleAddTimeline}>
+              Guardar
+            </button>
+            <button
+              type="button"
+              className="btn"
+              style={{ backgroundColor: 'transparent', color: '#f33d48' }}
+              onClick={this.handleCancelMarker}>
+              Cancelar
+            </button>
+          </div>
+        )}
       </div>
-    </div>
-  );
-};
+    );
+  }
+}
 
 const mapDispatchToProps = dispatch =>
-  bindActionCreators({ getTimelineVideoDoc }, dispatch);
+  bindActionCreators({ isHideTakerMarkerDoc }, dispatch);
 
 export default compose(
   firestoreConnect(['documentos']),
@@ -56,6 +78,7 @@ export default compose(
     state => ({
       timelineVideo: state.Documentos.timeline,
       durationVideo: state.Documentos.duration,
+      viewTakeTimeline: state.Documentos.viewTakeTimeline,
       pageHeight: state.Documentos.pageHeight,
       documentos: state.firestore.data.documentos,
     }),
