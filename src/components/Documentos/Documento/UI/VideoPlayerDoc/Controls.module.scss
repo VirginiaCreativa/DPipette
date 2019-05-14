@@ -1,0 +1,61 @@
+@import '../../../../../styles/variables';
+
+.Controls {
+	position: absolute;
+	display: grid;
+	padding: 0 10px;
+	grid-template-columns: 35px auto 35px;
+	align-items: end;
+	grid-gap: 10px;
+	bottom: 10px;
+	width: 100%;
+	.progressSlider {
+		height: 30px;
+		.MarkerTimeline {
+			z-index: 3;
+			position: absolute;
+			bottom: 0;
+			.lineM {
+				height: 30px;
+				display: block;
+				width: 4px;
+				background-color: $green;
+			}
+		}
+		.Progress {
+			background-color: rgba($color: $blue, $alpha: 0.8);
+			z-index: 1;
+			height: 100%;
+			cursor: ew-resize;
+			overflow: hidden;
+			.ProgressFilled {
+				display: block;
+				background-color: $blue_medium;
+				width: 0;
+				height: 36px;
+				transition: all 0.3s ease-in;
+				z-index: 2;
+			}
+		}
+	}
+	.Control {
+		button {
+			text-align: center;
+			color: #fff;
+			background-color: $blue;
+			opacity: 0.9;
+			border: none;
+			height: 30px;
+			&.btnMark {
+				float: left;
+			}
+		}
+		:global {
+			.bx {
+				font-size: 20px;
+				position: relative;
+				top: 4px;
+			}
+		}
+	}
+}

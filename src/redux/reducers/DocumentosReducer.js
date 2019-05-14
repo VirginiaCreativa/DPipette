@@ -4,6 +4,7 @@ import {
   GET_PAGE_HEIGHT_DOC,
   SHOW_TAKER_MARKER_DOC,
   HIDE_TAKER_MARKER_DOC,
+  GET_TIMELINE_SAME_DOC,
 } from '../actions/Types';
 
 const initialState = {
@@ -11,6 +12,7 @@ const initialState = {
   duration: 0,
   pageHeight: 0,
   viewTakeTimeline: false,
+  timelineSame: null,
 };
 
 const DocumentosReducer = (state = initialState, action) => {
@@ -43,6 +45,12 @@ const DocumentosReducer = (state = initialState, action) => {
       return {
         ...state,
         viewTakeTimeline: action.viewTakeTimeline,
+      };
+    }
+    case GET_TIMELINE_SAME_DOC: {
+      return {
+        ...state,
+        timelineSame: action.payload,
       };
     }
     default:

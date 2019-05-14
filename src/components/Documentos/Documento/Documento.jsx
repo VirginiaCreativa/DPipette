@@ -40,7 +40,9 @@ class Documento extends Component {
           <Spinner />
         ) : (
           <>
-            <Video ID={this.props.match.params.id} />
+            <div className={[classes.Video, 'img-fluid'].join('')}>
+              <Video ID={this.props.match.params.id} />
+            </div>
             <div className={classes.Page}>
               <Page onRef={c => (this.refPage = c)} />
               <Marker

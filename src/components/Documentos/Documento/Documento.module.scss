@@ -1,8 +1,12 @@
 .Documento {
 	display: grid;
-	grid-template-columns: 37% auto;
+	grid-template-columns: 640px auto;
+	@media screen and (max-width: 1920px) {
+		grid-template-columns: 640px auto;
+	}
+
 	.Page {
 		display: grid;
-		grid-template-columns: auto 45px;
+		grid-template-columns: auto 36px;
 	}
 }

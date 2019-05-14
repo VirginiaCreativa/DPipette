@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators, compose } from 'redux';
 import { firestoreConnect } from 'react-redux-firebase';
 import { withRouter } from 'react-router';
-import VideoPlayer from '../../../UI/VideoPlayerDoc/VideoPlayer';
+import VideoPlayer from '../UI/VideoPlayerDoc/VideoPlayer';
 import classes from './DocumentoVideo.module.scss';
 
 import { isHideTakerMarkerDoc } from '../../../../redux/actions/DocumentosAction';
@@ -76,7 +76,6 @@ const mapDispatchToProps = dispatch =>
 
 export default compose(
   firestoreConnect(['documentos']),
-  withRouter,
   connect(
     state => ({
       timelineVideo: state.Documentos.timeline,

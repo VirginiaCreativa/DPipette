@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators, compose } from 'redux';
-import { firebaseConnect } from 'react-redux-firebase';
+import { firestoreConnect } from 'react-redux-firebase';
 import Controls from './Controls';
 import classes from './Video.module.scss';
 
@@ -9,7 +9,7 @@ import {
   getTimelineVideoDoc,
   getDurationVideoDoc,
   isShowTakerMarkerDoc,
-} from '../../../redux/actions/DocumentosAction';
+} from '../../../../../redux/actions/DocumentosAction';
 
 class VideoDoc extends Component {
   constructor(props) {
@@ -20,19 +20,18 @@ class VideoDoc extends Component {
 
   state = {
     isPlayer: 0,
-    isDuration: 0,
     isCurrentTime: 0,
     isControlPlay: true,
   };
 
   componentDidMount() {
-    const { isDuration, isCurrentTime } = this.state;
-    // console.log('---->', isDuration, isCurrentTime);
+    this.refVideo.addEventListener('loadeddata', ev => {
+      this.props.getDurationVideoDoc(ev.target.duration);
+    });
   }
 
   componentDidUpdate(prevProps, prevState) {
     const { isDuration, isCurrentTime } = this.state;
-    // console.log('......>', isDuration, isCurrentTime);
     const progress = this.refProgress.current;
     progress.addEventListener('click', ev => {
       const scrubTime = parseFloat(
@@ -40,7 +39,6 @@ class VideoDoc extends Component {
       );
       this.refVideo.currentTime = scrubTime;
     });
-    this.props.getDurationVideoDoc(this.state.isDuration);
   }
 
   onPlay = () => {
@@ -48,14 +46,15 @@ class VideoDoc extends Component {
     const { isControlPlay } = this.state;
     this.setState({
       isControlPlay: !isControlPlay,
-      isCurrentTime: this.refVideo.currentTime,
     });
+    this.refVideo.currentTime = this.props.timelineSame;
   };
 
   onPause = () => {
     const { isControlPlay } = this.state;
     this.refVideo.pause();
     this.setState({ isControlPlay: !isControlPlay });
+    this.refVideo.currentTime = this.props.timelineSame;
   };
 
   onMarker = () => {
@@ -63,19 +62,16 @@ class VideoDoc extends Component {
     this.props.isShowTakerMarkerDoc();
   };
 
-  handleTimeUpdate = () => {
+  handleTimeUpdate = ev => {
     this.setState({
       isCurrentTime: this.refVideo.currentTime,
     });
   };
 
-  handleMetada = ev => {
-    console.log(ev);
-  };
-
   render() {
-    const { title, srcVideo } = this.props;
+    const { title, srcVideo, getDurationVideoDoc } = this.props;
     const { isCurrentTime, isDuration, isControlPlay } = this.state;
+
     return (
       <div className={classes.Video}>
         <Controls
@@ -112,9 +108,9 @@ const mapDispatchToProps = dispatch =>
   );
 
 export default compose(
-  firebaseConnect(),
+  firestoreConnect(),
   connect(
-    null,
+    state => ({ timelineSame: state.Documentos.timelineSame }),
     mapDispatchToProps
   )
 )(VideoDoc);

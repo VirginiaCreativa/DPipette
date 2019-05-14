@@ -1,8 +1,10 @@
 @import '../../../../styles/variables';
 
 .DocumentoPage {
+	display: block;
 	padding: 20px 30px;
 	margin-bottom: 40px;
+	margin-left: 20px;
 	@extend %boxContent;
 	@extend %boxShadowContent;
 	p {
