@@ -38,7 +38,6 @@ class VideoDoc extends Component {
       const scrubTime = parseFloat(
         (ev.offsetX / progress.offsetWidth) * isDuration
       );
-      console.log(scrubTime);
       this.refVideo.currentTime = scrubTime;
     });
     this.props.getDurationVideoDoc(this.state.isDuration);

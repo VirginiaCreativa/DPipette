@@ -11,7 +11,6 @@ import msToTime from '../../../../scripts/msToTime';
 
 class DocumentVideo extends Component {
   handleAddTimeline = () => {
-    this.props.isHideTakerMarkerDoc();
     const {
       documentos,
       ID,
@@ -20,10 +19,14 @@ class DocumentVideo extends Component {
       timelineVideo,
       firestore,
     } = this.props;
+
+    // this.props.isHideTakerMarkerDoc();
     const arrayTimelines = documentos[ID].addTimeline;
+    const arrayPageH = documentos[ID].addPageHeightTime;
     const timeline = Math.floor((pageHeight / durationVideo) * timelineVideo);
     firestore.update(`documentos/${ID}`, {
-      addTimeline: arrayTimelines.concat(timeline),
+      addTimeline: arrayTimelines.concat(timelineVideo),
+      addPageHeightTime: arrayPageH.concat(timeline),
     });
   };
 
@@ -33,7 +36,6 @@ class DocumentVideo extends Component {
 
   render() {
     const { viewTakeTimeline, timelineVideo } = this.props;
-    console.log(viewTakeTimeline);
     return (
       <div className={classes.DocumentVideo}>
         <div className={classes.boxVideo}>

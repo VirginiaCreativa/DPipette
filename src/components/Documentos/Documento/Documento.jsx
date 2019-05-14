@@ -42,12 +42,12 @@ class Documento extends Component {
           <>
             <Video ID={this.props.match.params.id} />
             <div className={classes.Page}>
+              <Page onRef={c => (this.refPage = c)} />
               <Marker
-                markers={documento.addTimeline}
+                markers={documento.addPageHeightTime}
                 ID={this.props.match.params.id}
                 onRefUl={ref => (this.refMarkeUl = ref)}
               />
-              <Page onRef={c => (this.refPage = c)} />
             </div>
           </>
         )}

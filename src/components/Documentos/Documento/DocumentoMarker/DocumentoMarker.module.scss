@@ -3,56 +3,6 @@
 .DocumentoMarker {
 	position: relative;
 	padding: 20px 0;
-	.pinMarker {
-		display: block;
-		background-color: $red;
-		// box-shadow: -2px 2px 1px 0px rgba(100, 100, 100, 0.3);
-		position: absolute;
-		position: relative;
-		right: 0px;
-		padding: 0px;
-		width: 36px;
-		height: 12px;
-		border-top-left-radius: 2px;
-		border-bottom-left-radius: 2px;
-		z-index: 100;
-		cursor: pointer;
-		&:before {
-			content: '';
-			display: block;
-			position: absolute;
-			top: 0.2px;
-			right: -8px;
-			border-top: 6.3px solid transparent;
-			border-left: 8px solid $red;
-			border-bottom: 6.2px solid transparent;
-			z-index: 2;
-		}
-		&:after {
-			content: '';
-			display: block;
-			background-color: $red;
-			box-shadow: -2px 0px 4px 0px rgba(0, 0, 0, 0.11);
-			position: absolute;
-			top: 0;
-			right: 6px;
-			width: 5px;
-			height: 10px;
-			z-index: 2;
-		}
-		// &:hover {
-		//   background-color: $red_dark;
-		//   &:before {
-		//     border-left: 10px solid $red_dark;
-		//     border-right: 10px solid $red_dark;
-		//     border-bottom: 4px solid transparent;
-		//   }
-		//   &::after {
-		//     background-color: $red_dark;
-		//     box-shadow: -2px 0px 1px 0px rgba(0, 0, 0, 0.1);
-		//   }
-		// }
-	}
 	ul {
 		margin: 0;
 		padding: 0;
@@ -63,6 +13,75 @@
 			margin: 0;
 			padding: 0;
 			z-index: 1;
+			display: flex;
+			&:hover {
+				.btnDelete {
+					display: flex;
+				}
+			}
+			.btnDelete {
+				display: none;
+			}
+			:global {
+				.bx-trash-alt {
+					position: relative;
+					top: 0px;
+					left: -3px;
+					color: $red;
+					cursor: pointer;
+				}
+			}
+			.pinMarker {
+				display: block;
+				background-color: $green;
+				position: absolute;
+				position: relative;
+				left: -14px;
+				padding: 0px;
+				width: 36px;
+				height: 14px;
+				border-top-left-radius: 2px;
+				border-bottom-left-radius: 2px;
+				z-index: 100;
+				cursor: pointer;
+				transform: rotate(-180deg);
+
+				&:before {
+					content: '';
+					display: block;
+					position: absolute;
+					top: 0;
+					right: -8px;
+					border-top: 7px solid transparent;
+					border-left: 8px solid $green;
+					border-bottom: 7px solid transparent;
+					z-index: 2;
+				}
+				&:after {
+					content: '';
+					display: block;
+					background-color: $green;
+					box-shadow: -2px 0px 4px 0px rgba(0, 0, 0, 0.11);
+					position: absolute;
+					top: 0;
+					right: 9px;
+					width: 5px;
+					height: 14px;
+					z-index: 2;
+				}
+				&:hover {
+					background-color: #0cbb84;
+					&:before {
+						border-top: 7px solid transparent;
+						border-left: 8px solid #0cbb84;
+						border-bottom: 7px solid transparent;
+					}
+					&::after {
+						background-color: #0cbb84;
+						box-shadow: -2px 0px 1px 0px rgba(0, 0, 0, 0.1);
+					}
+				}
+			}
 		}
 	}
 }
