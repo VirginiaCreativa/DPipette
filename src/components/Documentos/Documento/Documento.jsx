@@ -44,7 +44,7 @@ class Documento extends Component {
             <div className={classes.Page}>
               <Page onRef={c => (this.refPage = c)} />
               <Marker
-                markers={documento.addPageHeightTime}
+                markers={documento.addTimeline}
                 ID={this.props.match.params.id}
                 onRefUl={ref => (this.refMarkeUl = ref)}
               />

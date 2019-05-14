@@ -91,7 +91,6 @@ class ButtonCreates extends Component {
       tema: 'Nueva tema',
       materia: 'Nueva materia',
       addTimeline: [],
-      addPageHeightTime: [],
     };
     this.props.firestore
       .add('documentos', {

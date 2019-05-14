@@ -20,13 +20,14 @@ class DocumentVideo extends Component {
       firestore,
     } = this.props;
 
-    // this.props.isHideTakerMarkerDoc();
+    this.props.isHideTakerMarkerDoc();
     const arrayTimelines = documentos[ID].addTimeline;
-    const arrayPageH = documentos[ID].addPageHeightTime;
-    const timeline = Math.floor((pageHeight / durationVideo) * timelineVideo);
+    const PageHeight = Math.floor((pageHeight / durationVideo) * timelineVideo);
     firestore.update(`documentos/${ID}`, {
-      addTimeline: arrayTimelines.concat(timelineVideo),
-      addPageHeightTime: arrayPageH.concat(timeline),
+      addTimeline: arrayTimelines.concat({
+        time: timelineVideo,
+        height: PageHeight,
+      }),
     });
   };
 
