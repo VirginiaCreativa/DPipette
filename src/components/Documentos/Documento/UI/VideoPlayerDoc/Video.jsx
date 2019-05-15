@@ -47,14 +47,12 @@ class VideoDoc extends Component {
     this.setState({
       isControlPlay: !isControlPlay,
     });
-    this.refVideo.currentTime = this.props.timelineSame;
   };
 
   onPause = () => {
     const { isControlPlay } = this.state;
     this.refVideo.pause();
     this.setState({ isControlPlay: !isControlPlay });
-    this.refVideo.currentTime = this.props.timelineSame;
   };
 
   onMarker = () => {
@@ -89,7 +87,6 @@ class VideoDoc extends Component {
           controlPlay={isControlPlay}
           clickProgress={this.handleScrub}
           refProgress={this.refProgress}
-          lineTime={this.props.lineTime}
           onTimeline={this.handleTimelineMarke}
         />
         <video

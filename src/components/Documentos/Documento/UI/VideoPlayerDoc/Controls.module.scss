@@ -19,9 +19,12 @@
 			.lineM {
 				height: 30px;
 				display: block;
-				width: 4px;
+				width: 3px;
 				background-color: $green;
 				position: relative;
+				&:hover {
+					background-color: #0cf7ac;
+				}
 			}
 		}
 		.Progress {

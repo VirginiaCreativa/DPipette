@@ -30,6 +30,10 @@ class Documento extends Component {
     this.props.getPageHeightDoc(this.refPage.clientHeight);
   }
 
+  handleTimelineSame = (item, index) => {
+    console.log(item);
+  };
+
   render() {
     const { documento } = this.props;
     return (
@@ -49,6 +53,7 @@ class Documento extends Component {
                 markers={documento.addTimeline}
                 ID={this.props.match.params.id}
                 onRefUl={ref => (this.refMarkeUl = ref)}
+                onTimelSame={this.handleTimelineSame}
               />
             </div>
           </>

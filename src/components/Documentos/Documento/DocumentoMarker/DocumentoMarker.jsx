@@ -13,6 +13,7 @@ const DocumentoMarker = ({
   firestore,
   documentos,
   getTimelineSame,
+  onTimelSame,
 }) => {
   const handleDeleteMarker = (index, item) => {
     const timeDB = documentos[ID].addTimeline;
@@ -33,7 +34,7 @@ const DocumentoMarker = ({
             <div
               className={classes.pinMarker}
               role="presentation"
-              onClick={() => handleTimelineSame(item, index)}
+              onClick={() => onTimelSame(item, index)}
             />
             <div
               className={classes.btnDelete}

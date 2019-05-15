@@ -40,10 +40,7 @@ class DocumentVideo extends Component {
     return (
       <div className={classes.DocumentVideo}>
         <div className={classes.boxVideo}>
-          <VideoPlayer
-            lineTime={this.props.lineTime}
-            srcVideo="https://firebasestorage.googleapis.com/v0/b/dpipette-ff5ee.appspot.com/o/notescornell%2Fprueba%20materia%201%2Fprueba_1%2Fresumen%2Fprueba_1?alt=media&token=37705e96-54d5-44a6-a6a6-8cd3555a5015"
-          />
+          <VideoPlayer srcVideo="https://firebasestorage.googleapis.com/v0/b/dpipette-ff5ee.appspot.com/o/notescornell%2Fprueba%20materia%201%2Fprueba_1%2Fresumen%2Fprueba_1?alt=media&token=37705e96-54d5-44a6-a6a6-8cd3555a5015" />
         </div>
         {viewTakeTimeline && (
           <div className={classes.boxAddTimeVideo}>
