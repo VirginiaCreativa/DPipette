@@ -45,7 +45,10 @@ class Documento extends Component {
         ) : (
           <>
             <div className={[classes.Video, 'img-fluid'].join('')}>
-              <Video ID={this.props.match.params.id} {...document} />
+              <Video
+                ID={this.props.match.params.id}
+                srcVideo="https://firebasestorage.googleapis.com/v0/b/dpipette-ff5ee.appspot.com/o/notescornell%2Fprueba%20materia%201%2Fprueba_1%2Fresumen%2Fprueba_1?alt=media&token=37705e96-54d5-44a6-a6a6-8cd3555a5015"
+              />
             </div>
             <div className={classes.Page}>
               <Page onRef={c => (this.refPage = c)} />
