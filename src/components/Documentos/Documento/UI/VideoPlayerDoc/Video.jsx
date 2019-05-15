@@ -68,6 +68,12 @@ class VideoDoc extends Component {
     });
   };
 
+  handleTimelineMarke = (index, item) => {
+    console.log(item.time);
+    this.refVideo.currentTime = item.time;
+    this.refVideo.play();
+  };
+
   render() {
     const { title, srcVideo, getDurationVideoDoc } = this.props;
     const { isCurrentTime, isDuration, isControlPlay } = this.state;
@@ -83,6 +89,8 @@ class VideoDoc extends Component {
           controlPlay={isControlPlay}
           clickProgress={this.handleScrub}
           refProgress={this.refProgress}
+          lineTime={this.props.lineTime}
+          onTimeline={this.handleTimelineMarke}
         />
         <video
           ref={ref => (this.refVideo = ref)}

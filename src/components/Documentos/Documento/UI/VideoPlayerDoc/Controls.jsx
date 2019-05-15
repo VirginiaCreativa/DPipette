@@ -1,6 +1,7 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { connect } from 'react-redux';
-import { bindActionCreators, compose } from 'redux';
+import { withRouter } from 'react-router';
+import { compose } from 'redux';
 import { firestoreConnect } from 'react-redux-firebase';
 import classes from './Controls.module.scss';
 
@@ -13,8 +14,18 @@ const Controls = ({
   controlPlay,
   clickProgress,
   refProgress,
+  match,
   documentos,
+  durationVideo,
+  onTimeline,
 }) => {
+  const [isWidthProgress, setWidthProgress] = useState(0);
+  const refProgressSlider = useRef(null);
+
+  useEffect(() => () => {
+    setWidthProgress(refProgressSlider.current.offsetWidth);
+  });
+
   const handleProgress = () => {
     const float = parseFloat(isCurrentTime / isDuration).toFixed(2);
     const percent = float * 100;
@@ -24,10 +35,13 @@ const Controls = ({
   const progressClass = {
     width: `${handleProgress()}%`,
   };
-  const handleTimelineMarke = ev => {
-    console.log(ev);
+
+  const isTimeWidth = time => {
+    const timeWidth = Math.floor((isWidthProgress / durationVideo) * time);
+    return timeWidth;
   };
 
+  const timelineDB = documentos[match.params.id].addTimeline;
   return (
     <div className={classes.Controls}>
       <div className={classes.Control}>
@@ -41,16 +55,20 @@ const Controls = ({
           </button>
         )}
       </div>
-      <div className={classes.progressSlider}>
-        <div
-          className={classes.MarkerTimeline}
-          onClick={handleTimelineMarke}
-          role="presentation">
-          <span className={classes.lineM} />
-          {/* {documentos.map(item => (
-            <span key={item} style={progressClass} />
-          ))} */}
-        </div>
+      <div className={classes.progressSlider} ref={refProgressSlider}>
+        {timelineDB.map((item, index) => (
+          <div
+            key={index}
+            className={classes.MarkerTimeline}
+            onClick={() => onTimeline(index, item)}
+            role="presentation">
+            <span
+              className={classes.lineM}
+              style={{ left: `${isTimeWidth(item.time)}px` }}
+            />
+          </div>
+        ))}
+
         <div
           className={classes.Progress}
           ref={refProgress}
@@ -71,8 +89,13 @@ const Controls = ({
 
 export default compose(
   firestoreConnect(),
+  withRouter,
   connect(
-    state => ({ documentos: state.firestore.data.documentos }),
+    state => ({
+      documentos: state.firestore.data.documentos,
+      timelineVideo: state.Documentos.timeline,
+      durationVideo: state.Documentos.duration,
+    }),
     null
   )
 )(Controls);

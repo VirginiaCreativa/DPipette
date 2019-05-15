@@ -12,6 +12,7 @@
 	.progressSlider {
 		height: 30px;
 		.MarkerTimeline {
+			cursor: pointer;
 			z-index: 3;
 			position: absolute;
 			bottom: 0;
@@ -20,6 +21,7 @@
 				display: block;
 				width: 4px;
 				background-color: $green;
+				position: relative;
 			}
 		}
 		.Progress {

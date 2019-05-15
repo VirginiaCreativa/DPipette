@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { bindActionCreators, compose } from 'redux';
 import { connect } from 'react-redux';
 import { firestoreConnect, isLoaded, isEmpty } from 'react-redux-firebase';
-import Spinner from './Spinner/Spinner';
+import Spinner from './UI/Spinner/Spinner';
 import Empty from '../../UI/Empty/Empty';
 import classes from './Documento.module.scss';
 
@@ -41,7 +41,7 @@ class Documento extends Component {
         ) : (
           <>
             <div className={[classes.Video, 'img-fluid'].join('')}>
-              <Video ID={this.props.match.params.id} />
+              <Video ID={this.props.match.params.id} {...document} />
             </div>
             <div className={classes.Page}>
               <Page onRef={c => (this.refPage = c)} />
