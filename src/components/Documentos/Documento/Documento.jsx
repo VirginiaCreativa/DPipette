@@ -36,24 +36,24 @@ class Documento extends Component {
   };
 
   componentDidMount() {
+    const { isDuration } = this.state;
     this.props.getPageHeightDoc(this.refPage.clientHeight);
+    this.props.getDurationVideoDoc(isDuration);
   }
 
   componentDidUpdate() {
-    // const { isDuration, isCurrentTime } = this.state;
+    const { isDuration } = this.state;
+    this.props.getDurationVideoDoc(isDuration);
     this.props.getPageHeightDoc(this.refPage.clientHeight);
-
-    // const progress = this.refProgress;
-    // progress.addEventListener('click', ev => {
-    //   const scrubTime = parseFloat(
-    //     (ev.offsetX / progress.offsetWidth) * isDuration
-    //   );
-    //   this.refVideo.currentTime = scrubTime;
-    // });
+    const progress = this.refProgress;
+    progress.addEventListener('click', ev => {
+      console.log((ev.offsetX / progress.offsetWidth) * isDuration);
+      this.refVideo.currentTime =
+        (ev.offsetX / progress.offsetWidth) * isDuration;
+    });
   }
 
   handleTimelineSame = (item, index) => {
-    console.log(item.time);
     this.refVideo.currentTime = item.time;
     this.refVideo.play();
   };
@@ -83,19 +83,23 @@ class Documento extends Component {
     });
   };
 
-  handleProgressTimilne = ev => {
-    console.log(ev.target);
-  };
+  // handleProgressTimilne = ev => {
+  //   console.log(ev);
+  // };
 
   handleTimelineMarke = (index, item) => {
+    const { isControlPlay } = this.state;
     this.refVideo.currentTime = item.time;
     this.refVideo.play();
+    this.setState({
+      isControlPlay: !isControlPlay,
+    });
   };
 
   render() {
     const { documento } = this.props;
     const { isCurrentTime, isDuration, isControlPlay } = this.state;
-    this.props.getDurationVideoDoc(isDuration);
+    console.log(isDuration);
     return (
       <div className={classes.Documento}>
         {!isLoaded(documento) ? (
@@ -113,17 +117,17 @@ class Documento extends Component {
                   onPause={this.onPause}
                   onMarker={this.onMarker}
                   controlPlay={isControlPlay}
-                  onClick={this.handleProgressTimilne}
+                  // onClick={this.handleProgressTimilne}
                   refProgress={refP => (this.refProgress = refP)}
                   onTimeline={this.handleTimelineMarke}
                 />
                 <video
                   ref={ref => (this.refVideo = ref)}
                   muted
-                  preload="true"
+                  preload="auto"
                   src="https://firebasestorage.googleapis.com/v0/b/dpipette-ff5ee.appspot.com/o/notescornell%2Fprueba%20materia%201%2Fprueba_1%2Fresumen%2Fprueba_1?alt=media&token=37705e96-54d5-44a6-a6a6-8cd3555a5015"
                   onTimeUpdate={this.handleTimeUpdate}
-                  onLoadedData={event =>
+                  onDurationChange={event =>
                     this.setState({ isDuration: event.target.duration })
                   }
                 />

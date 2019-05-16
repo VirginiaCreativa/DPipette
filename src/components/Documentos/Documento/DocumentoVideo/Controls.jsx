@@ -23,7 +23,10 @@ const Controls = ({
   const refProgressSlider = useRef(null);
 
   useEffect(() => () => {
-    setWidthProgress(refProgressSlider.current.offsetWidth);
+    setWidthProgress(
+      refProgressSlider.current.offsetWidth ||
+        refProgressSlider.current.clientWidth
+    );
   });
 
   const handleProgress = () => {

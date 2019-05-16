@@ -11,6 +11,7 @@
 	width: 100%;
 	.progressSlider {
 		height: 30px;
+		overflow: hidden;
 		.MarkerTimeline {
 			cursor: pointer;
 			z-index: 3;
