@@ -1,10 +1,7 @@
 @import '../../../../styles/variables';
 
-.DocumentVideo {
-	position: fixed;
-	.boxVideo {
-		margin-bottom: 10px;
-	}
+.DocumentoGetMarker {
+	margin-top: 490px;
 	.boxAddTimeVideo {
 		display: grid;
 		grid-template-columns: 26px auto 12% 12%;
@@ -22,13 +19,6 @@
 				font-size: 22px;
 				color: $blue;
 			}
-		}
-	}
-	.Video {
-		position: relative;
-
-		video {
-			display: block;
 		}
 	}
 }

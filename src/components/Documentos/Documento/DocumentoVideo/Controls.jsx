@@ -12,7 +12,7 @@ const Controls = ({
   onPause,
   onMarker,
   controlPlay,
-  clickProgress,
+  onClick,
   refProgress,
   match,
   documentos,
@@ -74,7 +74,7 @@ const Controls = ({
           ref={refProgress}
           role="button"
           tabIndex="0"
-          onClick={clickProgress}>
+          onClick={onClick}>
           <div className={classes.ProgressFilled} style={progressClass} />
         </div>
       </div>
