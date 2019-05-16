@@ -42,12 +42,14 @@ class Documento extends Component {
   }
 
   componentDidUpdate() {
+    this.refVideo.addEventListener('ondurationchange', ev =>
+      console.log('---->', ev.target)
+    );
     const { isDuration } = this.state;
     this.props.getDurationVideoDoc(isDuration);
     this.props.getPageHeightDoc(this.refPage.clientHeight);
     const progress = this.refProgress;
     progress.addEventListener('click', ev => {
-      console.log((ev.offsetX / progress.offsetWidth) * isDuration);
       this.refVideo.currentTime =
         (ev.offsetX / progress.offsetWidth) * isDuration;
     });
@@ -127,9 +129,9 @@ class Documento extends Component {
                   preload="auto"
                   src="https://firebasestorage.googleapis.com/v0/b/dpipette-ff5ee.appspot.com/o/notescornell%2Fprueba%20materia%201%2Fprueba_1%2Fresumen%2Fprueba_1?alt=media&token=37705e96-54d5-44a6-a6a6-8cd3555a5015"
                   onTimeUpdate={this.handleTimeUpdate}
-                  onDurationChange={event =>
-                    this.setState({ isDuration: event.target.duration })
-                  }
+                  onDurationChange={event => {
+                    this.setState({ isDuration: event.target.duration });
+                  }}
                 />
               </div>
               <GetMarker ID={this.props.match.params.id} />
