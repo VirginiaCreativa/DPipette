@@ -4,8 +4,6 @@ import { bindActionCreators, compose } from 'redux';
 import { firestoreConnect } from 'react-redux-firebase';
 import classes from './DocumentoGetMarker.module.scss';
 
-import Controls from './Controls';
-
 import {
   isHideTakerMarkerDoc,
   getTimelineVideoDoc,
@@ -41,13 +39,7 @@ class DocumentoGetMarker extends Component {
   };
 
   render() {
-    const {
-      title,
-      srcVideo,
-      getDurationVideoDoc,
-      viewTakeTimeline,
-      timelineVideo,
-    } = this.props;
+    const { viewTakeTimeline, timelineVideo } = this.props;
     return (
       <>
         <div className={classes.DocumentoGetMarker}>

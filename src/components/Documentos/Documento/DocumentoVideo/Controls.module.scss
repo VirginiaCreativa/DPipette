@@ -1,28 +1,28 @@
 @import '../../../../styles/variables';
 
 .Controls {
-	position: absolute;
 	display: grid;
-	padding: 0 10px;
 	grid-template-columns: 35px auto 35px;
-	align-items: end;
 	grid-gap: 10px;
+	align-items: end;
+	position: absolute;
 	bottom: 10px;
+	padding: 0 10px;
 	width: 100%;
+	overflow: hidden;
 	.progressSlider {
 		height: 30px;
-		overflow: hidden;
 		.MarkerTimeline {
-			cursor: pointer;
-			z-index: 3;
 			position: absolute;
 			bottom: 0;
+			cursor: pointer;
+			z-index: 4;
 			.lineM {
-				height: 30px;
 				display: block;
-				width: 3px;
 				background-color: $green;
 				position: relative;
+				width: 3px;
+				height: 30px;
 				&:hover {
 					background-color: #0cf7ac;
 				}
@@ -30,8 +30,8 @@
 		}
 		.Progress {
 			background-color: rgba($color: $blue, $alpha: 0.8);
-			z-index: 1;
 			height: 100%;
+			z-index: 1;
 			cursor: ew-resize;
 			overflow: hidden;
 			.ProgressFilled {
@@ -45,13 +45,14 @@
 		}
 	}
 	.Control {
+		position: relative;
 		button {
 			text-align: center;
 			color: #fff;
 			background-color: $blue;
 			opacity: 0.9;
-			border: none;
 			height: 30px;
+			border: none;
 			&.btnMark {
 				float: left;
 			}
