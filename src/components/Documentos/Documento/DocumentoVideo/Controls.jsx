@@ -5,6 +5,8 @@ import { compose } from 'redux';
 import { firestoreConnect } from 'react-redux-firebase';
 import classes from './Controls.module.scss';
 
+import { msToTime } from '../../../../scripts/msToTime';
+
 const Controls = ({
   isCurrentTime,
   isDuration,
@@ -58,6 +60,7 @@ const Controls = ({
           </button>
         )}
       </div>
+      <div className={classes.TimeVideo}>{msToTime(isCurrentTime)}</div>
       <div className={classes.progressSlider} ref={refProgressSlider}>
         {timelineDB.map((item, index) => (
           <div

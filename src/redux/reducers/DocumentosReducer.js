@@ -5,6 +5,7 @@ import {
   SHOW_TAKER_MARKER_DOC,
   HIDE_TAKER_MARKER_DOC,
   GET_TIMELINE_SAME_DOC,
+  GET_TIME_PLAY_VIDEO_DOC,
 } from '../actions/Types';
 
 const initialState = {
@@ -13,6 +14,7 @@ const initialState = {
   pageHeight: 0,
   viewTakeTimeline: false,
   timelineSame: null,
+  timePlay: 0,
 };
 
 const DocumentosReducer = (state = initialState, action) => {
@@ -51,6 +53,12 @@ const DocumentosReducer = (state = initialState, action) => {
       return {
         ...state,
         timelineSame: action.payload,
+      };
+    }
+    case GET_TIME_PLAY_VIDEO_DOC: {
+      return {
+        ...state,
+        timePlay: action.payload,
       };
     }
     default:

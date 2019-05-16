@@ -2,7 +2,7 @@
 
 .Controls {
 	display: grid;
-	grid-template-columns: 35px auto 35px;
+	grid-template-columns: 35px 65px auto 35px;
 	grid-gap: 10px;
 	align-items: end;
 	position: absolute;
@@ -12,6 +12,7 @@
 	overflow: hidden;
 	.progressSlider {
 		height: 30px;
+		overflow: hidden;
 		.MarkerTimeline {
 			position: absolute;
 			bottom: 0;
@@ -30,6 +31,7 @@
 		}
 		.Progress {
 			background-color: rgba($color: $blue, $alpha: 0.8);
+			border-radius: 2px;
 			height: 100%;
 			z-index: 1;
 			cursor: ew-resize;
@@ -37,12 +39,23 @@
 			.ProgressFilled {
 				display: block;
 				background-color: $blue_medium;
+				border-radius: 2px;
 				width: 0;
-				height: 36px;
+				height: 30px;
 				transition: all 0.3s ease-in;
 				z-index: 2;
 			}
 		}
+	}
+	.TimeVideo {
+		font-size: 0.8rem;
+		color: #fff;
+		background-color: $blue_medium;
+		background-color: rgba($color: $blue, $alpha: 0.8);
+		padding: 6px;
+		height: 30px;
+		border-radius: 2px;
+		font-weight: 500;
 	}
 	.Control {
 		position: relative;
@@ -53,6 +66,7 @@
 			opacity: 0.9;
 			height: 30px;
 			border: none;
+			border-radius: 2px;
 			&.btnMark {
 				float: left;
 			}

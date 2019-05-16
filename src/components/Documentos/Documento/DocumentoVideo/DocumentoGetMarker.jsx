@@ -10,7 +10,7 @@ import {
   getDurationVideoDoc,
   isShowTakerMarkerDoc,
 } from '../../../../redux/actions/DocumentosAction';
-import msToTime from '../../../../scripts/msToTime';
+import { msToTime } from '../../../../scripts/msToTime';
 
 class DocumentoGetMarker extends Component {
   handleAddTimeline = () => {

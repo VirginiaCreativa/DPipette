@@ -1,6 +1,7 @@
 import {
   GET_TIMELINE_VIDEO_DOC,
   GET_DURATION_VIDEO_DOC,
+  GET_TIME_PLAY_VIDEO_DOC,
   GET_PAGE_HEIGHT_DOC,
   SHOW_TAKER_MARKER_DOC,
   HIDE_TAKER_MARKER_DOC,
@@ -33,6 +34,11 @@ export const isHideTakerMarkerDoc = () => ({
 });
 
 export const getTimelineSame = payload => ({
+  type: GET_TIMELINE_SAME_DOC,
+  payload,
+});
+
+export const getTimePlayVideoDoc = payload => ({
   type: GET_TIMELINE_SAME_DOC,
   payload,
 });

@@ -17,6 +17,7 @@ import {
   getTimelineVideoDoc,
   getDurationVideoDoc,
   isShowTakerMarkerDoc,
+  getTimePlayVideoDoc,
 } from '../../../redux/actions/DocumentosAction';
 
 class Documento extends Component {
@@ -42,9 +43,6 @@ class Documento extends Component {
   }
 
   componentDidUpdate() {
-    this.refVideo.addEventListener('ondurationchange', ev =>
-      console.log('---->', ev.target)
-    );
     const { isDuration } = this.state;
     this.props.getDurationVideoDoc(isDuration);
     this.props.getPageHeightDoc(this.refPage.clientHeight);
@@ -52,6 +50,10 @@ class Documento extends Component {
     progress.addEventListener('click', ev => {
       this.refVideo.currentTime =
         (ev.offsetX / progress.offsetWidth) * isDuration;
+    });
+
+    this.refVideo.addEventListener('loadedmetadata', () => {
+      if (this.refVideo.buffered.length === 0);
     });
   }
 
@@ -80,6 +82,7 @@ class Documento extends Component {
   };
 
   handleTimeUpdate = ev => {
+    console.log('----)', ev);
     this.setState({
       isCurrentTime: this.refVideo.currentTime,
     });
@@ -121,7 +124,7 @@ class Documento extends Component {
                 <video
                   ref={ref => (this.refVideo = ref)}
                   muted
-                  preload="true"
+                  preload="auto"
                   src="https://firebasestorage.googleapis.com/v0/b/dpipette-ff5ee.appspot.com/o/notescornell%2Fprueba%20materia%201%2Fprueba_1%2Fresumen%2Fprueba_1?alt=media&token=37705e96-54d5-44a6-a6a6-8cd3555a5015"
                   onTimeUpdate={this.handleTimeUpdate}
                   onDurationChange={event => {
@@ -154,6 +157,7 @@ const mapDispatchToProps = dispatch =>
       getTimelineVideoDoc,
       getDurationVideoDoc,
       isShowTakerMarkerDoc,
+      getTimePlayVideoDoc,
     },
     dispatch
   );
