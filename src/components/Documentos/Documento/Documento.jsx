@@ -154,7 +154,7 @@ class Documento extends Component {
                       </div>
                     </div>
                     <div className="col-8">
-                      <div className={classes.BoxPage}>
+                      <div className={classes.BoxPageLeft}>
                         <Page onRef={c => (this.refPage = c)} />
                         <Marker
                           {...documento}
@@ -170,14 +170,14 @@ class Documento extends Component {
                 <>
                   <div className="row">
                     <div className="col-8">
-                      <div className={classes.BoxPage}>
-                        <Page onRef={c => (this.refPage = c)} />
+                      <div className={classes.BoxPageRight}>
                         <Marker
                           {...documento}
                           ID={this.props.match.params.id}
                           onRefUl={ref => (this.refMarkeUl = ref)}
                           onTimelSame={this.handleTimelineSame}
                         />
+                        <Page onRef={c => (this.refPage = c)} />
                       </div>
                     </div>
                     <div className="col-4">

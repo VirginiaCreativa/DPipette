@@ -15,6 +15,7 @@ const DocumentoMarker = ({
   getTimelineSame,
   onTimelSame,
   addTimeline,
+  pageGrid,
 }) => {
   const handleDeleteMarker = (index, item) => {
     const timeDB = documentos[ID].addTimeline;
@@ -33,12 +34,16 @@ const DocumentoMarker = ({
         {addTimeline.map((item, index) => (
           <li key={index} style={{ top: `${item.height}px` }} ref={onRef}>
             <div
-              className={classes.pinMarker}
+              className={
+                pageGrid ? classes.pinMarkerLeft : classes.pinMarkerRight
+              }
               role="presentation"
               onClick={() => onTimelSame(item, index)}
             />
             <div
-              className={classes.btnDelete}
+              className={
+                pageGrid ? classes.btnDeleteLeft : classes.btnDeleteRight
+              }
               role="presentation"
               onClick={() => handleDeleteMarker(item, index)}>
               <i className="bx bx-trash-alt" />
@@ -58,6 +63,7 @@ export default compose(
   connect(
     state => ({
       documentos: state.firestore.data.documentos,
+      pageGrid: state.Documentos.pageGrid,
     }),
     mapDispatchToProps
   )

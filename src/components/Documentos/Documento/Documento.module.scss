@@ -10,9 +10,13 @@
 				}
 			}
 		}
-		.BoxPage {
+		.BoxPageLeft {
 			display: grid;
-			grid-template-columns: auto 36px;
+			grid-template-columns: auto 42px;
+		}
+		.BoxPageRight {
+			display: grid;
+			grid-template-columns: 42px auto;
 		}
 	}
 }
