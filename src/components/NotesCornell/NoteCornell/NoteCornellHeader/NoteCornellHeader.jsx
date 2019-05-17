@@ -54,12 +54,11 @@ const NoteCornellHeader = ({
   };
 
   const handleSubmiteTema = () => {
-    const id = docID;
-    const db = firestore;
-    db.update(`notescornell/${id}`, {
-      tema: isTema,
-      date: Date.now(),
-    })
+    firestore
+      .update(`notescornell/${docID}`, {
+        tema: isTema,
+        date: Date.now(),
+      })
       .then(() => {
         setActiveTema(true);
       })
@@ -67,12 +66,11 @@ const NoteCornellHeader = ({
   };
 
   const handleSubmiteMateria = () => {
-    const id = docID;
-    const db = firestore;
-    db.update(`notescornell/${id}`, {
-      materia: isMateria,
-      date: Date.now(),
-    })
+    firestore
+      .update(`notescornell/${docID}`, {
+        materia: isMateria,
+        date: Date.now(),
+      })
       .then(() => {
         setActiveMateria(true);
       })

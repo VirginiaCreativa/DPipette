@@ -1,6 +1,52 @@
 @import '../../../../styles/variables';
 
 .DocumentoHeader {
+	display: grid;
+	align-items: center;
+	margin-bottom: 30px;
+	min-height: 72px;
+	.BoxHeadingConfirm {
+		display: flex;
+		align-items: center;
+		align-content: center;
+
+		.btnEditable {
+			position: relative;
+			top: 10px;
+		}
+	}
+	.btnEditable {
+		color: $gray_light;
+		background-color: transparent !important;
+		border: none;
+
+		:global {
+			.bx {
+				font-size: 20px;
+				line-height: 1.5;
+			}
+		}
+	}
+	.BoxHeadingForm {
+		display: grid;
+		grid-template-columns: 75% 25%;
+		align-items: center;
+		align-content: center;
+
+		.GroupForm {
+			display: grid;
+			grid-template-columns: 49% 49%;
+			grid-gap: 10px;
+			align-items: center;
+			align-content: center;
+		}
+
+		.btnEditable {
+			text-align: left;
+			position: relative;
+			top: 10px;
+		}
+	}
 }
 .TitleHeading {
 	padding-left: 15px;
@@ -33,4 +79,8 @@
 			font-weight: 700;
 		}
 	}
+}
+
+.activeBtnEditable {
+	color: $green !important;
 }

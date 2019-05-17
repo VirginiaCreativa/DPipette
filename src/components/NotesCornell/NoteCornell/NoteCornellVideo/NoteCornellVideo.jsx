@@ -37,7 +37,6 @@ const NoteCornellVideo = ({
         setVideoShow(false);
         setUploadValue(0);
       }
-      console.log(refVideoNote.currentTime);
     },
     [docID, notescornell, videoNote]
   );
