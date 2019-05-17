@@ -4,16 +4,16 @@
 	position: relative;
 	padding: 20px 0;
 	ul {
+		position: relative;
 		margin: 0;
 		padding: 0;
 		height: 100%;
-		position: relative;
 		li {
+			display: flex;
 			position: absolute;
 			margin: 0;
 			padding: 0;
 			z-index: 1;
-			display: flex;
 			&:hover {
 				.btnDelete {
 					display: flex;
@@ -24,10 +24,10 @@
 			}
 			:global {
 				.bx-trash-alt {
+					color: $red;
 					position: relative;
 					top: 0px;
 					left: -3px;
-					color: $red;
 					cursor: pointer;
 				}
 			}
@@ -40,11 +40,11 @@
 				padding: 0px;
 				width: 36px;
 				height: 14px;
+				transform: rotate(-180deg);
 				border-top-left-radius: 2px;
 				border-bottom-left-radius: 2px;
 				z-index: 100;
 				cursor: pointer;
-				transform: rotate(-180deg);
 
 				&:before {
 					content: '';

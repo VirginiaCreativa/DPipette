@@ -111,7 +111,7 @@ const DocumentoHeader = ({ materia, tema, documentos, ID, firestore }) => {
 };
 
 export default compose(
-  firestoreConnect(['notescornell']),
+  firestoreConnect(['documentos']),
   connect(state => ({
     documentos: state.firestore.data.documentos,
   }))

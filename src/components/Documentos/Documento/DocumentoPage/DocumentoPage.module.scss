@@ -2,9 +2,9 @@
 
 .DocumentoPage {
 	display: block;
-	padding: 20px 30px;
 	margin-bottom: 40px;
 	margin-left: 20px;
+	padding: 20px 30px;
 	@extend %boxContent;
 	@extend %boxShadowContent;
 	p {

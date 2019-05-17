@@ -82,8 +82,8 @@ const NoteCornellHeader = ({
     setActivePopever(!isActivePopever);
   };
 
-  const cssActiveEditable = isActiveEditable ? classes.activeBtnEditable : null;
-  const cssActivePopever = isActivePopever ? classes.activeBtnPopever : null;
+  const cssActiveEditable = isActiveEditable && classes.activeBtnEditable;
+  const cssActivePopever = isActivePopever && classes.activeBtnPopever;
 
   return (
     <div className={classes.LayoutHeader}>
@@ -150,11 +150,11 @@ const NoteCornellHeader = ({
             <button type="button" onClick={onDelete}>
               <i className="bx bx-trash-alt" />
             </button>
-            {isOpenPortada ? (
+            {isOpenPortada && (
               <div className={classes.OpenPopever}>
                 <NoteCornellPortada ID={docID} tema={tema} portada={portada} />
               </div>
-            ) : null}
+            )}
           </div>
         </div>
       </div>
