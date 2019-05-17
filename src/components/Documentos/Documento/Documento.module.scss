@@ -1,22 +1,24 @@
 @import '../../../styles/variables';
 
 .Documento {
-	display: grid;
-	grid-template-columns: 640px auto;
-	@media screen and (max-width: 1920px) {
-		grid-template-columns: 640px auto;
-	}
-	.BoxVideo {
-		.VideoPlayer {
-			margin-bottom: 10px;
-			position: fixed;
-		}
-		video {
-			display: block;
-		}
-	}
-	.Page {
+	.Wrapper {
 		display: grid;
-		grid-template-columns: auto 36px;
+		grid-template-columns: 640px auto;
+		@media screen and (max-width: 1920px) {
+			grid-template-columns: 640px auto;
+		}
+		.BoxVideo {
+			.VideoPlayer {
+				margin-bottom: 10px;
+				position: fixed;
+			}
+			video {
+				display: block;
+			}
+		}
+		.BoxPage {
+			display: grid;
+			grid-template-columns: auto 36px;
+		}
 	}
 }

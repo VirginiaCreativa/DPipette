@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
 import { compose } from 'redux';
 import { firestoreConnect } from 'react-redux-firebase';
-import classes from './Controls.module.scss';
+import classes from './DocumentoControls.module.scss';
 
 import { msToTime } from '../../../../scripts/msToTime';
 
@@ -48,7 +48,7 @@ const Controls = ({
   const timelineDB = documentos[match.params.id].addTimeline;
 
   return (
-    <div className={classes.Controls}>
+    <div className={classes.DocumentoControls}>
       <div className={classes.Control}>
         {controlPlay ? (
           <button type="button" onClick={onPlay}>

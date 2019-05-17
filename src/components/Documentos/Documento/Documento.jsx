@@ -9,7 +9,9 @@ import classes from './Documento.module.scss';
 import Page from './DocumentoPage/DocumentoPage';
 import Marker from './DocumentoMarker/DocumentoMarker';
 import GetMarker from './DocumentoVideo/DocumentoGetMarker';
-import Controls from './DocumentoVideo/Controls';
+import Controls from './DocumentoVideo/DocumentoControls';
+import Header from './DocumentoHeader/DocumentoHeader';
+import Config from './DocumentoConfig/DocumentoConfig';
 
 import {
   getPageHeightDoc,
@@ -109,39 +111,51 @@ class Documento extends Component {
           <Spinner />
         ) : (
           <>
-            <div className={classes.BoxVideo}>
-              <div className={classes.VideoPlayer}>
-                <Controls
-                  isCurrentTime={isCurrentTime}
-                  isDuration={isDuration}
-                  onPlay={this.onPlay}
-                  onPause={this.onPause}
-                  onMarker={this.onMarker}
-                  controlPlay={isControlPlay}
-                  refProgress={refP => (this.refProgress = refP)}
-                  onTimeline={this.handleTimelineMarke}
-                />
-                <video
-                  ref={ref => (this.refVideo = ref)}
-                  muted
-                  preload="auto"
-                  src="https://firebasestorage.googleapis.com/v0/b/dpipette-ff5ee.appspot.com/o/notescornell%2Fprueba%20materia%201%2Fprueba_1%2Fresumen%2Fprueba_1?alt=media&token=37705e96-54d5-44a6-a6a6-8cd3555a5015"
-                  onTimeUpdate={this.handleTimeUpdate}
-                  onDurationChange={event => {
-                    this.setState({ isDuration: event.target.duration });
-                  }}
+            <div className={classes.BoxHeader}>
+              <div className="row">
+                <div className="col-9">
+                  <Header />
+                </div>
+                <div className="col-3">
+                  <Config />
+                </div>
+              </div>
+            </div>
+            <div className={classes.Wrapper}>
+              <div className={classes.BoxVideo}>
+                <div className={classes.VideoPlayer}>
+                  <Controls
+                    isCurrentTime={isCurrentTime}
+                    isDuration={isDuration}
+                    onPlay={this.onPlay}
+                    onPause={this.onPause}
+                    onMarker={this.onMarker}
+                    controlPlay={isControlPlay}
+                    refProgress={refP => (this.refProgress = refP)}
+                    onTimeline={this.handleTimelineMarke}
+                  />
+                  <video
+                    ref={ref => (this.refVideo = ref)}
+                    muted
+                    preload="auto"
+                    src="https://firebasestorage.googleapis.com/v0/b/dpipette-ff5ee.appspot.com/o/notescornell%2Fprueba%20materia%201%2Fprueba_1%2Fresumen%2Fprueba_1?alt=media&token=37705e96-54d5-44a6-a6a6-8cd3555a5015"
+                    onTimeUpdate={this.handleTimeUpdate}
+                    onDurationChange={event => {
+                      this.setState({ isDuration: event.target.duration });
+                    }}
+                  />
+                </div>
+                <GetMarker ID={this.props.match.params.id} />
+              </div>
+              <div className={classes.BoxPage}>
+                <Page onRef={c => (this.refPage = c)} />
+                <Marker
+                  markers={documento.addTimeline}
+                  ID={this.props.match.params.id}
+                  onRefUl={ref => (this.refMarkeUl = ref)}
+                  onTimelSame={this.handleTimelineSame}
                 />
               </div>
-              <GetMarker ID={this.props.match.params.id} />
-            </div>
-            <div className={classes.Page}>
-              <Page onRef={c => (this.refPage = c)} />
-              <Marker
-                markers={documento.addTimeline}
-                ID={this.props.match.params.id}
-                onRefUl={ref => (this.refMarkeUl = ref)}
-                onTimelSame={this.handleTimelineSame}
-              />
             </div>
           </>
         )}
