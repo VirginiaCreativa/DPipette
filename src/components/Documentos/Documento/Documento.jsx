@@ -19,7 +19,6 @@ import {
   getTimelineVideoDoc,
   getDurationVideoDoc,
   isShowTakerMarkerDoc,
-  getTimePlayVideoDoc,
 } from '../../../redux/actions/DocumentosAction';
 
 class Documento extends Component {
@@ -99,13 +98,12 @@ class Documento extends Component {
   };
 
   render() {
-    const { documento } = this.props;
+    const { documento, pageGrid } = this.props;
     const { isCurrentTime, isDuration, isControlPlay } = this.state;
-    console.log(isDuration);
     return (
       <div className={classes.Documento}>
         {!isLoaded(documento) ? (
-          <Empty />
+          <Spinner />
         ) : isEmpty(documento) ? (
           <Spinner />
         ) : (
@@ -132,6 +130,7 @@ class Documento extends Component {
                     controlPlay={isControlPlay}
                     refProgress={refP => (this.refProgress = refP)}
                     onTimeline={this.handleTimelineMarke}
+                    {...documento}
                   />
                   <video
                     ref={ref => (this.refVideo = ref)}
@@ -149,7 +148,7 @@ class Documento extends Component {
               <div className={classes.BoxPage}>
                 <Page onRef={c => (this.refPage = c)} />
                 <Marker
-                  markers={documento.addTimeline}
+                  {...documento}
                   ID={this.props.match.params.id}
                   onRefUl={ref => (this.refMarkeUl = ref)}
                   onTimelSame={this.handleTimelineSame}
@@ -170,7 +169,6 @@ const mapDispatchToProps = dispatch =>
       getTimelineVideoDoc,
       getDurationVideoDoc,
       isShowTakerMarkerDoc,
-      getTimePlayVideoDoc,
     },
     dispatch
   );
@@ -181,9 +179,10 @@ export default compose(
     (state, ownProps) => {
       const id = ownProps.match.params.id;
       const documentos = state.firestore.data.documentos;
-      const documento = documentos ? documentos[id] : null;
+      const documento = documentos && documentos[id];
       return {
         documento,
+        pageGrid: state.Documentos.pageGrid,
         durationVideo: state.Documentos.duration,
         timelineVideo: state.Documentos.timeline,
       };

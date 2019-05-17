@@ -5,7 +5,7 @@ import {
   SHOW_TAKER_MARKER_DOC,
   HIDE_TAKER_MARKER_DOC,
   GET_TIMELINE_SAME_DOC,
-  GET_TIME_PLAY_VIDEO_DOC,
+  GET_CHANGE_PAGE_GRID_DOC,
 } from '../actions/Types';
 
 const initialState = {
@@ -15,6 +15,7 @@ const initialState = {
   viewTakeTimeline: false,
   timelineSame: null,
   timePlay: 0,
+  pageGrid: false,
 };
 
 const DocumentosReducer = (state = initialState, action) => {
@@ -55,10 +56,10 @@ const DocumentosReducer = (state = initialState, action) => {
         timelineSame: action.payload,
       };
     }
-    case GET_TIME_PLAY_VIDEO_DOC: {
+    case GET_CHANGE_PAGE_GRID_DOC: {
       return {
         ...state,
-        timePlay: action.payload,
+        pageGrid: action.payload,
       };
     }
     default:

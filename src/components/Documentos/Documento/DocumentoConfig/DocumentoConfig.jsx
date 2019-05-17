@@ -1,10 +1,17 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { compose } from 'redux';
+import { bindActionCreators, compose } from 'redux';
 import { connect } from 'react-redux';
 import { firestoreConnect } from 'react-redux-firebase';
 import classes from './DocumentoConfig.module.scss';
 
-const DocumentoConfig = ({ documentos, favorito }) => {
+import { getChangePageGrid } from '../../../../redux/actions/DocumentosAction';
+
+const DocumentoConfig = ({
+  documentos,
+  favorito,
+  pageGrid,
+  getChangePageGrid,
+}) => {
   const [isFavorito, setFavorito] = useState(favorito);
   const [isActivePopever, setActivePopever] = useState(false);
 
@@ -12,11 +19,15 @@ const DocumentoConfig = ({ documentos, favorito }) => {
   const onDelete = () => {};
   const handleOpenPoprever = () => {};
 
+  const onChangePageGrid = () => {
+    getChangePageGrid(!pageGrid);
+  };
+
   const cssActivePopever = isActivePopever && classes.activeBtnPopever;
 
   return (
     <div className={classes.DocumentoConfig}>
-      <button type="button" onClick={onDelete}>
+      <button type="button" onClick={onChangePageGrid}>
         <i className="bx bx-transfer" />
       </button>
       <button
@@ -39,9 +50,16 @@ const DocumentoConfig = ({ documentos, favorito }) => {
   );
 };
 
+const mapDispatchToProps = dispatch =>
+  bindActionCreators({ getChangePageGrid }, dispatch);
+
 export default compose(
   firestoreConnect(['documentos']),
-  connect(state => ({
-    documentos: state.firestore.data.documentos,
-  }))
+  connect(
+    state => ({
+      pageGrid: state.Documentos.pageGrid,
+      documentos: state.firestore.data.documentos,
+    }),
+    mapDispatchToProps
+  )
 )(DocumentoConfig);

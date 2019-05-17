@@ -14,6 +14,7 @@ const DocumentoMarker = ({
   documentos,
   getTimelineSame,
   onTimelSame,
+  addTimeline,
 }) => {
   const handleDeleteMarker = (index, item) => {
     const timeDB = documentos[ID].addTimeline;
@@ -29,7 +30,7 @@ const DocumentoMarker = ({
   return (
     <div className={classes.DocumentoMarker}>
       <ul className="list-unstyled">
-        {markers.map((item, index) => (
+        {addTimeline.map((item, index) => (
           <li key={index} style={{ top: `${item.height}px` }} ref={onRef}>
             <div
               className={classes.pinMarker}

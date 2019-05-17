@@ -1,11 +1,11 @@
 import {
   GET_TIMELINE_VIDEO_DOC,
   GET_DURATION_VIDEO_DOC,
-  GET_TIME_PLAY_VIDEO_DOC,
   GET_PAGE_HEIGHT_DOC,
   SHOW_TAKER_MARKER_DOC,
   HIDE_TAKER_MARKER_DOC,
   GET_TIMELINE_SAME_DOC,
+  GET_CHANGE_PAGE_GRID_DOC,
 } from './Types';
 
 export const getTimelineVideoDoc = payload => ({
@@ -38,7 +38,7 @@ export const getTimelineSame = payload => ({
   payload,
 });
 
-export const getTimePlayVideoDoc = payload => ({
-  type: GET_TIMELINE_SAME_DOC,
+export const getChangePageGrid = payload => ({
+  type: GET_CHANGE_PAGE_GRID_DOC,
   payload,
 });

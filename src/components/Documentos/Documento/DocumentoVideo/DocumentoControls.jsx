@@ -19,6 +19,7 @@ const Controls = ({
   documentos,
   durationVideo,
   onTimeline,
+  addTimeline,
 }) => {
   const [isWidthProgress, setWidthProgress] = useState(0);
   const refProgressSlider = useRef(null);
@@ -45,8 +46,6 @@ const Controls = ({
     return timeWidth;
   };
 
-  const timelineDB = documentos[match.params.id].addTimeline;
-
   return (
     <div className={classes.DocumentoControls}>
       <div className={classes.Control}>
@@ -62,7 +61,7 @@ const Controls = ({
       </div>
       <div className={classes.TimeVideo}>{msToTime(isCurrentTime)}</div>
       <div className={classes.progressSlider} ref={refProgressSlider}>
-        {timelineDB.map((item, index) => (
+        {addTimeline.map((item, index) => (
           <div
             key={index}
             className={classes.MarkerTimeline}
@@ -94,7 +93,6 @@ const Controls = ({
 
 export default compose(
   firestoreConnect(),
-  withRouter,
   connect(
     state => ({
       documentos: state.firestore.data.documentos,
