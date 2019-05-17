@@ -11,6 +11,8 @@ const DocumentoConfig = ({
   favorito,
   pageGrid,
   getChangePageGrid,
+  firestore,
+  ID,
 }) => {
   const [isFavorito, setFavorito] = useState(favorito);
   const [isActivePopever, setActivePopever] = useState(false);
@@ -20,6 +22,12 @@ const DocumentoConfig = ({
   const handleOpenPoprever = () => {};
 
   const onChangePageGrid = () => {
+    firestore
+      .update(`documentos/${ID}`, {
+        pageGrid: !pageGrid,
+      })
+      .then(() => {})
+      .catch(error => console.log(error));
     getChangePageGrid(!pageGrid);
   };
 

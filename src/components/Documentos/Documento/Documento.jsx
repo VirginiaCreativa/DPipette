@@ -114,12 +114,12 @@ class Documento extends Component {
                   <Header {...documento} ID={this.props.match.params.id} />
                 </div>
                 <div className="col-3">
-                  <Config />
+                  <Config ID={this.props.match.params.id} {...document} />
                 </div>
               </div>
             </div>
             <div className={classes.Wrapper}>
-              {pageGrid ? (
+              {documento.pageGrid ? (
                 <>
                   <div className="row">
                     <div className="col-4">

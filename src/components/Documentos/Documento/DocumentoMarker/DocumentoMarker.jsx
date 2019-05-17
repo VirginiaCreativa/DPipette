@@ -63,7 +63,6 @@ export default compose(
   connect(
     state => ({
       documentos: state.firestore.data.documentos,
-      pageGrid: state.Documentos.pageGrid,
     }),
     mapDispatchToProps
   )
