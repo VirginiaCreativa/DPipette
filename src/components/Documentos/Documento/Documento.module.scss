@@ -2,14 +2,7 @@
 
 .Documento {
 	.Wrapper {
-		display: grid;
-		grid-template-columns: 640px auto;
-		grid-gap: 25px;
-		@media screen and (max-width: 1920px) {
-			grid-template-columns: 640px auto;
-		}
 		.BoxVideo {
-			width: 640px;
 			.VideoPlayer {
 				position: relative;
 				video {

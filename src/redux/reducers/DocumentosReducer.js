@@ -15,7 +15,7 @@ const initialState = {
   viewTakeTimeline: false,
   timelineSame: null,
   timePlay: 0,
-  pageGrid: false,
+  pageGrid: true,
 };
 
 const DocumentosReducer = (state = initialState, action) => {

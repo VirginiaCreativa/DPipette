@@ -119,41 +119,101 @@ class Documento extends Component {
               </div>
             </div>
             <div className={classes.Wrapper}>
-              <div className={classes.BoxVideo}>
-                <div className={classes.VideoPlayer}>
-                  <Controls
-                    isCurrentTime={isCurrentTime}
-                    isDuration={isDuration}
-                    onPlay={this.onPlay}
-                    onPause={this.onPause}
-                    onMarker={this.onMarker}
-                    controlPlay={isControlPlay}
-                    refProgress={refP => (this.refProgress = refP)}
-                    onTimeline={this.handleTimelineMarke}
-                    {...documento}
-                  />
-                  <video
-                    ref={ref => (this.refVideo = ref)}
-                    muted
-                    preload="auto"
-                    src="https://firebasestorage.googleapis.com/v0/b/dpipette-ff5ee.appspot.com/o/notescornell%2Fprueba%20materia%201%2Fprueba_1%2Fresumen%2Fprueba_1?alt=media&token=37705e96-54d5-44a6-a6a6-8cd3555a5015"
-                    onTimeUpdate={this.handleTimeUpdate}
-                    onDurationChange={event => {
-                      this.setState({ isDuration: event.target.duration });
-                    }}
-                  />
-                </div>
-                <GetMarker ID={this.props.match.params.id} />
-              </div>
-              <div className={classes.BoxPage}>
-                <Page onRef={c => (this.refPage = c)} />
-                <Marker
-                  {...documento}
-                  ID={this.props.match.params.id}
-                  onRefUl={ref => (this.refMarkeUl = ref)}
-                  onTimelSame={this.handleTimelineSame}
-                />
-              </div>
+              {pageGrid ? (
+                <>
+                  <div className="row">
+                    <div className="col-4">
+                      <div className={classes.BoxVideo}>
+                        <div className={classes.VideoPlayer}>
+                          <Controls
+                            isCurrentTime={isCurrentTime}
+                            isDuration={isDuration}
+                            onPlay={this.onPlay}
+                            onPause={this.onPause}
+                            onMarker={this.onMarker}
+                            controlPlay={isControlPlay}
+                            refProgress={refP => (this.refProgress = refP)}
+                            onTimeline={this.handleTimelineMarke}
+                            {...documento}
+                          />
+                          <video
+                            className="img-fluid"
+                            ref={ref => (this.refVideo = ref)}
+                            muted
+                            preload="auto"
+                            src="https://firebasestorage.googleapis.com/v0/b/dpipette-ff5ee.appspot.com/o/notescornell%2Fprueba%20materia%201%2Fprueba_1%2Fresumen%2Fprueba_1?alt=media&token=37705e96-54d5-44a6-a6a6-8cd3555a5015"
+                            onTimeUpdate={this.handleTimeUpdate}
+                            onDurationChange={event => {
+                              this.setState({
+                                isDuration: event.target.duration,
+                              });
+                            }}
+                          />
+                        </div>
+                        <GetMarker ID={this.props.match.params.id} />
+                      </div>
+                    </div>
+                    <div className="col-8">
+                      <div className={classes.BoxPage}>
+                        <Page onRef={c => (this.refPage = c)} />
+                        <Marker
+                          {...documento}
+                          ID={this.props.match.params.id}
+                          onRefUl={ref => (this.refMarkeUl = ref)}
+                          onTimelSame={this.handleTimelineSame}
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </>
+              ) : (
+                <>
+                  <div className="row">
+                    <div className="col-8">
+                      <div className={classes.BoxPage}>
+                        <Page onRef={c => (this.refPage = c)} />
+                        <Marker
+                          {...documento}
+                          ID={this.props.match.params.id}
+                          onRefUl={ref => (this.refMarkeUl = ref)}
+                          onTimelSame={this.handleTimelineSame}
+                        />
+                      </div>
+                    </div>
+                    <div className="col-4">
+                      <div className={classes.BoxVideo}>
+                        <div className={classes.VideoPlayer}>
+                          <Controls
+                            isCurrentTime={isCurrentTime}
+                            isDuration={isDuration}
+                            onPlay={this.onPlay}
+                            onPause={this.onPause}
+                            onMarker={this.onMarker}
+                            controlPlay={isControlPlay}
+                            refProgress={refP => (this.refProgress = refP)}
+                            onTimeline={this.handleTimelineMarke}
+                            {...documento}
+                          />
+                          <video
+                            className="img-fluid"
+                            ref={ref => (this.refVideo = ref)}
+                            muted
+                            preload="auto"
+                            src="https://firebasestorage.googleapis.com/v0/b/dpipette-ff5ee.appspot.com/o/notescornell%2Fprueba%20materia%201%2Fprueba_1%2Fresumen%2Fprueba_1?alt=media&token=37705e96-54d5-44a6-a6a6-8cd3555a5015"
+                            onTimeUpdate={this.handleTimeUpdate}
+                            onDurationChange={event => {
+                              this.setState({
+                                isDuration: event.target.duration,
+                              });
+                            }}
+                          />
+                        </div>
+                        <GetMarker ID={this.props.match.params.id} />
+                      </div>
+                    </div>
+                  </div>
+                </>
+              )}
             </div>
           </>
         )}
