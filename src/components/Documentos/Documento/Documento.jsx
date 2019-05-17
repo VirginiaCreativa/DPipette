@@ -84,7 +84,6 @@ class Documento extends Component {
   };
 
   handleTimeUpdate = ev => {
-    console.log('----)', ev);
     this.setState({
       isCurrentTime: this.refVideo.currentTime,
     });
@@ -114,7 +113,7 @@ class Documento extends Component {
             <div className={classes.BoxHeader}>
               <div className="row">
                 <div className="col-9">
-                  <Header />
+                  <Header {...documento} ID={this.props.match.params.id} />
                 </div>
                 <div className="col-3">
                   <Config />

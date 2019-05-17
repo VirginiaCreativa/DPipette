@@ -1,9 +1,7 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useRef, useEffect } from 'react';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { firestoreConnect } from 'react-redux-firebase';
-import { ID } from 'postcss-selector-parser';
 import classes from './NoteCornellHeader.module.scss';
 import CapitalizeFirstLetter from '../../../../scripts/CapitalizeFirstLetter';
 

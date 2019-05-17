@@ -1,0 +1,36 @@
+@import '../../../../styles/variables';
+
+.DocumentoHeader {
+}
+.TitleHeading {
+	padding-left: 15px;
+	border-left: 2px solid $write_gray_3;
+
+	.textDate {
+		font-size: 0.775rem;
+		color: $gray_light;
+	}
+
+	.GroupTitle {
+		display: flex;
+		align-items: center;
+		align-content: center;
+
+		.Tema {
+			color: $heading;
+			margin-bottom: 0;
+			// font-size: 2rem;
+		}
+
+		.Materia {
+			display: inline-block;
+			font-size: 0.875rem;
+			color: $blue;
+			background-color: #daeafd;
+			margin-left: 10px;
+			padding: 2px 8px;
+			border-radius: 2px;
+			font-weight: 700;
+		}
+	}
+}
