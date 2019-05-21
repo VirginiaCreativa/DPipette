@@ -2,14 +2,6 @@
 
 .Documento {
 	.Wrapper {
-		.BoxVideo {
-			.VideoPlayer {
-				position: relative;
-				video {
-					display: block;
-				}
-			}
-		}
 		.BoxPageLeft {
 			display: grid;
 			grid-template-columns: auto 42px;

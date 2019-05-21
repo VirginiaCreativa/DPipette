@@ -92,6 +92,7 @@ class ButtonCreates extends Component {
       materia: 'Nueva materia',
       addTimeline: [],
       favorito: false,
+      hasVideo: false,
       date: Date.now(),
     };
     this.props.firestore

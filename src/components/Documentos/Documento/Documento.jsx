@@ -36,7 +36,6 @@ class Documento extends Component {
     isDuration: 0,
     isCurrentTime: 0,
     isControlPlay: true,
-    hasVideo: true,
   };
 
   componentDidMount() {
@@ -51,7 +50,7 @@ class Documento extends Component {
     this.props.getPageHeightDoc(this.refPage.clientHeight);
     const progress = this.refProgress;
 
-    if (hasVideo) {
+    if (this.props.hasVideo) {
       progress.addEventListener('click', ev => {
         this.refVideo.currentTime =
           (ev.offsetX / progress.offsetWidth) * isDuration;
@@ -105,8 +104,8 @@ class Documento extends Component {
   };
 
   render() {
-    const { documento, pageGrid } = this.props;
-    const { isCurrentTime, isControlPlay, hasVideo } = this.state;
+    const { documento, pageGrid, hasVideo } = this.props;
+    const { isCurrentTime, isControlPlay } = this.state;
     return (
       <div className={classes.Documento}>
         {!isLoaded(documento) ? (
@@ -131,27 +130,25 @@ class Documento extends Component {
                   <div className="row">
                     <div className="col-4">
                       <div className={classes.BoxVideo}>
-                        <div className={classes.VideoPlayer}>
-                          <Video
-                            {...documento}
-                            isCurrentTime={isCurrentTime}
-                            onPlay={this.onPlay}
-                            onPause={this.onPause}
-                            onMarker={this.onMarker}
-                            onControlPlay={isControlPlay}
-                            onRefProgress={refP => (this.refProgress = refP)}
-                            onTimeline={this.handleTimelineMarke}
-                            hasVideo={hasVideo}
-                            onRefVideo={ref => (this.refVideo = ref)}
-                            onSrc="https://firebasestorage.googleapis.com/v0/b/dpipette-ff5ee.appspot.com/o/notescornell%2Fprueba%20materia%201%2Fprueba_1%2Fresumen%2Fprueba_1?alt=media&token=37705e96-54d5-44a6-a6a6-8cd3555a5015"
-                            onTimeUpdate={this.handleTimeUpdate}
-                            onDurationChange={event => {
-                              this.setState({
-                                isDuration: event.target.duration,
-                              });
-                            }}
-                          />
-                        </div>
+                        <Video
+                          {...documento}
+                          ID={this.props.match.params.id}
+                          isCurrentTime={isCurrentTime}
+                          onPlay={this.onPlay}
+                          onPause={this.onPause}
+                          onMarker={this.onMarker}
+                          onControlPlay={isControlPlay}
+                          onRefProgress={refP => (this.refProgress = refP)}
+                          onTimeline={this.handleTimelineMarke}
+                          onRefVideo={ref => (this.refVideo = ref)}
+                          onSrc="https://firebasestorage.googleapis.com/v0/b/dpipette-ff5ee.appspot.com/o/notescornell%2Fprueba%20materia%201%2Fprueba_1%2Fresumen%2Fprueba_1?alt=media&token=37705e96-54d5-44a6-a6a6-8cd3555a5015"
+                          onTimeUpdate={this.handleTimeUpdate}
+                          onDurationChange={event => {
+                            this.setState({
+                              isDuration: event.target.duration,
+                            });
+                          }}
+                        />
                         <GetMarker ID={this.props.match.params.id} />
                       </div>
                     </div>
@@ -184,25 +181,25 @@ class Documento extends Component {
                     </div>
                     <div className="col-4">
                       <div className={classes.BoxVideo}>
-                        <div className={classes.VideoPlayer}>
-                          <Video
-                            isCurrentTime={isCurrentTime}
-                            onPlay={this.onPlay}
-                            onPause={this.onPause}
-                            onMarker={this.onMarker}
-                            onControlPlay={isControlPlay}
-                            onRefProgress={refP => (this.refProgress = refP)}
-                            onTimeline={this.handleTimelineMarke}
-                            onRefVideo={ref => (this.refVideo = ref)}
-                            onSrc="https://firebasestorage.googleapis.com/v0/b/dpipette-ff5ee.appspot.com/o/notescornell%2Fprueba%20materia%201%2Fprueba_1%2Fresumen%2Fprueba_1?alt=media&token=37705e96-54d5-44a6-a6a6-8cd3555a5015"
-                            onTimeUpdate={this.handleTimeUpdate}
-                            onDurationChange={event => {
-                              this.setState({
-                                isDuration: event.target.duration,
-                              });
-                            }}
-                          />
-                        </div>
+                        <Video
+                          {...documento}
+                          ID={this.props.match.params.id}
+                          isCurrentTime={isCurrentTime}
+                          onPlay={this.onPlay}
+                          onPause={this.onPause}
+                          onMarker={this.onMarker}
+                          onControlPlay={isControlPlay}
+                          onRefProgress={refP => (this.refProgress = refP)}
+                          onTimeline={this.handleTimelineMarke}
+                          onRefVideo={ref => (this.refVideo = ref)}
+                          onSrc="https://firebasestorage.googleapis.com/v0/b/dpipette-ff5ee.appspot.com/o/notescornell%2Fprueba%20materia%201%2Fprueba_1%2Fresumen%2Fprueba_1?alt=media&token=37705e96-54d5-44a6-a6a6-8cd3555a5015"
+                          onTimeUpdate={this.handleTimeUpdate}
+                          onDurationChange={event => {
+                            this.setState({
+                              isDuration: event.target.duration,
+                            });
+                          }}
+                        />
                         <GetMarker ID={this.props.match.params.id} />
                       </div>
                     </div>
@@ -237,6 +234,7 @@ export default compose(
       const documento = documentos && documentos[id];
       return {
         documento,
+        hasVideo: state.Documentos.hasVideo,
         pageGrid: state.Documentos.pageGrid,
         durationVideo: state.Documentos.duration,
         timelineVideo: state.Documentos.timeline,

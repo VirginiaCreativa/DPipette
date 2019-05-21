@@ -1,0 +1,28 @@
+@import '../../../../styles/variables';
+
+.VideoPlayer {
+	position: relative;
+	video {
+		display: block;
+	}
+	.btnDelete {
+		line-height: 1;
+		color: $red;
+		background-color: transparent;
+		padding: 4px;
+		border: none;
+		border-radius: 2px;
+		position: absolute;
+		z-index: 3;
+		right: 10px;
+		top: 6px;
+		&:hover {
+			color: $red_dark;
+		}
+		:global {
+			.bxs-x-circle {
+				font-size: 28px;
+			}
+		}
+	}
+}

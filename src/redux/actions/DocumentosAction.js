@@ -6,6 +6,7 @@ import {
   HIDE_TAKER_MARKER_DOC,
   GET_TIMELINE_SAME_DOC,
   GET_CHANGE_PAGE_GRID_DOC,
+  GET_VIDE_DOC,
 } from './Types';
 
 export const getTimelineVideoDoc = payload => ({
@@ -40,5 +41,10 @@ export const getTimelineSame = payload => ({
 
 export const getChangePageGrid = payload => ({
   type: GET_CHANGE_PAGE_GRID_DOC,
+  payload,
+});
+
+export const getVideoDoc = payload => ({
+  type: GET_VIDE_DOC,
   payload,
 });
