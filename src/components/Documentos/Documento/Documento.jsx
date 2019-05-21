@@ -10,6 +10,7 @@ import Page from './DocumentoPage/DocumentoPage';
 import Marker from './DocumentoMarker/DocumentoMarker';
 import GetMarker from './DocumentoVideo/DocumentoGetMarker';
 import Controls from './DocumentoVideo/DocumentoControls';
+import Video from './DocumentoVideo/DocumentoVideo';
 import Header from './DocumentoHeader/DocumentoHeader';
 import Config from './DocumentoConfig/DocumentoConfig';
 
@@ -58,28 +59,32 @@ class Documento extends Component {
     });
   }
 
-  handleTimelineSame = (item, index) => {
-    this.refVideo.currentTime = item.time;
-    this.refVideo.play();
-  };
-
   onPlay = () => {
     this.refVideo.play();
-    const { isControlPlay } = this.state;
     this.setState({
-      isControlPlay: !isControlPlay,
+      isControlPlay: false,
     });
   };
 
   onPause = () => {
-    const { isControlPlay } = this.state;
     this.refVideo.pause();
-    this.setState({ isControlPlay: !isControlPlay });
+    this.setState({ isControlPlay: true });
   };
 
   onMarker = () => {
     this.props.getTimelineVideoDoc(this.refVideo.currentTime);
     this.props.isShowTakerMarkerDoc();
+    this.setState({
+      isControlPlay: false,
+    });
+  };
+
+  handleTimelineSame = (item, index) => {
+    this.refVideo.currentTime = item.time;
+    this.refVideo.play();
+    this.setState({
+      isControlPlay: false,
+    });
   };
 
   handleTimeUpdate = ev => {
@@ -136,12 +141,9 @@ class Documento extends Component {
                             onTimeline={this.handleTimelineMarke}
                             {...documento}
                           />
-                          <video
-                            className="img-fluid"
-                            ref={ref => (this.refVideo = ref)}
-                            muted
-                            preload="auto"
-                            src="https://firebasestorage.googleapis.com/v0/b/dpipette-ff5ee.appspot.com/o/notescornell%2Fprueba%20materia%201%2Fprueba_1%2Fresumen%2Fprueba_1?alt=media&token=37705e96-54d5-44a6-a6a6-8cd3555a5015"
+                          <Video
+                            onRefVideo={ref => (this.refVideo = ref)}
+                            onSrc="https://firebasestorage.googleapis.com/v0/b/dpipette-ff5ee.appspot.com/o/notescornell%2Fprueba%20materia%201%2Fprueba_1%2Fresumen%2Fprueba_1?alt=media&token=37705e96-54d5-44a6-a6a6-8cd3555a5015"
                             onTimeUpdate={this.handleTimeUpdate}
                             onDurationChange={event => {
                               this.setState({
@@ -194,12 +196,9 @@ class Documento extends Component {
                             onTimeline={this.handleTimelineMarke}
                             {...documento}
                           />
-                          <video
-                            className="img-fluid"
-                            ref={ref => (this.refVideo = ref)}
-                            muted
-                            preload="auto"
-                            src="https://firebasestorage.googleapis.com/v0/b/dpipette-ff5ee.appspot.com/o/notescornell%2Fprueba%20materia%201%2Fprueba_1%2Fresumen%2Fprueba_1?alt=media&token=37705e96-54d5-44a6-a6a6-8cd3555a5015"
+                          <Video
+                            onRefVideo={ref => (this.refVideo = ref)}
+                            onSrc="https://firebasestorage.googleapis.com/v0/b/dpipette-ff5ee.appspot.com/o/notescornell%2Fprueba%20materia%201%2Fprueba_1%2Fresumen%2Fprueba_1?alt=media&token=37705e96-54d5-44a6-a6a6-8cd3555a5015"
                             onTimeUpdate={this.handleTimeUpdate}
                             onDurationChange={event => {
                               this.setState({
