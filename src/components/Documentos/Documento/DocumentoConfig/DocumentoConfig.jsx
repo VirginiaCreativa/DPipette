@@ -14,10 +14,18 @@ const DocumentoConfig = ({
   firestore,
   ID,
 }) => {
-  const [isFavorito, setFavorito] = useState(favorito);
+  const [isFavorito, setFavorito] = useState(false);
   const [isActivePopever, setActivePopever] = useState(false);
 
-  const onFavorite = () => {};
+  const onFavorite = () => {
+    setFavorito(!isFavorito);
+    firestore
+      .update(`documentos/${ID}`, {
+        favorito: !isFavorito,
+      })
+      .then(() => {})
+      .catch(error => console.log(error));
+  };
   const onDelete = () => {};
   const handleOpenPoprever = () => {};
 
