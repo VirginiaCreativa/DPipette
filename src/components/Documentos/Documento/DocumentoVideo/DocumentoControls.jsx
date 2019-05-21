@@ -9,13 +9,11 @@ import { msToTime } from '../../../../scripts/msToTime';
 
 const Controls = ({
   isCurrentTime,
-  isDuration,
   onPlay,
   onPause,
   onMarker,
-  controlPlay,
-  refProgress,
-  match,
+  onControlPlay,
+  onRefProgress,
   documentos,
   durationVideo,
   onTimeline,
@@ -32,7 +30,7 @@ const Controls = ({
   });
 
   const handleProgress = () => {
-    const float = parseFloat(isCurrentTime / isDuration).toFixed(2);
+    const float = parseFloat(isCurrentTime / durationVideo).toFixed(2);
     const percent = float * 100;
     return percent;
   };
@@ -49,7 +47,7 @@ const Controls = ({
   return (
     <div className={classes.DocumentoControls}>
       <div className={classes.Control}>
-        {controlPlay ? (
+        {onControlPlay ? (
           <button type="button" onClick={onPlay}>
             <i className="bx bx-play" />
           </button>
@@ -76,7 +74,7 @@ const Controls = ({
 
         <div
           className={classes.Progress}
-          ref={refProgress}
+          ref={onRefProgress}
           role="button"
           tabIndex="0">
           <div className={classes.ProgressFilled} style={progressClass} />

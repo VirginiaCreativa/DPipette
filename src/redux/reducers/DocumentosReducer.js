@@ -14,7 +14,6 @@ const initialState = {
   pageHeight: 0,
   viewTakeTimeline: false,
   timelineSame: null,
-  timePlay: 0,
   pageGrid: true,
 };
 

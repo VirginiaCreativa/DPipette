@@ -36,6 +36,7 @@ class Documento extends Component {
     isDuration: 0,
     isCurrentTime: 0,
     isControlPlay: true,
+    hasVideo: true,
   };
 
   componentDidMount() {
@@ -45,18 +46,20 @@ class Documento extends Component {
   }
 
   componentDidUpdate() {
-    const { isDuration } = this.state;
+    const { isDuration, hasVideo } = this.state;
     this.props.getDurationVideoDoc(isDuration);
     this.props.getPageHeightDoc(this.refPage.clientHeight);
     const progress = this.refProgress;
-    progress.addEventListener('click', ev => {
-      this.refVideo.currentTime =
-        (ev.offsetX / progress.offsetWidth) * isDuration;
-    });
 
-    this.refVideo.addEventListener('loadedmetadata', () => {
-      if (this.refVideo.buffered.length === 0);
-    });
+    if (hasVideo) {
+      progress.addEventListener('click', ev => {
+        this.refVideo.currentTime =
+          (ev.offsetX / progress.offsetWidth) * isDuration;
+      });
+      this.refVideo.addEventListener('loadedmetadata', () => {
+        if (this.refVideo.buffered.length === 0);
+      });
+    }
   }
 
   onPlay = () => {
@@ -94,17 +97,16 @@ class Documento extends Component {
   };
 
   handleTimelineMarke = (index, item) => {
-    const { isControlPlay } = this.state;
     this.refVideo.currentTime = item.time;
     this.refVideo.play();
     this.setState({
-      isControlPlay: !isControlPlay,
+      isControlPlay: false,
     });
   };
 
   render() {
     const { documento, pageGrid } = this.props;
-    const { isCurrentTime, isDuration, isControlPlay } = this.state;
+    const { isCurrentTime, isControlPlay, hasVideo } = this.state;
     return (
       <div className={classes.Documento}>
         {!isLoaded(documento) ? (
@@ -130,18 +132,16 @@ class Documento extends Component {
                     <div className="col-4">
                       <div className={classes.BoxVideo}>
                         <div className={classes.VideoPlayer}>
-                          <Controls
+                          <Video
+                            {...documento}
                             isCurrentTime={isCurrentTime}
-                            isDuration={isDuration}
                             onPlay={this.onPlay}
                             onPause={this.onPause}
                             onMarker={this.onMarker}
-                            controlPlay={isControlPlay}
-                            refProgress={refP => (this.refProgress = refP)}
+                            onControlPlay={isControlPlay}
+                            onRefProgress={refP => (this.refProgress = refP)}
                             onTimeline={this.handleTimelineMarke}
-                            {...documento}
-                          />
-                          <Video
+                            hasVideo={hasVideo}
                             onRefVideo={ref => (this.refVideo = ref)}
                             onSrc="https://firebasestorage.googleapis.com/v0/b/dpipette-ff5ee.appspot.com/o/notescornell%2Fprueba%20materia%201%2Fprueba_1%2Fresumen%2Fprueba_1?alt=media&token=37705e96-54d5-44a6-a6a6-8cd3555a5015"
                             onTimeUpdate={this.handleTimeUpdate}
@@ -185,18 +185,14 @@ class Documento extends Component {
                     <div className="col-4">
                       <div className={classes.BoxVideo}>
                         <div className={classes.VideoPlayer}>
-                          <Controls
+                          <Video
                             isCurrentTime={isCurrentTime}
-                            isDuration={isDuration}
                             onPlay={this.onPlay}
                             onPause={this.onPause}
                             onMarker={this.onMarker}
-                            controlPlay={isControlPlay}
-                            refProgress={refP => (this.refProgress = refP)}
+                            onControlPlay={isControlPlay}
+                            onRefProgress={refP => (this.refProgress = refP)}
                             onTimeline={this.handleTimelineMarke}
-                            {...documento}
-                          />
-                          <Video
                             onRefVideo={ref => (this.refVideo = ref)}
                             onSrc="https://firebasestorage.googleapis.com/v0/b/dpipette-ff5ee.appspot.com/o/notescornell%2Fprueba%20materia%201%2Fprueba_1%2Fresumen%2Fprueba_1?alt=media&token=37705e96-54d5-44a6-a6a6-8cd3555a5015"
                             onTimeUpdate={this.handleTimeUpdate}
