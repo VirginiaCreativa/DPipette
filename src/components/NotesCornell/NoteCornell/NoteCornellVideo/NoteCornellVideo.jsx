@@ -144,7 +144,7 @@ const NoteCornellVideo = ({
           <button type="button" className="btn btn-primary btn-block">
             Añadir un video
           </button>
-          <p>Obligación un archivo de video => mp4 o webm</p>
+          <p>Obligación un archivo de video => mp4 or webm</p>
           <div className={classes.showUpload} style={classProgressUpload} />
         </div>
       ) : (

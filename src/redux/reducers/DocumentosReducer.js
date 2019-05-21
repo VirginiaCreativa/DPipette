@@ -6,7 +6,6 @@ import {
   HIDE_TAKER_MARKER_DOC,
   GET_TIMELINE_SAME_DOC,
   GET_CHANGE_PAGE_GRID_DOC,
-  GET_VIDE_DOC,
 } from '../actions/Types';
 
 const initialState = {
@@ -61,12 +60,6 @@ const DocumentosReducer = (state = initialState, action) => {
       return {
         ...state,
         pageGrid: action.payload,
-      };
-    }
-    case GET_VIDE_DOC: {
-      return {
-        ...state,
-        hasVideo: action.payload,
       };
     }
     default:

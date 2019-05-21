@@ -1,16 +1,16 @@
-import React, { useState } from 'react';
-import { bindActionCreators, compose } from 'redux';
+import React, { useState, useEffect } from 'react';
+import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { firestoreConnect } from 'react-redux-firebase';
+import firebase from '../../../../config/FirebaseConfig';
 import classes from './DocumentoVideo.module.scss';
 import Controls from './DocumentoControls';
-
-import { getVideoDoc } from '../../../../redux/actions/DocumentosAction';
+import CleanUpSpecialChars from '../../../../scripts/CleanUpSpecialChars';
 
 const DocumentoVideo = ({
   onRefVideo,
   onTimeUpdate,
-  onSrc,
+  videoDoc,
   onDurationChange,
   isCurrentTime,
   onPlay,
@@ -22,16 +22,74 @@ const DocumentoVideo = ({
   addTimeline,
   hasVideo,
   firestore,
+  documentos,
   ID,
+  firebase: { storage },
 }) => {
-  const onUploadVideo = () => {
-    firestore
-      .update(`documentos/${ID}`, {
-        hasVideo: !hasVideo,
-      })
-      .then(() => {})
-      .catch(error => console.log(error));
-    getVideoDoc(!hasVideo);
+  const [isProgressUploadValue, setProgressUploadValue] = useState(0);
+
+  const fileName = documentos[ID].filenameVideoNote;
+  const materiaFB = documentos[ID].materia.toLowerCase();
+  const temaFB = documentos[ID].tema.toLowerCase();
+  const materia = CleanUpSpecialChars(materiaFB);
+  const tema = CleanUpSpecialChars(temaFB);
+  const temaNotSpace = tema.replace(/ +/g, '_');
+
+  const handleOnFileVideo = ev => {
+    const videoFile = ev.target.files[0];
+    const metadata = {
+      contentType: 'video/webm;codecs=vp9',
+    };
+
+    const storageRef = storage().ref(
+      `documentos/${materia}/${temaNotSpace}/${videoFile.name}`
+    );
+
+    const uploadTask = storageRef.put(videoFile, metadata);
+
+    uploadTask.on(
+      firebase.storage.TaskEvent.STATE_CHANGED,
+      snapshot => {
+        const progress =
+          (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+        const isDuration = parseFloat(progress).toFixed(0);
+        console.log(`Upload is ${isDuration}% done`);
+        setProgressUploadValue(isDuration);
+        switch (snapshot.state) {
+          case firebase.storage.TaskState.PAUSED:
+            console.log('Upload is paused');
+            break;
+          case firebase.storage.TaskState.RUNNING:
+            console.log('Upload is running');
+            break;
+          default:
+            console.log('Upload Not');
+        }
+      },
+      error => {
+        switch (error.code) {
+          case 'storage/unauthorized':
+            break;
+          case 'storage/canceled':
+            break;
+          case 'storage/unknown':
+            break;
+          default:
+            console.log(error);
+        }
+      },
+      () => {
+        uploadTask.snapshot.ref.getDownloadURL().then(downloadURL => {
+          console.log('imageFile available at', downloadURL);
+          firestore.update(`documentos/${ID}`, {
+            videoDoc: downloadURL,
+            filenameVideoDoc: videoFile.name,
+            hasVideo: !hasVideo,
+          });
+          console.log('=====> YA PROBAR');
+        });
+      }
+    );
   };
   const onRemoveVideo = () => {
     firestore
@@ -40,8 +98,30 @@ const DocumentoVideo = ({
       })
       .then(() => {})
       .catch(error => console.log(error));
-    getVideoDoc(!hasVideo);
+
+    console.log('delete');
+    const storageRef = storage().ref(
+      `documentos/${materia}/${temaNotSpace}/${fileName}`
+    );
+    storageRef
+      .delete()
+      .then(() => {
+        console.log('SI DELETE');
+      })
+      .catch(error => {
+        console.error('Error removing document: ', error);
+      });
+    firestore.update(`documentos/${ID}`, {
+      videoDoc: '',
+      filenameVideoDoc: '',
+      hasVideo: !hasVideo,
+    });
   };
+
+  const classProgressUpload = {
+    width: `${isProgressUploadValue}%`,
+  };
+
   return (
     <>
       {hasVideo ? (
@@ -68,7 +148,7 @@ const DocumentoVideo = ({
               ref={onRefVideo}
               muted
               preload="auto"
-              src={onSrc}
+              src={videoDoc}
               onTimeUpdate={onTimeUpdate}
               onDurationChange={onDurationChange}
             />
@@ -76,25 +156,30 @@ const DocumentoVideo = ({
         </>
       ) : (
         <>
-          <h1>UPLOAD VIDEO</h1>
-          <button type="button" onClick={onUploadVideo}>
-            Video
-          </button>
+          <div className={classes.BoxFile}>
+            <h6>Subir un video del intérprete o traducción</h6>
+            <input
+              type="file"
+              name="imagendestacada"
+              className={classes.InputFile}
+              onChange={handleOnFileVideo}
+              accept="video/mp4, video/webm"
+            />
+            <button type="button" className="btn btn-primary btn-block">
+              Añadir un video
+            </button>
+            <p>Obligación un archivo de video => mp4 or webm</p>
+            <div className={classes.showUpload} style={classProgressUpload} />
+          </div>
         </>
       )}
     </>
   );
 };
 
-const mapDispatchToProps = dispatch =>
-  bindActionCreators({ getVideoDoc }, dispatch);
-
 export default compose(
   firestoreConnect(['documentos']),
-  connect(
-    state => ({
-      documentos: state.firestore.data.documentos,
-    }),
-    mapDispatchToProps
-  )
+  connect(state => ({
+    documentos: state.firestore.data.documentos,
+  }))
 )(DocumentoVideo);

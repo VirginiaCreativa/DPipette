@@ -141,7 +141,6 @@ class Documento extends Component {
                           onRefProgress={refP => (this.refProgress = refP)}
                           onTimeline={this.handleTimelineMarke}
                           onRefVideo={ref => (this.refVideo = ref)}
-                          onSrc="https://firebasestorage.googleapis.com/v0/b/dpipette-ff5ee.appspot.com/o/notescornell%2Fprueba%20materia%201%2Fprueba_1%2Fresumen%2Fprueba_1?alt=media&token=37705e96-54d5-44a6-a6a6-8cd3555a5015"
                           onTimeUpdate={this.handleTimeUpdate}
                           onDurationChange={event => {
                             this.setState({
@@ -192,7 +191,6 @@ class Documento extends Component {
                           onRefProgress={refP => (this.refProgress = refP)}
                           onTimeline={this.handleTimelineMarke}
                           onRefVideo={ref => (this.refVideo = ref)}
-                          onSrc="https://firebasestorage.googleapis.com/v0/b/dpipette-ff5ee.appspot.com/o/notescornell%2Fprueba%20materia%201%2Fprueba_1%2Fresumen%2Fprueba_1?alt=media&token=37705e96-54d5-44a6-a6a6-8cd3555a5015"
                           onTimeUpdate={this.handleTimeUpdate}
                           onDurationChange={event => {
                             this.setState({
