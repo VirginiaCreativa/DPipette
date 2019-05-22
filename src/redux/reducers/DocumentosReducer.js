@@ -6,6 +6,12 @@ import {
   HIDE_TAKER_MARKER_DOC,
   GET_TIMELINE_SAME_DOC,
   GET_CHANGE_PAGE_GRID_DOC,
+  FILTER_MATERIA_DOCUMENTOS,
+  FILTER_ALL_DOCUMENTOS,
+  FILTER_DATE_NOW_DOCUMENTOS,
+  FILTER_DATE_YESTERDAY_DOCUMENTOS,
+  FILTER_FAVORITE_DOCUMENTOS,
+  SEARCH_DOCUMENTOS,
 } from '../actions/Types';
 
 const initialState = {
@@ -16,6 +22,13 @@ const initialState = {
   timelineSame: null,
   pageGrid: true,
   hasVideo: false,
+  search: '',
+  materia: '',
+  date: '',
+  all: '',
+  categoria: '',
+  yesterday: '',
+  favorito: null,
 };
 
 const DocumentosReducer = (state = initialState, action) => {
@@ -62,6 +75,39 @@ const DocumentosReducer = (state = initialState, action) => {
         pageGrid: action.payload,
       };
     }
+    case SEARCH_DOCUMENTOS: {
+      return {
+        ...state,
+        search: action.payload,
+      };
+    }
+    case FILTER_MATERIA_DOCUMENTOS:
+      return {
+        ...state,
+        materia: action.payload,
+      };
+    case FILTER_ALL_DOCUMENTOS:
+      return {
+        ...state,
+        materia: state.all,
+        yesterday: state.yesterday,
+        date: state.date,
+      };
+    case FILTER_DATE_NOW_DOCUMENTOS:
+      return {
+        ...state,
+        date: action.payload,
+      };
+    case FILTER_DATE_YESTERDAY_DOCUMENTOS:
+      return {
+        ...state,
+        yesterday: action.payload,
+      };
+    case FILTER_FAVORITE_DOCUMENTOS:
+      return {
+        ...state,
+        favorite: action.payload,
+      };
     default:
       return state;
   }

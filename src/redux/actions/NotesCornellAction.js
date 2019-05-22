@@ -12,27 +12,27 @@ export const SearchNotesCornell = payload => ({
   payload,
 });
 
-export const getFilterMateria = payload => ({
+export const getFilterMateriaNC = payload => ({
   type: FILTER_MATERIA_NOTESCORNELL,
   payload,
 });
 
-export const getFilterAll = () => ({
+export const getFilterAllNC = () => ({
   type: FILTER_ALL_NOTESCORNELL,
   all: '',
 });
 
-export const getFilterDateNow = payload => ({
+export const getFilterDateNowNC = payload => ({
   type: FILTER_DATE_NOW_NOTESCORNELL,
   payload,
 });
 
-export const getFilterDateYesterday = payload => ({
+export const getFilterDateYesterdayNC = payload => ({
   type: FILTER_DATE_YESTERDAY_NOTESCORNELL,
   payload,
 });
 
-export const getFilterFavorite = payload => ({
+export const getFilterFavoriteNC = payload => ({
   type: FILTER_FAVORITE_NOTESCORNELL,
   payload,
 });

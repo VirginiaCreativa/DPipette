@@ -14,11 +14,11 @@ import { breakpointColumnsObj } from './breakpointColumnsObj';
 
 const NotesCornellMain = ({
   notescornell,
-  getFilterMateria,
+  getFilterMateriaNC,
   Search,
-  getFilterDateNow,
-  getFilterDateYesterday,
-  getFilterFavorite,
+  getFilterDateNowNC,
+  getFilterDateYesterdayNC,
+  getFilterFavoriteNC,
 }) => {
   const dateItemNow = item =>
     moment(item)
@@ -46,13 +46,12 @@ const NotesCornellMain = ({
               .filter(item => {
                 const dateToday = dateItemNow(item.date);
                 const dateYesterday = dateItemYesterday(item.date);
-                console.log(getFilterFavorite);
                 return (
                   item.tema.toLowerCase().includes(Search.toLowerCase()) &&
-                  item.materia.includes(getFilterMateria) &&
-                  dateToday.includes(getFilterDateNow) &&
-                  dateYesterday.includes(getFilterDateYesterday) &&
-                  item.favorite !== getFilterFavorite
+                  item.materia.includes(getFilterMateriaNC) &&
+                  dateToday.includes(getFilterDateNowNC) &&
+                  dateYesterday.includes(getFilterDateYesterdayNC) &&
+                  item.favorite !== getFilterFavoriteNC
                 );
               })
               .map(item => (
@@ -71,9 +70,9 @@ export default compose(
   connect(state => ({
     notescornell: state.firestore.ordered.notescornell,
     Search: state.NotesCornell.search,
-    getFilterMateria: state.NotesCornell.materia,
-    getFilterDateNow: state.NotesCornell.date,
-    getFilterDateYesterday: state.NotesCornell.yesterday,
-    getFilterFavorite: state.NotesCornell.favorite,
+    getFilterMateriaNC: state.NotesCornell.materia,
+    getFilterDateNowNC: state.NotesCornell.date,
+    getFilterDateYesterdayNC: state.NotesCornell.yesterday,
+    getFilterFavoriteNC: state.NotesCornell.favorite,
   }))
 )(NotesCornellMain);

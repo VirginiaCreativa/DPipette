@@ -6,6 +6,7 @@ import { history } from '../redux/store/Store';
 import classes from './Documentos.module.scss';
 
 import DocumentosMain from '../components/Documentos/DocumentosMain/DocumentosMain';
+import Filtering from '../components/Documentos/DocumentosMain/DocumentosFiltering';
 import Header from '../components/UI/HeaderMain_Documentos/HeaderMain_Documentos';
 
 class Documentos extends Component {
@@ -43,7 +44,14 @@ class Documentos extends Component {
           linked="/documento/:id"
           clicked={this.handleNewIDDocumento}
         />
-        <DocumentosMain />
+        <div className={classes.BoxContent}>
+          <div className={classes.Filters}>
+            <Filtering />
+          </div>
+          <div className={classes.Contents}>
+            <DocumentosMain />
+          </div>
+        </div>
       </div>
     );
   }

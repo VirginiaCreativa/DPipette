@@ -6,6 +6,12 @@ import {
   HIDE_TAKER_MARKER_DOC,
   GET_TIMELINE_SAME_DOC,
   GET_CHANGE_PAGE_GRID_DOC,
+  FILTER_MATERIA_DOCUMENTOS,
+  FILTER_ALL_DOCUMENTOS,
+  FILTER_DATE_NOW_DOCUMENTOS,
+  FILTER_DATE_YESTERDAY_DOCUMENTOS,
+  FILTER_FAVORITE_DOCUMENTOS,
+  SEARCH_DOCUMENTOS,
 } from './Types';
 
 export const getTimelineVideoDoc = payload => ({
@@ -40,5 +46,35 @@ export const getTimelineSame = payload => ({
 
 export const getChangePageGrid = payload => ({
   type: GET_CHANGE_PAGE_GRID_DOC,
+  payload,
+});
+
+export const getFilterMateriaDoc = payload => ({
+  type: FILTER_MATERIA_DOCUMENTOS,
+  payload,
+});
+
+export const getFilterAllDoc = () => ({
+  type: FILTER_ALL_DOCUMENTOS,
+  all: '',
+});
+
+export const getFilterDateNowDoc = payload => ({
+  type: FILTER_DATE_NOW_DOCUMENTOS,
+  payload,
+});
+
+export const getFilterDateYesterdayDoc = payload => ({
+  type: FILTER_DATE_YESTERDAY_DOCUMENTOS,
+  payload,
+});
+
+export const getFilterFavoriteDoc = payload => ({
+  type: FILTER_FAVORITE_DOCUMENTOS,
+  payload,
+});
+
+export const SearchDocumentos = payload => ({
+  type: SEARCH_DOCUMENTOS,
   payload,
 });

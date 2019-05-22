@@ -38,6 +38,7 @@ class NotesCornell extends Component {
       videoResumen: null,
       cover: 'option2',
       portada: '',
+      favorite: false,
       getContent: JSON.stringify(content),
       getResumen: JSON.stringify(content),
       setContent: null,
@@ -70,7 +71,7 @@ class NotesCornell extends Component {
           <div className={classes.Filter}>
             <Filtering />
           </div>
-          <div className={classes.Filter}>
+          <div className={classes.Contents}>
             <NotesCornellMain />
           </div>
         </div>

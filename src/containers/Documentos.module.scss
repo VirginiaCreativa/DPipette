@@ -1,0 +1,7 @@
+@import '../styles/variables';
+
+.BoxContent {
+	display: grid;
+	grid-template-columns: 11% auto;
+	grid-gap: 20px;
+}

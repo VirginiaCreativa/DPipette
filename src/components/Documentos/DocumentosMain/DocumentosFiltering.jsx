@@ -4,24 +4,23 @@ import { bindActionCreators, compose } from 'redux';
 import { firestoreConnect } from 'react-redux-firebase';
 import moment from 'moment';
 import 'moment/locale/es';
-import classes from './Filtering.module.scss';
+import classes from './DocumentosFiltering.module.scss';
 
 import {
-  getFilterMateriaNC,
-  getFilterAllNC,
-  getFilterDateNowNC,
-  getFilterDateYesterdayNC,
-  getFilterFavoriteNC,
-  SearchNotesCornell,
-} from '../../../../redux/actions/NotesCornellAction';
+  getFilterMateriaDoc,
+  getFilterAllDoc,
+  getFilterDateNowDoc,
+  getFilterDateYesterdayDoc,
+  getFilterFavoriteDoc,
+} from '../../../redux/actions/DocumentosAction';
 
-const Filter = ({
+const DocumentosFiltering = ({
   notescornell,
-  getFilterMateriaNC,
-  getFilterAllNC,
-  getFilterDateNowNC,
-  getFilterDateYesterdayNC,
-  getFilterFavoriteNC,
+  getFilterMateriaDoc,
+  getFilterAllDoc,
+  getFilterDateNowDoc,
+  getFilterDateYesterdayDoc,
+  getFilterFavoriteDoc,
 }) => {
   const [isActiveCategAll, setActiveCategAll] = useState(1);
   const [isActiveCategToday, setActiveCategToday] = useState(null);
@@ -31,9 +30,9 @@ const Filter = ({
 
   useEffect(
     () => () => {
-      getFilterFavoriteNC(null);
+      getFilterFavoriteDoc(null);
     },
-    [getFilterFavoriteNC]
+    [getFilterFavoriteDoc]
   );
 
   const dateNow = moment(Date.now())
@@ -46,10 +45,10 @@ const Filter = ({
     .format('LL');
 
   const handleFilteAll = ev => {
-    getFilterAllNC();
-    getFilterDateNowNC('');
-    getFilterDateYesterdayNC('');
-    getFilterFavoriteNC(null);
+    getFilterAllDoc();
+    getFilterDateNowDoc('');
+    getFilterDateYesterdayDoc('');
+    getFilterFavoriteDoc(null);
     setActiveCategAll(1);
     setActiveCategToday(null);
     setActiveCategYesterday(null);
@@ -57,18 +56,18 @@ const Filter = ({
     setActiveTag(null);
   };
   const handleFilteToday = ev => {
-    getFilterDateNowNC(dateNow);
-    getFilterDateYesterdayNC('');
-    getFilterFavoriteNC(null);
+    getFilterDateNowDoc(dateNow);
+    getFilterDateYesterdayDoc('');
+    getFilterFavoriteDoc(null);
     setActiveCategAll(null);
     setActiveCategToday(2);
     setActiveCategYesterday(null);
     setActiveCategFavor(null);
   };
   const handleFilteYesterday = ev => {
-    getFilterDateYesterdayNC(dateYesterday);
-    getFilterDateNowNC('');
-    getFilterFavoriteNC(null);
+    getFilterDateYesterdayDoc(dateYesterday);
+    getFilterDateNowDoc('');
+    getFilterFavoriteDoc(null);
     setActiveCategAll(null);
     setActiveCategToday(null);
     setActiveCategYesterday(3);
@@ -76,7 +75,7 @@ const Filter = ({
     setActiveTag(null);
   };
   const handleFilteFavorite = ev => {
-    getFilterFavoriteNC(false);
+    getFilterFavoriteDoc(false);
     setActiveCategAll(null);
     setActiveCategToday(null);
     setActiveCategYesterday(null);
@@ -84,7 +83,7 @@ const Filter = ({
     setActiveTag(null);
   };
   const handleTagFilter = (item, index) => {
-    getFilterMateriaNC(item);
+    getFilterMateriaDoc(item);
     setActiveCategAll(null);
     setActiveCategFavor(null);
     setActiveTag(null);
@@ -161,21 +160,21 @@ const Filter = ({
 const mapDispatchToProps = dispatch =>
   bindActionCreators(
     {
-      getFilterMateriaNC,
-      getFilterAllNC,
-      getFilterDateNowNC,
-      getFilterDateYesterdayNC,
-      getFilterFavoriteNC,
+      getFilterMateriaDoc,
+      getFilterAllDoc,
+      getFilterDateNowDoc,
+      getFilterDateYesterdayDoc,
+      getFilterFavoriteDoc,
     },
     dispatch
   );
 
 export default compose(
-  firestoreConnect(['notescornell']),
+  firestoreConnect(['documentos']),
   connect(
     state => ({
-      notescornell: state.firestore.ordered.notescornell,
+      documentos: state.firestore.ordered.documentos,
     }),
     mapDispatchToProps
   )
-)(Filter);
+)(DocumentosFiltering);
