@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import Moment from '../../UI/Moment/Moment';
 import CapitalizeFirstLetter from '../../../scripts/CapitalizeFirstLetter';
-import classes from './NotesCornellMain.module.scss';
+import classes from './DocumentosMain.module.scss';
 
 import CoverClient from '../../UI/CoverClient/CoverClient';
 
@@ -11,7 +11,7 @@ const Item = ({ linked, tema, materia, date, cover, portada, favorite }) => {
 
   return (
     <Link to={linked}>
-      <div className={classes.NotesCornellItem}>
+      <div className={classes.DocumentosItem}>
         <div className={classes.BookMark}>
           {favorite ? <i className="bx bxs-bookmark" /> : null}
         </div>
