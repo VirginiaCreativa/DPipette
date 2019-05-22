@@ -15,7 +15,7 @@ import {
 } from '../../../redux/actions/DocumentosAction';
 
 const DocumentosFiltering = ({
-  notescornell,
+  documentos,
   getFilterMateriaDoc,
   getFilterAllDoc,
   getFilterDateNowDoc,
@@ -89,7 +89,7 @@ const DocumentosFiltering = ({
     setActiveTag(null);
     setActiveTag(index);
   };
-  const materia = notescornell && notescornell.map(item => item.materia);
+  const materia = documentos && documentos.map(item => item.materia);
   const tags = [...new Set(materia)].sort();
 
   const classActiveAll = isActiveCategAll === 1 ? classes.Active : null;

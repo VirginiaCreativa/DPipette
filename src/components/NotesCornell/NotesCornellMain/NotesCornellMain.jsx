@@ -15,7 +15,7 @@ import { breakpointColumnsObj } from './breakpointColumnsObj';
 const NotesCornellMain = ({
   notescornell,
   getFilterMateriaNC,
-  Search,
+  search,
   getFilterDateNowNC,
   getFilterDateYesterdayNC,
   getFilterFavoriteNC,
@@ -47,7 +47,7 @@ const NotesCornellMain = ({
                 const dateToday = dateItemNow(item.date);
                 const dateYesterday = dateItemYesterday(item.date);
                 return (
-                  item.tema.toLowerCase().includes(Search.toLowerCase()) &&
+                  item.tema.toLowerCase().includes(search.toLowerCase()) &&
                   item.materia.includes(getFilterMateriaNC) &&
                   dateToday.includes(getFilterDateNowNC) &&
                   dateYesterday.includes(getFilterDateYesterdayNC) &&
@@ -69,7 +69,7 @@ export default compose(
   firestoreConnect(['notescornell']),
   connect(state => ({
     notescornell: state.firestore.ordered.notescornell,
-    Search: state.NotesCornell.search,
+    search: state.NotesCornell.search,
     getFilterMateriaNC: state.NotesCornell.materia,
     getFilterDateNowNC: state.NotesCornell.date,
     getFilterDateYesterdayNC: state.NotesCornell.yesterday,

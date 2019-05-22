@@ -4,18 +4,18 @@ import { connect } from 'react-redux';
 import { bindActionCreators, compose } from 'redux';
 import classes from './HeaderMain_Documentos.module.scss';
 
-import { SearchNotesCornell } from '../../../redux/actions/NotesCornellAction';
+import { SearchDocumentos } from '../../../redux/actions/DocumentosAction';
 
 const HeaderMainNotesCornell = ({
   iconName,
   linked,
   title,
   colored,
-  SearchNotesCornell,
+  SearchDocumentos,
   clicked,
 }) => {
   const handleSearch = ev => {
-    SearchNotesCornell(ev.target.value);
+    SearchDocumentos(ev.target.value);
   };
   const colorSelect = {
     backgroundColor: colored,
@@ -56,7 +56,7 @@ const HeaderMainNotesCornell = ({
 };
 
 const mapDispatchToProps = dispatch =>
-  bindActionCreators({ SearchNotesCornell }, dispatch);
+  bindActionCreators({ SearchDocumentos }, dispatch);
 
 export default compose(
   connect(
