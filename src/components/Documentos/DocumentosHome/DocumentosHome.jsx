@@ -2,37 +2,39 @@ import React, { useEffect } from 'react';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { firestoreConnect, isLoaded, isEmpty } from 'react-redux-firebase';
-import { Link } from 'react-router-dom';
-import { height } from 'window-size';
 import Spinner from './Spinner/Spinner';
 import Empty from '../../UI/Empty/Empty';
+import classes from './DocumentosHome.module.scss';
+
+import Item from './DocumentosItem';
 
 const DocumentosHome = ({ documentos }) => (
-  <div>
+  <div className={classes.DocumentosHome}>
     {!isLoaded(documentos) ? (
       <Spinner />
     ) : isEmpty(documentos) ? (
       <Empty />
     ) : (
-      <ul>
+      <div className={classes.GridMultiple}>
         {documentos &&
           documentos.map(item => (
-            <li key={item.id}>
-              <Link to={`documento/${item.id}`}>{item.tema}</Link>
-              <img
-                src={item.portada}
-                alt={item.materia}
-                className="img-fluid"
-              />
-            </li>
+            <div key={item.id}>
+              <Item {...item} linked={`documento/${item.id}`} />
+            </div>
           ))}
-      </ul>
+      </div>
     )}
   </div>
 );
 
 export default compose(
-  firestoreConnect(['documentos']),
+  firestoreConnect([
+    {
+      collection: 'documentos',
+      orderBy: ['date', 'desc'],
+      limit: 4,
+    },
+  ]),
   connect(state => ({
     documentos: state.firestore.ordered.documentos,
   }))

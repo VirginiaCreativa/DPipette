@@ -1,6 +1,6 @@
 @import '../../../styles/variables';
 
-.NotesCornellHome {
+.DocumentosHome {
 	.GridMultiple {
 		margin-bottom: 20px;
 
@@ -8,14 +8,14 @@
 			transition: all 0.25s ease-in;
 
 			&:hover {
-				.NotesCornellItem {
+				.DocumentosItem {
 					transform: scale(1.03);
 				}
 			}
 		}
 	}
 
-	.NotesCornellItem {
+	.DocumentosItem {
 		position: relative;
 		margin-bottom: 30px;
 		padding: 20px;
