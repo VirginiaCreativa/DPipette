@@ -28,12 +28,12 @@ class NotesCornell extends Component {
   handleNewIDNotaCornell = ev => {
     ev.preventDefault();
     const project = {
+      date: Date.now(),
       tema: 'Nueva tema',
       materia: 'Nueva materia',
       preguntas: [] || null,
       importantes: [] || null,
       claves: [] || null,
-      date: Date.now(),
       apuntes: [] || null,
       videoResumen: null,
       cover: 'option2',

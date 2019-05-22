@@ -88,12 +88,16 @@ class ButtonCreates extends Component {
   handleNewIDDocumentos = ev => {
     ev.preventDefault();
     const project = {
+      date: Date.now(),
       tema: 'Nueva tema',
       materia: 'Nueva materia',
       addTimeline: [],
       favorito: false,
       hasVideo: false,
-      date: Date.now(),
+      cover: 'option2',
+      portada: '',
+      filenamePortadaImagen: '',
+      filenameVideoDoc: '',
     };
     this.props.firestore
       .add('documentos', {
