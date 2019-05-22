@@ -4,23 +4,23 @@
 	margin-bottom: 40px;
 
 	.DocumentosItem {
-		@extend %boxShadowContent;
-		@extend %boxContent;
+		position: relative;
 		margin-bottom: 20px;
 		padding: 20px;
 		transition: all 0.25s ease-in;
 		border-bottom: 1px solid $write_gray_2;
-		position: relative;
+		@extend %boxShadowContent;
+		@extend %boxContent;
 
 		.BookMark {
 			position: absolute;
-			top: -2px;
+			top: -4px;
 			right: 10px;
 
 			:global {
 				.bxs-bookmark {
-					color: $green;
 					font-size: 24px;
+					color: $green;
 				}
 			}
 		}

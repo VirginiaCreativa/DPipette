@@ -1,89 +1,88 @@
 @import '../../../styles/variables';
 
 .NotesCornellMain {
-  margin-bottom: 40px;
+	margin-bottom: 40px;
 
-  .NotesCornellItem {
-    @extend %boxShadowContent;
-    @extend %boxContent;
-    margin-bottom: 20px;
-    padding: 20px;
-    transition: all 0.25s ease-in;
-    border-bottom: 1px solid $write_gray_2;
-    position: relative;
+	.NotesCornellItem {
+		position: relative;
+		margin-bottom: 20px;
+		padding: 20px;
+		transition: all 0.25s ease-in;
+		border-bottom: 1px solid $write_gray_2;
+		@extend %boxShadowContent;
+		@extend %boxContent;
 
-    .BookMark {
-      position: absolute;
-      top: -2px;
-      right: 10px;
+		.BookMark {
+			position: absolute;
+			top: -4px;
+			right: 10px;
 
-      :global {
-        .bxs-bookmark {
-          color: $green;
-          font-size: 24px;
-        }
-      }
+			:global {
+				.bxs-bookmark {
+					font-size: 24px;
+					color: $green;
+				}
+			}
+		}
 
-    }
+		.TagMateria {
+			display: inline-block;
+			font-size: 0.875rem;
+			color: $green;
+			background-color: rgb(219, 247, 246);
+			padding: 2px 8px;
+			border-radius: 2px;
+			font-weight: 600;
+		}
 
-    .TagMateria {
-      display: inline-block;
-      font-size: 0.875rem;
-      color: $green;
-      background-color: rgb(219, 247, 246);
-      padding: 2px 8px;
-      border-radius: 2px;
-      font-weight: 600;
-    }
+		.CoverEmpty {
+			display: block;
+			height: 20px;
+		}
 
-    .CoverEmpty {
-      display: block;
-      height: 20px;
-    }
+		.BoxContent {
+			margin-top: 20px;
+		}
 
-    .BoxContent {
-      margin-top: 20px;
-    }
+		.DateItem {
+			color: $gray_light;
 
-    .DateItem {
-      color: $gray_light;
+			:global {
+				.bx {
+					position: relative;
+					top: 2px;
+					margin-right: 4px;
+				}
+			}
+		}
 
-      :global {
-        .bx {
-          position: relative;
-          top: 2px;
-          margin-right: 4px;
-        }
-      }
-    }
+		h3 {
+			color: $heading;
+			position: relative;
+			margin-bottom: 0;
 
-    h3 {
-      color: $heading;
-      position: relative;
-      margin-bottom: 0;
-
-      &:before {
-        content: '';
-        background-color: $green;
-        position: absolute;
-        top: 5px;
-        left: -20px;
-        width: 4px;
-        height: 20px;
-      }
-    }
-  }
+			&:before {
+				content: '';
+				background-color: $green;
+				position: absolute;
+				top: 5px;
+				left: -20px;
+				width: 4px;
+				height: 20px;
+			}
+		}
+	}
 }
 
 :global {
-  .my-masonry-grid {
-    display: flex;
-    margin-left: -30px;
-    width: auto;
-  }
+	.my-masonry-grid {
+		display: flex;
+		margin-left: -30px;
+		width: auto;
+	}
 
-  .my-masonry-grid_column {
-    padding-left: 30px;
-    background-clip: padding-box;
-  }
+	.my-masonry-grid_column {
+		padding-left: 30px;
+		background-clip: padding-box;
+	}
 }

@@ -6,14 +6,14 @@ import classes from './DocumentosMain.module.scss';
 
 import CoverClient from '../../UI/CoverClient/CoverClient';
 
-const Item = ({ linked, tema, materia, date, cover, portada, favorite }) => {
+const Item = ({ linked, tema, materia, date, cover, portada, favorito }) => {
   const [isCover, setCover] = useState(cover);
 
   return (
     <Link to={linked}>
       <div className={classes.DocumentosItem}>
         <div className={classes.BookMark}>
-          {favorite ? <i className="bx bxs-bookmark" /> : null}
+          {favorito ? <i className="bx bxs-bookmark" /> : null}
         </div>
         <span className={classes.TagMateria}>
           {CapitalizeFirstLetter(materia)}

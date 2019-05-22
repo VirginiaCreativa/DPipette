@@ -106,7 +106,7 @@ const DocumentosReducer = (state = initialState, action) => {
     case FILTER_FAVORITE_DOCUMENTOS:
       return {
         ...state,
-        favorite: action.payload,
+        favorito: action.payload,
       };
     default:
       return state;
