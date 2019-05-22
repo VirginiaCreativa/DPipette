@@ -18,6 +18,11 @@ const DocumentosMain = ({ documentos }) => (
           documentos.map(item => (
             <li key={item.id}>
               <Link to={`documento/${item.id}`}>{item.tema}</Link>
+              <img
+                src={item.portada}
+                alt={item.materia}
+                className="img-fluid"
+              />
             </li>
           ))}
       </ul>

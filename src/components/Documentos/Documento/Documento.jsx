@@ -120,7 +120,7 @@ class Documento extends Component {
                   <Header {...documento} ID={this.props.match.params.id} />
                 </div>
                 <div className="col-3">
-                  <Config ID={this.props.match.params.id} {...document} />
+                  <Config ID={this.props.match.params.id} {...documento} />
                 </div>
               </div>
             </div>

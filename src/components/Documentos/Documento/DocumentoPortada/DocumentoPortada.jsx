@@ -1,28 +1,22 @@
-/* eslint-disable no-unused-vars */
 import React, { useState, useRef, useEffect } from 'react';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { firestoreConnect } from 'react-redux-firebase';
-import { withRouter } from 'react-router';
 import firebase from '../../../../config/FirebaseConfig';
 import CleanUpSpecialChars from '../../../../scripts/CleanUpSpecialChars';
-import Spinner from '../../../UI/Spinner/Spinner';
-import classes from './NoteCornellPortada.module.scss';
+import classes from './DocumentoPortada.module.scss';
 
-import Image from './NoteCornellImage';
+import Image from './DocumentoImage';
 
-const NoteCornellPortada = ({
+const DocumentoPortada = ({
   firebase: { storage },
   ID,
-  notescornell,
+  documentos,
   firestore,
   portada,
-  tema,
 }) => {
   const [isOnImage, setOnImage] = useState(true);
   const [isUploadValue, setUploadValue] = useState(0);
-  const [isFileName, setFileName] = useState('');
-  const [isPortada, setPortada] = useState('');
   const [isShowImage, setShowImage] = useState(false);
   const childRef = useRef(null);
   let refPortada = useRef(null);
@@ -38,19 +32,20 @@ const NoteCornellPortada = ({
     }
   }, [portada]);
 
+  const fileName = documentos[ID].filenamePortadaImagen;
+  const materiaFB = documentos[ID].materia.toLowerCase();
+  const temaFB = documentos[ID].tema.toLowerCase();
+  const materia = CleanUpSpecialChars(materiaFB);
+  const tema = CleanUpSpecialChars(temaFB);
+  const temaNotSpace = tema.replace(/ +/g, '_');
+
   const handleOnFileChange = ev => {
     const imgFile = ev.target.files[0];
-    const id = ID;
-    const materiaFB = notescornell[id].materia.toLowerCase();
-    const temaFB = notescornell[id].tema.toLowerCase();
-    const materia = CleanUpSpecialChars(materiaFB);
-    const tema = CleanUpSpecialChars(temaFB);
-    const temaNotSpace = tema.replace(/ +/g, '_');
     const metadata = {
       contentType: 'image/jpg',
     };
     const storageRef = storage().ref(
-      `notescornell/${materia}/${temaNotSpace}/portada/${imgFile.name}`
+      `documentos/${materia}/${temaNotSpace}/portada/${imgFile.name}`
     );
     const uploadTask = storageRef.put(imgFile, metadata);
 
@@ -88,7 +83,7 @@ const NoteCornellPortada = ({
       () => {
         uploadTask.snapshot.ref.getDownloadURL().then(downloadURL => {
           console.log('imageFile available at', downloadURL);
-          firestore.update(`notescornell/${ID}`, {
+          firestore.update(`documentos/${ID}`, {
             portada: downloadURL,
             cover: 'option1',
             filenamePortadaImagen: imgFile.name,
@@ -100,26 +95,19 @@ const NoteCornellPortada = ({
   };
 
   const handleRemoveFile = () => {
-    const materiaFB = notescornell[ID].materia.toLowerCase();
-    const temaFB = notescornell[ID].tema.toLowerCase();
-    const fileName = notescornell[ID].filenameVideoResumen;
-    const materia = CleanUpSpecialChars(materiaFB);
-    const tema = CleanUpSpecialChars(temaFB);
-    const temaNotSpace = tema.replace(/ +/g, '_');
-
     const storageRef = storage().ref(
-      `notescornell/${materia}/${temaNotSpace}/portada/${fileName}`
+      `documentos/${materia}/${temaNotSpace}/portada/${fileName}`
     );
     storageRef
       .delete()
       .then(() => {
         console.log('SI DELETE');
+        setOnImage(true);
       })
       .catch(error => {
         console.error('Error removing document: ', error);
       });
-    setPortada(null);
-    firestore.update(`notescornell/${ID}`, {
+    firestore.update(`documentos/${ID}`, {
       portada: '',
       filenamePortadaImagen: '',
     });
@@ -129,7 +117,7 @@ const NoteCornellPortada = ({
     width: `${isUploadValue}%`,
   };
   return (
-    <div className={classes.NoteCornellPortada}>
+    <div className={classes.DocumentoPortada}>
       {isOnImage ? (
         <div className={classes.BoxFile}>
           <input
@@ -163,9 +151,8 @@ const NoteCornellPortada = ({
 };
 
 export default compose(
-  firestoreConnect(['notescornell']),
-  withRouter,
+  firestoreConnect(['documentos']),
   connect(state => ({
-    notescornell: state.firestore.data.notescornell,
+    documentos: state.firestore.data.documentos,
   }))
-)(NoteCornellPortada);
+)(DocumentoPortada);

@@ -4,11 +4,15 @@ import { connect } from 'react-redux';
 import { firestoreConnect } from 'react-redux-firebase';
 import classes from './DocumentoConfig.module.scss';
 
+import Portada from '../DocumentoPortada/DocumentoPortada';
+
 import { getChangePageGrid } from '../../../../redux/actions/DocumentosAction';
 
 const DocumentoConfig = ({
   documentos,
   favorito,
+  portada,
+  tema,
   pageGrid,
   getChangePageGrid,
   firestore,
@@ -16,6 +20,7 @@ const DocumentoConfig = ({
 }) => {
   const [isFavorito, setFavorito] = useState(false);
   const [isActivePopever, setActivePopever] = useState(false);
+  const [onOpenPortada, setOpenPortada] = useState(false);
 
   const onFavorite = () => {
     setFavorito(!isFavorito);
@@ -26,8 +31,11 @@ const DocumentoConfig = ({
       .then(() => {})
       .catch(error => console.log(error));
   };
-  const onDelete = () => {};
-  const handleOpenPoprever = () => {};
+  const handleRemoveID = () => {};
+  const handleOpenPopreverPortada = () => {
+    setOpenPortada(!onOpenPortada);
+    setActivePopever(!isActivePopever);
+  };
 
   const onChangePageGrid = () => {
     firestore
@@ -48,7 +56,7 @@ const DocumentoConfig = ({
       </button>
       <button
         type="button"
-        onClick={handleOpenPoprever}
+        onClick={handleOpenPopreverPortada}
         className={[classes.btnPoprever, cssActivePopever].join(' ')}>
         <i className="bx bx-image" />
       </button>
@@ -59,9 +67,14 @@ const DocumentoConfig = ({
           <i className="bx bx-bookmark" />
         )}
       </button>
-      <button type="button" onClick={onDelete}>
+      <button type="button" onClick={handleRemoveID}>
         <i className="bx bx-trash-alt" />
       </button>
+      {onOpenPortada && (
+        <div className={classes.OpenPopever}>
+          <Portada ID={ID} tema={tema} portada={portada} />
+        </div>
+      )}
     </div>
   );
 };

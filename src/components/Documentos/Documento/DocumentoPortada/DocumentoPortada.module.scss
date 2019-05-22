@@ -1,13 +1,18 @@
 @import '../../../../styles/variables';
 
-.NoteCornellPortada {
+.DocumentoPortada {
 	position: relative;
 	border-radius: 4px;
+	// min-height: 180px;
+
 	.BoxFile {
 		display: flex;
 		justify-content: center;
 		align-content: center;
 		background-color: $write_gray_1;
+		// position: absolute;
+		top: 0;
+		left: 0;
 		padding: 70px 20px;
 		width: 100%;
 		border: 2px dotted $write_gray_3;
@@ -56,16 +61,17 @@
 	.BoxPortada {
 		position: relative;
 		overflow: hidden;
+		min-height: auto;
 
 		.showUpload {
 			display: block;
 			background-color: $green;
 			position: absolute;
-			bottom: 0;
+			top: 0;
 			left: 0;
 			width: 0%;
 			height: 4px;
-			z-index: 4;
+			z-index: 100;
 		}
 
 		.BtnRemove {

@@ -59,9 +59,9 @@
 				cursor: pointer;
 			}
 			.pinMarkerLeft {
-				@extend .pinMarker;
 				left: -14px;
 				transform: rotate(-180deg);
+				@extend .pinMarker;
 
 				&:before {
 					content: '';
@@ -100,9 +100,9 @@
 				}
 			}
 			.pinMarkerRight {
-				@extend .pinMarker;
 				left: 20px;
 				transform: rotate(0deg);
+				@extend .pinMarker;
 
 				&:before {
 					content: '';
