@@ -42,7 +42,7 @@ const DocumentoVideo = ({
     };
 
     const storageRef = storage().ref(
-      `documentos/${materia}/${temaNotSpace}/${videoFile.name}`
+      `documentos/${materia}/${temaNotSpace}/video/${videoFile.name}`
     );
 
     const uploadTask = storageRef.put(videoFile, metadata);

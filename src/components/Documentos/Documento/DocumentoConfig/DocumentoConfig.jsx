@@ -2,6 +2,8 @@ import React, { useState, useRef, useEffect } from 'react';
 import { bindActionCreators, compose } from 'redux';
 import { connect } from 'react-redux';
 import { firestoreConnect } from 'react-redux-firebase';
+import { history } from '../../../../redux/store/Store';
+import CleanUpSpecialChars from '../../../../scripts/CleanUpSpecialChars';
 import classes from './DocumentoConfig.module.scss';
 
 import Portada from '../DocumentoPortada/DocumentoPortada';
@@ -9,6 +11,7 @@ import Portada from '../DocumentoPortada/DocumentoPortada';
 import { getChangePageGrid } from '../../../../redux/actions/DocumentosAction';
 
 const DocumentoConfig = ({
+  firebase: { storage },
   documentos,
   favorito,
   portada,
@@ -22,6 +25,21 @@ const DocumentoConfig = ({
   const [isActivePopever, setActivePopever] = useState(false);
   const [onOpenPortada, setOpenPortada] = useState(false);
 
+  const onChangePageGrid = () => {
+    firestore
+      .update(`documentos/${ID}`, {
+        pageGrid: !pageGrid,
+      })
+      .then(() => {})
+      .catch(error => console.log(error));
+    getChangePageGrid(!pageGrid);
+  };
+
+  const handleOpenPopreverPortada = () => {
+    setOpenPortada(!onOpenPortada);
+    setActivePopever(!isActivePopever);
+  };
+
   const onFavorite = () => {
     setFavorito(!isFavorito);
     firestore
@@ -31,20 +49,53 @@ const DocumentoConfig = ({
       .then(() => {})
       .catch(error => console.log(error));
   };
-  const handleRemoveID = () => {};
-  const handleOpenPopreverPortada = () => {
-    setOpenPortada(!onOpenPortada);
-    setActivePopever(!isActivePopever);
-  };
 
-  const onChangePageGrid = () => {
-    firestore
-      .update(`documentos/${ID}`, {
-        pageGrid: !pageGrid,
+  const handleRemoveID = () => {
+    const fileNamePortada = documentos[ID].filenamePortadaImagen;
+    const fileNameVideo = documentos[ID].filenameVideoDoc;
+    console.log(fileNamePortada, fileNameVideo);
+    const materiaFB = documentos[ID].materia.toLowerCase();
+    const temaFB = documentos[ID].tema.toLowerCase();
+    const materia = CleanUpSpecialChars(materiaFB);
+    const tema = CleanUpSpecialChars(temaFB);
+    const temaNotSpace = tema.replace(/ +/g, '_');
+
+    const storageRefPortada = storage().ref(
+      `documentos/${materiaFB}/${temaNotSpace}/portada/${fileNamePortada}`
+    );
+    const storageRefVideo = storage().ref(
+      `documentos/${materiaFB}/${temaNotSpace}/video/${fileNameVideo}`
+    );
+
+    storageRefPortada
+      .delete()
+      .then(() => {
+        console.log('SI DELETE PORTADA');
       })
-      .then(() => {})
-      .catch(error => console.log(error));
-    getChangePageGrid(!pageGrid);
+      .catch(error => {
+        console.error('Error removing document: ', error);
+      });
+
+    storageRefVideo
+      .delete()
+      .then(() => {
+        console.log('SI DELETE VIDEO');
+      })
+      .catch(error => {
+        console.error('Error removing document: ', error);
+      });
+
+    firestore
+      .collection('documentos')
+      .doc(ID)
+      .delete()
+      .then(() => {
+        history.push('/documentos');
+        console.log('Document successfully deleted!');
+      })
+      .catch(error => {
+        console.error('Error removing document: ', error);
+      });
   };
 
   const cssActivePopever = isActivePopever && classes.activeBtnPopever;
