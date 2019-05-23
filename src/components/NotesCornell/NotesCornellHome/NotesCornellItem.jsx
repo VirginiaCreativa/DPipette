@@ -4,7 +4,7 @@ import Moment from '../../UI/Moment/Moment';
 import CapitalizeFirstLetter from '../../../scripts/CapitalizeFirstLetter';
 import classes from './NotesCornellHome.module.scss';
 
-import CoverClient from '../UI/CoverClient';
+import CoverClient from '../../UI/CoverClient/CoverClient';
 
 const NotesCornellItem = ({
   linked,
