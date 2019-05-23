@@ -19,6 +19,8 @@ const getCSSModuleLocalIdent = require('react-dev-utils/getCSSModuleLocalIdent')
 const ModuleNotFoundPlugin = require('react-dev-utils/ModuleNotFoundPlugin');
 const ForkTsCheckerWebpackPlugin = require('react-dev-utils/ForkTsCheckerWebpackPlugin');
 const typescriptFormatter = require('react-dev-utils/typescriptFormatter');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
+
 const getClientEnvironment = require('./env');
 const paths = require('./paths');
 
@@ -143,6 +145,7 @@ module.exports = function(webpackEnv) {
     output: {
       // The build folder.
       path: isEnvProduction ? paths.appBuild : undefined,
+      globalObject: 'this',
       // Add /* filename */ comments to generated require()s in the output.
       pathinfo: isEnvDevelopment,
       // There will be one main bundle, and one file per asynchronous chunk.
@@ -286,7 +289,7 @@ module.exports = function(webpackEnv) {
       strictExportPresence: true,
       rules: [
         // Disable require.ensure as it's not a standard language feature.
-        { parser: { requireEnsure: false } },
+        { parser: { requireEnsure: true } },
 
         // First, run the linter.
         // It's important to do this before Babel processes the JS.
@@ -315,6 +318,10 @@ module.exports = function(webpackEnv) {
             {
               test: /\.(woff2|ttf|woff|eot|svg)$/,
               loader: 'file-loader?name=assets/fonts/[name].[ext]',
+            },
+            {
+              test: /\.(pdf|mp4|webm)$/,
+              loader: 'file-loader?name=assets/files/[name].[ext]',
             },
             {
               test: [
@@ -470,7 +477,7 @@ module.exports = function(webpackEnv) {
               // its runtime that would otherwise be processed through "file" loader.
               // Also exclude `html` and `json` extensions so they get processed
               // by webpacks internal loaders.
-              exclude: [/\.(js|mjs|jsx|ts|tsx)$/, /\.html$/, /\.json$/],
+              exclude: [/\.(js|mjs|jsx|ts|tsx|)$/, /\.html$/, /\.json$/],
               options: {
                 name: 'static/media/[name].[hash:8].[ext]',
               },
@@ -483,6 +490,12 @@ module.exports = function(webpackEnv) {
     },
     plugins: [
       // Generates an `index.html` file with the <script> injected.
+      // new CopyWebpackPlugin([
+      //   {
+      //     from: path.resolve(__dirname, './node_modules/pdfjs-dist/cmaps/'),
+      //     to: 'cmaps/',
+      //   },
+      // ]),
       new HtmlWebpackPlugin(
         Object.assign(
           {},

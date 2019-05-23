@@ -7,6 +7,7 @@
     "@babel/plugin-transform-react-jsx": "^7.3.0",
     "@babel/plugin-transform-react-jsx-self": "^7.2.0",
     "@babel/plugin-transform-react-jsx-source": "^7.2.0",
+    "@babel/runtime": "^7.4.5",
     "@firebase/app-types": "^0.3.7",
     "@firebase/util": "^0.2.11",
     "@mikeljames/draft-js-drag-n-drop-upload-plugin": "^2.0.1",
@@ -22,7 +23,8 @@
     "boxicons": "^2.0.2",
     "case-sensitive-paths-webpack-plugin": "2.2.0",
     "connected-react-router": "^6.3.2",
-    "core-js": "^3.0.1",
+    "copy-webpack-plugin": "^5.0.3",
+    "core-js": "2.6.8",
     "css-loader": "1.0.0",
     "dotenv": "6.0.0",
     "dotenv-expand": "4.2.0",
@@ -72,8 +74,9 @@
     "kleur": "2.0.2",
     "mini-css-extract-plugin": "0.5.0",
     "moment": "^2.24.0",
-    "node-sass": "^4.11.0",
+    "node-sass": "4.12.0",
     "optimize-css-assets-webpack-plugin": "5.0.1",
+    "pdfjs": "^2.3.0",
     "pnp-webpack-plugin": "1.2.1",
     "popper.js": "^1.14.7",
     "postcss-flexbugs-fixes": "4.1.0",
@@ -90,10 +93,13 @@
     "react-draft-wysiwyg": "^1.13.2",
     "react-loadable": "^5.5.0",
     "react-masonry-css": "^1.0.12",
+    "react-pdf": "4.0.5",
+    "react-pdf-to-image": "^1.0.2",
     "react-redux": "^7.1.0-alpha.4",
     "react-redux-firebase": "^3.0.0-alpha.11",
     "react-router": "5.0.0",
     "react-router-dom": "^5.0.0",
+    "react-scripts": "^3.0.1",
     "react-skylight": "^0.5.1",
     "react-youtube": "^7.9.0",
     "redux": "^4.0.1",
@@ -179,5 +185,7 @@
       "@babel/plugin-proposal-class-properties"
     ]
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "webpack-cli": "^3.3.2"
+  }
 }
