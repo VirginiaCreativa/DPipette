@@ -92,8 +92,6 @@ class DocumentoPage extends Component {
 
     const files = ev.target.files;
 
-    const fileList = [];
-
     for (let i = 0; i < files.length; i += 1) {
       const imgsFiles = ev.target.files[i];
 
@@ -107,9 +105,10 @@ class DocumentoPage extends Component {
 
   render() {
     const { onRef, imgsPages, tema } = this.props;
-    const { isProgressUpload, hasFilesImages } = this.state;
+    const { isProgressUpload } = this.state;
 
-    console.log(hasFilesImages);
+    const set = new Set(imgsPages);
+    const imgsPagesOrder = Array.from(set).sort();
 
     return (
       <div className={classes.DocumentoPage} ref={onRef}>
@@ -121,8 +120,8 @@ class DocumentoPage extends Component {
           multiple
         />
         <h5>{isProgressUpload}%</h5>
-        {imgsPages &&
-          imgsPages.map((item, index) => (
+        {imgsPagesOrder &&
+          imgsPagesOrder.map((item, index) => (
             <img
               key={index}
               src={item}
