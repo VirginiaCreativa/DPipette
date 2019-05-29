@@ -1,21 +1,18 @@
-/* eslint-disable prefer-const */
 import React, { Component } from 'react';
-import { bindActionCreators, compose } from 'redux';
+import { compose } from 'redux';
 import { connect } from 'react-redux';
-import { firestoreConnect, withFirestore } from 'react-redux-firebase';
-import { withHandlers } from 'recompose';
+import { firestoreConnect } from 'react-redux-firebase';
 import firebase from '../../../../config/FirebaseConfig';
 import CleanUpSpecialChars from '../../../../scripts/CleanUpSpecialChars';
 import classes from './DocumentoPage.module.scss';
 import Spinner from '../UI/Spinner/Spinner';
-
-import { addPagesImgsDoc } from '../../../../redux/actions/DocumentosAction';
 
 class DocumentoPage extends Component {
   state = {
     isProgressUpload: 0,
     hasImages: 0,
     hasPagesImages: [],
+    hasFilesImages: [],
   };
 
   uploadFiles = files => {
@@ -73,10 +70,13 @@ class DocumentoPage extends Component {
       },
       () => {
         uploadTask.snapshot.ref.getDownloadURL().then(downloadURL => {
-          const { hasPagesImages } = this.state;
-          this.setState({ hasPagesImages: hasPagesImages.concat(downloadURL) });
+          const { hasPagesImages, hasFilesImages } = this.state;
+          this.setState(prevState => ({
+            hasPagesImages: hasPagesImages.concat(downloadURL),
+          }));
           firestore.update(`documentos/${ID}`, {
             imgsPages: hasPagesImages,
+            filenamePageDoc: hasFilesImages,
           });
         });
       }
@@ -84,7 +84,7 @@ class DocumentoPage extends Component {
   };
 
   changeFiles = ev => {
-    const { documentos, ID } = this.props;
+    const { documentos, ID, firestore } = this.props;
 
     const temaFB = documentos[ID].tema.toLowerCase();
     const tema = CleanUpSpecialChars(temaFB);
@@ -92,28 +92,24 @@ class DocumentoPage extends Component {
 
     const files = ev.target.files;
 
-    this.setState({ hasImages: files.length });
     const fileList = [];
 
     for (let i = 0; i < files.length; i += 1) {
-      const imgfiles = ev.target.files[i];
+      const imgsFiles = ev.target.files[i];
 
-      const changeNameFile = imgfiles.slice(0, imgfiles.size, 'image/jpg');
-      const imgFilesName = new File([changeNameFile], `${temaNotSpace}_${i}`, {
-        type: 'image/jpg',
-      });
-      const reader = new FileReader();
-      reader.onload = ev => {
-        fileList.push(ev.target.result);
-      };
-      reader.readAsDataURL(imgFilesName);
-      this.uploadFiles(imgFilesName);
+      const { hasFilesImages } = this.state;
+      this.setState(prevState => ({
+        hasFilesImages: prevState.hasFilesImages.concat(imgsFiles.name),
+      }));
+      this.uploadFiles(imgsFiles);
     }
   };
 
   render() {
     const { onRef, imgsPages, tema } = this.props;
-    const { isProgressUpload } = this.state;
+    const { isProgressUpload, hasFilesImages } = this.state;
+
+    console.log(hasFilesImages);
 
     return (
       <div className={classes.DocumentoPage} ref={onRef}>
@@ -141,11 +137,8 @@ class DocumentoPage extends Component {
 
 export default compose(
   firestoreConnect(['documentos']),
-  connect(
-    state => ({
-      documentos: state.firestore.data.documentos,
-      PagesImgs: state.Documentos.PagesImgs,
-    }),
-    null
-  )
+  connect(state => ({
+    documentos: state.firestore.data.documentos,
+    PagesImgs: state.Documentos.PagesImgs,
+  }))
 )(DocumentoPage);

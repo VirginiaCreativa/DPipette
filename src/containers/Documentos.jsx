@@ -23,6 +23,7 @@ class Documentos extends Component {
       portada: '',
       filenamePortadaImagen: '',
       filenameVideoDoc: '',
+      filenamePagesDoc: [],
       pageGrid: true,
     };
     this.props.firestore
