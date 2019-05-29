@@ -98,6 +98,7 @@ class ButtonCreates extends Component {
       portada: '',
       filenamePortadaImagen: '',
       filenameVideoDoc: '',
+      pageGrid: true,
     };
     this.props.firestore
       .add('documentos', {

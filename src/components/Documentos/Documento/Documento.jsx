@@ -47,7 +47,6 @@ class Documento extends Component {
   componentDidUpdate() {
     const { isDuration, hasVideo } = this.state;
     this.props.getDurationVideoDoc(isDuration);
-    this.props.getPageHeightDoc(this.refPage.clientHeight);
     const progress = this.refProgress;
 
     if (this.props.hasVideo) {
@@ -153,7 +152,11 @@ class Documento extends Component {
                     </div>
                     <div className="col-8">
                       <div className={classes.BoxPageLeft}>
-                        <Page onRef={c => (this.refPage = c)} />
+                        <Page
+                          onRef={c => (this.refPage = c)}
+                          ID={this.props.match.params.id}
+                          {...documento}
+                        />
                         <Marker
                           {...documento}
                           ID={this.props.match.params.id}
@@ -175,7 +178,11 @@ class Documento extends Component {
                           onRefUl={ref => (this.refMarkeUl = ref)}
                           onTimelSame={this.handleTimelineSame}
                         />
-                        <Page onRef={c => (this.refPage = c)} />
+                        <Page
+                          onRef={c => (this.refPage = c)}
+                          ID={this.props.match.params.id}
+                          {...documento}
+                        />
                       </div>
                     </div>
                     <div className="col-4">

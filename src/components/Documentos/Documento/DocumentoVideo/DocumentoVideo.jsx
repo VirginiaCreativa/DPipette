@@ -91,7 +91,7 @@ const DocumentoVideo = ({
       }
     );
   };
-  const onRemoveVideo = () => {
+  const handleRemoveVideo = () => {
     firestore
       .update(`documentos/${ID}`, {
         hasVideo: !hasVideo,
@@ -101,7 +101,7 @@ const DocumentoVideo = ({
 
     console.log('delete');
     const storageRef = storage().ref(
-      `documentos/${materia}/${temaNotSpace}/${fileName}`
+      `documentos/${materia}/${temaNotSpace}/video/${fileName}`
     );
     storageRef
       .delete()
@@ -129,7 +129,7 @@ const DocumentoVideo = ({
           <div className={classes.VideoPlayer}>
             <button
               type="button"
-              onClick={onRemoveVideo}
+              onClick={handleRemoveVideo}
               className={classes.btnDelete}>
               <i className="bx bxs-x-circle" />
             </button>
