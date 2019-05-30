@@ -7,6 +7,8 @@ import CleanUpSpecialChars from '../../../../scripts/CleanUpSpecialChars';
 import classes from './DocumentoPage.module.scss';
 import Spinner from '../UI/Spinner/Spinner';
 
+const PagesImages = React.lazy(() => import('./DocumentoImages'));
+
 class DocumentoPage extends Component {
   state = {
     isProgressUpload: 0,
@@ -122,12 +124,9 @@ class DocumentoPage extends Component {
         <h5>{isProgressUpload}%</h5>
         {imgsPagesOrder &&
           imgsPagesOrder.map((item, index) => (
-            <img
-              key={index}
-              src={item}
-              alt={`${tema}_${index}`}
-              className="img-fluid"
-            />
+            <React.Suspense fallback={<Spinner />}>
+              <PagesImages key={index} src={item} alt={`${tema}_${index}`} />
+            </React.Suspense>
           ))}
       </div>
     );
