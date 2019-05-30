@@ -15,6 +15,7 @@ class DocumentoPage extends Component {
     hasImages: 0,
     hasPagesImages: [],
     hasFilesImages: [],
+    isShowPage: false,
   };
 
   uploadFiles = files => {
@@ -86,7 +87,7 @@ class DocumentoPage extends Component {
   };
 
   changeFiles = ev => {
-    const { documentos, ID, firestore } = this.props;
+    const { documentos, ID } = this.props;
 
     const temaFB = documentos[ID].tema.toLowerCase();
     const tema = CleanUpSpecialChars(temaFB);
@@ -107,7 +108,7 @@ class DocumentoPage extends Component {
 
   render() {
     const { onRef, imgsPages, tema } = this.props;
-    const { isProgressUpload } = this.state;
+    const { isProgressUpload, isShowPage } = this.state;
 
     const set = new Set(imgsPages);
     const imgsPagesOrder = Array.from(set).sort();
@@ -121,13 +122,20 @@ class DocumentoPage extends Component {
           accept="image/*"
           multiple
         />
-        <h5>{isProgressUpload}%</h5>
-        {imgsPagesOrder &&
-          imgsPagesOrder.map((item, index) => (
-            <React.Suspense fallback={<Spinner />}>
-              <PagesImages key={index} src={item} alt={`${tema}_${index}`} />
-            </React.Suspense>
-          ))}
+        {isShowPage && (
+          <div className={classes.BoxPage}>
+            {imgsPagesOrder &&
+              imgsPagesOrder.map((item, index) => (
+                <React.Suspense fallback={<Spinner />}>
+                  <PagesImages
+                    key={index}
+                    src={item}
+                    alt={`${tema}_${index}`}
+                  />
+                </React.Suspense>
+              ))}
+          </div>
+        )}
       </div>
     );
   }

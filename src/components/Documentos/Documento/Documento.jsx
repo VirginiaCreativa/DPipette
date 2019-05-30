@@ -114,18 +114,12 @@ class Documento extends Component {
         ) : (
           <>
             <div className={classes.BoxHeader}>
-              <div className="row">
-                <div className="col-9">
-                  <Header {...documento} ID={this.props.match.params.id} />
-                </div>
-                <div className="col-3">
-                  <Config ID={this.props.match.params.id} {...documento} />
-                </div>
-              </div>
+              <Header {...documento} ID={this.props.match.params.id} />
+              <Config ID={this.props.match.params.id} {...documento} />
             </div>
             <div className={classes.Wrapper}>
               {documento.pageGrid ? (
-                <>
+                <div className="container-fluid">
                   <div className="row">
                     <div className="col-4">
                       <div className={classes.BoxVideo}>
@@ -166,7 +160,7 @@ class Documento extends Component {
                       </div>
                     </div>
                   </div>
-                </>
+                </div>
               ) : (
                 <>
                   <div className="row">

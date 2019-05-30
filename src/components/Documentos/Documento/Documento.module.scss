@@ -1,6 +1,10 @@
 @import '../../../styles/variables';
 
 .Documento {
+	.BoxHeader {
+		display: grid;
+		grid-template-columns: 85% 1fr;
+	}
 	.Wrapper {
 		.BoxPageLeft {
 			display: grid;
