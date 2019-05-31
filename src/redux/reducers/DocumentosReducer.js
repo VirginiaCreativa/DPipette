@@ -12,6 +12,7 @@ import {
   FILTER_DATE_YESTERDAY_DOCUMENTOS,
   FILTER_FAVORITE_DOCUMENTOS,
   SEARCH_DOCUMENTOS,
+  SHOW_EDITABLE_DOC,
 } from '../actions/Types';
 
 const initialState = {
@@ -29,6 +30,7 @@ const initialState = {
   categoria: '',
   yesterday: '',
   favorito: null,
+  Editable: false,
 };
 
 const DocumentosReducer = (state = initialState, action) => {
@@ -107,6 +109,11 @@ const DocumentosReducer = (state = initialState, action) => {
       return {
         ...state,
         favorito: action.payload,
+      };
+    case SHOW_EDITABLE_DOC:
+      return {
+        ...state,
+        Editable: action.payload,
       };
     default:
       return state;

@@ -8,7 +8,10 @@ import classes from './DocumentoConfig.module.scss';
 
 import Portada from '../DocumentoPortada/DocumentoPortada';
 
-import { getChangePageGrid } from '../../../../redux/actions/DocumentosAction';
+import {
+  getChangePageGrid,
+  showEditableDoc,
+} from '../../../../redux/actions/DocumentosAction';
 
 const DocumentoConfig = ({
   firebase: { storage },
@@ -20,10 +23,12 @@ const DocumentoConfig = ({
   getChangePageGrid,
   firestore,
   ID,
+  showEditableDoc,
 }) => {
   const [isFavorito, setFavorito] = useState(false);
   const [isActivePopever, setActivePopever] = useState(false);
   const [onOpenPortada, setOpenPortada] = useState(false);
+  const [isShowEditable, setShowEditable] = useState(false);
 
   const onChangePageGrid = () => {
     firestore
@@ -98,10 +103,24 @@ const DocumentoConfig = ({
       });
   };
 
+  const handlShowEditable = () => {
+    showEditableDoc(true);
+  };
+
+  const handlHideEditable = () => {
+    showEditableDoc(false);
+  };
+
   const cssActivePopever = isActivePopever && classes.activeBtnPopever;
 
   return (
     <div className={classes.DocumentoConfig}>
+      <button
+        type="button"
+        onClick={handlShowEditable}
+        onDoubleClick={handlHideEditable}>
+        <i className="bx bx-pencil" />
+      </button>
       <button type="button" onClick={onChangePageGrid}>
         <i className="bx bx-transfer" />
       </button>
@@ -131,7 +150,7 @@ const DocumentoConfig = ({
 };
 
 const mapDispatchToProps = dispatch =>
-  bindActionCreators({ getChangePageGrid }, dispatch);
+  bindActionCreators({ getChangePageGrid, showEditableDoc }, dispatch);
 
 export default compose(
   firestoreConnect(['documentos']),

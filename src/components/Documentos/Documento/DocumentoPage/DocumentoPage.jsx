@@ -16,7 +16,39 @@ class DocumentoPage extends Component {
     hasPagesImages: [],
     hasFilesImages: [],
     isShowPage: false,
+    isShowGetting: true,
+    canMoreFile: false,
   };
+
+  componentDidMount() {
+    const { imgsPages, showEditable } = this.props;
+    const { isShowPage, isShowGetting } = this.state;
+
+    if (imgsPages.length === 0) {
+      this.setState({ isShowPage: false, isShowGetting: true });
+    } else {
+      this.setState({ isShowPage: true, isShowGetting: false });
+    }
+    console.log('>>>>', isShowGetting, showEditable);
+    this.setState({ isShowGetting: showEditable });
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    const { isShowPage, isShowGetting } = this.state;
+    const { imgsPages, showEditable } = this.props;
+
+    if (imgsPages !== prevProps.imgsPages) {
+      if (imgsPages.length === 0) {
+        this.setState({ isShowPage: false, isShowGetting: true });
+      } else {
+        this.setState({ isShowPage: true, isShowGetting: false });
+      }
+    }
+
+    if (showEditable !== prevProps.showEditable) {
+      this.setState({ isShowGetting: showEditable });
+    }
+  }
 
   uploadFiles = files => {
     const {
@@ -107,33 +139,43 @@ class DocumentoPage extends Component {
   };
 
   render() {
-    const { onRef, imgsPages, tema } = this.props;
-    const { isProgressUpload, isShowPage } = this.state;
+    const { onRef, imgsPages, tema, showEditable } = this.props;
+    const { isProgressUpload, isShowPage, isShowGetting } = this.state;
 
     const set = new Set(imgsPages);
     const imgsPagesOrder = Array.from(set).sort();
 
+    const classProgressUpload = {
+      width: `${isProgressUpload}%`,
+    };
+
     return (
       <div className={classes.DocumentoPage} ref={onRef}>
-        <input
-          type="file"
-          name="uploadPDF"
-          onChange={this.changeFiles}
-          accept="image/*"
-          multiple
-        />
+        {isShowGetting && (
+          <div className={classes.BoxFile}>
+            <h6>Subir unos imagenes del documento</h6>
+            <input
+              type="file"
+              name="uploadPDF"
+              onChange={this.changeFiles}
+              className={classes.InputFile}
+              accept="image/jpeg"
+              multiple
+            />
+            <button type="button" className="btn btn-primary btn-block">
+              Añadir unos imagenes
+            </button>
+            <p>Obligación un archivo de imagen => jpg</p>
+            <div className={classes.showUpload} style={classProgressUpload} />
+          </div>
+        )}
         {isShowPage && (
           <div className={classes.BoxPage}>
-            {imgsPagesOrder &&
-              imgsPagesOrder.map((item, index) => (
-                <React.Suspense fallback={<Spinner />}>
-                  <PagesImages
-                    key={index}
-                    src={item}
-                    alt={`${tema}_${index}`}
-                  />
-                </React.Suspense>
-              ))}
+            {imgsPagesOrder.map((item, index) => (
+              <React.Suspense key={index} fallback={<Spinner />}>
+                <PagesImages src={item} alt={`${tema}_${index}`} />
+              </React.Suspense>
+            ))}
           </div>
         )}
       </div>
@@ -146,5 +188,6 @@ export default compose(
   connect(state => ({
     documentos: state.firestore.data.documentos,
     PagesImgs: state.Documentos.PagesImgs,
+    showEditable: state.Documentos.Editable,
   }))
 )(DocumentoPage);

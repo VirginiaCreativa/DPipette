@@ -12,6 +12,7 @@ import {
   FILTER_DATE_YESTERDAY_DOCUMENTOS,
   FILTER_FAVORITE_DOCUMENTOS,
   SEARCH_DOCUMENTOS,
+  SHOW_EDITABLE_DOC,
 } from './Types';
 
 export const getTimelineVideoDoc = payload => ({
@@ -76,5 +77,10 @@ export const getFilterFavoriteDoc = payload => ({
 
 export const SearchDocumentos = payload => ({
   type: SEARCH_DOCUMENTOS,
+  payload,
+});
+
+export const showEditableDoc = payload => ({
+  type: SHOW_EDITABLE_DOC,
   payload,
 });

@@ -9,13 +9,13 @@
 		line-height: 1;
 		color: $red;
 		background-color: transparent;
+		position: absolute;
+		top: 6px;
+		right: 10px;
 		padding: 4px;
 		border: none;
 		border-radius: 2px;
-		position: absolute;
 		z-index: 3;
-		right: 10px;
-		top: 6px;
 		&:hover {
 			color: $red_dark;
 		}
@@ -32,21 +32,22 @@
 	grid-template-rows: auto auto;
 	justify-content: center;
 	align-content: center;
+	text-align: center;
 	background-color: $write_gray_1;
 	position: absolute;
 	top: 0;
 	left: 0;
 	padding: 96px 20px;
-	width: 100%;
-	border: 2px dotted $write_gray_3;
+	width: 95%;
 	height: 233px;
+	border: 2px dotted $write_gray_3;
 	&:hover {
 		background-color: $write_gray_2;
 	}
 	h6 {
-		text-transform: uppercase;
-		color: $black;
 		font-size: 0.8rem;
+		color: $black;
+		text-transform: uppercase;
 	}
 
 	.InputFile {

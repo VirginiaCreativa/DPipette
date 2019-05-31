@@ -1,242 +1,240 @@
 @import '../../../../../../styles/variables';
 
 .UserProfile {
-  display: flex;
-  align-items: center;
-  text-align: center;
-  position: relative;
+	display: flex;
+	align-items: center;
+	text-align: center;
+	position: relative;
 
-  @keyframes fade-on-keyframes {
-    from {
-      opacity: 0;
-      top: 0;
-    }
+	@keyframes fade-on-keyframes {
+		from {
+			opacity: 0;
+			top: 0;
+		}
 
-    to {
-      opacity: 1;
-      top: 60px;
-    }
-  }
+		to {
+			opacity: 1;
+			top: 60px;
+		}
+	}
 
-  @keyframes fade-off-keyframes {
-    from {
-      opacity: 1;
-      top: 60px;
-    }
+	@keyframes fade-off-keyframes {
+		from {
+			opacity: 1;
+			top: 60px;
+		}
 
-    to {
-      opacity: 0;
-      top: 0;
-    }
-  }
+		to {
+			opacity: 0;
+			top: 0;
+		}
+	}
 
-  .CircleImg {
-    display: block;
-    font-size: 12px;
-    text-align: center;
-    background-color: $write_gray_3;
-    margin-right: 10px;
-    width: 36px;
-    height: 36px !important;
-    border-radius: 100%;
-    background-size: cover;
-    overflow: hidden;
+	.CircleImg {
+		display: block;
+		font-size: 12px;
+		text-align: center;
+		background-color: $write_gray_3;
+		margin-right: 10px;
+		width: 30px;
+		height: 30px !important;
+		border-radius: 100%;
+		background-size: cover;
+		overflow: hidden;
 
-    img {
-      display: block;
-      font-size: 12px;
-      text-align: center;
-      background-color: $write_gray_3;
-      margin-right: 10px;
-      width: auto;
-      height: 100%;
-      border-radius: 50%;
-    }
-  }
+		img {
+			display: block;
+			font-size: 12px;
+			text-align: center;
+			background-color: $write_gray_3;
+			margin-right: 10px;
+			width: auto;
+			height: 100%;
+			border-radius: 50%;
+		}
+	}
 
-  .CircleAnomy {
-    font-size: 12px;
-    line-height: 3;
-    text-align: center;
-    background-color: $write_gray_3;
-    margin-right: 10px;
-    width: 36px;
-    height: 36px !important;
-    border-radius: 100%;
-    max-width: 100%;
-    max-height: 100%;
-    font-weight: 700;
-  }
+	.CircleAnomy {
+		font-size: 12px;
+		line-height: 3;
+		text-align: center;
+		background-color: $write_gray_3;
+		margin-right: 10px;
+		width: 36px;
+		height: 36px !important;
+		border-radius: 100%;
+		max-width: 100%;
+		max-height: 100%;
+		font-weight: 700;
+	}
 
-  p {
-    line-height: 4;
-    margin-bottom: 0;
-    text-transform: capitalize;
+	p {
+		line-height: 4;
+		margin-bottom: 0;
+		text-transform: capitalize;
 
-    &:hover {
-      color: $blue;
-    }
-  }
+		&:hover {
+			color: $blue;
+		}
+	}
 
-  .btnMenuUser {
-    background-color: transparent;
-    border: none;
-    cursor: pointer !important;
+	.btnMenuUser {
+		background-color: transparent;
+		border: none;
+		cursor: pointer !important;
 
-    :global {
-      [class*="bx-"] {
-        font-size: 22px;
-        position: relative;
-        top: 3px;
-      }
-    }
-  }
+		:global {
+			[class*='bx-'] {
+				font-size: 22px;
+				position: relative;
+				top: 3px;
+			}
+		}
+	}
 
-  .FadeOn {
-    animation: fade-on-keyframes 0.5s;
-  }
+	.FadeOn {
+		animation: fade-on-keyframes 0.5s;
+	}
 
-  .FadeOff {
-    animation: fade-off-keyframes 0.5s;
-  }
+	.FadeOff {
+		animation: fade-off-keyframes 0.5s;
+	}
 
-  .isMenuOpen {
-    background-color: #fff;
-    box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.15);
-    position: absolute;
-    top: 60px;
-    right: 0;
-    width: 166px;
+	.isMenuOpen {
+		background-color: #fff;
+		box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.15);
+		position: absolute;
+		top: 60px;
+		right: 0;
+		width: 166px;
 
-    .Triangule {
-      box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.15);
-      position: absolute;
-      top: -60px;
-      right: 0;
-      width: 60px;
-      height: 60px;
-      overflow: hidden;
+		.Triangule {
+			box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.15);
+			position: absolute;
+			top: -60px;
+			right: 0;
+			width: 60px;
+			height: 60px;
+			overflow: hidden;
 
-      &:after {
-        background: #fff;
-        box-shadow: -1px -1px 3px -2px rgba(0, 0, 0, 0.5);
-        position: absolute;
-        top: 60px;
-        left: 5px;
-        width: 50px;
-        height: 50px;
-        transform: rotate(45deg);
-        content: "";
-      }
-    }
+			&:after {
+				background: #fff;
+				box-shadow: -1px -1px 3px -2px rgba(0, 0, 0, 0.5);
+				position: absolute;
+				top: 60px;
+				left: 5px;
+				width: 50px;
+				height: 50px;
+				transform: rotate(45deg);
+				content: '';
+			}
+		}
 
-    ul {
-      margin: 0;
-      padding: 0;
-      width: 100%;
-      list-style: none;
+		ul {
+			margin: 0;
+			padding: 0;
+			width: 100%;
+			list-style: none;
 
-      li {
-        display: flex;
-        align-items: center;
-        justify-content: flex-start;
-        line-height: 2;
-        // height: 40px;
-        padding: 8px 12px;
-        list-style: none;
+			li {
+				display: flex;
+				align-items: center;
+				justify-content: flex-start;
+				line-height: 2;
+				// height: 40px;
+				padding: 8px 12px;
+				list-style: none;
 
-        &:last-child {
-          border-top: 1px solid $write_gray_1;
-        }
+				&:last-child {
+					border-top: 1px solid $write_gray_1;
+				}
 
-        a {
-          display: flex;
-          justify-content: flex-start;
-          font-size: 15px;
-          color: $gray_medium;
-          margin-bottom: 0;
-          width: 200px;
+				a {
+					display: flex;
+					justify-content: flex-start;
+					font-size: 15px;
+					color: $gray_medium;
+					margin-bottom: 0;
+					width: 200px;
 
-          :global {
+					:global {
+						.bx,
+						.bxs {
+							font-size: 20px;
+							color: $gray_light;
+							position: relative;
+							top: 4px;
+							margin-right: 6px;
+						}
 
-            .bx,
-            .bxs {
-              font-size: 20px;
-              color: $gray_light;
-              position: relative;
-              top: 4px;
-              margin-right: 6px;
-            }
+						.bx-user-circle {
+							font-size: 20px !important;
+						}
+					}
 
-            .bx-user-circle {
-              font-size: 20px !important;
-            }
-          }
+					&:hover {
+						color: $blue;
 
-          &:hover {
-            color: $blue;
+						:global {
+							.bxs-user-circle,
+							.bx-cog,
+							.bx-lock-open {
+								color: $blue;
+							}
+						}
+					}
+				}
 
-            :global {
+				&.Storage {
+					display: flex;
+					align-items: flex-start;
+					justify-content: flex-start;
+					flex-direction: column;
 
-              .bxs-user-circle,
-              .bx-cog,
-              .bx-lock-open {
-                color: $blue;
-              }
-            }
-          }
-        }
+					.infoStorage {
+						margin-bottom: 6px;
+						width: 100%;
 
-        &.Storage {
-          display: flex;
-          align-items: flex-start;
-          justify-content: flex-start;
-          flex-direction: column;
+						p {
+							display: block;
+							font-size: 11px;
+							margin-bottom: 0;
+							height: 38px;
+							text-transform: none;
 
-          .infoStorage {
-            margin-bottom: 6px;
-            width: 100%;
+							&:hover {
+								color: $gray_medium;
+							}
+						}
 
-            p {
-              display: block;
-              font-size: 11px;
-              margin-bottom: 0;
-              height: 38px;
-              text-transform: none;
+						.linePorce {
+							display: block;
+							position: relative;
+							height: 3px;
+							border-radius: 4px;
 
-              &:hover {
-                color: $gray_medium;
-              }
-            }
+							.bgPorce {
+								position: absolute;
+								width: 100%;
+								border-bottom: 3px solid $write_gray_3;
+								z-index: 1;
+							}
+						}
 
-            .linePorce {
-              display: block;
-              position: relative;
-              height: 3px;
-              border-radius: 4px;
+						:global {
+							.bx {
+								font-size: 20px;
+								color: $gray_light;
+								margin-right: 6px;
+							}
+						}
 
-              .bgPorce {
-                position: absolute;
-                width: 100%;
-                border-bottom: 3px solid $write_gray_3;
-                z-index: 1;
-              }
-            }
-
-            :global {
-              .bx {
-                font-size: 20px;
-                color: $gray_light;
-                margin-right: 6px;
-              }
-            }
-
-            a {
-              display: block;
-            }
-          }
-        }
-      }
-    }
-  }
+						a {
+							display: block;
+						}
+					}
+				}
+			}
+		}
+	}
 }
