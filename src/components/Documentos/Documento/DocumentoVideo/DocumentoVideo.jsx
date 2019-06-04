@@ -24,11 +24,23 @@ const DocumentoVideo = ({
   firestore,
   documentos,
   ID,
+  showEditable,
   firebase: { storage },
 }) => {
   const [isProgressUploadValue, setProgressUploadValue] = useState(0);
+  const [isActiveEditable, setActiveEditable] = useState(false);
 
-  const fileName = documentos[ID].filenameVideoNote;
+  useEffect(
+    () => () => {
+      setTimeout(() => {
+        setProgressUploadValue(0);
+      }, 20000);
+      setActiveEditable(!showEditable);
+    },
+    [showEditable, videoDoc]
+  );
+
+  const fileName = documentos[ID].filenameVideoDoc;
   const materiaFB = documentos[ID].materia.toLowerCase();
   const temaFB = documentos[ID].tema.toLowerCase();
   const materia = CleanUpSpecialChars(materiaFB);
@@ -127,12 +139,14 @@ const DocumentoVideo = ({
       {hasVideo ? (
         <>
           <div className={classes.VideoPlayer}>
-            <button
-              type="button"
-              onClick={handleRemoveVideo}
-              className={classes.btnDelete}>
-              <i className="bx bxs-x-circle" />
-            </button>
+            {isActiveEditable && (
+              <button
+                type="button"
+                onClick={handleRemoveVideo}
+                className={classes.btnDelete}>
+                <i className="bx bxs-x-circle" />
+              </button>
+            )}
             <Controls
               isCurrentTime={isCurrentTime}
               onPlay={onPlay}
@@ -181,5 +195,6 @@ export default compose(
   firestoreConnect(['documentos']),
   connect(state => ({
     documentos: state.firestore.data.documentos,
+    showEditable: state.Documentos.Editable,
   }))
 )(DocumentoVideo);

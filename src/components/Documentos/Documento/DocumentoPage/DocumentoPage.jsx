@@ -55,8 +55,8 @@ class DocumentoPage extends Component {
       } else {
         this.setState({
           isShowPage: true,
-          isShowGetting: true,
-          canGetEditableFile: true,
+          isShowGetting: false,
+          canGetEditableFile: false,
         });
       }
     }
