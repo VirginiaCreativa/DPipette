@@ -6,7 +6,7 @@ import { bindActionCreators, compose } from 'redux';
 import { firebaseConnect } from 'react-redux-firebase';
 import classes from './HeaderMain_Significados.module.scss';
 
-import { searchSignificados } from '../../../redux/actions/Action';
+import { searchSignificados } from '../../../redux/actions/SignificadosAction';
 
 const HeaderMainSignificados = ({
   iconName,

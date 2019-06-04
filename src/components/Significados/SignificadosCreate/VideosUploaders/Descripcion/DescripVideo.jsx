@@ -10,7 +10,7 @@ import classes from './DescripVideo.module.scss';
 import {
   getUploaderVideoDescrip,
   addUploaderVideoDescrip,
-} from '../../../../../redux/actions/Action';
+} from '../../../../../redux/actions/SignificadosAction';
 
 const videoType = 'video/webm;codecs=vp9';
 let localstream;
@@ -291,7 +291,7 @@ export default compose(
   firebaseConnect(),
   connect(
     state => ({
-      word: state.createSing.word,
+      word: state.Significados.word,
     }),
     mapDispatchToProps
   )

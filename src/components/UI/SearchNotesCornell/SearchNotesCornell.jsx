@@ -4,7 +4,7 @@ import { bindActionCreators, compose } from 'redux';
 import { firebaseConnect } from 'react-redux-firebase';
 import classes from './SearchNotesCornell.module.scss';
 
-import { searchSignificados } from '../../../redux/actions/Action';
+import { searchSignificados } from '../../../redux/actions/SignificadosAction';
 
 const SearchNotesCornell = props => {
   const handleSearch = ev => {

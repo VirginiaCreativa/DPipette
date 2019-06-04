@@ -10,7 +10,7 @@ import classes from './SenaVideo.module.scss';
 import {
   getUploaderVideoSena,
   addUploaderVideoSena,
-} from '../../../../../redux/actions/Action';
+} from '../../../../../redux/actions/SignificadosAction';
 
 const videoType = 'video/webm;codecs=vp9';
 let localstream;
@@ -282,7 +282,7 @@ export default compose(
   firebaseConnect(),
   connect(
     state => ({
-      word: state.createSing.word,
+      word: state.Significados.word,
     }),
     mapDispatchToProps
   )

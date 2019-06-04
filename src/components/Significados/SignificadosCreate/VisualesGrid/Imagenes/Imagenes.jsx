@@ -9,7 +9,7 @@ import Imagen from './Imagen';
 import {
   deleteImagenesFiles,
   getCreateSignificado,
-} from '../../../../../redux/actions/Action';
+} from '../../../../../redux/actions/SignificadosAction';
 
 class Imagenes extends Component {
   handleDeleteImg = (item, index) => {
@@ -58,8 +58,8 @@ export default compose(
   connect(
     state => ({
       word: state.createSing.word,
-      imgFiles: state.createSing.imgFiles,
-      imagenes: state.createSing.imagenes,
+      imgFiles: state.Significados.imgFiles,
+      imagenes: state.Significados.imagenes,
     }),
     mapDispatchToProps
   )

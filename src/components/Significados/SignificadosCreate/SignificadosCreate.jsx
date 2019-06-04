@@ -26,7 +26,7 @@ import {
   hideVisibleVideoVisual,
   showVisibleMasEjemploVisual,
   hideVisibleMasEjemploVisual,
-} from '../../../redux/actions/Action';
+} from '../../../redux/actions/SignificadosAction';
 
 class SignificadosCreate extends Component {
   state = {
@@ -668,15 +668,15 @@ export default compose(
   withFirestore,
   connect(
     state => ({
-      imagenes: state.createSing.imagenes,
-      imgFiles: state.createSing.imgFiles,
-      isVisibleImg: state.createSing.isVisibleImg,
-      isVisibleVideo: state.createSing.isVisibleVideo,
-      isVisibleEjemplo: state.createSing.isVisibleEjemplo,
-      videoSena: state.createSing.videoSena,
-      videoSenaBlob: state.createSing.videoSenaBlob,
-      videoDescripBlob: state.createSing.videoDescripBlob,
-      videoDescrip: state.createSing.videoDescrip,
+      imagenes: state.Significados.imagenes,
+      imgFiles: state.Significados.imgFiles,
+      isVisibleImg: state.Significados.isVisibleImg,
+      isVisibleVideo: state.Significados.isVisibleVideo,
+      isVisibleEjemplo: state.Significados.isVisibleEjemplo,
+      videoSena: state.Significados.videoSena,
+      videoSenaBlob: state.Significados.videoSenaBlob,
+      videoDescripBlob: state.Significados.videoDescripBlob,
+      videoDescrip: state.Significados.videoDescrip,
     }),
     mapDispatchToProps
   )

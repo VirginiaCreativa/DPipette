@@ -9,7 +9,7 @@ import firebase from '../../../../config/FirebaseConfig';
 import {
   getUploaderImg,
   addImagenesFiles,
-} from '../../../../redux/actions/Action';
+} from '../../../../redux/actions/SignificadosAction';
 
 class ImagenesUploader extends Component {
   state = {
@@ -149,7 +149,7 @@ export default compose(
   connect(
     state => ({
       word: state.createSing.word,
-      imgFiles: state.createSing.imgFiles,
+      imgFiles: state.Significados.imgFiles,
     }),
     mapDispatchToProps
   )
