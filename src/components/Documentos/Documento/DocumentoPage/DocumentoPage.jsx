@@ -7,7 +7,10 @@ import CleanUpSpecialChars from '../../../../scripts/CleanUpSpecialChars';
 import classes from './DocumentoPage.module.scss';
 import Spinner from '../UI/Spinner/Spinner';
 
-import { showEditableDoc } from '../../../../redux/actions/DocumentosAction';
+import {
+  showEditableDoc,
+  hasPageDoc,
+} from '../../../../redux/actions/DocumentosAction';
 
 const PagesImages = React.lazy(() => import('./DocumentoImages'));
 
@@ -23,7 +26,7 @@ class DocumentoPage extends Component {
   };
 
   componentDidMount() {
-    const { imgsPages, showEditable } = this.props;
+    const { imgsPages, showEditable, hasPageDoc } = this.props;
     const { isShowPage, isShowGetting, canGetEditableFile } = this.state;
 
     if (imgsPages.length === 0) {
@@ -32,18 +35,20 @@ class DocumentoPage extends Component {
         isShowGetting: true,
         canGetEditableFile: false,
       });
+      hasPageDoc(false);
     } else {
       this.setState({
         isShowPage: true,
         isShowGetting: false,
         canGetEditableFile: false,
       });
+      hasPageDoc(true);
     }
   }
 
   componentDidUpdate(prevProps, prevState) {
     const { isShowPage, isShowGetting, isProgressUpload } = this.state;
-    const { imgsPages, showEditable } = this.props;
+    const { imgsPages, showEditable, hasPageDoc } = this.props;
 
     if (imgsPages !== prevProps.imgsPages) {
       if (imgsPages.length === 0) {
@@ -52,12 +57,14 @@ class DocumentoPage extends Component {
           isShowGetting: true,
           canGetEditableFile: true,
         });
+        hasPageDoc(false);
       } else {
         this.setState({
           isShowPage: true,
           isShowGetting: false,
           canGetEditableFile: false,
         });
+        hasPageDoc(true);
       }
     }
 
@@ -280,7 +287,7 @@ class DocumentoPage extends Component {
 }
 
 const mapDispatchToProps = dispatch =>
-  bindActionCreators({ showEditableDoc }, dispatch);
+  bindActionCreators({ showEditableDoc, hasPageDoc }, dispatch);
 
 export default compose(
   firestoreConnect(['documentos']),

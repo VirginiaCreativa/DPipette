@@ -13,6 +13,7 @@ import {
   FILTER_FAVORITE_DOCUMENTOS,
   SEARCH_DOCUMENTOS,
   SHOW_EDITABLE_DOC,
+  HAS_PAGE_DOC,
 } from './Types';
 
 export const getTimelineVideoDoc = payload => ({
@@ -82,5 +83,10 @@ export const SearchDocumentos = payload => ({
 
 export const showEditableDoc = payload => ({
   type: SHOW_EDITABLE_DOC,
+  payload,
+});
+
+export const hasPageDoc = payload => ({
+  type: HAS_PAGE_DOC,
   payload,
 });

@@ -13,6 +13,7 @@ import Controls from './DocumentoVideo/DocumentoControls';
 import Video from './DocumentoVideo/DocumentoVideo';
 import Header from './DocumentoHeader/DocumentoHeader';
 import Config from './DocumentoConfig/DocumentoConfig';
+import BuscadorSignficado from '../../Significados/BuscadorSignficado/BuscadorSignficado';
 
 import {
   getPageHeightDoc,
@@ -45,7 +46,7 @@ class Documento extends Component {
   }
 
   componentDidUpdate() {
-    const { isDuration, hasVideo } = this.state;
+    const { isDuration } = this.state;
     this.props.getDurationVideoDoc(isDuration);
     const progress = this.refProgress;
 
@@ -103,7 +104,7 @@ class Documento extends Component {
   };
 
   render() {
-    const { documento, pageGrid, hasVideo } = this.props;
+    const { documento, pageGrid, hasVideo, hasPage } = this.props;
     const { isCurrentTime, isControlPlay } = this.state;
     return (
       <div className={classes.Documento}>
@@ -143,6 +144,11 @@ class Documento extends Component {
                         />
                         <GetMarker ID={this.props.match.params.id} />
                       </div>
+                      {hasPage && (
+                        <div className={classes.BoxSearch}>
+                          <BuscadorSignficado />
+                        </div>
+                      )}
                     </div>
                     <div className="col-8">
                       <div className={classes.BoxPageLeft}>
@@ -201,6 +207,11 @@ class Documento extends Component {
                         />
                         <GetMarker ID={this.props.match.params.id} />
                       </div>
+                      {hasPage && (
+                        <div className={classes.BoxSearch}>
+                          <BuscadorSignficado />
+                        </div>
+                      )}
                     </div>
                   </div>
                 </>
@@ -237,6 +248,7 @@ export default compose(
         pageGrid: state.Documentos.pageGrid,
         durationVideo: state.Documentos.duration,
         timelineVideo: state.Documentos.timeline,
+        hasPage: state.Documentos.hasPage,
       };
     },
     mapDispatchToProps

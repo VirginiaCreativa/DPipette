@@ -13,6 +13,7 @@ import {
   FILTER_FAVORITE_DOCUMENTOS,
   SEARCH_DOCUMENTOS,
   SHOW_EDITABLE_DOC,
+  HAS_PAGE_DOC,
 } from '../actions/Types';
 
 const initialState = {
@@ -31,6 +32,7 @@ const initialState = {
   yesterday: '',
   favorito: null,
   Editable: false,
+  hasPage: false,
 };
 
 const DocumentosReducer = (state = initialState, action) => {
@@ -114,6 +116,11 @@ const DocumentosReducer = (state = initialState, action) => {
       return {
         ...state,
         Editable: action.payload,
+      };
+    case HAS_PAGE_DOC:
+      return {
+        ...state,
+        hasPage: action.payload,
       };
     default:
       return state;
