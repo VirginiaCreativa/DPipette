@@ -24,11 +24,11 @@ const DocumentoConfig = ({
   firestore,
   ID,
   showEditableDoc,
+  showEditable,
 }) => {
   const [isFavorito, setFavorito] = useState(false);
   const [isActivePopever, setActivePopever] = useState(false);
   const [onOpenPortada, setOpenPortada] = useState(false);
-  const [isShowEditable, setShowEditable] = useState(false);
 
   const onChangePageGrid = () => {
     firestore
@@ -113,13 +113,15 @@ const DocumentoConfig = ({
 
   const cssActivePopever = isActivePopever && classes.activeBtnPopever;
 
+  const cssActiveEditable = showEditable && classes.activeBtnEditable;
+
   return (
     <div className={classes.DocumentoConfig}>
       <button
         type="button"
         onClick={handlShowEditable}
         onDoubleClick={handlHideEditable}>
-        <i className="bx bx-pencil" />
+        <i className={[cssActiveEditable, 'bx bx-pencil'].join(' ')} />
       </button>
       <button type="button" onClick={onChangePageGrid}>
         <i className="bx bx-transfer" />
@@ -158,6 +160,7 @@ export default compose(
     state => ({
       pageGrid: state.Documentos.pageGrid,
       documentos: state.firestore.data.documentos,
+      showEditable: state.Documentos.Editable,
     }),
     mapDispatchToProps
   )

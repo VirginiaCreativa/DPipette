@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
-import { compose } from 'redux';
+import { bindActionCreators, compose } from 'redux';
 import { connect } from 'react-redux';
 import { firestoreConnect } from 'react-redux-firebase';
 import firebase from '../../../../config/FirebaseConfig';
 import CleanUpSpecialChars from '../../../../scripts/CleanUpSpecialChars';
 import classes from './DocumentoPage.module.scss';
 import Spinner from '../UI/Spinner/Spinner';
+
+import { showEditableDoc } from '../../../../redux/actions/DocumentosAction';
 
 const PagesImages = React.lazy(() => import('./DocumentoImages'));
 
@@ -16,38 +18,63 @@ class DocumentoPage extends Component {
     hasPagesImages: [],
     hasFilesImages: [],
     isShowPage: false,
-    isShowGetting: true,
-    canMoreFile: false,
+    isShowGetting: false,
+    canGetEditableFile: true,
   };
 
   componentDidMount() {
     const { imgsPages, showEditable } = this.props;
-    const { isShowPage, isShowGetting } = this.state;
+    const { isShowPage, isShowGetting, canGetEditableFile } = this.state;
 
     if (imgsPages.length === 0) {
-      this.setState({ isShowPage: false, isShowGetting: true });
+      this.setState({
+        isShowPage: false,
+        isShowGetting: true,
+        canGetEditableFile: false,
+      });
     } else {
-      this.setState({ isShowPage: true, isShowGetting: false });
+      this.setState({
+        isShowPage: true,
+        isShowGetting: false,
+        canGetEditableFile: false,
+      });
     }
-    console.log('>>>>', isShowGetting, showEditable);
-    this.setState({ isShowGetting: showEditable });
   }
 
   componentDidUpdate(prevProps, prevState) {
-    const { isShowPage, isShowGetting } = this.state;
+    const { isShowPage, isShowGetting, isProgressUpload } = this.state;
     const { imgsPages, showEditable } = this.props;
 
     if (imgsPages !== prevProps.imgsPages) {
       if (imgsPages.length === 0) {
-        this.setState({ isShowPage: false, isShowGetting: true });
+        this.setState({
+          isShowPage: false,
+          isShowGetting: true,
+          canGetEditableFile: true,
+        });
       } else {
-        this.setState({ isShowPage: true, isShowGetting: false });
+        this.setState({
+          isShowPage: true,
+          isShowGetting: true,
+          canGetEditableFile: true,
+        });
       }
     }
 
     if (showEditable !== prevProps.showEditable) {
-      this.setState({ isShowGetting: showEditable });
+      this.setState({
+        isShowGetting: showEditable,
+        canGetEditableFile: showEditable,
+      });
     }
+
+    setTimeout(() => {
+      if (isProgressUpload !== prevState.isProgressUpload) {
+        this.setState({
+          isProgressUpload: 0,
+        });
+      }
+    }, 4000);
   }
 
   uploadFiles = files => {
@@ -119,7 +146,7 @@ class DocumentoPage extends Component {
   };
 
   changeFiles = ev => {
-    const { documentos, ID } = this.props;
+    const { documentos, ID, firestore } = this.props;
 
     const temaFB = documentos[ID].tema.toLowerCase();
     const tema = CleanUpSpecialChars(temaFB);
@@ -138,12 +165,62 @@ class DocumentoPage extends Component {
     }
   };
 
+  handleAprobandoGetFile = () => {
+    this.props.showEditableDoc(false);
+  };
+
+  handleRemovesImagesComplete = () => {
+    const {
+      documentos,
+      ID,
+      firestore,
+      firebase: { storage },
+    } = this.props;
+
+    const filenamePageDoc = documentos[ID].filenamePageDoc;
+    const materiaFB = documentos[ID].materia.toLowerCase();
+    const temaFB = documentos[ID].tema.toLowerCase();
+    const tema = CleanUpSpecialChars(temaFB);
+    const temaNotSpace = tema.replace(/ +/g, '_');
+
+    filenamePageDoc.forEach(element => {
+      const storageRefImagePage = storage().ref(
+        `documentos/${materiaFB}/${temaNotSpace}/pages/${element}`
+      );
+      storageRefImagePage
+        .delete()
+        .then(() => {
+          console.log('SI DELETE IMAGENES PAGES');
+        })
+        .catch(error => {
+          console.error('Error removing document: ', error);
+        });
+    });
+
+    firestore.update(`documentos/${ID}`, {
+      imgsPages: [],
+      filenamePageDoc: [],
+    });
+  };
+
   render() {
-    const { onRef, imgsPages, tema, showEditable } = this.props;
-    const { isProgressUpload, isShowPage, isShowGetting } = this.state;
+    const {
+      onRef,
+      imgsPages,
+      tema,
+      showEditable,
+      firebase: { storage },
+      materia,
+    } = this.props;
+    const {
+      isProgressUpload,
+      isShowPage,
+      isShowGetting,
+      canGetEditableFile,
+    } = this.state;
 
     const set = new Set(imgsPages);
-    const imgsPagesOrder = Array.from(set).sort();
+    const imgsPagesOrder = [...new Set(set)].sort();
 
     const classProgressUpload = {
       width: `${isProgressUpload}%`,
@@ -169,6 +246,25 @@ class DocumentoPage extends Component {
             <div className={classes.showUpload} style={classProgressUpload} />
           </div>
         )}
+        {canGetEditableFile && (
+          <div
+            className="d-flex justify-content-center"
+            style={{ marginBottom: '20px' }}>
+            <button
+              type="button"
+              className="btn mr-1 btn-success"
+              onClick={this.handleAprobandoGetFile}>
+              <i className="bx bx-like" />
+            </button>
+
+            <button
+              type="button"
+              className="btn btn-danger"
+              onClick={this.handleRemovesImagesComplete}>
+              <i className="bx bx-trash-alt" />
+            </button>
+          </div>
+        )}
         {isShowPage && (
           <div className={classes.BoxPage}>
             {imgsPagesOrder.map((item, index) => (
@@ -183,11 +279,17 @@ class DocumentoPage extends Component {
   }
 }
 
+const mapDispatchToProps = dispatch =>
+  bindActionCreators({ showEditableDoc }, dispatch);
+
 export default compose(
   firestoreConnect(['documentos']),
-  connect(state => ({
-    documentos: state.firestore.data.documentos,
-    PagesImgs: state.Documentos.PagesImgs,
-    showEditable: state.Documentos.Editable,
-  }))
+  connect(
+    state => ({
+      documentos: state.firestore.data.documentos,
+      PagesImgs: state.Documentos.PagesImgs,
+      showEditable: state.Documentos.Editable,
+    }),
+    mapDispatchToProps
+  )
 )(DocumentoPage);

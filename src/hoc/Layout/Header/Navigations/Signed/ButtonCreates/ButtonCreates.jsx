@@ -99,6 +99,7 @@ class ButtonCreates extends Component {
       filenamePortadaImagen: '',
       filenameVideoDoc: '',
       filenamePagesDoc: [],
+      imgsPages: [],
       pageGrid: true,
     };
     this.props.firestore

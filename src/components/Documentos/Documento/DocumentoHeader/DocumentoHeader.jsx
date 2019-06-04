@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { compose } from 'redux';
+import { bindActionCreators, compose } from 'redux';
 import { connect } from 'react-redux';
 import { firestoreConnect } from 'react-redux-firebase';
 import classes from './DocumentoHeader.module.scss';
@@ -8,7 +8,16 @@ import CapitalizeFirstLetter from '../../../../scripts/CapitalizeFirstLetter';
 import Heading from './Heading';
 import InputBtnUpdate from '../../../UI/InputBtnUpdate/InputBtnUpdate';
 
-const DocumentoHeader = ({ materia, tema, documentos, ID, firestore }) => {
+import { showEditableDoc } from '../../../../redux/actions/DocumentosAction';
+
+const DocumentoHeader = ({
+  materia,
+  tema,
+  documentos,
+  ID,
+  firestore,
+  showEditable,
+}) => {
   const [isTema, setTema] = useState(tema);
   const [isMateria, setMateria] = useState(materia);
   const [isActiveEditable, setActiveEditable] = useState(false);
@@ -17,6 +26,12 @@ const DocumentoHeader = ({ materia, tema, documentos, ID, firestore }) => {
   let textInputTema = useRef(null);
   let textInputMateria = useRef(null);
 
+  useEffect(
+    () => () => {
+      setActiveEditable(!showEditable);
+    },
+    [showEditable]
+  );
   const onEditable = () => {
     setActiveEditable(!isActiveEditable);
   };
@@ -88,31 +103,38 @@ const DocumentoHeader = ({ materia, tema, documentos, ID, firestore }) => {
               onFocus={() => (textInputMateria.value = '')}
             />
           </div>
-          <button
+          {/* <button
             type="button"
             onClick={onEditable}
             className={[classes.btnEditable, cssActiveEditable].join(' ')}>
             <i className="bx bx-pencil" />
-          </button>
+          </button> */}
         </div>
       ) : (
         <div className={classes.BoxHeadingConfirm}>
           <Heading tema={isTema} materia={isMateria} />
-          <button
+          {/* <button
             type="button"
             onClick={onEditable}
             className={[classes.btnEditable, cssActiveEditable].join(' ')}>
             <i className="bx bx-pencil" />
-          </button>
+          </button> */}
         </div>
       )}
     </div>
   );
 };
 
+const mapDispatchToProps = dispatch =>
+  bindActionCreators({ showEditableDoc }, dispatch);
+
 export default compose(
   firestoreConnect(['documentos']),
-  connect(state => ({
-    documentos: state.firestore.data.documentos,
-  }))
+  connect(
+    state => ({
+      documentos: state.firestore.data.documentos,
+      showEditable: state.Documentos.Editable,
+    }),
+    mapDispatchToProps
+  )
 )(DocumentoHeader);
