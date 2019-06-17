@@ -1,0 +1,63 @@
+@import '../styles/variables';
+
+.SignUp {
+  display: grid;
+  justify-content: center;
+  justify-items: center;
+  align-items: center;
+  align-content: center;
+  height: 80vh;
+  .boxHeadign {
+    text-align: center;
+    margin-bottom: 40px;
+    width: 200%;
+    h4 {
+      color: $black;
+      margin-bottom: 20px;
+      font-weight: 700;
+    }
+  }
+  .boxForm {
+    width: 200%;
+    label {
+      font-size: 0.85rem;
+      color: $gray_light;
+    }
+    input {
+      background-color: transparent;
+      width: 100%;
+      border-top: none;
+      border-right: none;
+      border-left: none;
+      border-bottom: 1px solid $write_gray_3;
+      caret-color: $blue;
+    }
+    button {
+      &:first-child{
+        margin-top: 40px;
+      } 
+    }
+    .btnGoogle {
+      line-height: 0;
+      color: #fff;
+      background-color: $red;
+      margin-top: 10px;
+      padding: 6px;
+      box-icon {
+        fill: #fff !important;
+      }
+      span {
+        position: relative;
+        top: -6px;
+        margin: 0;
+      }
+
+      &:hover {
+        background-color: $red;
+        box-icon {
+          fill: #fff !important;
+        }
+      }
+    }
+  }
+}
