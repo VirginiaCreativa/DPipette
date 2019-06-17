@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { firebaseConnect } from 'react-redux-firebase';
+import firebase from '../config/FirebaseConfig';
 import { history } from '../redux/store/Store';
 import classes from './Login.module.scss';
 

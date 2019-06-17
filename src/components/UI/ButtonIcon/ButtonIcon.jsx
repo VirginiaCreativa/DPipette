@@ -6,7 +6,8 @@ const ButtonIcon = ({ onClick, typeIcon, btnColor }) => (
     <button
       type="button"
       onClick={onClick}
-      className={['btn', btnColor].join(' ')}>
+      className={['btn', btnColor].join(' ')}
+    >
       <i className={['bx', typeIcon].join(' ')} />
     </button>
   </div>

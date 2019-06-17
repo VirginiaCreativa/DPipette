@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators, compose } from 'redux';
@@ -107,9 +108,8 @@ class DescripciónVideo extends Component {
       name: this.props.word,
     };
     const storageRef = storage().ref(
-      `significados/${this.props.word}/videoDescripcion/descripcion_${
-        this.props.word
-      }`
+      // eslint-disable-next-line prettier/prettier
+      `significados/${this.props.word}/videoDescripcion/descripcion_${this.props.word}`
     );
 
     const uploadTask = storageRef.put(blob, metadata);
@@ -162,9 +162,7 @@ class DescripciónVideo extends Component {
       firebase: { storage },
     } = this.props;
     const storageRef = storage().ref(
-      `significados/${this.props.word}/videoDescripcion/descripcion_${
-        this.props.word
-      }`
+      `significados/${this.props.word}/videoDescripcion/descripcion_${this.props.word}`
     );
     storageRef
       .delete()

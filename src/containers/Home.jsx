@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { history } from '../redux/store/Store';
+import firebase from '../config/FirebaseConfig';
 import {
   Significados,
   NotesCornell,
@@ -8,6 +10,28 @@ import {
 import Header from '../components/UI/HeaderHome/HeaderHome';
 
 class Home extends Component {
+  componentWillMount() {
+    firebase.auth().onAuthStateChanged(user => {
+      if (user) {
+        console.log('User is signed in', user.uid);
+      } else {
+        console.log('No user is signed');
+        history.push('/login');
+      }
+    });
+  }
+
+  componentWillUpdate() {
+    firebase.auth().onAuthStateChanged(user => {
+      if (user) {
+        console.log('User is signed in', user.uid);
+      } else {
+        console.log('No user is signed');
+        history.push('/login');
+      }
+    });
+  }
+
   render() {
     return (
       <>

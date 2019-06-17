@@ -11,10 +11,7 @@ export const history = createBrowserHistory();
 
 export default function createReduxStore(preloadedState) {
   const enhancers = [];
-  const middleware = [
-    ReduxThunk.withExtraArgument(getFirebase),
-    routerMiddleware(history),
-  ];
+  const middleware = [routerMiddleware(history)];
 
   if (process.env.NODE_ENV === 'development') {
     const devToolsExtension =

@@ -17,8 +17,9 @@ const store = createReduxStore(initialState);
 
 const rrfConfig = {
   userProfile: 'users',
-  attachAuthIsReady: true,
   useFirestoreForProfile: true,
+  enableLogging: false,
+  attachAuthIsReady: true,
 };
 
 const rrfProps = {
