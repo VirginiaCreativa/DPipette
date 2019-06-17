@@ -1,8 +1,8 @@
-/* eslint-disable react/no-unused-state */
 import React, { Component } from 'react';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { firebaseConnect } from 'react-redux-firebase';
+import { Link } from 'react-router-dom';
 import firebase from '../config/FirebaseConfig';
 import { history } from '../redux/store/Store';
 import classes from './Login.module.scss';
@@ -58,10 +58,14 @@ class Login extends Component {
                   autoComplete="none"
                 />
               </div>
-              <button type="submit" className="btn btn-success">
-                Entrar
+              <button type="submit" className="btn btn-success btn-block">
+                Ingresar
               </button>
             </form>
+            <div className={classes.SignUp}>
+              <p>¿No tienes cuenta?</p>
+              <Link to="/signup">Crear una registra</Link>
+            </div>
           </div>
         </div>
         <div className={classes.Img}>

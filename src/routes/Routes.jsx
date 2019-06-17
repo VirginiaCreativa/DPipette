@@ -11,6 +11,7 @@ import Documento from '../components/Documentos/Documento/Documento';
 import Foros from '../containers/Foros';
 import NotFound from '../containers/NotFound';
 import Login from '../containers/Login';
+import SignUp from '../containers/SignUp';
 
 const Routers = () => (
   <>
@@ -25,6 +26,7 @@ const Routers = () => (
       <Route path="/documentos" component={Documentos} />
       <Route path="/documento/:id" component={Documento} />
       <Route path="/login" component={Login} />
+      <Route path="/signup" component={SignUp} />
       <Route component={NotFound} />
     </Switch>
   </>
