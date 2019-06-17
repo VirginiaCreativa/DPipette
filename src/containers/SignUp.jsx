@@ -3,20 +3,19 @@ import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { firestoreConnect } from 'react-redux-firebase';
 import { history } from '../redux/store/Store.js';
-import firebase from '../config/FirebaseConfig';
 import classes from './SignUp.module.scss';
 
 const SignUp = ({ firestore, firebase }) => {
   console.log(firestore);
   const handleSubmitPassword = ev => {
     ev.preventDefault();
-    const { firstname, lastname, email, password } = ev.target.elements;
+    const { namefull, email, password } = ev.target.elements;
     firebase
       .auth()
       .createUserWithEmailAndPassword(email.value, password.value)
       .then(result => {
         result.user.updateProfile({
-          displayName: `${firstname.value} ${lastname.value}`,
+          displayName: namefull.value,
         });
 
         const configuracion = {
@@ -32,8 +31,7 @@ const SignUp = ({ firestore, firebase }) => {
           .collection('users')
           .doc(result.user.uid)
           .set({
-            firstname: firstname.value,
-            lastname: lastname.value,
+            namefull: namefull.value,
             email: email.value,
             photo: '',
           })
@@ -47,7 +45,31 @@ const SignUp = ({ firestore, firebase }) => {
         alert(error.message, 4000);
       });
   };
-  const handleAuthRegistrarGoogle = () => {};
+  const handleAuthRegistrarGoogle = () => {
+    const provider = new firebase.auth.GoogleAuthProvider();
+
+    firebase
+      .auth()
+      .signInWithPopup(provider)
+      .then(result => {
+        firebase
+          .firestore()
+          .collection('users')
+          .doc(result.user.uid)
+          .set({
+            namefull: result.user.displayName,
+            email: result.user.email,
+            photo: result.user.photoURL,
+          })
+          .then(() => {
+            history.push('/');
+          })
+          .catch(error => console.log(error.message));
+      })
+      .catch(error => {
+        console.log(error.message);
+      });
+  };
   return (
     <div className={classes.SignUp}>
       <div className={classes.boxHeadign}>
@@ -56,12 +78,8 @@ const SignUp = ({ firestore, firebase }) => {
       <div className={classes.boxForm}>
         <form onSubmit={handleSubmitPassword}>
           <div className="form-group">
-            <label>Nombre</label>
-            <input type="text" name="firstname" className="form-control" />
-          </div>
-          <div className="form-group">
-            <label>Apellidos</label>
-            <input type="text" name="lastname" className="form-control" />
+            <label>Nombre Completo</label>
+            <input type="text" name="namefull" className="form-control" />
           </div>
           <div className="form-group">
             <label>Email</label>
