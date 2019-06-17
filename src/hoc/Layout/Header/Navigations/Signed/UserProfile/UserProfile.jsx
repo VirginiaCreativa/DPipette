@@ -5,7 +5,7 @@ import { firebaseConnect } from 'react-redux-firebase';
 import { Link } from 'react-router-dom';
 import classes from './UserProfile.module.scss';
 
-const imgUser = require('../.../../../../../../../assets/images/virginia.jpg');
+const imgUser = require('../.../../../../../../../assets/icons/user_unknown.svg');
 
 class UserProfile extends Component {
   state = {
@@ -46,6 +46,30 @@ class UserProfile extends Component {
     this.props.firebase.logout();
   };
 
+  photoProfile = () => {
+    const currentUser = this.props.firebase.auth().currentUser;
+    const userPass = this.props.profile;
+    let photoProfile;
+    if (currentUser) {
+      if (currentUser.providerData[0].providerId === 'google.com') {
+        console.log('GOOGLE PHOTO');
+        photoProfile = currentUser.photoURL;
+      } else if (
+        currentUser.providerData[0].providerId === 'password' &&
+        userPass.photo === ''
+      ) {
+        console.log('DESCONOCIDO PHOTO');
+        photoProfile = imgUser;
+      } else {
+        console.log('PASSWORD PHOTO');
+        photoProfile = userPass.photo;
+      }
+    } else {
+      console.log('ERROR');
+    }
+    return photoProfile;
+  };
+
   render() {
     const { userSign, auth, profile } = this.props;
     const { isMenu, fade, porcentStorage } = this.state;
@@ -67,57 +91,13 @@ class UserProfile extends Component {
     if (fade) {
       btnShow = { color: '#1948ca' };
     }
-    let showMenu = null;
-    if (isMenu) {
-      showMenu = (
-        <div
-          className={[
-            classes.isMenuOpen,
-            fade ? classes.FadeOn : classes.FadeOff,
-          ].join(' ')}>
-          <div className={classes.Triangule} />
-          <ul>
-            <li className={classes.Storage}>
-              <div className={classes.infoStorage}>
-                <p>4,2 GB de 15 GB usado</p>
-                <div className={classes.linePorce}>
-                  <div style={cantPorce} />
-                  <div className={classes.bgPorce} />
-                </div>
-              </div>
-              <Link to="/almacenamiento" tabIndex="0">
-                <i className="bx bx-cloud" />
-                Almacenamiento
-              </Link>
-            </li>
-            <li>
-              <Link to="/perfil" tabIndex="-1">
-                <i className="bx bxs-user-circle" />
-                Perfíl
-              </Link>
-            </li>
-            <li>
-              <Link to="/configuracion" tabIndex="0">
-                <i className="bx bx-cog" />
-                Configuración
-              </Link>
-            </li>
-            <li>
-              <Link to="/login" onClick={this.handleLoginOut}>
-                <i className="bx bx-log-in" />
-                Salir
-              </Link>
-            </li>
-          </ul>
-        </div>
-      );
-    }
+
     return (
       <>
         <div className={classes.UserProfile}>
           {userSign ? (
             <div className={classes.CircleImg}>
-              <img src={imgUser} alt="El imagen de perfil" />
+              <img src={this.photoProfile()} alt="El imagen de perfil" />
             </div>
           ) : (
             <div
@@ -136,7 +116,50 @@ class UserProfile extends Component {
             title="Menu">
             <i className="bx bx-chevron-down" style={btnShow} />
           </button>
-          <div>{showMenu}</div>
+          <div>
+            {isMenu && (
+              <div
+                className={[
+                  classes.isMenuOpen,
+                  fade ? classes.FadeOn : classes.FadeOff,
+                ].join(' ')}>
+                <div className={classes.Triangule} />
+                <ul>
+                  <li className={classes.Storage}>
+                    <div className={classes.infoStorage}>
+                      <p>4,2 GB de 15 GB usado</p>
+                      <div className={classes.linePorce}>
+                        <div style={cantPorce} />
+                        <div className={classes.bgPorce} />
+                      </div>
+                    </div>
+                    <Link to="/almacenamiento" tabIndex="0">
+                      <i className="bx bx-cloud" />
+                      Almacenamiento
+                    </Link>
+                  </li>
+                  <li>
+                    <Link to="/perfil" tabIndex="-1">
+                      <i className="bx bxs-user-circle" />
+                      Perfíl
+                    </Link>
+                  </li>
+                  <li>
+                    <Link to="/configuracion" tabIndex="0">
+                      <i className="bx bx-cog" />
+                      Configuración
+                    </Link>
+                  </li>
+                  <li>
+                    <Link to="/login" onClick={this.handleLoginOut}>
+                      <i className="bx bx-log-in" />
+                      Salir
+                    </Link>
+                  </li>
+                </ul>
+              </div>
+            )}
+          </div>
         </div>
       </>
     );

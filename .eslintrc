@@ -104,7 +104,7 @@
         "printWidth": 80,
         "semi": true,
         "jsxBracketSameLine": true,
-        "usePrettierrc": false,
+        "usePrettierrc": true,
         "parser": "flow"
       }
     ],

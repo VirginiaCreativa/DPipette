@@ -40,6 +40,20 @@ class Login extends Component {
       });
   };
 
+  handleAuthGoogle = () => {
+    const provider = new firebase.auth.GoogleAuthProvider();
+
+    firebase
+      .auth()
+      .signInWithPopup(provider)
+      .then(result => {
+        history.push('/');
+      })
+      .catch(error => {
+        console.log(error.message);
+      });
+  };
+
   render() {
     const { error } = this.state;
     return (
@@ -80,6 +94,13 @@ class Login extends Component {
                 Ingresar
               </button>
             </form>
+            <button
+              type="button"
+              onClick={this.handleAuthGoogle}
+              className={[classes.btnGoogle, 'btn btn-block'].join(' ')}>
+              <box-icon type="logo" name="google" />
+              <span>Google</span>
+            </button>
             <div className={classes.SignUp}>
               <p>¿No tienes cuenta?</p>
               <Link to="/signup">Crear una registra</Link>
