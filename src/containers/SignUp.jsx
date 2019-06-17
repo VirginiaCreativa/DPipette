@@ -89,7 +89,11 @@ const SignUp = ({ firestore, firebase }) => {
             <label>Password</label>
             <input type="password" name="password" className="form-control" />
           </div>
-          <button type="submit" className="btn btn-success btn-block">
+          <button
+            type="submit"
+            className={[classes.btnRegistra, 'btn btn-success btn-block'].join(
+              ' '
+            )}>
             Registrate
           </button>
         </form>

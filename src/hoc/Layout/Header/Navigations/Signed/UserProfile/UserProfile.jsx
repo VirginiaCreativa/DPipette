@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import { compose } from 'redux';
+import { connect } from 'react-redux';
 import { firebaseConnect } from 'react-redux-firebase';
+import { Link } from 'react-router-dom';
 import classes from './UserProfile.module.scss';
 
 const imgUser = require('../.../../../../../../../assets/images/virginia.jpg');
@@ -45,7 +47,7 @@ class UserProfile extends Component {
   };
 
   render() {
-    const { userSign } = this.props;
+    const { userSign, auth, profile } = this.props;
     const { isMenu, fade, porcentStorage } = this.state;
     let btnShow;
     if (fade) {
@@ -125,7 +127,7 @@ class UserProfile extends Component {
             </div>
           )}
 
-          <p style={btnShow}>Virginia Velásquez</p>
+          <p style={btnShow}>{profile.namefull}</p>
           <button
             type="button"
             className={classes.btnMenuUser}
@@ -141,4 +143,10 @@ class UserProfile extends Component {
   }
 }
 
-export default firebaseConnect()(UserProfile);
+export default compose(
+  firebaseConnect(),
+  connect(({ firebase: { auth, profile } }) => ({
+    auth,
+    profile,
+  }))
+)(UserProfile);

@@ -9,7 +9,7 @@ class SignedOut extends Component {
         <div className={classes.SignedOut}>
           <button type="button">
             <Link to="/login">
-              <i className="bx bx-log-out" />
+              <i className="bx bx-log-in-circle" />
               Sign In
             </Link>
           </button>

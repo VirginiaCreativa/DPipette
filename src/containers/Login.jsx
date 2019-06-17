@@ -11,8 +11,16 @@ class Login extends Component {
   state = {
     userEmail: '',
     userPassword: '',
-    error: null,
+    error: false,
   };
+
+  componentDidUpdate() {
+    if (this.state.error) {
+      setTimeout(() => {
+        this.setState({ error: false });
+      }, 5000);
+    }
+  }
 
   handleChange = ev => {
     this.setState({ [ev.target.id]: ev.target.value });
@@ -26,10 +34,14 @@ class Login extends Component {
         password: this.state.userPassword,
       })
       .then(() => history.push('/'))
-      .catch(error => console.log(error));
+      .catch(error => {
+        this.setState({ error: true });
+        console.log(error);
+      });
   };
 
   render() {
+    const { error } = this.state;
     return (
       <div className={classes.Login}>
         <div className={classes.BoxForm}>
@@ -58,6 +70,12 @@ class Login extends Component {
                   autoComplete="none"
                 />
               </div>
+              {error && (
+                <p className={classes.boxError}>
+                  La contraseña no es válida o el usuario no tiene una
+                  contraseña.
+                </p>
+              )}
               <button type="submit" className="btn btn-success btn-block">
                 Ingresar
               </button>

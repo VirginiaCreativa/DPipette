@@ -11,7 +11,7 @@
 
   .BoxForm {
     padding-right: 120px;
-
+    width: 40%;
     .Header {
       h4 {
         color: $black;
@@ -27,23 +27,32 @@
       }
 
       input {
+        background-color: transparent;
         border-top: none;
         border-right: none;
         border-left: none;
         border-bottom: 1px solid $write_gray_3;
-        background-color: transparent;
         caret-color: $blue;
       }
+      button {
+        margin-top: 50px;
+      }
+    }
+    .boxError {
+      font-size: 0.8rem;
+      text-align: center;
+      color: $red;
     }
   }
   .SignUp {
     display: flex;
+    justify-content: center;
     font-size: 0.8rem;
-    padding: 5px 20px;
     margin-bottom: 0;
+    padding: 5px 20px;
     p {
-      margin-right: 10px;
       margin-bottom: 0;
+      margin-right: 10px;
     }
     a {
       margin-bottom: 0;
