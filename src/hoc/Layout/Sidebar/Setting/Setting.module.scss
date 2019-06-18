@@ -3,14 +3,31 @@
 .Setting {
   padding: 60px 0 0 100px;
   header {
-    margin-bottom: 60px;
+    display: grid;
     h6 {
-      background-color: $write_gray_2;
-      display: inline-block;
+      text-align: center;
       color: $gray_light;
-      padding: 4px;
+      background-color: $write_gray_2;
+      margin-bottom: 60px;
+      padding: 4px 6px;
+      width: 12%;
       border-radius: 2px;
       font-weight: 400;
+    }
+    h1 {
+      display: inline-block;
+      width: 60%;
+    }
+  }
+  .boxSubSetting {
+    button {
+      background-color: transparent;
+      border: none;
+    }
+    :global {
+      .bx-log-out-circle {
+        font-size: 30px;
+      }
     }
   }
 }

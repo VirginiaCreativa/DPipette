@@ -7,7 +7,6 @@ import classes from './SignIn.module.scss';
 const imgUser = require('../../../../assets/icons/user_unknown.svg');
 
 const SignIn = ({ firebase, profile, onSettign, colorSetting }) => {
-  console.log(profile);
   const photoProfile = () => {
     const currentUser = firebase.auth().currentUser;
     let photoProfile;
