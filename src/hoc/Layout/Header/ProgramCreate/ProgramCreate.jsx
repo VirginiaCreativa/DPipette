@@ -1,10 +1,9 @@
-/* eslint-disable no-return-assign */
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { compose } from 'redux';
 import { withFirestore } from 'react-redux-firebase';
-import { history } from '../../../../../../redux/store/Store';
-import classes from './ButtonCreates.module.scss';
+import { history } from '../../../../redux/store/Store';
+import classes from './ProgramCreate.module.scss';
 
 const content = {
   entityMap: {},
@@ -21,10 +20,10 @@ const content = {
   ],
 };
 
-class ButtonCreates extends Component {
+class ProgramCreate extends Component {
   state = {
     isMenu: false,
-    fade: false,
+    isfade: false,
   };
 
   componentDidMount() {
@@ -38,7 +37,7 @@ class ButtonCreates extends Component {
   handleShowMenu = () => {
     this.setState(prevState => ({
       isMenu: !prevState.isMenu,
-      fade: !prevState.fade,
+      isfade: !prevState.isfade,
     }));
   };
 
@@ -48,7 +47,7 @@ class ButtonCreates extends Component {
     if (xClose >= '800' || yClose >= '80') {
       this.setState({
         isMenu: false,
-        fade: false,
+        isfade: false,
       });
     }
   };
@@ -113,70 +112,64 @@ class ButtonCreates extends Component {
   };
 
   render() {
-    const { isMenu, fade } = this.state;
+    const { isMenu, isfade } = this.state;
     let btnHover;
-    if (fade) {
+    if (isfade) {
       btnHover = { backgroundColor: '#1948ca' };
     }
-
-    let showMenu = null;
-    if (isMenu) {
-      showMenu = (
-        <div
-          className={[
-            classes.isMenuOpen,
-            fade ? classes.FadeOn : classes.FadeOff,
-          ].join(' ')}>
-          <div className={classes.Triangule} />
-          <ul>
-            <li>
-              <Link to="/significadocreate">
-                <i
-                  className="icon-funnel-outline"
-                  title="El icono de Significados"
-                />
-                Signficados
-              </Link>
-            </li>
-            <li>
-              <Link to="/notecornell/:id" onClick={this.handleNewIDNotaCornell}>
-                <i
-                  className="icon-book-outline"
-                  title="El icono de Notas Cornell"
-                />
-                Notas Cornell
-              </Link>
-            </li>
-            <li>
-              <Link to="/documento/:id" onClick={this.handleNewIDDocumentos}>
-                <i
-                  className="icon-file-text-outline"
-                  title="El icono de Documentos"
-                />
-                Doucmento
-              </Link>
-            </li>
-          </ul>
-        </div>
-      );
-    }
-
     return (
-      <>
-        <div className={classes.ButtonCreates}>
-          <button
-            className={classes.btnCreate}
-            type="button"
-            style={btnHover}
-            onMouseOver={this.handleShowMenu}
-            ref={a => (this.fadeMenu = a)}>
-            <i className="bx bx-plus" />
-          </button>
-          <div>{showMenu}</div>
-        </div>
-      </>
+      <div className={classes.ProgramCreate}>
+        <button
+          className={classes.btnCreate}
+          type="button"
+          style={btnHover}
+          onMouseOver={this.handleShowMenu}
+          ref={a => (this.fadeMenu = a)}>
+          <i className="bx bx-plus" />
+        </button>
+        {isMenu && (
+          <div
+            className={[
+              classes.isMenuOpen,
+              isfade ? classes.FadeOn : classes.FadeOff,
+            ].join(' ')}>
+            <div className={classes.Triangule} />
+            <ul>
+              <li>
+                <Link to="/significadocreate">
+                  <i
+                    className="icon-funnel-outline"
+                    title="El icono de Significados"
+                  />
+                  Signficados
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to="/notecornell/:id"
+                  onClick={this.handleNewIDNotaCornell}>
+                  <i
+                    className="icon-book-outline"
+                    title="El icono de Notas Cornell"
+                  />
+                  Notas Cornell
+                </Link>
+              </li>
+              <li>
+                <Link to="/documento/:id" onClick={this.handleNewIDDocumentos}>
+                  <i
+                    className="icon-file-text-outline"
+                    title="El icono de Documentos"
+                  />
+                  Doucmento
+                </Link>
+              </li>
+            </ul>
+          </div>
+        )}
+      </div>
     );
   }
 }
 
-export default compose(withFirestore)(ButtonCreates);
+export default compose(withFirestore)(ProgramCreate);

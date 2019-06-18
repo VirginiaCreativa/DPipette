@@ -4,10 +4,6 @@ import ButtonCreates from './ButtonCreates/ButtonCreates';
 import UserProfile from './UserProfile/UserProfile';
 
 class SignedIn extends Component {
-  handleSearch = ev => {
-    console.log(ev.target.value);
-  };
-
   render() {
     const { userSign } = this.props;
     return (
@@ -16,9 +12,9 @@ class SignedIn extends Component {
           <div className={classes.Grid}>
             <ButtonCreates />
           </div>
-          <div className={classes.Grid}>
+          {/* <div className={classes.Grid}>
             <UserProfile userSign={userSign} />
-          </div>
+          </div> */}
         </div>
       </>
     );
