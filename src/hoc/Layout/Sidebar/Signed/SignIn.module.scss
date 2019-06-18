@@ -1,0 +1,11 @@
+.SignIn {
+  button {
+    background-color: transparent;
+    border: none;
+    :global {
+      .bx {
+        font-size: 26px;
+      }
+    }
+  }
+}

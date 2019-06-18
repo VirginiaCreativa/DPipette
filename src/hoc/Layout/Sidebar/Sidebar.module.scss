@@ -8,8 +8,8 @@
   bottom: 0;
   width: 68px;
   height: 100vh;
-  z-index: 1;
-
+  z-index: 999;
+  // box-shadow: 0px 0px 8px 1px rgba(0,0,0,0.05);
   a {
     display: flex;
     justify-content: center;
@@ -29,6 +29,18 @@
       margin-bottom: 0;
     }
   }
+ 
+  .boxSigned {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    position: absolute;
+    bottom: 0;
+    width: 68px;
+    margin-bottom: 30px;
+  }
+ 
 }
 
 :global {
@@ -44,4 +56,14 @@
       left: 2px;
     }
   }
+}
+
+.boxOpenSetting {
+  background-color: #fff;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 600px;
+  height: 100vh;
+  z-index: 99;
 }

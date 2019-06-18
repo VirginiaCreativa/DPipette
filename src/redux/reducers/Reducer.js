@@ -6,6 +6,7 @@ import SearchSignificados from './SearchSignificados';
 import Significados from './SignificadosReducer';
 import NotesCornell from './NotesCornellReducer';
 import Documentos from './DocumentosReducer';
+import Layout from './LayoutReducer';
 
 export default history =>
   combineReducers({
@@ -16,4 +17,5 @@ export default history =>
     Significados,
     NotesCornell,
     Documentos,
+    Layout,
   });
