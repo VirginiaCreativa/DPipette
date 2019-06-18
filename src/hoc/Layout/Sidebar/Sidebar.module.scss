@@ -7,17 +7,17 @@
   position: fixed;
   bottom: 0;
   width: 68px;
-  height: 94.3vh;
+  height: 100vh;
   z-index: 1;
 
   a {
     display: flex;
+    justify-content: center;
     align-items: center;
     align-content: center;
-    justify-content: center;
     text-align: center;
     color: $gray_light;
-    margin: 30px 0;
+    margin: 10px 0 20px;
     width: 68px;
     height: 40px;
     transition: all ease-in-out .2s;
@@ -36,12 +36,12 @@
     color: $blue;
     position: relative;
     height: 25px;
-    border-left: 4px solid $blue;
-
+    border-left: 3px solid $blue;
+    
     [class^="icon-"] {
       color: $blue !important;
       position: relative;
-      left: 3px;
+      left: 2px;
     }
   }
 }

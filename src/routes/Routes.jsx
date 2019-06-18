@@ -12,22 +12,24 @@ import Foros from '../containers/Foros';
 import NotFound from '../containers/NotFound';
 import Login from '../containers/Login';
 import SignUp from '../containers/SignUp';
+import Perfil from '../containers/Perfil';
 
 const Routers = () => (
   <>
     <Switch>
-      <Route path="/" exact component={Home} />
-      <Route path="/foros" component={Foros} />
-      <Route path="/significados" component={Significados} />
-      <Route path="/significadocreate" component={SignificadosCreate} />
-      <Route path="/significado/:id" component={SignificadoDetail} />
-      <Route path="/notescornell" component={NotesCornell} />
-      <Route path="/notecornell/:id" component={NoteCornell} />
-      <Route path="/documentos" component={Documentos} />
-      <Route path="/documento/:id" component={Documento} />
-      <Route path="/login" component={Login} />
-      <Route path="/signup" component={SignUp} />
-      <Route component={NotFound} />
+      <Route exact path="/" component={Home} />
+      <Route exact path="/foros" component={Foros} />
+      <Route exact path="/significados" component={Significados} />
+      <Route exact path="/significadocreate" component={SignificadosCreate} />
+      <Route exact path="/significado/:id" component={SignificadoDetail} />
+      <Route exact path="/notescornell" component={NotesCornell} />
+      <Route exact path="/notecornell/:id" component={NoteCornell} />
+      <Route exact path="/documentos" component={Documentos} />
+      <Route exact path="/documento/:id" component={Documento} />
+      <Route exact path="/login" component={Login} />
+      <Route exact path="/signup" component={SignUp} />
+      <Route exact path="/perfil" component={Perfil} />
+      <Route exact component={NotFound} />
     </Switch>
   </>
 );

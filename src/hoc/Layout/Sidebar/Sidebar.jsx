@@ -1,10 +1,13 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
+import Logo from '../Logo/Logo';
+
 import classes from './Sidebar.module.scss';
 
 const Sidebar = () => (
   <div className={classes.Sidebar}>
     <React.Fragment>
+      <Logo></Logo>
       <NavLink to="/" exact activeClassName="selected" className="linkActive">
         <i className="icon-home-outline" title="El icono de Home" />
       </NavLink>

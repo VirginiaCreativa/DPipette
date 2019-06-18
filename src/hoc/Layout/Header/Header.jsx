@@ -10,10 +10,10 @@ const header = () => (
     <header className={classes.Header}>
       <div className="container-full">
         <div className="row">
-          <div className="col-2">
+          {/* <div className="col-2">
             <Logo />
-          </div>
-          <div className="col-10">
+          </div> */}
+          <div className="col-12">
             <Navigations />
           </div>
         </div>
