@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { bindActionCreators, compose } from 'redux';
 import { connect } from 'react-redux';
 import { NavLink } from 'react-router-dom';
@@ -10,6 +10,17 @@ import { getOpenSetting } from '../../../redux/actions/LayoutAction';
 
 const Sidebar = ({ getOpenSetting }) => {
   const [onOpenSetting, setOpenSetting] = useState(false);
+  const [onFade, setFade] = useState(false);
+
+  const moveMenuSettingHide = ev => {
+    console.log(ev.clientX);
+    if (ev.clientX >= '620') setOpenSetting(false);
+  };
+
+  useEffect(() => () => {
+    document.addEventListener('mousemove', moveMenuSettingHide);
+  });
+
   const handleOnSetting = () => {
     setOpenSetting(!onOpenSetting);
   };
@@ -59,7 +70,13 @@ const Sidebar = ({ getOpenSetting }) => {
         </NavLink>
         <Signed className={classes.boxSigned} onSettign={handleOnSetting} />
       </div>
-      {onOpenSetting && <div className={classes.boxOpenSetting}></div>}
+      {onOpenSetting && (
+        <div
+          className={[
+            classes.boxOpenSetting,
+            onFade ? classes.FadeOff : classes.FadeOn,
+          ].join(' ')}></div>
+      )}
     </>
   );
 };

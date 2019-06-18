@@ -5,7 +5,6 @@ import Header from './Header/Header';
 
 const Layout = ({ children }) => (
   <div className={classes.Layout}>
-    <Header />
     <Sidebar />
     <div className={classes.Wrapper}>
       <div className="container-fluid">{children}</div>

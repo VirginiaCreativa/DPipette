@@ -40,6 +40,19 @@
     width: 68px;
     margin-bottom: 30px;
   }
+
+  @keyframes fade-on-keyframes {
+		from {
+			opacity: 0;
+			top: 0;
+		}
+
+		to {
+			opacity: 1;
+			left: 300;
+		}
+  }
+  
  
 }
 
@@ -62,8 +75,36 @@
   background-color: #fff;
   position: absolute;
   top: 0;
-  left: 0;
   width: 600px;
   height: 100vh;
   z-index: 99;
+}
+
+@keyframes fade-on-keyframes {
+  from {
+    left: -540px;
+  }
+
+  to {
+    left: 0;
+  }
+}
+
+
+@keyframes fade-off-keyframes {
+  from {
+    left: 0;
+  }
+
+  to {
+    left: -540px;
+  }
+}
+
+.FadeOn {
+  animation: fade-on-keyframes 0.5s;
+}
+
+.FadeOff {
+  animation: fade-off-keyframes 0.5s;
 }
