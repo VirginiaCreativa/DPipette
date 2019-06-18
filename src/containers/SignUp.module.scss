@@ -36,23 +36,31 @@
       margin-top: 40px;
     }
     .btnGoogle {
+      display: flex;
+      justify-content: center;
+      justify-items: center;
       line-height: 0;
       color: #fff;
-      background-color: $red;
+      position: relative;
       margin-top: 10px;
       padding: 6px;
-      box-icon {
-        fill: #fff !important;
+      width: 100%;
+      &:after {
+        transition: all 0.3s ease;
+        content: '';
+        display: block;
+        position: absolute;    
+        bottom: 0;
+        width: 0;   
       }
-      span {
-        position: relative;
-        top: -6px;
-        margin: 0;
+      img {
+        height: 24px;
       }
       &:hover {
-        background-color: $red;
-        box-icon {
-          fill: #fff !important;
+        &:after {
+          content: '';
+          width: 30px;
+          border-bottom: 2px solid $red;      
         }
       }
     }
