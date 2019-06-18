@@ -12,11 +12,14 @@ class UserProfile extends Component {
     isMenu: false,
     fade: false,
     porcentStorage: 30,
+    userSign: false,
   };
 
   componentDidMount() {
     document.addEventListener('mousemove', this.handleHideMenu);
     this.fadeMenu.addEventListener('animationend', this.handleHideMenu);
+    const user = this.props.firebase.auth().currentUser;
+    if (user) this.setState({ userSign: true });
   }
 
   componentWillUnmount() {
@@ -52,16 +55,13 @@ class UserProfile extends Component {
     let photoProfile;
     if (currentUser) {
       if (currentUser.providerData[0].providerId === 'google.com') {
-        console.log('GOOGLE PHOTO');
         photoProfile = currentUser.photoURL;
       } else if (
         currentUser.providerData[0].providerId === 'password' &&
         userPass.photo === ''
       ) {
-        console.log('DESCONOCIDO PHOTO');
         photoProfile = imgUser;
       } else {
-        console.log('PASSWORD PHOTO');
         photoProfile = userPass.photo;
       }
     } else {
@@ -71,8 +71,8 @@ class UserProfile extends Component {
   };
 
   render() {
-    const { userSign, auth, profile } = this.props;
-    const { isMenu, fade, porcentStorage } = this.state;
+    const { profile } = this.props;
+    const { userSign, isMenu, fade, porcentStorage } = this.state;
     let btnShow;
     if (fade) {
       btnShow = { color: '#1948ca' };
@@ -95,28 +95,18 @@ class UserProfile extends Component {
     return (
       <>
         <div className={classes.UserProfile}>
-          {userSign ? (
+          {userSign && (
             <div className={classes.CircleImg}>
               <img src={this.photoProfile()} alt="El imagen de perfil" />
             </div>
-          ) : (
-            <div
-              className={classes.CircleAnomy}
-              title="El imagen de desconocido">
-              VS
-            </div>
           )}
-
-          <p className={classes.boxName} style={btnShow}>
-            {profile.namefull}
-          </p>
           <button
             type="button"
             className={classes.btnMenuUser}
             onMouseOver={this.handleShowMenu}
             ref={a => (this.fadeMenu = a)}
             title="Menu">
-            <i className="bx bx-chevron-down" style={btnShow} />
+            <i className="bx bx-dots-vertical-rounded" style={btnShow}></i>
           </button>
           <div>
             {isMenu && (
@@ -127,6 +117,11 @@ class UserProfile extends Component {
                 ].join(' ')}>
                 <div className={classes.Triangule} />
                 <ul>
+                  <li>
+                    <p className={classes.boxName} style={btnShow}>
+                      {profile.namefull}
+                    </p>
+                  </li>
                   <li className={classes.Storage}>
                     <div className={classes.infoStorage}>
                       <p>4,2 GB de 15 GB usado</p>

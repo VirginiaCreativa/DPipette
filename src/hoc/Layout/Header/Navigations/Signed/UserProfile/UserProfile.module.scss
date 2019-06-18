@@ -28,15 +28,12 @@
 			top: 0;
 		}
 	}
-	.boxName {
-		font-size: 0.845rem;
-	}
+	
 
 	.CircleImg {
 		display: block;
 		font-size: 12px;
 		text-align: center;
-		// background-color: $write_gray_3;
 		margin-right: 10px;
 		width: 30px;
 		height: 30px !important;
@@ -48,7 +45,7 @@
 			display: block;
 			font-size: 12px;
 			text-align: center;
-			// background-color: $write_gray_3;
+			color: #f4f7fc;
 			margin-right: 10px;
 			width: auto;
 			height: 100%;
@@ -106,7 +103,7 @@
 		background-color: #fff;
 		box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.15);
 		position: absolute;
-		top: 60px;
+		top: 45px;
 		right: 0;
 		width: 186px;
 		border-radius: 4px;
@@ -126,7 +123,7 @@
 				box-shadow: -1px -1px 3px -2px rgba(0, 0, 0, 0.5);
 				position: absolute;
 				top: 60px;
-				left: 5px;
+				right: 0;
 				width: 50px;
 				height: 50px;
 				transform: rotate(45deg);
@@ -151,6 +148,12 @@
 				&:last-child {
 					border-top: 1px solid $write_gray_1;
 				}
+
+				.boxName {
+					font-size: 0.845rem;
+					text-align: center;
+				}
+				
 				a,
 				p {
 					font-size: 0.85rem !important;
