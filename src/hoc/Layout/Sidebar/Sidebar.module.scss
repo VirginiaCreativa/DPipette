@@ -9,6 +9,18 @@
   width: 68px;
   height: 100vh;
   z-index: 999;
+
+  @keyframes fade-on-keyframes {
+		from {
+			opacity: 0;
+			top: 0;
+		}
+
+		to {
+			opacity: 1;
+			left: 300;
+		}
+  }
   // box-shadow: 0px 0px 8px 1px rgba(0,0,0,0.05);
   a {
     display: flex;
@@ -37,20 +49,8 @@
     align-content: center;
     position: absolute;
     bottom: 0;
-    width: 68px;
     margin-bottom: 30px;
-  }
-
-  @keyframes fade-on-keyframes {
-		from {
-			opacity: 0;
-			top: 0;
-		}
-
-		to {
-			opacity: 1;
-			left: 300;
-		}
+    width: 68px;
   }
   
  

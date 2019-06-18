@@ -4,16 +4,16 @@ import { connect } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import Logo from '../Logo/Logo';
 import Signed from './Signed/Signed';
+import Setting from './Setting/Setting';
 import classes from './Sidebar.module.scss';
 
 import { getOpenSetting } from '../../../redux/actions/LayoutAction';
 
 const Sidebar = ({ getOpenSetting }) => {
-  const [onOpenSetting, setOpenSetting] = useState(false);
+  const [onOpenSetting, setOpenSetting] = useState(true);
   const [onFade, setFade] = useState(false);
 
   const moveMenuSettingHide = ev => {
-    console.log(ev.clientX);
     if (ev.clientX >= '620') setOpenSetting(false);
   };
 
@@ -75,7 +75,9 @@ const Sidebar = ({ getOpenSetting }) => {
           className={[
             classes.boxOpenSetting,
             onFade ? classes.FadeOff : classes.FadeOn,
-          ].join(' ')}></div>
+          ].join(' ')}>
+          <Setting />
+        </div>
       )}
     </>
   );

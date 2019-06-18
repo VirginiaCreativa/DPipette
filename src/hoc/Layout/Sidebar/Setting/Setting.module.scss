@@ -1,0 +1,16 @@
+@import '../../../../styles/variables';
+
+.Setting {
+  padding: 60px 0 0 100px;
+  header {
+    margin-bottom: 60px;
+    h6 {
+      background-color: $write_gray_2;
+      display: inline-block;
+      color: $gray_light;
+      padding: 4px;
+      border-radius: 2px;
+      font-weight: 400;
+    }
+  }
+}
