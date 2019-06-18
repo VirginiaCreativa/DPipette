@@ -10,12 +10,12 @@
 	@keyframes fade-on-keyframes {
 		from {
 			opacity: 0;
-			top: 0;
+			top: 80px;
 		}
 
 		to {
 			opacity: 1;
-			top: 60px;
+			top: 50px;
 		}
 	}
 
@@ -59,17 +59,18 @@
 		background-color: #fff;
 		box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.15);
 		position: absolute;
-		top: 60px;
+		top: 50px;
 		right: 0;
 		width: 160px;
 		border-radius: 4px;
-		cursor: pointer;
+    cursor: pointer;
+    padding: 0 10px;
 
 		.Triangule {
 			box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.15);
 			position: absolute;
 			top: -60px;
-			left: 32%;
+			right: 0;
 			width: 60px;
 			height: 60px;
 			overflow: hidden;
@@ -92,15 +93,16 @@
 			padding: 0;
 			width: 100%;
 			list-style: none;
-
 			li {
 				display: flex;
 				align-items: center;
-				justify-content: flex-start;
 				line-height: 2;
-				padding: 10px 12px;
+				padding: 10px 0;
 				list-style: none;
-
+        border-bottom: 1px dotted $write_gray_2;
+        &:last-child {
+          border-bottom: none;
+        }
 				a {
 					font-size: 0.845rem;
 					display: flex;

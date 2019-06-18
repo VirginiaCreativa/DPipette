@@ -22,7 +22,7 @@ const content = {
 
 class ProgramCreate extends Component {
   state = {
-    isMenu: false,
+    isMenu: true,
     isfade: false,
   };
 
