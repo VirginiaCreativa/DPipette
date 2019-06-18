@@ -5,7 +5,6 @@
 	align-items: center;
 	text-align: center;
 	position: relative;
-
 	@keyframes fade-on-keyframes {
 		from {
 			opacity: 0;
@@ -28,6 +27,9 @@
 			opacity: 0;
 			top: 0;
 		}
+	}
+	.boxName {
+		font-size: 0.845rem;
 	}
 
 	.CircleImg {
@@ -106,7 +108,8 @@
 		position: absolute;
 		top: 60px;
 		right: 0;
-		width: 166px;
+		width: 186px;
+		border-radius: 4px;
 
 		.Triangule {
 			box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.15);
@@ -118,6 +121,7 @@
 			overflow: hidden;
 
 			&:after {
+				content: '';
 				background: #fff;
 				box-shadow: -1px -1px 3px -2px rgba(0, 0, 0, 0.5);
 				position: absolute;
@@ -126,7 +130,6 @@
 				width: 50px;
 				height: 50px;
 				transform: rotate(45deg);
-				content: '';
 			}
 		}
 
@@ -138,8 +141,8 @@
 
 			li {
 				display: flex;
-				align-items: center;
 				justify-content: flex-start;
+				align-items: center;
 				line-height: 2;
 				// height: 40px;
 				padding: 8px 12px;
@@ -148,7 +151,10 @@
 				&:last-child {
 					border-top: 1px solid $write_gray_1;
 				}
-
+				a,
+				p {
+					font-size: 0.85rem !important;
+				}
 				a {
 					display: flex;
 					justify-content: flex-start;
@@ -187,9 +193,9 @@
 
 				&.Storage {
 					display: flex;
-					align-items: flex-start;
-					justify-content: flex-start;
 					flex-direction: column;
+					justify-content: flex-start;
+					align-items: flex-start;
 
 					.infoStorage {
 						margin-bottom: 6px;
@@ -198,8 +204,9 @@
 						p {
 							display: block;
 							font-size: 11px;
-							margin-bottom: 0;
-							height: 38px;
+							// height: 38px;
+							margin: 10px 0;
+							line-height: 1;
 							text-transform: none;
 
 							&:hover {

@@ -107,7 +107,9 @@ class UserProfile extends Component {
             </div>
           )}
 
-          <p style={btnShow}>{profile.namefull}</p>
+          <p className={classes.boxName} style={btnShow}>
+            {profile.namefull}
+          </p>
           <button
             type="button"
             className={classes.btnMenuUser}
