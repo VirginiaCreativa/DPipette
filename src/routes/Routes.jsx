@@ -13,6 +13,7 @@ import NotFound from '../containers/NotFound';
 import Login from '../containers/Login';
 import SignUp from '../containers/SignUp';
 import Configuration from '../containers/Configuration';
+import Contact from '../containers/Contact';
 
 const Routers = () => (
   <>
@@ -29,6 +30,7 @@ const Routers = () => (
       <Route exact path="/login" component={Login} />
       <Route exact path="/signup" component={SignUp} />
       <Route exact path="/configuration" component={Configuration} />
+      <Route exact path="/contact" component={Contact} />
       <Route exact component={NotFound} />
     </Switch>
   </>

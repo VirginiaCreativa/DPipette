@@ -28,7 +28,7 @@ class Sidebar extends Component {
   }
 
   moveMenuSettingHide = ev => {
-    if (ev.clientX >= '620') this.props.getOnSetting(false);
+    if (ev.clientX >= '660') this.props.getOnSetting(false);
   };
 
   handleOnSetting = () => {
