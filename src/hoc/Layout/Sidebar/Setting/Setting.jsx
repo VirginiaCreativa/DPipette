@@ -5,7 +5,8 @@ import { firebaseConnect } from 'react-redux-firebase';
 import { history } from '../../../../redux/store/Store';
 import classes from './Setting.module.scss';
 
-import SubSetting from './SubSetting';
+import SettingSub from './SettingSub';
+import SettingStorage from './SettingStorage';
 
 import { getOnSetting } from '../../../../redux/actions/LayoutAction';
 
@@ -17,6 +18,10 @@ const Setting = ({ firebase, profile, getOnSetting }) => {
     history.push('/configuration');
     getOnSetting(false);
   };
+  const handleContact = () => {
+    history.push('/contact');
+    getOnSetting(false);
+  };
   return (
     <div className={classes.Setting}>
       <header>
@@ -25,11 +30,14 @@ const Setting = ({ firebase, profile, getOnSetting }) => {
         <p>{profile.email}</p>
       </header>
       <div className={classes.boxSubSetting}>
-        <SubSetting
+        <SettingSub
           onLogOut={handleLogOut}
           onConfig={handleConfiguration}
-          onContact={handleLogOut}
+          onContact={handleContact}
         />
+      </div>
+      <div className={classes.boxStorage}>
+        <SettingStorage porcentStorage="43" />
       </div>
     </div>
   );

@@ -1,7 +1,8 @@
 @import '../../../../styles/variables';
 
 .Setting {
-  padding: 60px 0 0 100px;
+  position: relative;
+  padding: 60px 40px 0 100px;
   header {
     display: grid;
     margin-bottom: 40px;
@@ -19,7 +20,7 @@
     h1 {
       display: inline-block;
       margin-bottom: 0;
-      width: 60%;
+      width: 70%;
       font-weight: 600;
     }
     p {
@@ -75,6 +76,66 @@
       .bx-envelope {
         font-size: 22px;
         color: #fdc717;
+      }
+    }
+  }
+  .boxStorage {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    margin: 20px 0;
+    .infoStorage {
+      margin-bottom: 6px;
+      width: 100%;
+
+      p {
+        display: block;
+        font-size: 11px;
+        line-height: 1;
+        // height: 38px;
+        margin: 10px 0;
+        text-transform: none;
+
+        &:hover {
+          color: $gray_medium;
+        }
+      }
+
+      .linePorce {
+        display: block;
+        position: relative;
+        height: 3px;
+        border-radius: 4px;
+
+        .cantPorce {
+          display: block;
+          position: absolute;
+          border-bottom: 3px solid #2572dd;
+          z-index: 3;
+        }
+        .bgPorce {
+          position: absolute;
+          width: 100%;
+          border-bottom: 3px solid $write_gray_3;
+          z-index: 1;
+        }
+      }
+
+      :global {
+        .bx {
+          font-size: 23px;
+          color: $blue;
+          position: relative;
+          top: -1px;
+          margin-right: 6px;
+        }
+      }
+
+      a {
+        display: flex;
+        justify-content: flex-end;
+        margin-top: 10px;
       }
     }
   }
