@@ -12,6 +12,7 @@ import Foros from '../containers/Foros';
 import NotFound from '../containers/NotFound';
 import Login from '../containers/Login';
 import SignUp from '../containers/SignUp';
+import Configuration from '../containers/Configuration';
 
 const Routers = () => (
   <>
@@ -27,6 +28,7 @@ const Routers = () => (
       <Route exact path="/documento/:id" component={Documento} />
       <Route exact path="/login" component={Login} />
       <Route exact path="/signup" component={SignUp} />
+      <Route exact path="/configuration" component={Configuration} />
       <Route exact component={NotFound} />
     </Switch>
   </>

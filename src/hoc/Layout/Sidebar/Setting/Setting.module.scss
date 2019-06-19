@@ -4,11 +4,13 @@
   padding: 60px 0 0 100px;
   header {
     display: grid;
+    margin-bottom: 40px;
     h6 {
+      font-size: 0.845rem;
       text-align: center;
       color: $gray_light;
       background-color: $write_gray_2;
-      margin-bottom: 60px;
+      margin-bottom: 40px;
       padding: 4px 6px;
       width: 12%;
       border-radius: 2px;
@@ -16,17 +18,63 @@
     }
     h1 {
       display: inline-block;
+      margin-bottom: 0;
       width: 60%;
+      font-weight: 600;
+    }
+    p {
+      color: $gray_light;
+      margin-bottom: 0;
     }
   }
   .boxSubSetting {
     button {
       background-color: transparent;
+      margin-right: 20px;
       border: none;
+      &.btnGeneral {
+        line-height: 1;
+        text-align: center;
+        padding: 0;
+        width: 36px;
+        height: 36px;
+        border-radius: 100%;
+
+      }
+      &.btnLogOut {
+        background-color: #ffeeef;
+        @extend .btnGeneral;
+        &:hover {
+          background-color: #ffc2c6;
+        }
+      }
+      &.btnConfiguration {
+        background-color: $write_gray_1;
+        @extend .btnGeneral;
+        &:hover {
+          background-color: $write_gray_2;
+        }
+      }
+      &.btnContact {
+        background-color: #fff3d1;
+        @extend .btnGeneral;
+        &:hover {
+          background-color: #fae3a2;
+        }
+      }
     }
     :global {
       .bx-log-out-circle {
-        font-size: 30px;
+        font-size: 22px;
+        color: $red;
+      }
+      .bx-cog {
+        font-size: 22px;
+        color: $gray_light;
+      }
+      .bx-envelope {
+        font-size: 22px;
+        color: #fdc717;
       }
     }
   }

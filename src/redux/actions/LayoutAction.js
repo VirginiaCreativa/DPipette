@@ -1,6 +1,11 @@
-import { GET_OPEN_SETTING_LAYOUT } from './Types';
+import { ACTIVE_SETTING_LAYOUT, GET_ON_SETTING } from './Types';
 
-export const getOpenSetting = payload => ({
-  type: GET_OPEN_SETTING_LAYOUT,
+export const activeSetting = payload => ({
+  type: ACTIVE_SETTING_LAYOUT,
+  payload,
+});
+
+export const getOnSetting = payload => ({
+  type: GET_ON_SETTING,
   payload,
 });
