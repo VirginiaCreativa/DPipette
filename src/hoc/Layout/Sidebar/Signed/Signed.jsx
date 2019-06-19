@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import SignIn from './SignIn';
 import SignOut from './SignOut';
 
-const Signed = ({ isEmpty, className, onSettign }) => (
+const Signed = ({ isEmpty, className, onSettign, onLogOut }) => (
   <div className={className}>
     {isEmpty ? <SignOut /> : <SignIn onSettign={onSettign} />}
   </div>

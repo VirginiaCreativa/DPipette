@@ -1,8 +1,13 @@
 import React from 'react';
+import classes from './SignOut.module.scss';
+
+const imgUser = require('../../../../assets/icons/user_unknown.svg');
 
 const SignOut = () => (
-  <div>
-    <h2>Out</h2>
+  <div className={classes.SignOut}>
+    <div className={classes.ProfileImg}>
+      <img src={imgUser} alt="El imagen de perfil" />
+    </div>
   </div>
 );
 

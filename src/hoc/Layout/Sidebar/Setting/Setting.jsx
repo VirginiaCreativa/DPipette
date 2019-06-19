@@ -5,7 +5,9 @@ import { firebaseConnect } from 'react-redux-firebase';
 import classes from './Setting.module.scss';
 
 const Setting = ({ firebase, profile }) => {
-  const handleLogOut = () => {};
+  const handleLogOut = () => {
+    firebase.logout();
+  };
   return (
     <div className={classes.Setting}>
       <header>
