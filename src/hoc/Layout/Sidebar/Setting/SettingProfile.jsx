@@ -5,7 +5,8 @@ import { firebaseConnect } from 'react-redux-firebase';
 import classes from './Setting.module.scss';
 
 const SettingProfile = ({ profile, onClick }) => {
-  const [onEditableProfile, setOnEditableProfile] = useState(false);
+  const [onEditableProfile, setOnEditableProfile] = useState(true);
+
   const handleOnEditableProfile = () => {
     setOnEditableProfile(!onEditableProfile);
   };
@@ -30,7 +31,11 @@ const SettingProfile = ({ profile, onClick }) => {
             </label>
             <div className="col-sm-7 d-flex justify-content-end align-items-center">
               {onEditableProfile ? (
-                <input type="text" className="form-control form-control-sm " />
+                <input
+                  type="text"
+                  className="form-control form-control-sm"
+                  defaultValue={profile.namefull}
+                />
               ) : (
                 <p>{profile.namefull}</p>
               )}
@@ -62,7 +67,7 @@ const SettingProfile = ({ profile, onClick }) => {
             </label>
             <div className="col-sm-7 d-flex justify-content-end align-items-center">
               {onEditableProfile ? (
-                <input type="text" className="form-control form-control-sm " />
+                <input type="text" className="form-control form-control-sm" />
               ) : (
                 <p>
                   {profile.country === null ? (
