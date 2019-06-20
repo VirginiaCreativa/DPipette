@@ -12,7 +12,7 @@ const Storage = ({ porcentStorage }) => (
       />
       <div className={classes.bgPorce} />
     </div>
-    <Link to="/almacenamiento" tabIndex="0">
+    <Link to="/storageplan" tabIndex="0">
       <i className="bx bx-cloud" />
       Adquirir más almacenamiento
     </Link>

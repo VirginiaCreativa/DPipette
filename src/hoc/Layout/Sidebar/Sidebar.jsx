@@ -20,6 +20,7 @@ class Sidebar extends Component {
 
   componentDidMount() {
     document.addEventListener('mousemove', this.moveMenuSettingHide);
+    document.addEventListener('click', this.overMenuSettingHide);
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -29,6 +30,13 @@ class Sidebar extends Component {
 
   moveMenuSettingHide = ev => {
     if (ev.clientX >= '660') this.props.getOnSetting(false);
+  };
+
+  overMenuSettingHide = ev => {
+    console.log(ev.target.dataset.menusetting);
+    if (ev.target.tabIndex === 0 || ev.target.dataset.menusetting) {
+      this.props.getOnSetting(false);
+    }
   };
 
   handleOnSetting = () => {
@@ -55,43 +63,56 @@ class Sidebar extends Component {
             <NavLink
               to="/"
               exact
+              data-menusetting="0"
               activeClassName="selected"
               className="linkActive">
-              <i className="icon-home-outline" title="El icono de Home" />
+              <i
+                className="icon-home-outline"
+                data-menusetting="0"
+                title="El icono de Home"
+              />
             </NavLink>
             <NavLink
               to="/significados"
               exact
+              data-menusetting="0"
               activeClassName="selected"
               className="linkActive">
               <i
+                data-menusetting="0"
                 className="icon-funnel-outline"
                 title="El icono de Significados"
               />
             </NavLink>
             <NavLink
               to="/notescornell"
+              data-menusetting="0"
               activeClassName="selected"
               className="linkActive">
               <i
+                data-menusetting="0"
                 className="icon-book-outline"
                 title="El icono de Notas Cornell"
               />
             </NavLink>
             <NavLink
               to="/documentos"
+              data-menusetting="0"
               activeClassName="selected"
               className="linkActive">
               <i
+                data-menusetting="0"
                 className="icon-file-text-outline"
                 title="El icono de Documentos"
               />
             </NavLink>
             <NavLink
               to="/foros"
+              data-menusetting="0"
               activeClassName="selected"
               className="linkActive">
               <i
+                data-menusetting="0"
                 className="icon-message-circle-outline"
                 title="El icono de Foros"
               />
