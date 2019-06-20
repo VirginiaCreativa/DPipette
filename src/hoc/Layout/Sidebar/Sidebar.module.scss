@@ -87,10 +87,10 @@
 
 .boxOpenSetting {
   background-color: #fff;
-  position: absolute;
+  position: fixed;
   top: 0;
   width: 600px;
-  height: 100vh;
+  height: 100%;
   z-index: 99;
 }
 

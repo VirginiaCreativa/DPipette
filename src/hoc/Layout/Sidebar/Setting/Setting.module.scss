@@ -2,7 +2,7 @@
 
 .Setting {
   position: relative;
-  padding: 60px 80px 80px 140px;
+  padding: 60px 70px 80px 130px;
   height: 100vh;
   header {
     display: grid;
@@ -147,7 +147,7 @@
     margin-bottom: 40px;
     width: 100%;
     .ProfileDetail {
-      width: 67%;
+      width: 65%;
       .Heading {
         display: flex;
         justify-content: space-between;
@@ -198,13 +198,13 @@
       :global {
         .form-group {
           display: flex;
-          margin-bottom: 8px;
+          margin-bottom: 10px;
           label {
             padding: 0;
             font-weight: 300;
             color: $gray_light !important;
           }
-          .col-sm-6  {
+          .col-sm-7  {
             p {
               margin-bottom: 0 !important;
               font-weight: 500;
