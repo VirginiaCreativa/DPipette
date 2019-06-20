@@ -7,6 +7,7 @@ import classes from './Setting.module.scss';
 
 import SettingSub from './SettingSub';
 import SettingStorage from './SettingStorage';
+import SettingProfile from './SettingProfile';
 
 import { getOnSetting } from '../../../../redux/actions/LayoutAction';
 
@@ -38,6 +39,9 @@ const Setting = ({ firebase, profile, getOnSetting }) => {
       </div>
       <div className={classes.boxStorage}>
         <SettingStorage porcentStorage="43" />
+      </div>
+      <div className={classes.boxProfile}>
+        <SettingProfile />
       </div>
     </div>
   );

@@ -34,6 +34,9 @@ const SignUp = ({ firestore, firebase }) => {
             namefull: namefull.value,
             email: email.value,
             photo: '',
+            mobile: null,
+            country: null,
+            city: null,
           })
           .then(() => {
             history.push('/');
@@ -60,6 +63,9 @@ const SignUp = ({ firestore, firebase }) => {
             namefull: result.user.displayName,
             email: result.user.email,
             photo: result.user.photoURL,
+            mobile: null,
+            country: null,
+            city: null,
           })
           .then(() => {
             history.push('/');

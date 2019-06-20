@@ -2,7 +2,8 @@
 
 .Setting {
   position: relative;
-  padding: 60px 40px 0 100px;
+  padding: 60px 80px 80px 140px;
+  height: 100vh;
   header {
     display: grid;
     margin-bottom: 40px;
@@ -24,10 +25,10 @@
       font-weight: 600;
     }
     p {
+      font-size: 0.845rem;
       color: $gray_light;
       margin-bottom: 0;
-      font-size: 0.845rem;
-      letter-spacing: 1px;
+      letter-spacing: 0.5px;
     }
   }
   .boxSubSetting {
@@ -90,7 +91,6 @@
     .infoStorage {
       margin-bottom: 6px;
       width: 100%;
-
       p {
         display: block;
         font-size: 11px;
@@ -141,4 +141,104 @@
       }
     }
   }
+  .boxProfile {
+    position: absolute;
+    bottom: 0;
+    margin-bottom: 40px;
+    width: 100%;
+    .ProfileDetail {
+      width: 67%;
+      .Heading {
+        display: flex;
+        justify-content: space-between;
+        color: $gray_dark;
+        margin-bottom: 20px;
+        padding-bottom: 10px;
+        border-bottom: 2px solid $write_gray_1;
+        .Title {
+          display: flex;
+          :global {
+            .bx {
+              font-size: 16px;
+              line-height: 1.2;
+              color: $gray_dark !important;
+            }
+          }
+          h6 {
+            margin-bottom: 0;
+            margin-left: 8px;
+            font-weight: 500;
+          }
+        }
+        button {
+          line-height: 0; 
+          text-align: right;
+          background-color: transparent;
+          margin: 0;
+          padding: 0;
+          border: none;
+          &:hover {
+            :global {
+              .bx {
+                color: $green !important;
+              }
+            }
+          }
+          :global {
+            .bx {
+              font-size: 22px;
+              line-height: 0.8;
+              color: $gray_dark !important;
+            }
+          }
+        }
+      }
+    }
+    form {
+      :global {
+        .form-group {
+          display: flex;
+          margin-bottom: 8px;
+          label {
+            padding: 0;
+            font-weight: 300;
+            color: $gray_light !important;
+          }
+          .col-sm-6  {
+            p {
+              margin-bottom: 0 !important;
+              font-weight: 500;
+              color: $heading;
+              span {
+                color: $write_gray_3;
+                font-style: italic;
+                font-weight: 300;
+              }
+            }
+          }
+        }
+      }
+    }
+    .ProfileImg {
+      display: block;
+      font-size: 12px;
+      text-align: center;
+      color: #fff;
+      width: 36px;
+      height: 36px !important;
+      border-radius: 100%;
+      background-size: cover;
+      overflow: hidden;
+      img {
+        display: block;
+        font-size: 12px;
+        text-align: center;
+        color: #f4f7fc;
+        width: auto;
+        height: 100%;
+        border-radius: 50%;
+        background-size: cover;
+      }
+    }
+  } 
 }
