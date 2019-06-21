@@ -1,15 +1,51 @@
 import React, { useState } from 'react';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
-import { firebaseConnect } from 'react-redux-firebase';
+import { firestoreConnect } from 'react-redux-firebase';
 import classes from './Setting.module.scss';
 
-const SettingProfile = ({ profile, onClick }) => {
-  const [onEditableProfile, setOnEditableProfile] = useState(true);
+const SettingProfile = ({ firebase, firestore, profile, auth }) => {
+  const [onEditableProfile, setOnEditableProfile] = useState(false);
+  const [isConfirmChangeProfile, setConfirmChangeProfile] = useState(false);
+  const [isNotConfirmChangeProfile, setNotConfirmChangeProfile] = useState(
+    false
+  );
 
   const handleOnEditableProfile = () => {
     setOnEditableProfile(!onEditableProfile);
   };
+
+  const handleSubmit = ev => {
+    ev.preventDefault();
+    const { name, mobile, country, city } = ev.target.elements;
+    console.log(name.value, mobile.value, country.value, city.value);
+
+    firestore
+      .update(`users/${auth.uid}`, {
+        namefull: name.value,
+        country: country.value || ' ',
+        mobile: mobile.value || ' ',
+        city: city.value || '',
+      })
+      .then(() => {
+        setConfirmChangeProfile(true);
+        setTimeout(() => {
+          setConfirmChangeProfile(false);
+        }, 5000);
+      })
+      .catch(error => {
+        setNotConfirmChangeProfile(true);
+        setTimeout(() => {
+          setNotConfirmChangeProfile(false);
+        }, 3000);
+        console.log(error.message);
+      });
+  };
+
+  const activeStylEditable = onEditableProfile
+    ? classes.activeStylEditable
+    : null;
+
   return (
     <div className={classes.ProfileDetail}>
       <div className={classes.Heading}>
@@ -18,21 +54,22 @@ const SettingProfile = ({ profile, onClick }) => {
           <h6>Perfíl</h6>
         </div>
         <button type="button" onClick={handleOnEditableProfile}>
-          <i className="bx bx-pencil"></i>
+          <i className={[activeStylEditable, 'bx bx-pencil'].join(' ')}></i>
         </button>
       </div>
 
       <div className={classes.DetailUser}>
-        <form action="">
+        <form onSubmit={handleSubmit}>
           {/* NOMBRE COMPLETO */}
           <div className="form-group">
-            <label className="col-sm-5 col-form-label col-form-label-sm">
+            <label className="col-sm-5 col-form-label col-form-label-sm d-flex align-items-center">
               Nombre Completo
             </label>
             <div className="col-sm-7 d-flex justify-content-end align-items-center">
               {onEditableProfile ? (
                 <input
                   type="text"
+                  name="name"
                   className="form-control form-control-sm"
                   defaultValue={profile.namefull}
                 />
@@ -43,12 +80,17 @@ const SettingProfile = ({ profile, onClick }) => {
           </div>
           {/* CELULAR */}
           <div className="form-group">
-            <label className="col-sm-5 col-form-label col-form-label-sm">
+            <label className="col-sm-5 col-form-label col-form-label-sm d-flex align-items-center">
               Celular
             </label>
             <div className="col-sm-7 d-flex justify-content-end align-items-center">
               {onEditableProfile ? (
-                <input type="text" className="form-control form-control-sm " />
+                <input
+                  type="text"
+                  name="mobile"
+                  className="form-control "
+                  defaultValue={profile.mobile}
+                />
               ) : (
                 <p>
                   {profile.mobile === null ? (
@@ -62,12 +104,17 @@ const SettingProfile = ({ profile, onClick }) => {
           </div>
           {/* PAÍS */}
           <div className="form-group">
-            <label className="col-sm-5 col-form-label col-form-label-sm">
+            <label className="col-sm-5 col-form-label col-form-label-sm d-flex align-items-center">
               País
             </label>
             <div className="col-sm-7 d-flex justify-content-end align-items-center">
               {onEditableProfile ? (
-                <input type="text" className="form-control form-control-sm" />
+                <input
+                  type="text"
+                  name="country"
+                  className="form-control"
+                  defaultValue={profile.country}
+                />
               ) : (
                 <p>
                   {profile.country === null ? (
@@ -81,12 +128,17 @@ const SettingProfile = ({ profile, onClick }) => {
           </div>
           {/* CIUDAD */}
           <div className="form-group">
-            <label className="col-sm-5 col-form-label col-form-label-sm">
+            <label className="col-sm-5 col-form-label col-form-label-sm d-flex align-items-center">
               Ciudad
             </label>
             <div className="col-sm-7 d-flex justify-content-end align-items-center">
               {onEditableProfile ? (
-                <input type="text" className="form-control form-control-sm " />
+                <input
+                  type="text"
+                  name="city"
+                  className="form-control"
+                  defaultValue={profile.city}
+                />
               ) : (
                 <p>
                   {profile.city === null ? <span>vació</span> : profile.city}
@@ -94,21 +146,25 @@ const SettingProfile = ({ profile, onClick }) => {
               )}
             </div>
           </div>
-          {/* PHOTO */}
-          <div className="form-group">
-            <label className="col-sm-5  col-form-label col-form-label-sm">
-              Foto del perfíl
-            </label>
-            <div className="col-sm-7 d-flex justify-content-end align-items-center">
-              {onEditableProfile ? (
-                <input type="text" className="form-control form-control-sm " />
-              ) : (
-                <div className={classes.ProfileImg}>
-                  <img src={profile.photo} alt="El imagen de perfil" />
-                </div>
-              )}
-            </div>
-          </div>
+          {isConfirmChangeProfile && (
+            <span className={classes.alertConfirman}>
+              <i
+                className="bx bxs-check-circle"
+                style={{ color: '#49cba4' }}></i>
+              Confirmación para guardar tu perfíl
+            </span>
+          )}
+          {isNotConfirmChangeProfile && (
+            <span className={classes.alertNotConfirman}>
+              <i className="bx bxs-x-circle" style={{ color: '#f33d48' }}></i>
+              Error
+            </span>
+          )}
+          {onEditableProfile ? (
+            <button type="submit" className="btn btn-primary btn-block">
+              Guardar
+            </button>
+          ) : null}
         </form>
       </div>
     </div>
@@ -116,8 +172,9 @@ const SettingProfile = ({ profile, onClick }) => {
 };
 
 export default compose(
-  firebaseConnect(),
+  firestoreConnect(),
   connect(state => ({
     profile: state.firebase.profile,
+    auth: state.firebase.auth,
   }))
 )(SettingProfile);

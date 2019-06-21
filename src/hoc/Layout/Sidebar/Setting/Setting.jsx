@@ -25,10 +25,15 @@ const Setting = ({ firebase, profile, getOnSetting }) => {
   };
   return (
     <div className={classes.Setting}>
+      <h6 className={classes.titleSetting}>Ajuste</h6>
       <header>
-        <h6>Ajuste</h6>
-        <h1>{profile.namefull}</h1>
-        <p>{profile.email}</p>
+        <div className={classes.ProfileImg}>
+          <img src={profile.photo} alt="El imagen de perfil" />
+        </div>
+        <div className={classes.ProfileData}>
+          <h1>{profile.namefull}</h1>
+          <p>{profile.email}</p>
+        </div>
       </header>
       <div className={classes.boxSubSetting}>
         <SettingSub

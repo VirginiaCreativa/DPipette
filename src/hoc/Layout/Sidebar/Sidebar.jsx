@@ -33,10 +33,8 @@ class Sidebar extends Component {
   };
 
   overMenuSettingHide = ev => {
-    if (ev.target.tabIndex === 0 || ev.target.dataset.menusetting) {
+    if (ev.target.dataset.menusetting) {
       this.props.getOnSetting(false);
-    } else {
-      this.props.getOnSetting(true);
     }
   };
 
