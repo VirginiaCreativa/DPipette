@@ -1,24 +1,25 @@
 .SignIn {
-  .ProfileImg {
+
+
+	.ProfileImg {
 		display: block;
 		font-size: 12px;
 		text-align: center;
 		color: #fff;
-		margin: 0 auto;
+		position: relative;
 		width: 40px;
 		height: 40px !important;
 		border-radius: 100%;
 		background-size: cover;
 		overflow: hidden;
+		z-index: 1;
 		img {
-			display: block;
-			font-size: 12px;
-			text-align: center;
-			color: #f4f7fc;
-			width: auto;
-			height: 100%;
-			border-radius: 50%;
-			background-size: cover;
+			position: absolute;
+			top: 0;
+			left: 0;
+			min-height: 100%;
+			width: 100%;
+			height: auto;
 		}
 	}
   button {

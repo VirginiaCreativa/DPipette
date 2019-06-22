@@ -3,44 +3,20 @@ import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { firebaseConnect } from 'react-redux-firebase';
 import classes from './SignIn.module.scss';
+import photoProfile from '../../../../scripts/photoProfilePosition';
 
-const imgUser = require('../../../../assets/icons/user_unknown.svg');
-
-const SignIn = ({ firebase, profile, onSettign, colorSetting }) => {
-  const photoProfile = () => {
-    const currentUser = firebase.auth().currentUser;
-    let photoProfile;
-    if (currentUser) {
-      if (currentUser.providerData[0].providerId === 'google.com') {
-        photoProfile = currentUser.photoURL;
-      } else if (
-        currentUser.providerData[0].providerId === 'password' &&
-        profile.photo === ''
-      ) {
-        photoProfile = imgUser;
-      } else {
-        photoProfile = profile.photo;
-      }
-    } else {
-      console.log('ERROR');
-    }
-    return photoProfile;
-  };
-
-  return (
-    <div className={classes.SignIn}>
-      <div className={classes.ProfileImg}>
-        <img src={photoProfile()} alt="El imagen de perfil" />
-      </div>
-      <button type="button" onClick={onSettign}>
-        <i
-          className="bx bx-dots-horizontal-rounded"
-          style={{ color: `${colorSetting}` }}></i>
-      </button>
+const SignIn = ({ firebase, profile, onSettign, colorSetting }) => (
+  <div className={classes.SignIn}>
+    <div className={classes.ProfileImg}>
+      <img src={photoProfile(firebase, profile)} alt="El imagen de perfil" />
     </div>
-  );
-};
-
+    <button type="button" onClick={onSettign}>
+      <i
+        className="bx bx-dots-horizontal-rounded"
+        style={{ color: `${colorSetting}` }}></i>
+    </button>
+  </div>
+);
 export default compose(
   firebaseConnect(),
   connect(state => ({
