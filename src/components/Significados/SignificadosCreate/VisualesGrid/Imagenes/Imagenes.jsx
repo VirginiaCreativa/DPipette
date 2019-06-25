@@ -57,7 +57,7 @@ export default compose(
   firestoreConnect(),
   connect(
     state => ({
-      word: state.createSing.word,
+      word: state.Significados.word,
       imgFiles: state.Significados.imgFiles,
       imagenes: state.Significados.imagenes,
     }),

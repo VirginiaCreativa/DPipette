@@ -1,7 +1,7 @@
 import React from 'react';
 import classes from './HeaderHome.module.scss';
 
-const HeaderHome = ({ iconName, title, colored }) => {
+const HeaderHome = ({ iconName, title, colored, onClick }) => {
   const colorSelect = {
     backgroundColor: colored,
   };
@@ -16,6 +16,9 @@ const HeaderHome = ({ iconName, title, colored }) => {
           />
           {title}
         </h5>
+        <button type="button" onClick={onClick} className={classes.btnPlusNew}>
+          <i className="bx bx-plus-circle"></i>
+        </button>
       </div>
     </>
   );

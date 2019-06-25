@@ -148,7 +148,7 @@ export default compose(
   firestoreConnect(['significados']),
   connect(
     state => ({
-      word: state.createSing.word,
+      word: state.Significados.word,
       imgFiles: state.Significados.imgFiles,
     }),
     mapDispatchToProps

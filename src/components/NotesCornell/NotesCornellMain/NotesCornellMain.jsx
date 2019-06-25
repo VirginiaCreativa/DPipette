@@ -66,7 +66,6 @@ const NotesCornellMain = ({
 };
 
 export default compose(
-  firestoreConnect(['notescornell']),
   connect(state => ({
     notescornell: state.firestore.ordered.notescornell,
     search: state.NotesCornell.search,
@@ -74,5 +73,6 @@ export default compose(
     getFilterDateNowNC: state.NotesCornell.date,
     getFilterDateYesterdayNC: state.NotesCornell.yesterday,
     getFilterFavoriteNC: state.NotesCornell.favorite,
-  }))
+  })),
+  firestoreConnect(['notescornell'])
 )(NotesCornellMain);

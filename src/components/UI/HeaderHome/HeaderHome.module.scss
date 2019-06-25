@@ -2,7 +2,7 @@
 
 .HeaderHome {
   margin-bottom: 20px;
-
+  display: flex;
   h5 {
     display: inline-block;
     margin-bottom: 0;
@@ -19,5 +19,21 @@
     width: 26px;
     height: 26px;
     border-radius: 100%;
+  }
+  .btnPlusNew {
+    background-color: transparent;
+    border: none;
+    border-radius: 2px;
+    text-align: center;
+    :global {
+      .bx {
+        position: relative;
+        top: 2px;
+        color: $gray_light;
+        &:hover {
+          color: $blue;
+        }
+      }
+    }
   }
 }

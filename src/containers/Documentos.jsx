@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { withFirestore } from 'react-redux-firebase';
+import { firestoreConnect } from 'react-redux-firebase';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { history } from '../redux/store/Store';
@@ -61,6 +61,6 @@ class Documentos extends Component {
 }
 
 export default compose(
-  withFirestore,
-  connect()
+  connect(),
+  firestoreConnect()
 )(Documentos);

@@ -28,7 +28,7 @@ const Videos = ({ videoSenaBlob, videoDescripBlob }) => (
 export default compose(
   firestoreConnect(),
   connect(state => ({
-    videoSenaBlob: state.createSing.videoSenaBlob,
-    videoDescripBlob: state.createSing.videoDescripBlob,
+    videoSenaBlob: state.Significados.videoSenaBlob,
+    videoDescripBlob: state.Significados.videoDescripBlob,
   }))
 )(Videos);

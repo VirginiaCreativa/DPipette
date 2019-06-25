@@ -28,14 +28,14 @@ const NotesCornellHome = ({ notescornell }) => (
 );
 
 export default compose(
+  connect(state => ({
+    notescornell: state.firestore.ordered.notescornell,
+  })),
   firestoreConnect([
     {
       collection: 'notescornell',
       orderBy: ['date', 'desc'],
       limit: 4,
     },
-  ]),
-  connect(state => ({
-    notescornell: state.firestore.ordered.notescornell,
-  }))
+  ])
 )(NotesCornellHome);
