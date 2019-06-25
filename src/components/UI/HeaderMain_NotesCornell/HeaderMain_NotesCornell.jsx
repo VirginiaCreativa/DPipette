@@ -4,15 +4,15 @@ import { connect } from 'react-redux';
 import { bindActionCreators, compose } from 'redux';
 import classes from './HeaderMain_NotesCornell.module.scss';
 
+import BtnAdd from '../HeaderMain/btnAdd';
 import { SearchNotesCornell } from '../../../redux/actions/NotesCornellAction';
 
 const HeaderMainNotesCornell = ({
   iconName,
-  linked,
   title,
   colored,
   SearchNotesCornell,
-  clicked,
+  onClick,
 }) => {
   const handleSearch = ev => {
     SearchNotesCornell(ev.target.value);
@@ -43,12 +43,7 @@ const HeaderMainNotesCornell = ({
           </div>
         </div>
         <div className="col-2 d-flex align-items-start justify-content-end">
-          <div className={classes.BtnAdd}>
-            <Link to={linked} onClick={clicked}>
-              Añadir nuevo
-              <i className="bx bx-plus" />
-            </Link>
-          </div>
+          <BtnAdd onClick={onClick} />
         </div>
       </div>
     </div>

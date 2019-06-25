@@ -29,7 +29,7 @@ class Documentos extends Component {
       pageGrid: true,
     };
     this.props.firestore
-      .add(`documentos/${this.props.auth.uid}`, {
+      .add(`documentos`, {
         ...project,
       })
       .then(doc => {
@@ -46,7 +46,7 @@ class Documentos extends Component {
           iconName="icon-file-text-outline"
           colored="#5f27cd"
           linked="/documento/:id"
-          clicked={this.handleNewIDDocumento}
+          onClick={this.handleNewIDDocumento}
         />
         <div className={classes.BoxContent}>
           <div className={classes.Filters}>

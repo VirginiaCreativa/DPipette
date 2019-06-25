@@ -6,15 +6,15 @@ import { bindActionCreators, compose } from 'redux';
 import { firebaseConnect } from 'react-redux-firebase';
 import classes from './HeaderMain_Significados.module.scss';
 
+import BtnAdd from '../HeaderMain/btnAdd';
 import { searchSignificados } from '../../../redux/actions/SignificadosAction';
 
 const HeaderMainSignificados = ({
   iconName,
-  linked,
   title,
   colored,
   searchSignificados,
-  clicked,
+  onClick,
 }) => {
   const handleSearch = ev => {
     searchSignificados(ev.target.value);
@@ -45,12 +45,7 @@ const HeaderMainSignificados = ({
           </div>
         </div>
         <div className="col-2 d-flex align-items-start justify-content-end">
-          <div className={classes.BtnAdd}>
-            <Link to={linked} onClick={clicked}>
-              Añadir nuevo
-              <i className="bx bx-plus" />
-            </Link>
-          </div>
+          <BtnAdd onClick={onClick} />
         </div>
       </div>
     </div>

@@ -1,0 +1,26 @@
+@import '../../../styles/variables';
+
+.BtnAdd {
+  button {
+    line-height: 0;
+    color: #fff;
+    background-color: $blue;
+    padding: 6px 10px;
+    border: none;
+    border-radius: 3px;
+    font-size: 0.845rem;
+    &:hover {
+      background-color: $blue_medium;
+    }
+  }
+  :global {
+    .bx {
+      font-size: 18px;
+      line-height: 1;
+      position: relative;
+      top: -1px;
+      margin-left: 10px;
+      vertical-align: middle;
+    }
+  }
+}

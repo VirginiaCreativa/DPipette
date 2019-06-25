@@ -124,7 +124,7 @@
 		background-color: $blue;
 		padding: 6px 10px;
 		border-radius: 3px;
-
+		line-height: 0;
 		&:hover {
 			background-color: $blue_medium;
 		}
@@ -136,6 +136,7 @@
 
 		:global {
 			.bx {
+				
 				font-size: 14px;
 				position: relative;
 				top: -1px;

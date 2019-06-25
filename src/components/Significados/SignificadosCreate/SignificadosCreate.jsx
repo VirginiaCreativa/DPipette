@@ -328,6 +328,7 @@ class SignificadosCreate extends Component {
   handleSubmit = ev => {
     ev.preventDefault();
     const project = {
+      uid: this.props.auth.uid,
       word: this.state.word || 'Desconocido',
       descriptions: this.state.descriptions || null,
       abreviatura: this.state.abreviatura || null,
@@ -677,6 +678,7 @@ export default compose(
       videoSenaBlob: state.Significados.videoSenaBlob,
       videoDescripBlob: state.Significados.videoDescripBlob,
       videoDescrip: state.Significados.videoDescrip,
+      auth: state.firebase.auth,
     }),
     mapDispatchToProps
   )

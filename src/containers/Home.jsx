@@ -58,6 +58,7 @@ class Home extends Component {
   handleNoteCornellNew = ev => {
     ev.preventDefault();
     const project = {
+      uid: this.props.auth.uid,
       date: Date.now(),
       tema: 'Nueva tema',
       materia: 'Nueva materia',

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { withFirestore } from 'react-redux-firebase';
+import { withFirestore, firestoreConnect } from 'react-redux-firebase';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { history } from '../redux/store/Store';
@@ -25,9 +25,10 @@ const content = {
 };
 
 class NotesCornell extends Component {
-  handleNewIDNotaCornell = ev => {
+  handleNewIDNoteCornell = ev => {
     ev.preventDefault();
     const project = {
+      uid: this.props.auth.uid,
       date: Date.now(),
       tema: 'Nueva tema',
       materia: 'Nueva materia',
@@ -64,8 +65,7 @@ class NotesCornell extends Component {
           title="Notas Cornell"
           iconName="icon-book-outline"
           colored="#1fd1a1"
-          linked="/notacornell/:id"
-          clicked={this.handleNewIDNotaCornell}
+          onClick={this.handleNewIDNoteCornell}
         />
         <div className={classes.BoxContent}>
           <div className={classes.Filter}>
@@ -81,6 +81,8 @@ class NotesCornell extends Component {
 }
 
 export default compose(
-  withFirestore,
-  connect()
+  connect(state => ({
+    auth: state.firebase.auth,
+  })),
+  firestoreConnect()
 )(NotesCornell);

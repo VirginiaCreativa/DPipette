@@ -18,6 +18,7 @@ const NoteCornellPortada = ({
   firestore,
   portada,
   tema,
+  auth,
 }) => {
   const [isOnImage, setOnImage] = useState(true);
   const [isUploadValue, setUploadValue] = useState(0);
@@ -46,11 +47,13 @@ const NoteCornellPortada = ({
     const materia = CleanUpSpecialChars(materiaFB);
     const tema = CleanUpSpecialChars(temaFB);
     const temaNotSpace = tema.replace(/ +/g, '_');
+    const materiaNotSpace = materia.replace(/ +/g, '_');
+
     const metadata = {
       contentType: 'image/jpg',
     };
     const storageRef = storage().ref(
-      `notescornell/${materia}/${temaNotSpace}/portada/${imgFile.name}`
+      `notescornell/${auth.uid}/${materiaNotSpace}/${temaNotSpace}/portada/${imgFile.name}`
     );
     const uploadTask = storageRef.put(imgFile, metadata);
 
@@ -102,13 +105,14 @@ const NoteCornellPortada = ({
   const handleRemoveFile = () => {
     const materiaFB = notescornell[ID].materia.toLowerCase();
     const temaFB = notescornell[ID].tema.toLowerCase();
-    const fileName = notescornell[ID].filenameVideoResumen;
+    const fileName = notescornell[ID].filenamePortadaImagen;
     const materia = CleanUpSpecialChars(materiaFB);
     const tema = CleanUpSpecialChars(temaFB);
     const temaNotSpace = tema.replace(/ +/g, '_');
+    const materiaNotSpace = materia.replace(/ +/g, '_');
 
     const storageRef = storage().ref(
-      `notescornell/${materia}/${temaNotSpace}/portada/${fileName}`
+      `notescornell/${auth.uid}/${materiaNotSpace}/${temaNotSpace}/portada/${fileName}`
     );
     storageRef
       .delete()
@@ -167,5 +171,6 @@ export default compose(
   withRouter,
   connect(state => ({
     notescornell: state.firestore.data.notescornell,
+    auth: state.firebase.auth,
   }))
 )(NoteCornellPortada);
