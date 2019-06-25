@@ -65,7 +65,6 @@ const DocumentosMain = ({
   );
 };
 export default compose(
-  firestoreConnect(['documentos']),
   connect(state => ({
     documentos: state.firestore.ordered.documentos,
     search: state.Documentos.search,
@@ -73,5 +72,16 @@ export default compose(
     getFilterDateNowDoc: state.Documentos.date,
     getFilterDateYesterdayDoc: state.Documentos.yesterday,
     getFilterFavoriteDoc: state.Documentos.favorito,
-  }))
+    auth: state.firebase.auth,
+  })),
+  firestoreConnect(props => {
+    const user = props.auth;
+    if (!user.uid) return [];
+    return [
+      {
+        collection: 'documentos',
+        where: [['uid', '==', user.uid]],
+      },
+    ];
+  })
 )(DocumentosMain);

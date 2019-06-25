@@ -28,14 +28,20 @@ const DocumentosHome = ({ documentos }) => (
 );
 
 export default compose(
-  firestoreConnect([
-    {
-      collection: 'documentos',
-      orderBy: ['date', 'desc'],
-      limit: 4,
-    },
-  ]),
   connect(state => ({
     documentos: state.firestore.ordered.documentos,
-  }))
+    auth: state.firebase.auth,
+  })),
+  firestoreConnect(props => {
+    const user = props.auth;
+    if (!user.uid) return [];
+    return [
+      {
+        collection: 'documentos',
+        where: [['uid', '==', user.uid]],
+        orderBy: ['date', 'desc'],
+        limit: 4,
+      },
+    ];
+  })
 )(DocumentosHome);

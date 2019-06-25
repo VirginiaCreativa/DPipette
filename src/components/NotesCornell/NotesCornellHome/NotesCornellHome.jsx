@@ -30,12 +30,18 @@ const NotesCornellHome = ({ notescornell }) => (
 export default compose(
   connect(state => ({
     notescornell: state.firestore.ordered.notescornell,
+    auth: state.firebase.auth,
   })),
-  firestoreConnect([
-    {
-      collection: 'notescornell',
-      orderBy: ['date', 'desc'],
-      limit: 4,
-    },
-  ])
+  firestoreConnect(props => {
+    const user = props.auth;
+    if (!user.uid) return [];
+    return [
+      {
+        collection: 'notescornell',
+        where: [['uid', '==', user.uid]],
+        orderBy: ['date', 'desc'],
+        limit: 4,
+      },
+    ];
+  })
 )(NotesCornellHome);

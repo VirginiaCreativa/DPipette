@@ -73,6 +73,16 @@ export default compose(
     getFilterDateNowNC: state.NotesCornell.date,
     getFilterDateYesterdayNC: state.NotesCornell.yesterday,
     getFilterFavoriteNC: state.NotesCornell.favorite,
+    auth: state.firebase.auth,
   })),
-  firestoreConnect(['notescornell'])
+  firestoreConnect(props => {
+    const user = props.auth;
+    if (!user.uid) return [];
+    return [
+      {
+        collection: 'notescornell',
+        where: [['uid', '==', user.uid]],
+      },
+    ];
+  })
 )(NotesCornellMain);

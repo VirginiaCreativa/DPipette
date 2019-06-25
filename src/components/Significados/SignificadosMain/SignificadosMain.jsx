@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { firestoreConnect, isLoaded, isEmpty } from 'react-redux-firebase';
 import Spinner from './Spinner/Spinner';
+import Empty from '../../UI/Empty/Empty';
 import VideoPlayer from '../../UI/VideoPlayerSignificados/VideoPlayer';
 import classes from './SignificadosMain.module.scss';
 
@@ -19,7 +20,7 @@ class SignificadosMain extends Component {
         {!isLoaded(significados) ? (
           <Spinner />
         ) : isEmpty(significados) ? (
-          <Spinner />
+          <Empty />
         ) : (
           <div className={classes.GridMultiple}>
             {significados &&
@@ -61,11 +62,17 @@ export default compose(
   connect(state => ({
     significados: state.firestore.ordered.significados,
     search: state.searchSign.search,
+    auth: state.firebase.auth,
   })),
-  firestoreConnect(() => [
-    {
-      collection: 'significados',
-      orderBy: ['date', 'desc'],
-    },
-  ])
+  firestoreConnect(props => {
+    const user = props.auth;
+    if (!user.uid) return [];
+    return [
+      {
+        collection: 'significados',
+        where: [['uid', '==', user.uid]],
+        orderBy: ['date', 'desc'],
+      },
+    ];
+  })
 )(SignificadosMain);

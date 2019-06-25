@@ -25,14 +25,20 @@ const SiginficadosHome = ({ significados }) => (
 );
 
 export default compose(
-  firestoreConnect([
-    {
-      collection: 'significados',
-      orderBy: ['date', 'desc'],
-      limit: 3,
-    },
-  ]),
   connect(state => ({
     significados: state.firestore.ordered.significados,
-  }))
+    auth: state.firebase.auth,
+  })),
+  firestoreConnect(props => {
+    const user = props.auth;
+    if (!user.uid) return [];
+    return [
+      {
+        collection: 'significados',
+        where: [['uid', '==', user.uid]],
+        orderBy: ['date', 'desc'],
+        limit: 3,
+      },
+    ];
+  })
 )(SiginficadosHome);
