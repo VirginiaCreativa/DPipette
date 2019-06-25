@@ -13,6 +13,7 @@ class Documentos extends Component {
   handleNewIDDocumento = ev => {
     ev.preventDefault();
     const project = {
+      uid: this.props.auth.uid,
       date: Date.now(),
       tema: 'Nueva tema',
       materia: 'Nueva materia',
@@ -28,7 +29,7 @@ class Documentos extends Component {
       pageGrid: true,
     };
     this.props.firestore
-      .add('documentos', {
+      .add(`documentos/${this.props.auth.uid}`, {
         ...project,
       })
       .then(doc => {
@@ -61,6 +62,8 @@ class Documentos extends Component {
 }
 
 export default compose(
-  connect(),
+  connect(state => ({
+    auth: state.firebase.auth,
+  })),
   firestoreConnect()
 )(Documentos);

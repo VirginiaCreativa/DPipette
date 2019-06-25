@@ -7,6 +7,7 @@ import Search from '../../UI/Search/Search';
 import ItemSignificado from './ItemSignificado';
 
 import Spinner from './Spinner/Spinner';
+import Empty from '../../UI/Empty/Empty';
 import classes from './BuscadorSignficado.module.scss';
 
 const BuscadorSignficado = ({ significados, search }) => (
@@ -19,7 +20,7 @@ const BuscadorSignficado = ({ significados, search }) => (
       {!isLoaded(significados) ? (
         <Spinner />
       ) : isEmpty(significados) ? (
-        <Spinner />
+        <Empty />
       ) : (
         significados
           .filter(item =>
@@ -40,14 +41,20 @@ const BuscadorSignficado = ({ significados, search }) => (
 );
 
 export default compose(
-  firestoreConnect([
-    {
-      collection: 'significados',
-      orderBy: ['date', 'desc'],
-    },
-  ]),
   connect(state => ({
     significados: state.firestore.ordered.significados,
-    search: state.searchSign.search,
-  }))
+    search: state.Significados.search,
+    auth: state.firebase.auth,
+  })),
+  firestoreConnect(props => {
+    const user = props.auth;
+    if (!user.uid) return [];
+    return [
+      {
+        collection: 'significados',
+        where: [['uid', '==', user.uid]],
+        orderBy: ['date', 'desc'],
+      },
+    ];
+  })
 )(BuscadorSignficado);

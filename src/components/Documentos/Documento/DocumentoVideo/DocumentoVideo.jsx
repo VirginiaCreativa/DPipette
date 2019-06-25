@@ -26,6 +26,7 @@ const DocumentoVideo = ({
   ID,
   showEditable,
   firebase: { storage },
+  auth,
 }) => {
   const [isProgressUploadValue, setProgressUploadValue] = useState(0);
   const [isActiveEditable, setActiveEditable] = useState(false);
@@ -54,7 +55,7 @@ const DocumentoVideo = ({
     };
 
     const storageRef = storage().ref(
-      `documentos/${materia}/${temaNotSpace}/video/${videoFile.name}`
+      `documentos/${auth.uid}/${materia}/${temaNotSpace}/video/${videoFile.name}`
     );
 
     const uploadTask = storageRef.put(videoFile, metadata);
@@ -113,7 +114,7 @@ const DocumentoVideo = ({
 
     console.log('delete');
     const storageRef = storage().ref(
-      `documentos/${materia}/${temaNotSpace}/video/${fileName}`
+      `documentos/${auth.uid}/${materia}/${temaNotSpace}/video/${fileName}`
     );
     storageRef
       .delete()
@@ -196,5 +197,6 @@ export default compose(
   connect(state => ({
     documentos: state.firestore.data.documentos,
     showEditable: state.Documentos.Editable,
+    auth: state.firebase.auth,
   }))
 )(DocumentoVideo);

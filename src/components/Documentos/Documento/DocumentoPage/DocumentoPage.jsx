@@ -90,6 +90,7 @@ class DocumentoPage extends Component {
       ID,
       firestore,
       firebase: { storage },
+      auth,
     } = this.props;
     const materiaFB = documentos[ID].materia.toLowerCase();
     const temaFB = documentos[ID].tema.toLowerCase();
@@ -101,7 +102,7 @@ class DocumentoPage extends Component {
       contentType: 'image/jpg',
     };
     const storageRef = storage().ref(
-      `documentos/${materia}/${temaNotSpace}/pages/${files.name}`
+      `documentos/${auth.uid}/${materia}/${temaNotSpace}/pages/${files.name}`
     );
 
     const uploadTask = storageRef.put(files, metadata);
@@ -182,6 +183,7 @@ class DocumentoPage extends Component {
       ID,
       firestore,
       firebase: { storage },
+      auth,
     } = this.props;
 
     const filenamePageDoc = documentos[ID].filenamePageDoc;
@@ -192,7 +194,7 @@ class DocumentoPage extends Component {
 
     filenamePageDoc.forEach(element => {
       const storageRefImagePage = storage().ref(
-        `documentos/${materiaFB}/${temaNotSpace}/pages/${element}`
+        `documentos/${auth.uid}/${materiaFB}/${temaNotSpace}/pages/${element}`
       );
       storageRefImagePage
         .delete()
@@ -296,6 +298,7 @@ export default compose(
       documentos: state.firestore.data.documentos,
       PagesImgs: state.Documentos.PagesImgs,
       showEditable: state.Documentos.Editable,
+      auth: state.firebase.auth,
     }),
     mapDispatchToProps
   )
