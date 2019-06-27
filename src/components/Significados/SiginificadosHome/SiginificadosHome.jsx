@@ -16,7 +16,7 @@ const SiginficadosHome = ({ significados }) => (
       significados.map(item => (
         <SiginificadosItem
           key={item.id}
-          linked={`significado/${item.id}/${item.word}`}
+          linked={`significado/${item.id}`}
           {...item}
         />
       ))

@@ -1,13 +1,7 @@
 import React, { Component } from 'react';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
-import {
-  withFirestore,
-  firestoreConnect,
-  isLoaded,
-  isEmpty,
-} from 'react-redux-firebase';
-import * as functions from '@firebase/functions';
+import { firestoreConnect, isLoaded, isEmpty } from 'react-redux-firebase';
 import { history } from '../../../redux/store/Store';
 import Spinner from './Spinner/Spinner';
 import classes from './SignificadoDetail.module.scss';
@@ -78,14 +72,23 @@ class SignificadoDetail extends Component {
 }
 
 export default compose(
-  withFirestore,
   connect((state, ownProps) => {
     const id = ownProps.match.params.id;
     const significados = state.firestore.data.significados;
     const significado = significados ? significados[id] : null;
     return {
       significado,
+      auth: state.firebase.auth,
     };
   }),
-  firestoreConnect(['significados'])
+  firestoreConnect(props => {
+    const user = props.auth;
+    if (!user.uid) return [];
+    return [
+      {
+        collection: 'significados',
+        where: [['uid', '==', user.uid]],
+      },
+    ];
+  })
 )(SignificadoDetail);

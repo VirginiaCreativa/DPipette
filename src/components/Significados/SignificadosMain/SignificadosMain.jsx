@@ -29,9 +29,7 @@ class SignificadosMain extends Component {
                   item.word.toLowerCase().includes(search.toLowerCase())
                 )
                 .map(item => (
-                  <Link
-                    key={item.id}
-                    to={`/significado/${item.id}/${item.word}`}>
+                  <Link key={item.id} to={`/significado/${item.id}`}>
                     <div className={classes.BoxLists}>
                       <Heading {...item} />
                       <div className={classes.boxVideo}>

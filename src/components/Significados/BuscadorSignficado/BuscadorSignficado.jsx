@@ -43,7 +43,7 @@ const BuscadorSignficado = ({ significados, search }) => (
 export default compose(
   connect(state => ({
     significados: state.firestore.ordered.significados,
-    search: state.Significados.search,
+    search: state.searchSign.search,
     auth: state.firebase.auth,
   })),
   firestoreConnect(props => {
