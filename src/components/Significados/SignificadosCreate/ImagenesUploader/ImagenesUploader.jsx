@@ -38,7 +38,7 @@ class ImagenesUploader extends Component {
     const fileList = [];
     for (let i = 0; i < files.length; i += 1) {
       const imgfiles = e.target.files[i];
-      const changeNameFile = imgfiles.slice(0, imgfiles.size, 'image/jpg');
+      const changeNameFile = imgfiles.slice(0, imgfiles.size, 'image/*');
       const imgFilesName = new File(
         [changeNameFile],
         `${this.props.word}_${i}`,
@@ -128,7 +128,7 @@ class ImagenesUploader extends Component {
           onChange={this.handleOnFileChange}
           ref={this.props.childRef}
           multiple
-          accept="image/jpg"
+          accept="image/*"
         />
         <div className={classes.boxItems}>
           <i className="bx bxs-cloud-upload" />
