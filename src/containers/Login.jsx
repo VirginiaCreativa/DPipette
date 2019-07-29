@@ -14,6 +14,18 @@ class Login extends Component {
     error: false,
   };
 
+  componentWillMount() {
+    firebase.auth().onAuthStateChanged(user => {
+      if (user) {
+        console.log('User is signed in EXISTE', user.uid);
+        history.push('/');
+      } else {
+        console.log('No user is signed');
+        history.push('/login');
+      }
+    });
+  }
+
   componentDidUpdate() {
     if (this.state.error) {
       setTimeout(() => {
