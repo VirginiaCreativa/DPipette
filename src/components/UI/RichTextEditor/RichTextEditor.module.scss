@@ -2,7 +2,24 @@
 
 .RichTextEditor {
   position: relative;
-
+  .GridBox {
+    display: flex;
+    .Col {
+      button {
+        &:hover {
+          background-color: #f3f3f3;
+        }
+      }
+      :global {
+        .bx {
+          display: flex;
+          align-content: center;
+          align-items: center;
+          justify-content: center;
+        }
+      }
+    }
+  }
   :global {
     .public-DraftEditorPlaceholder-root {
       padding: 22px 21px;
@@ -122,6 +139,14 @@
       &:hover {
         color: $blue_medium;
       }
+    }
+    .bx-save, .bxs-eraser {
+      font-size: 22px;
+      padding: 0;
+      color: #5c6b72;
+      width: 36px;
+      height: 34px;
+      text-align: center;
     }
   }
 

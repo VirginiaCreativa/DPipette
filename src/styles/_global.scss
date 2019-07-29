@@ -87,3 +87,11 @@ blockquote {
 	padding-left: 12px;
 	border-left: 6px solid $write_gray_3;
 }
+
+button {
+	background: transparent;
+	border: none;
+	padding: 0;
+	margin: 0;
+	line-height: 0;
+}

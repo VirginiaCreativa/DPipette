@@ -87,36 +87,47 @@ class RichTextEditor extends Component {
     const { editorState, onChange } = this.props;
     return (
       <div className={classes.RichTextEditor}>
-        <Toolbar>
-          {externalProps => (
-            <React.Fragment>
-              <HeadlinesButton {...externalProps} />
-              <BoldButton {...externalProps} />
-              <ItalicButton {...externalProps} />
-              <UnderlineButton {...externalProps} />
-              <CodeButton {...externalProps} />
-              <Separator {...externalProps} />
-              <UnorderedListButton {...externalProps} />
-              <OrderedListButton {...externalProps} />
-              <BlockquoteButton {...externalProps} />
-              <CodeBlockButton {...externalProps} />
-              <Separator {...externalProps} />
-              <ImageAdd
-                editorState={editorState}
-                onChange={onChange}
-                modifier={imagePlugin.addImage}
-              />
-              <EmojiSuggestions />
-              <EmojiSelect />
-              <Separator {...externalProps} />
-              <UndoButton />
-              <RedoButton />
-              <Separator {...externalProps} />
-              <AlignmentTool />
-            </React.Fragment>
-          )}
-        </Toolbar>
-        <button type="button">Guardar</button>
+        <div className={classes.GridBox}>
+          <div className={classes.Col}>
+            <Toolbar>
+              {externalProps => (
+                <React.Fragment>
+                  <HeadlinesButton {...externalProps} />
+                  <BoldButton {...externalProps} />
+                  <ItalicButton {...externalProps} />
+                  <UnderlineButton {...externalProps} />
+                  <CodeButton {...externalProps} />
+                  <Separator {...externalProps} />
+                  <UnorderedListButton {...externalProps} />
+                  <OrderedListButton {...externalProps} />
+                  <BlockquoteButton {...externalProps} />
+                  <CodeBlockButton {...externalProps} />
+                  <Separator {...externalProps} />
+                  <ImageAdd
+                    editorState={editorState}
+                    onChange={onChange}
+                    modifier={imagePlugin.addImage}
+                  />
+                  <EmojiSuggestions />
+                  <EmojiSelect />
+                  <Separator {...externalProps} />
+                  <UndoButton />
+                  <RedoButton />
+                  <Separator {...externalProps} />
+                  <AlignmentTool />
+                </React.Fragment>
+              )}
+            </Toolbar>
+          </div>
+          <div className={classes.Col}>
+            <button type="button">
+              <i className="bx bx-save"></i>
+            </button>
+            <button type="button">
+              <i className="bx bxs-eraser"></i>
+            </button>
+          </div>
+        </div>
         <Editor
           placeholder="Escribir aquí..."
           editorState={editorState}
