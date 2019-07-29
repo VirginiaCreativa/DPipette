@@ -111,10 +111,12 @@ class RichTextEditor extends Component {
               <Separator {...externalProps} />
               <UndoButton />
               <RedoButton />
+              <Separator {...externalProps} />
               <AlignmentTool />
             </React.Fragment>
           )}
         </Toolbar>
+        <button type="button">Guardar</button>
         <Editor
           placeholder="Escribir aquí..."
           editorState={editorState}

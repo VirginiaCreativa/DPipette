@@ -21,16 +21,16 @@ class NoteCornellApuntes extends Component {
     if (this.state.setContent === null) {
       this.setState({ editorState: EditorState.createEmpty() });
     } else {
-      this.setContentData();
+      // this.setContentData();
       this.setState({ editorState: this.onContentData() });
     }
   }
 
-  componentDidUpdate(prevProps, prevState) {
-    if (this.state.editorState !== prevState.editorState) {
-      this.setContentData();
-    }
-  }
+  // componentDidUpdate(prevProps, prevState) {
+  //   if (this.state.editorState !== prevState.editorState) {
+  //     this.setContentData();
+  //   }
+  // }
 
   onContentData = () => {
     const id = this.props.docID;
@@ -40,27 +40,38 @@ class NoteCornellApuntes extends Component {
     return editorState;
   };
 
-  setContentData = () => {
-    const id = this.props.docID;
-    const db = this.props.firestore;
-    const getContent = this.props.notescornell[id].getContent;
-    db.update(`notescornell/${id}`, {
-      setContent: getContent,
-    });
-  };
+  // setContentData = () => {
+  //   const id = this.props.docID;
+  //   const db = this.props.firestore;
+  //   const getContent = this.props.notescornell[id].getContent;
+  //   db.update(`notescornell/${id}`, {
+  //     setContent: getContent,
+  //   });
+  // };
 
   onEditorStateChange = editorState => {
     const contentState = editorState.getCurrentContent();
-    this.onContentSave(contentState);
+    console.log('content state', convertToRaw(contentState));
     this.setState({ editorState });
   };
 
-  onContentSave = contentSave => {
+  // onContentSave = contentSave => {
+  //   const id = this.props.docID;
+  //   const db = this.props.firestore;
+  //   const content = JSON.stringify(convertToRaw(contentSave));
+  //   // db.update(`notescornell/${id}`, {
+  //   //   getContent: content,
+  //   // });
+  // };
+
+  handleSavedContent = contentSave => {
     const id = this.props.docID;
     const db = this.props.firestore;
-    const content = JSON.stringify(convertToRaw(contentSave));
+    const rawDraftContentState = JSON.stringify(
+      convertToRaw(this.state.editorState.getCurrentContent())
+    );
     db.update(`notescornell/${id}`, {
-      getContent: content,
+      getContent: rawDraftContentState,
     });
   };
 
@@ -76,6 +87,9 @@ class NoteCornellApuntes extends Component {
             />
           </React.Suspense>
         </div>
+        <button type="button" onClick={this.handleSavedContent}>
+          Guardar
+        </button>
       </div>
     );
   }
