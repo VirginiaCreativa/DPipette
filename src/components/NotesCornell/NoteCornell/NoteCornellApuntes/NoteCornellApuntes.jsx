@@ -13,8 +13,14 @@ const Editor = React.lazy(() =>
 );
 
 class NoteCornellApuntes extends Component {
+  constructor(props) {
+    super(props);
+    this.refPage = React.createRef();
+  }
+
   state = {
     editorState: EditorState.createEmpty(),
+    turnEdit: false,
   };
 
   componentDidMount() {
@@ -34,6 +40,14 @@ class NoteCornellApuntes extends Component {
   };
 
   onEditorStateChange = editorState => {
+    const currentContent = this.state.editorState.getCurrentContent();
+    const currentContentLength = currentContent.getPlainText('').length;
+    if (currentContentLength >= 1) {
+      this.setState({ turnEdit: true });
+    } else {
+      this.setState({ turnEdit: false });
+    }
+    console.log(currentContentLength);
     this.setState({ editorState });
   };
 
@@ -46,14 +60,16 @@ class NoteCornellApuntes extends Component {
     db.update(`notescornell/${id}`, {
       getContent: rawDraftContentState,
     });
+    this.setState({ turnEdit: false });
   };
 
   handleCleadContent = () => {
-    this.setState({ editorState: EditorState.createEmpty() });
+    this.setState({ editorState: EditorState.createEmpty(), turnEdit: true });
   };
 
   render() {
     const { editorState } = this.state;
+    const styleActiveTurnSave = this.state.turnEdit && classes.TurnSaved;
     return (
       <div className={classes.NoteCornellApuntes}>
         <div className={classes.BoxApuntes}>
@@ -63,6 +79,7 @@ class NoteCornellApuntes extends Component {
               onChange={this.onEditorStateChange}
               onSaved={this.handleSavedContent}
               onClead={this.handleCleadContent}
+              onTurnSaved={styleActiveTurnSave}
             />
           </React.Suspense>
         </div>
