@@ -21,16 +21,9 @@ class NoteCornellApuntes extends Component {
     if (this.state.setContent === null) {
       this.setState({ editorState: EditorState.createEmpty() });
     } else {
-      // this.setContentData();
       this.setState({ editorState: this.onContentData() });
     }
   }
-
-  // componentDidUpdate(prevProps, prevState) {
-  //   if (this.state.editorState !== prevState.editorState) {
-  //     this.setContentData();
-  //   }
-  // }
 
   onContentData = () => {
     const id = this.props.docID;
@@ -40,31 +33,11 @@ class NoteCornellApuntes extends Component {
     return editorState;
   };
 
-  // setContentData = () => {
-  //   const id = this.props.docID;
-  //   const db = this.props.firestore;
-  //   const getContent = this.props.notescornell[id].getContent;
-  //   db.update(`notescornell/${id}`, {
-  //     setContent: getContent,
-  //   });
-  // };
-
   onEditorStateChange = editorState => {
-    const contentState = editorState.getCurrentContent();
-    console.log('content state', convertToRaw(contentState));
     this.setState({ editorState });
   };
 
-  // onContentSave = contentSave => {
-  //   const id = this.props.docID;
-  //   const db = this.props.firestore;
-  //   const content = JSON.stringify(convertToRaw(contentSave));
-  //   // db.update(`notescornell/${id}`, {
-  //   //   getContent: content,
-  //   // });
-  // };
-
-  handleSavedContent = contentSave => {
+  handleSavedContent = () => {
     const id = this.props.docID;
     const db = this.props.firestore;
     const rawDraftContentState = JSON.stringify(
@@ -73,6 +46,10 @@ class NoteCornellApuntes extends Component {
     db.update(`notescornell/${id}`, {
       getContent: rawDraftContentState,
     });
+  };
+
+  handleCleadContent = () => {
+    this.setState({ editorState: EditorState.createEmpty() });
   };
 
   render() {
@@ -84,12 +61,11 @@ class NoteCornellApuntes extends Component {
             <Editor
               editorState={editorState}
               onChange={this.onEditorStateChange}
+              onSaved={this.handleSavedContent}
+              onClead={this.handleCleadContent}
             />
           </React.Suspense>
         </div>
-        <button type="button" onClick={this.handleSavedContent}>
-          Guardar
-        </button>
       </div>
     );
   }

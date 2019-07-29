@@ -84,7 +84,7 @@ const plugins = [
 
 class RichTextEditor extends Component {
   render() {
-    const { editorState, onChange } = this.props;
+    const { editorState, onChange, onSaved, onClead } = this.props;
     return (
       <div className={classes.RichTextEditor}>
         <div className={classes.GridBox}>
@@ -120,10 +120,10 @@ class RichTextEditor extends Component {
             </Toolbar>
           </div>
           <div className={classes.Col}>
-            <button type="button">
+            <button type="button" onClick={onSaved}>
               <i className="bx bx-save"></i>
             </button>
-            <button type="button">
+            <button type="button" onClick={onClead}>
               <i className="bx bxs-eraser"></i>
             </button>
           </div>
