@@ -3,9 +3,6 @@
 .NoteCornellResumen {
   position: relative;
   margin: 30px 0;
-  padding: 20px;
-  @extend %boxContent;
-  @extend %boxShadowContent;
 
   .BoxVideoClick {
     display: grid;
@@ -179,9 +176,9 @@
 
   .Editor {
     padding: 10px 15px;
+    height: 99%;
     border: 2px solid $write_gray_1;
     border-radius: 4px;
-    height: 99%;
     caret-color: $blue;
 
     :global {
@@ -206,8 +203,8 @@
         border-radius: 4px;
         z-index: 9999 !important;
         @media (min-width: 1440px) {
-          width: 54.4%;
           left: 300px !important;
+          width: 54.4%;
         }
       }
 

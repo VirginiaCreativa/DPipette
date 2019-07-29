@@ -299,55 +299,23 @@ class NoteCornellResumen extends Component {
 
     return (
       <div className={classes.NoteCornellResumen}>
-        <HeadingResumen title="Resumen" />
+        {/* <HeadingResumen title="Resumen" /> */}
         <div className={classes.BoxGroup}>
-          <div className="row">
-            <div className="col-4">
-              <div className={classes.Editor}>
-                <Editor
-                  editorState={editorState}
-                  onChange={this.onEditorStateChange}
-                  plugins={plugins}
-                  placeholder="Escribir aquí..."
-                  ref={element => {
-                    this.editor = element;
-                  }}
-                />
-                <InlineToolbar>
-                  {externalProps => (
-                    <div>
-                      <BoldButton {...externalProps} />
-                      <ItalicButton {...externalProps} />
-                      <UnderlineButton {...externalProps} />
-                      <Separator {...externalProps} />
-                      <UnorderedListButton {...externalProps} />
-                      <OrderedListButton {...externalProps} />
-                      <BlockquoteButton {...externalProps} />
-                    </div>
-                  )}
-                </InlineToolbar>
-              </div>
+          {isShowVideo ? (
+            <div className={classes.BoxVideoClick}>
+              <button type="button" onClick={this.handleVideoRecord}>
+                <i className="bx bx-video" />
+              </button>
+              <p>Grabado para expresar tu resumen</p>
             </div>
-            <div className="col-8">
-              {isShowVideo ? (
-                <div className={classes.BoxVideoClick}>
-                  <button type="button" onClick={this.handleVideoRecord}>
-                    <i className="bx bx-video" />
-                  </button>
-                  <p>Grabado para expresar tu resumen</p>
-                </div>
-              ) : (
-                <div className={classes.VideoResumen}>
-                  <button
-                    type="button"
-                    onClick={() => this.deleteVideoResumen()}>
-                    <i className="bx bxs-x-circle" />
-                  </button>
-                  <VideoPlayer src={videoResumen} title={tema} />
-                </div>
-              )}
+          ) : (
+            <div className={classes.VideoResumen}>
+              <button type="button" onClick={() => this.deleteVideoResumen()}>
+                <i className="bx bxs-x-circle" />
+              </button>
+              <VideoPlayer src={videoResumen} title={tema} />
             </div>
-          </div>
+          )}
         </div>
         <SkyLight
           hideOnOverlayClicked

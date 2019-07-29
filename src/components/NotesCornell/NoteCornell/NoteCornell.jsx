@@ -123,31 +123,26 @@ class NoteCornell extends Component {
                 docID={this.props.match.params.id}
               />
             </div>
-            <div className="col-8">
-              <div className="row">
-                <div className="col-3">
-                  <NoteCornellIdeas
-                    {...notecornell}
-                    docID={this.props.match.params.id}
-                  />
-                </div>
-                <div className="col-9">
-                  <NoteCornellApuntes
-                    {...notecornell}
-                    docID={this.props.match.params.id}
-                  />
-                </div>
-                <div className="col-12">
-                  <NoteCornellResumen
-                    {...notecornell}
-                    docID={this.props.match.params.id}
-                  />
-                </div>
-              </div>
+            <div className="col-2">
+              <NoteCornellIdeas
+                {...notecornell}
+                docID={this.props.match.params.id}
+              />
             </div>
+            <div className="col-6">
+              <NoteCornellApuntes
+                {...notecornell}
+                docID={this.props.match.params.id}
+              />
+            </div>
+
             <div className="col-4">
               <div className={classes.Sidebar}>
                 <NoteCornellVideo
+                  {...notecornell}
+                  docID={this.props.match.params.id}
+                />
+                <NoteCornellResumen
                   {...notecornell}
                   docID={this.props.match.params.id}
                 />

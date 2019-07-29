@@ -3,14 +3,15 @@
 .RichTextEditor {
   position: relative;
   .GridBox {
+    border-bottom: 2px solid $write_gray_1;
     display: flex;
     .Col {
       button {
-        background: transparent;
-        border: none;
-        padding: 0;
-        margin: 0;
         line-height: 0;
+        background: transparent;
+        margin: 0;
+        padding: 0;
+        border: none;
         &:hover {
           background-color: #f3f3f3;
         }
@@ -18,9 +19,9 @@
       :global {
         .bx {
           display: flex;
-          align-content: center;
-          align-items: center;
           justify-content: center;
+          align-items: center;
+          align-content: center;
         }
       }
     }
@@ -42,10 +43,12 @@
     }
 
     .DraftEditor-editorContainer {
-      padding: 16px 20px;
-      border: 2px solid $write_gray_1;
+      padding: 16px 10px;
+      height: 100%;
+      border:none;
       border-radius: 4px;
-      min-height: 346px;
+      min-height: 100%;
+      max-height: 100%;
       caret-color: $blue;
       overflow: auto;
       img {
@@ -122,14 +125,14 @@
 
     .draftJsEmojiPlugin__emojiSelectButton__3sPol,
     .draftJsEmojiPlugin__emojiSelectButtonPressed__2Tezu {
+      line-height: 1;
+      color: #5c6b72;
+      position: relative;
+      top: -3px;
       width: 36px;
       height: 34px;
       border: none;
-      line-height: 1;
-      color: #5c6b72;
       border-radius: 0;
-      position: relative;
-      top: -3px;
     }
 
     .draftJsEmojiPlugin__emojiSelectPopover__1J1s0 {
@@ -147,11 +150,11 @@
     }
     .bx-save, .bxs-eraser {
       font-size: 22px;
-      padding: 0;
+      text-align: center;
       color: #5c6b72;
+      padding: 0;
       width: 36px;
       height: 34px;
-      text-align: center;
     }
   }
 
