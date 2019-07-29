@@ -23,7 +23,6 @@ const Setting = ({
   const [isPhotoProfile, setPhotoProfile] = useState('');
   const [canBtnEditPhoto, setCanBtnEditPhoto] = useState(false);
 
-  console.log(auth);
   firebase.auth().onAuthStateChanged(user => {
     if (user) {
       if (user.providerData[0].providerId === 'google.com') {

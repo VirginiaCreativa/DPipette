@@ -18,14 +18,13 @@ const SettingProfile = ({ firebase, firestore, profile, auth }) => {
   const handleSubmit = ev => {
     ev.preventDefault();
     const { name, mobile, country, city } = ev.target.elements;
-    console.log(name.value, mobile.value, country.value, city.value);
 
     firestore
       .update(`users/${auth.uid}`, {
         namefull: name.value,
-        country: country.value || ' ',
-        mobile: mobile.value || ' ',
-        city: city.value || '',
+        country: country.value,
+        mobile: mobile.value,
+        city: city.value,
       })
       .then(() => {
         setConfirmChangeProfile(true);

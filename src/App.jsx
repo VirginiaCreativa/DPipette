@@ -30,24 +30,6 @@ class App extends Component {
       }
     });
   }
-  // componentDidMount() {
-  //   const user = firebase.auth().currentUser;
-  //   if (user === null) {
-  //     console.log(user);
-  //     history.push('/login');
-  //   }
-
-  //   firebase.auth().onAuthStateChanged(user => {
-  //     console.log(user);
-  //     if (user) {
-  //       console.log('User is signed in', user.uid);
-  //       document.location.reload();
-  //     } else {
-  //       console.log('No user is signed in');
-  //       history.push('/login');
-  //     }
-  //   });
-  // }
 
   render() {
     return (
