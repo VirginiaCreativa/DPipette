@@ -10,6 +10,7 @@
   .ImagenOverw {
     @extend %boxShadowContent;
     @extend %boxContent;
+    cursor: pointer;
     height: 140px;
     overflow: hidden;
     background-size: cover;
