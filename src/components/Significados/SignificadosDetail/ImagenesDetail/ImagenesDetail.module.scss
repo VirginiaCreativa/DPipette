@@ -19,4 +19,14 @@
       max-height: 100%;
     }
   }
+  :global {
+    .skylight-wrapper {
+      display: flex;
+      justify-content: center;
+      text-align: center;
+      img {
+        margin: 0 auto;
+      }
+    } 
+  }
 }

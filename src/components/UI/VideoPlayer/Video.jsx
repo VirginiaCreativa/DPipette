@@ -11,7 +11,7 @@ const Video = ({ title, srcVideo }) => {
 
   useEffect(() => {
     setIsDuration(refVideo.duration);
-    console.log('====>', refVideo.duration, refVideo.currentTime);
+    // console.log('====>', refVideo.duration, refVideo.currentTime);
   });
   const handleVideoOver = () => {
     refVideo.play();
