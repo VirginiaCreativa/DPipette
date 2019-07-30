@@ -43,25 +43,16 @@ class SignificadoDetail extends Component {
           <div className={classes.SignificadoDetail}>
             <HeadingDetail {...significado} onDeleted={this.handleDetele} />
             <div className="row">
-              <div className="col-5">
+              <div className="col-6">
                 <VideosDetail {...significado} />
-              </div>
-              <div className="col-7">
-                <DescriptionDetail {...significado} />
-              </div>
-              <div className={classes.spaceingBottom} />
-              <div className="col-5">
+                <div className={classes.spaceingBottom} />
                 <ImagenesDetail {...significado} />
               </div>
-              <div className="col-7">
+              <div className="col-6">
+                <DescriptionDetail {...significado} />
                 <PalabrasDetail {...significado} />
-              </div>
-              <div className={classes.spaceingBottom} />
-              <div className="col-8">
+                <div className={classes.spaceingBottom} />
                 <MasEjemplosDetail {...significado} />
-              </div>
-              <div className="col-4">
-                <BuscadorSignficado />
               </div>
             </div>
           </div>

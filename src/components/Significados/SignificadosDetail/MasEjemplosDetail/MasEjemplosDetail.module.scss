@@ -1,10 +1,10 @@
 @import '../../../../styles/variables';
 
 .MasEjemplosDetail {
-  @extend %boxContent;
-  @extend %boxShadowContent;
   margin-bottom: 30px;
   padding: 20px;
+  @extend %boxContent;
+  @extend %boxShadowContent;
 
 
   h6 {
@@ -21,24 +21,24 @@
     list-style: circle;
     padding-inline-start: 0;
     list-style-position: inside;
-    column-count: 2;
-    column-gap: 20px;
+    // column-count: 2;
+    // column-gap: 20px;
 
     li {
       position: relative;
-      padding: 20px 0 20px 16px;
+      padding: 15px 0 15px 16px;
       border-bottom: 1px dotted $write_gray_2;
       list-style-type: none;
       &:nth-child(3n) {
-        border-bottom: none;
         padding-bottom: 0;
+        border-bottom: none;
       }
 
       &:before {
         content: '';
         display: block;
         position: absolute;
-        top: 30px;
+        top: 24px;
         left: 0;
         width: 6px;
         height: 6px;
@@ -48,8 +48,8 @@
 
 
       p {
-        margin-bottom: 0;
         color: $black;
+        margin-bottom: 0;
       }
     }
   }

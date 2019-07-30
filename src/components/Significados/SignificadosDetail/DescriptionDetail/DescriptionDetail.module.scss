@@ -58,27 +58,27 @@
   }
 
   .Primary {
-    font-size: 1.125rem;
+    // font-size: 1.125rem;
     margin-bottom: 2px;
     column-gap: 10px;
   }
   
   .Secun {
-    font-size: 1rem;
-    color: $gray_light;
+    font-size: 0.875rem;
+    color: $gray_medium;
+    position: relative;
     padding-left: 10px;
     font-weight: 300 !important;
     font-style: italic;
-    position: relative;
     // border-left: 3px dotted $write_gray_2;
     &:before {
       content: '';
-      height: 16px;
-      width: 2px;
-      border-left: 2px solid $write_gray_2;
       position: absolute;
-      left: 0;
       top: 3px;
+      left: 0;
+      width: 2px;
+      height: 16px;
+      border-left: 2px solid $write_gray_2;
     }
   }
 }

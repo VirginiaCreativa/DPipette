@@ -6,19 +6,25 @@
   grid-gap: 20px;
   justify-content: center;
   align-items: center;
+  width: 100%;
 
   .ImagenOverw {
-    @extend %boxShadowContent;
-    @extend %boxContent;
-    cursor: pointer;
     height: 140px;
+    cursor: pointer;
     overflow: hidden;
     background-size: cover;
-
+    @extend %boxShadowContent;
+    @extend %boxContent;
+    
     img {
-      max-height: 100%;
+      position: relative;
+      top: -10%;
+      left: -12%;
+      max-width: 125%;
+
     }
   }
+
   :global {
     .skylight-wrapper {
       display: flex;
