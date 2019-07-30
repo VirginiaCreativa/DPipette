@@ -11,6 +11,10 @@ const HeadingDetail = ({ word, date, abrev, abreviatura, onDeleted }) => {
     setIsAbrev(false);
   };
 
+  const onPreviosPage = () => {
+    window.history.back();
+  };
+
   return (
     <div className={classes.HeaderDetail}>
       <div className="row">
@@ -47,6 +51,12 @@ const HeadingDetail = ({ word, date, abrev, abreviatura, onDeleted }) => {
               onClick={onDeleted}
               className={classes.btnDelete}>
               <i className="bx bx-trash-alt" />
+            </button>
+            <button
+              type="button"
+              className={classes.btnEditable}
+              onClick={onPreviosPage}>
+              <i className="bx bx-undo"></i>
             </button>
           </div>
         </div>

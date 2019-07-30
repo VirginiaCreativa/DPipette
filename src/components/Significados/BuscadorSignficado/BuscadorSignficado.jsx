@@ -29,11 +29,7 @@ const BuscadorSignficado = ({ significados, search }) => (
           .sort((a, b) => (a.date > b.date ? -1 : a.date < b.date ? 1 : 0))
           .slice(0, 4)
           .map(item => (
-            <ItemSignificado
-              key={item.id}
-              linked={`${item.id}/${item.word}`}
-              {...item}
-            />
+            <ItemSignificado key={item.id} linked={`${item.id}`} {...item} />
           ))
       )}
     </div>
