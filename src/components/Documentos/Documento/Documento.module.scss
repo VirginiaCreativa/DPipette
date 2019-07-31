@@ -5,6 +5,27 @@
 		display: grid;
 		grid-template-columns: 85% 1fr;
 	}
+	.BoxVideo {
+		margin-bottom: 30px;
+		position: fixed;
+		width:100%;
+		max-width: 450px;
+		@media (min-width: 1920px) {
+			max-width: 520px
+		}
+		@media (max-width: 1600px) {
+			max-width: 420px
+		}
+		@media (max-width: 1440px) {
+			max-width: 380px
+		}
+		@media (max-width: 1366px) {
+			max-width: 360px
+		}
+		@media (max-width: 1280px) {
+			max-width: 340px
+		}
+	}
 	.WrapperLeft {
 		display: grid;
 		grid-template-columns: 30% 70%;
@@ -13,28 +34,14 @@
 			display: grid;
 			grid-template-columns: auto 42px;
 		}
-		.BoxPageRight {
-			display: grid;
-			grid-template-columns: 42px auto;
-		}
-		.BoxVideo {
-			margin-bottom: 30px;
-		}
 	}
 	.WrapperRight {
 		display: grid;
 		grid-template-columns: 70% 30%;
 		grid-gap: 20px;
-		.BoxPageLeft {
-			display: grid;
-			grid-template-columns: auto 42px;
-		}
 		.BoxPageRight {
 			display: grid;
 			grid-template-columns: 42px auto;
-		}
-		.BoxVideo {
-			margin-bottom: 30px;
 		}
 	}
 }

@@ -107,13 +107,13 @@ class Documento extends Component {
     const { documento, pageGrid, hasVideo, hasPage } = this.props;
     const { isCurrentTime, isControlPlay } = this.state;
     return (
-      <div className={classes.Documento}>
+      <>
         {!isLoaded(documento) ? (
           <Spinner />
         ) : isEmpty(documento) ? (
           <Spinner />
         ) : (
-          <>
+          <div className={classes.Documento}>
             <div className={classes.BoxHeader}>
               <Header {...documento} ID={this.props.match.params.id} />
               <Config ID={this.props.match.params.id} {...documento} />
@@ -142,11 +142,11 @@ class Documento extends Component {
                     />
                     <GetMarker ID={this.props.match.params.id} />
                   </div>
-                  {hasPage && (
+                  {/* {hasPage && (
                     <div className={classes.BoxSearch}>
                       <BuscadorSignficado />
                     </div>
-                  )}
+                  )} */}
                 </div>
                 <div className={classes.BoxPageLeft}>
                   <Page
@@ -200,17 +200,17 @@ class Documento extends Component {
                     />
                     <GetMarker ID={this.props.match.params.id} />
                   </div>
-                  {hasPage && (
+                  {/* {hasPage && (
                     <div className={classes.BoxSearch}>
                       <BuscadorSignficado />
                     </div>
-                  )}
+                  )} */}
                 </div>
               </div>
             )}
-          </>
+          </div>
         )}
-      </div>
+      </>
     );
   }
 }

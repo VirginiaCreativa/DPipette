@@ -4,19 +4,23 @@
 	margin-top: 10px;
 	.boxAddTimeVideo {
 		display: grid;
-		grid-template-columns: 26px auto 12% 12%;
+		grid-template-columns: 26px auto 18% 20%;
 		button {
 			font-size: 0.8rem;
 			line-height: 0 !important;
 			color: #fff;
-			padding: 0 !important;
+			padding: 0 14px !important;
 			height: 24px;
 			border-radius: 14px;
 			font-weight: 600;
+			text-align: center;
+			&:last-child {
+				margin-left: 6px;
+			}
 		}
 		:global {
 			.bxs-bookmark {
-				font-size: 22px;
+				font-size: 20px;
 				color: $blue;
 			}
 		}

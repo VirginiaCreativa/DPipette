@@ -66,6 +66,7 @@
 			opacity: 0.9;
 			height: 30px;
 			border: none;
+			width: 35px;
 			border-radius: 2px;
 			&.btnMark {
 				float: left;
@@ -73,9 +74,10 @@
 		}
 		:global {
 			.bx {
-				font-size: 20px;
+				font-size: 16px;
 				position: relative;
-				top: 4px;
+				top: 1px;
+				text-align: center;
 			}
 		}
 	}

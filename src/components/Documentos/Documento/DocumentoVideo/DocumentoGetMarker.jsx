@@ -61,7 +61,7 @@ class DocumentoGetMarker extends Component {
               <button
                 type="button"
                 className="btn"
-                style={{ backgroundColor: 'transparent', color: '#f33d48' }}
+                style={{ backgroundColor: '#dfe4ea', color: '#48505a' }}
                 onClick={this.handleCancelMarker}>
                 Cancelar
               </button>
