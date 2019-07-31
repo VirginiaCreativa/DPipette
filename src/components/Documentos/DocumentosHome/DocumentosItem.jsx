@@ -29,7 +29,7 @@ const DocumentosItem = ({
         {isCover === 'option2' || portada === '' ? (
           <span className={classes.CoverEmpty} />
         ) : (
-          <CoverClient src={portada} top="-25" />
+          <CoverClient src={portada} top="0" />
         )}
         <div className={classes.BoxContent}>
           <div className={classes.DateItem}>

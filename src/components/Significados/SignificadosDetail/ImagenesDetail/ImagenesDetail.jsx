@@ -14,12 +14,12 @@ const ImagenesDetail = ({ imagenes, word }) => {
   };
 
   const classPopup = {
-    top: '30%',
-    width: '40%',
+    top: '35%',
+    width: '30%',
     minHeight: 'auto',
-    left: '50%',
-    right: '50%',
-    // marginTop: '-100px',2
+    left: '60%',
+    // right: '50%',
+    // marginTop: '-100px',
     // marginLeft: '-30px',
   };
   const classClosedNone = { display: 'none' };

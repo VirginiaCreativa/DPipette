@@ -106,7 +106,7 @@ class SenaVideo extends Component {
       contentType: videoType,
     };
     const storageRef = storage().ref(
-      `significados/${this.props.word}/videoSena/sena_${this.props.word}`
+      `significados/${this.props.word}/videos/sena/sena_${this.props.word}`
     );
 
     const uploadTask = storageRef.put(blob, metadata);

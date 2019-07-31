@@ -19,10 +19,10 @@
 
     video {
       position: absolute;
-      top: -45%;
+      // top: -45%;
 
       @media screen and (min-width: 1366px) {
-        top: -25%;
+        top: 0;
       }
     }
   }

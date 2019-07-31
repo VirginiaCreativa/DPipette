@@ -118,105 +118,96 @@ class Documento extends Component {
               <Header {...documento} ID={this.props.match.params.id} />
               <Config ID={this.props.match.params.id} {...documento} />
             </div>
-            <div className={classes.Wrapper}>
-              {documento.pageGrid ? (
-                <div className="container-fluid">
-                  <div className="row">
-                    <div className="col-4">
-                      <div className={classes.BoxVideo}>
-                        <Video
-                          {...documento}
-                          ID={this.props.match.params.id}
-                          isCurrentTime={isCurrentTime}
-                          onPlay={this.onPlay}
-                          onPause={this.onPause}
-                          onMarker={this.onMarker}
-                          onControlPlay={isControlPlay}
-                          onRefProgress={refP => (this.refProgress = refP)}
-                          onTimeline={this.handleTimelineMarke}
-                          onRefVideo={ref => (this.refVideo = ref)}
-                          onTimeUpdate={this.handleTimeUpdate}
-                          onDurationChange={event => {
-                            this.setState({
-                              isDuration: event.target.duration,
-                            });
-                          }}
-                        />
-                        <GetMarker ID={this.props.match.params.id} />
-                      </div>
-                      {hasPage && (
-                        <div className={classes.BoxSearch}>
-                          <BuscadorSignficado />
-                        </div>
-                      )}
-                    </div>
-                    <div className="col-8">
-                      <div className={classes.BoxPageLeft}>
-                        <Page
-                          onRef={c => (this.refPage = c)}
-                          ID={this.props.match.params.id}
-                          {...documento}
-                        />
-                        <Marker
-                          {...documento}
-                          ID={this.props.match.params.id}
-                          onRefUl={ref => (this.refMarkeUl = ref)}
-                          onTimelSame={this.handleTimelineSame}
-                        />
-                      </div>
-                    </div>
+            {documento.pageGrid ? (
+              <div className={classes.WrapperLeft}>
+                <div className={classes.GridLeft}>
+                  <div className={classes.BoxVideo}>
+                    <Video
+                      {...documento}
+                      ID={this.props.match.params.id}
+                      isCurrentTime={isCurrentTime}
+                      onPlay={this.onPlay}
+                      onPause={this.onPause}
+                      onMarker={this.onMarker}
+                      onControlPlay={isControlPlay}
+                      onRefProgress={refP => (this.refProgress = refP)}
+                      onTimeline={this.handleTimelineMarke}
+                      onRefVideo={ref => (this.refVideo = ref)}
+                      onTimeUpdate={this.handleTimeUpdate}
+                      onDurationChange={event => {
+                        this.setState({
+                          isDuration: event.target.duration,
+                        });
+                      }}
+                    />
+                    <GetMarker ID={this.props.match.params.id} />
                   </div>
+                  {hasPage && (
+                    <div className={classes.BoxSearch}>
+                      <BuscadorSignficado />
+                    </div>
+                  )}
                 </div>
-              ) : (
-                <>
-                  <div className="row">
-                    <div className="col-8">
-                      <div className={classes.BoxPageRight}>
-                        <Marker
-                          {...documento}
-                          ID={this.props.match.params.id}
-                          onRefUl={ref => (this.refMarkeUl = ref)}
-                          onTimelSame={this.handleTimelineSame}
-                        />
-                        <Page
-                          onRef={c => (this.refPage = c)}
-                          ID={this.props.match.params.id}
-                          {...documento}
-                        />
-                      </div>
-                    </div>
-                    <div className="col-4">
-                      <div className={classes.BoxVideo}>
-                        <Video
-                          {...documento}
-                          ID={this.props.match.params.id}
-                          isCurrentTime={isCurrentTime}
-                          onPlay={this.onPlay}
-                          onPause={this.onPause}
-                          onMarker={this.onMarker}
-                          onControlPlay={isControlPlay}
-                          onRefProgress={refP => (this.refProgress = refP)}
-                          onTimeline={this.handleTimelineMarke}
-                          onRefVideo={ref => (this.refVideo = ref)}
-                          onTimeUpdate={this.handleTimeUpdate}
-                          onDurationChange={event => {
-                            this.setState({
-                              isDuration: event.target.duration,
-                            });
-                          }}
-                        />
-                        <GetMarker ID={this.props.match.params.id} />
-                      </div>
-                      {hasPage && (
-                        <div className={classes.BoxSearch}>
-                          <BuscadorSignficado />
-                        </div>
-                      )}
-                    </div>
+                <div className={classes.BoxPageLeft}>
+                  <Page
+                    onRef={c => (this.refPage = c)}
+                    ID={this.props.match.params.id}
+                    {...documento}
+                  />
+                  <Marker
+                    {...documento}
+                    ID={this.props.match.params.id}
+                    onRefUl={ref => (this.refMarkeUl = ref)}
+                    onTimelSame={this.handleTimelineSame}
+                  />
+                </div>
+              </div>
+            ) : (
+              <div className={classes.WrapperRight}>
+                <div className={classes.BoxPageRight}>
+                  <Marker
+                    {...documento}
+                    ID={this.props.match.params.id}
+                    onRefUl={ref => (this.refMarkeUl = ref)}
+                    onTimelSame={this.handleTimelineSame}
+                  />
+                  <Page
+                    onRef={c => (this.refPage = c)}
+                    ID={this.props.match.params.id}
+                    {...documento}
+                  />
+                </div>
+
+                <div className={classes.GridLeft}>
+                  <div className={classes.BoxVideo}>
+                    <Video
+                      {...documento}
+                      ID={this.props.match.params.id}
+                      isCurrentTime={isCurrentTime}
+                      onPlay={this.onPlay}
+                      onPause={this.onPause}
+                      onMarker={this.onMarker}
+                      onControlPlay={isControlPlay}
+                      onRefProgress={refP => (this.refProgress = refP)}
+                      onTimeline={this.handleTimelineMarke}
+                      onRefVideo={ref => (this.refVideo = ref)}
+                      onTimeUpdate={this.handleTimeUpdate}
+                      onDurationChange={event => {
+                        this.setState({
+                          isDuration: event.target.duration,
+                        });
+                      }}
+                    />
+                    <GetMarker ID={this.props.match.params.id} />
                   </div>
-                </>
-              )}
-            </div>
+                  {hasPage && (
+                    <div className={classes.BoxSearch}>
+                      <BuscadorSignficado />
+                    </div>
+                  )}
+                </div>
+              </div>
+            )}
           </>
         )}
       </div>

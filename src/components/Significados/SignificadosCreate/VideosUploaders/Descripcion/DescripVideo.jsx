@@ -109,7 +109,7 @@ class DescripciónVideo extends Component {
     };
     const storageRef = storage().ref(
       // eslint-disable-next-line prettier/prettier
-      `significados/${this.props.word}/videoDescripcion/descripcion_${this.props.word}`
+      `significados/${this.props.word}/videos/descripcion/descripcion_${this.props.word}`
     );
 
     const uploadTask = storageRef.put(blob, metadata);
