@@ -2,6 +2,7 @@ import {
   GET_TIMELINE_VIDEO_DOC,
   GET_DURATION_VIDEO_DOC,
   GET_PAGE_HEIGHT_DOC,
+  GET_MARKER_TOUCH_HEIGHT,
   SHOW_TAKER_MARKER_DOC,
   HIDE_TAKER_MARKER_DOC,
   GET_TIMELINE_SAME_DOC,
@@ -53,6 +54,12 @@ const DocumentosReducer = (state = initialState, action) => {
       return {
         ...state,
         pageHeight: action.payload,
+      };
+    }
+    case GET_MARKER_TOUCH_HEIGHT: {
+      return {
+        ...state,
+        markerHeight: action.payload,
       };
     }
     case SHOW_TAKER_MARKER_DOC: {

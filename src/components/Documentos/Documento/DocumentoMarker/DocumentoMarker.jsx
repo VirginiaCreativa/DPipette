@@ -1,10 +1,13 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators, compose } from 'redux';
 import { firestoreConnect } from 'react-redux-firebase';
 import classes from './DocumentoMarker.module.scss';
 
-import { getTimelineSame } from '../../../../redux/actions/DocumentosAction';
+import {
+  getTimelineSame,
+  getMarkerTouchHeight,
+} from '../../../../redux/actions/DocumentosAction';
 
 const DocumentoMarker = ({
   markers,
@@ -13,10 +16,22 @@ const DocumentoMarker = ({
   firestore,
   documentos,
   getTimelineSame,
+  viewTakeTimeline,
   onTimelSame,
   addTimeline,
   pageGrid,
+  getMarkerTouchHeight,
+  markerHeight,
+  timelineSame,
 }) => {
+  const [isTouchPointHeight, setTouchPointHeight] = useState(0);
+
+  useEffect(() => {
+    const sameLastMarke =
+      documentos[ID].addTimeline.slice(-1).pop().height + 40;
+    getTimelineSame(sameLastMarke);
+  }, [ID, documentos, getTimelineSame]);
+
   const handleDeleteMarker = (index, item) => {
     const timeDB = documentos[ID].addTimeline;
     firestore.update(`documentos/${ID}`, {
@@ -24,15 +39,36 @@ const DocumentoMarker = ({
     });
   };
 
-  const handleTimelineSame = index => {
-    getTimelineSame(index.time);
+  const pageHeighPoint = ev => {
+    const pointClic = ev.pageY - 140;
+    setTouchPointHeight(pointClic);
+    getMarkerTouchHeight(pointClic);
+  };
+
+  const resutlPointHe = isTouchPointHeight || timelineSame;
+  const boxStyle = {
+    top: `${resutlPointHe}px`,
   };
 
   return (
-    <div className={classes.DocumentoMarker}>
+    <div
+      className={classes.DocumentoMarker}
+      role="presentation"
+      onClick={pageHeighPoint}>
+      {viewTakeTimeline && (
+        <div
+          className={
+            pageGrid
+              ? classes.pinMarkerLeftSelect
+              : classes.pinMarkerRightSelect
+          }
+          role="presentation"
+          style={boxStyle}
+        />
+      )}
       <ul className="list-unstyled">
         {addTimeline.map((item, index) => (
-          <li key={index} style={{ top: `${item.height}px` }} ref={onRef}>
+          <li key={index} style={{ top: `${item.height}px` }}>
             <div
               className={
                 pageGrid ? classes.pinMarkerLeft : classes.pinMarkerRight
@@ -40,6 +76,7 @@ const DocumentoMarker = ({
               role="presentation"
               onClick={() => onTimelSame(item, index)}
             />
+            <span>{index + 1}</span>
             <div
               className={
                 pageGrid ? classes.btnDeleteLeft : classes.btnDeleteRight
@@ -56,13 +93,15 @@ const DocumentoMarker = ({
 };
 
 const mapDispatchToProps = dispatch =>
-  bindActionCreators({ getTimelineSame }, dispatch);
+  bindActionCreators({ getTimelineSame, getMarkerTouchHeight }, dispatch);
 
 export default compose(
   firestoreConnect(['documentos']),
   connect(
     state => ({
       documentos: state.firestore.data.documentos,
+      viewTakeTimeline: state.Documentos.viewTakeTimeline,
+      timelineSame: state.Documentos.timelineSame,
     }),
     mapDispatchToProps
   )

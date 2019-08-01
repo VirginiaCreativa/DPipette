@@ -21,15 +21,15 @@ class DocumentoGetMarker extends Component {
       pageHeight,
       timelineVideo,
       firestore,
+      markerHeight,
     } = this.props;
 
     this.props.isHideTakerMarkerDoc();
     const arrayTimelines = documentos[ID].addTimeline;
-    const PageHeight = Math.floor((pageHeight / durationVideo) * timelineVideo);
     firestore.update(`documentos/${ID}`, {
       addTimeline: arrayTimelines.concat({
         time: timelineVideo,
-        height: PageHeight,
+        height: markerHeight,
       }),
     });
   };
@@ -94,6 +94,7 @@ export default compose(
       pageHeight: state.Documentos.pageHeight,
       documentos: state.firestore.data.documentos,
       timelineSame: state.Documentos.timelineSame,
+      markerHeight: state.Documentos.markerHeight,
     }),
     mapDispatchToProps
   )

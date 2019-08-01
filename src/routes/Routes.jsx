@@ -15,6 +15,7 @@ import SignUp from '../containers/SignUp';
 import Configuration from '../containers/Configuration';
 import Contact from '../containers/Contact';
 import StoragePlan from '../containers/StoragePlan';
+import PruebaMove from '../containers/PruebaMove';
 
 const Routers = () => (
   <>
@@ -33,6 +34,7 @@ const Routers = () => (
       <Route exact path="/configuration" component={Configuration} />
       <Route exact path="/contact" component={Contact} />
       <Route exact path="/storageplan" component={StoragePlan} />
+      <Route exact path="/PruebaMove" component={PruebaMove} />
       <Route exact component={NotFound} />
     </Switch>
   </>

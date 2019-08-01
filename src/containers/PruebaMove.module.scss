@@ -1,0 +1,15 @@
+@import '../styles/variables';
+
+.PageDoc {
+  width: 100px;
+  height: 800px;
+  background-color: $gray_light;
+  display: block;
+  position: relative;
+}
+.Box {
+  background-color: $blue;
+  width: 100px;
+  height: 24px;
+  position: absolute;
+}

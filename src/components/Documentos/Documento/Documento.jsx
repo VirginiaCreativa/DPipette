@@ -21,6 +21,7 @@ import {
   getTimelineVideoDoc,
   getDurationVideoDoc,
   isShowTakerMarkerDoc,
+  getMarkerTouchHeight,
 } from '../../../redux/actions/DocumentosAction';
 
 class Documento extends Component {
@@ -76,6 +77,7 @@ class Documento extends Component {
   onMarker = () => {
     this.props.getTimelineVideoDoc(this.refVideo.currentTime);
     this.props.isShowTakerMarkerDoc();
+    this.props.getMarkerTouchHeight(this.props.timelineSame);
     this.setState({
       isControlPlay: false,
     });
@@ -222,6 +224,7 @@ const mapDispatchToProps = dispatch =>
       getTimelineVideoDoc,
       getDurationVideoDoc,
       isShowTakerMarkerDoc,
+      getMarkerTouchHeight,
     },
     dispatch
   );
@@ -240,6 +243,7 @@ export default compose(
         durationVideo: state.Documentos.duration,
         timelineVideo: state.Documentos.timeline,
         hasPage: state.Documentos.hasPage,
+        timelineSame: state.Documentos.timelineSame,
       };
     },
     mapDispatchToProps

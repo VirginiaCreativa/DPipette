@@ -9,18 +9,18 @@
 		margin-bottom: 30px;
 		position: fixed;
 		width:100%;
-		max-width: 450px;
+		max-width: 520px;
 		@media (min-width: 1920px) {
 			max-width: 520px
 		}
 		@media (max-width: 1600px) {
-			max-width: 420px
+			max-width: 460px
 		}
 		@media (max-width: 1440px) {
-			max-width: 380px
+			max-width: 420px
 		}
 		@media (max-width: 1366px) {
-			max-width: 360px
+			max-width: 400px
 		}
 		@media (max-width: 1280px) {
 			max-width: 340px
@@ -28,7 +28,7 @@
 	}
 	.WrapperLeft {
 		display: grid;
-		grid-template-columns: 30% 70%;
+		grid-template-columns: 35% 65%;
 		grid-gap: 20px;
 		.BoxPageLeft {
 			display: grid;
@@ -37,7 +37,7 @@
 	}
 	.WrapperRight {
 		display: grid;
-		grid-template-columns: 70% 30%;
+		grid-template-columns: 65% 35%;
 		grid-gap: 20px;
 		.BoxPageRight {
 			display: grid;

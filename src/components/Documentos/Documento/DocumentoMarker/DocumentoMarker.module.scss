@@ -2,7 +2,102 @@
 
 .DocumentoMarker {
 	position: relative;
-	padding: 20px 0;
+	.pinMarkerSelect {
+		display: block;
+		background-color: $red;
+		position: absolute;
+		padding: 0px;
+		width: 36px;
+		height: 14px;
+		border-top-left-radius: 2px;
+		border-bottom-left-radius: 2px;
+		z-index: 100;
+		cursor: pointer;
+	}
+	.pinMarkerLeftSelect {
+		left: -14px;
+		transform: rotate(-180deg);
+		@extend .pinMarkerSelect;
+
+		&:before {
+			content: '';
+			display: block;
+			position: absolute;
+			top: 0;
+			right: -8px;
+			border-top: 7px solid transparent;
+			border-left: 8px solid $red;
+			border-bottom: 7px solid transparent;
+			z-index: 2;
+		}
+		&:after {
+			content: '';
+			display: block;
+			background-color: $red;
+			box-shadow: -2px 0px 4px 0px rgba(0, 0, 0, 0.11);
+			position: absolute;
+			top: 0;
+			right: 9px;
+			width: 5px;
+			height: 14px;
+			z-index: 2;
+		}
+		&:hover {
+			background-color: $red_dark;
+			&:before {
+				border-top: 7px solid transparent;
+				border-left: 8px solid $red_dark;
+				border-bottom: 7px solid transparent;
+			}
+			&::after {
+				background-color: $red_dark;
+				box-shadow: -2px 0px 1px 0px rgba(0, 0, 0, 0.1);
+			}
+		}
+	}
+	.pinMarkerRightSelect {
+		left: 20px;
+		transform: rotate(0deg);
+		@extend .pinMarker;
+
+		&:before {
+			content: '';
+			display: block;
+			position: absolute;
+			top: 0;
+			right: -8px;
+			border-top: 7px solid transparent;
+			border-left: 8px solid $red;
+			border-bottom: 7px solid transparent;
+			z-index: 2;
+		}
+		&:after {
+			content: '';
+			display: block;
+			background-color: $red;
+			box-shadow: -2px 0px 4px 0px rgba(0, 0, 0, 0.11);
+			position: absolute;
+			top: 0;
+			right: 9px;
+			width: 5px;
+			height: 14px;
+			z-index: 2;
+		}
+		&:hover {
+			background-color: $red_dark;
+			&:before {
+				border-top: 7px solid transparent;
+				border-left: 8px solid $red_dark;
+				border-bottom: 7px solid transparent;
+			}
+			&::after {
+				background-color: $red_dark;
+				box-shadow: -2px 0px 1px 0px rgba(0, 0, 0, 0.1);
+			}
+		}
+	}
+
+
 	ul {
 		position: relative;
 		margin: 0;

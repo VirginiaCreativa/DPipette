@@ -2,6 +2,7 @@ import {
   GET_TIMELINE_VIDEO_DOC,
   GET_DURATION_VIDEO_DOC,
   GET_PAGE_HEIGHT_DOC,
+  GET_MARKER_TOUCH_HEIGHT,
   SHOW_TAKER_MARKER_DOC,
   HIDE_TAKER_MARKER_DOC,
   GET_TIMELINE_SAME_DOC,
@@ -28,6 +29,11 @@ export const getDurationVideoDoc = payload => ({
 
 export const getPageHeightDoc = payload => ({
   type: GET_PAGE_HEIGHT_DOC,
+  payload,
+});
+
+export const getMarkerTouchHeight = payload => ({
+  type: GET_MARKER_TOUCH_HEIGHT,
   payload,
 });
 
