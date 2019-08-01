@@ -27,9 +27,12 @@ const DocumentoMarker = ({
   const [isTouchPointHeight, setTouchPointHeight] = useState(0);
 
   useEffect(() => {
-    const sameLastMarke =
-      documentos[ID].addTimeline.slice(-1).pop().height + 40;
-    getTimelineSame(sameLastMarke);
+    const existeTime = documentos[ID].addTimeline;
+    if (existeTime.length >= 1) {
+      const sameLastMarke =
+        documentos[ID].addTimeline.slice(-1).pop().height + 40;
+      getTimelineSame(sameLastMarke);
+    }
   }, [ID, documentos, getTimelineSame]);
 
   const handleDeleteMarker = (index, item) => {

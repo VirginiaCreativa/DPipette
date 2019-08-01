@@ -172,7 +172,7 @@ const DocumentoVideo = ({
       ) : (
         <>
           <div className={classes.BoxFile}>
-            <h6>Subir un video del intérprete o traducción</h6>
+            <h6>Subir un video de la intérprete o traducción</h6>
             <input
               type="file"
               name="imagendestacada"
