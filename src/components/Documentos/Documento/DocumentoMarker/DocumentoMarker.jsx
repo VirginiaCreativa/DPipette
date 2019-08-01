@@ -26,15 +26,6 @@ const DocumentoMarker = ({
 }) => {
   const [isTouchPointHeight, setTouchPointHeight] = useState(0);
 
-  useEffect(() => {
-    const existeTime = documentos[ID].addTimeline;
-    if (existeTime.length >= 1) {
-      const sameLastMarke =
-        documentos[ID].addTimeline.slice(-1).pop().height + 40;
-      getTimelineSame(sameLastMarke);
-    }
-  }, [ID, documentos, getTimelineSame]);
-
   const handleDeleteMarker = (index, item) => {
     const timeDB = documentos[ID].addTimeline;
     firestore.update(`documentos/${ID}`, {
@@ -52,6 +43,15 @@ const DocumentoMarker = ({
   const boxStyle = {
     top: `${resutlPointHe}px`,
   };
+
+  useEffect(() => {
+    const existeTime = documentos[ID].addTimeline;
+    if (existeTime.length >= 1) {
+      const sameLastMarke =
+        documentos[ID].addTimeline.slice(-1).pop().height + 40;
+      getTimelineSame(sameLastMarke);
+    }
+  }, [ID, documentos, getTimelineSame]);
 
   return (
     <div

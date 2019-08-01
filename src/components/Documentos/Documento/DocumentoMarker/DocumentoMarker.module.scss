@@ -106,12 +106,12 @@
 		height: 100%;
 		li {
 			display: flex;
+			opacity: 1;
 			position: absolute;
 			margin: 0;
 			padding: 0;
-			z-index: 1;
 			transition: all ease .3s;
-			opacity: 1;
+			z-index: 1;
 			&:hover {
 				.btnDeleteLeft,
 				.btnDeleteRight {
@@ -149,11 +149,11 @@
 				}
 			}
 			span {
-				position: absolute;
-				left: 6px;
-				bottom: 12px;
-				color: $gray_light;
 				font-size: 0.8rem;
+				color: $gray_light;
+				position: absolute;
+				bottom: 12px;
+				left: 6px;
 			}
 			.pinMarker {
 				display: block;

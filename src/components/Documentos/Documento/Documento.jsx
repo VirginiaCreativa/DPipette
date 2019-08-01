@@ -77,7 +77,7 @@ class Documento extends Component {
   onMarker = () => {
     this.props.getTimelineVideoDoc(this.refVideo.currentTime);
     this.props.isShowTakerMarkerDoc();
-    this.props.getMarkerTouchHeight(this.props.timelineSame);
+    this.props.getMarkerTouchHeight(this.props.timelineSame + 40);
     this.setState({
       isControlPlay: false,
     });

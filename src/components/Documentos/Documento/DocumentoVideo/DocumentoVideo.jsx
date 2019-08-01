@@ -31,15 +31,12 @@ const DocumentoVideo = ({
   const [isProgressUploadValue, setProgressUploadValue] = useState(0);
   const [isActiveEditable, setActiveEditable] = useState(false);
 
-  useEffect(
-    () => () => {
-      setTimeout(() => {
-        setProgressUploadValue(0);
-      }, 20000);
-      setActiveEditable(!showEditable);
-    },
-    [showEditable, videoDoc]
-  );
+  useEffect(() => () => {
+    setTimeout(() => {
+      setProgressUploadValue(0);
+    }, 20000);
+    setActiveEditable(!showEditable);
+  });
 
   const fileName = documentos[ID].filenameVideoDoc;
   const materiaFB = documentos[ID].materia.toLowerCase();
@@ -135,12 +132,15 @@ const DocumentoVideo = ({
     width: `${isProgressUploadValue}%`,
   };
 
+  const onClickPlay = ev => {
+    console.log(ev.target);
+  };
   return (
     <>
       {hasVideo ? (
         <>
           <div className={classes.VideoPlayer}>
-            {isActiveEditable && (
+            {showEditable && (
               <button
                 type="button"
                 onClick={handleRemoveVideo}
@@ -157,6 +157,7 @@ const DocumentoVideo = ({
               onRefProgress={onRefProgress}
               onTimeline={onTimeline}
               addTimeline={addTimeline}
+              onClickPlay={onClickPlay}
             />
             <video
               className="img-fluid"

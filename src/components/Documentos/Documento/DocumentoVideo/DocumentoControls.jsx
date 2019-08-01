@@ -18,6 +18,7 @@ const Controls = ({
   durationVideo,
   onTimeline,
   addTimeline,
+  onClickPlay,
 }) => {
   const [isWidthProgress, setWidthProgress] = useState(0);
   const refProgressSlider = useRef(null);
@@ -75,6 +76,7 @@ const Controls = ({
         <div
           className={classes.Progress}
           ref={onRefProgress}
+          onClick={onClickPlay}
           role="button"
           tabIndex="0">
           <div className={classes.ProgressFilled} style={progressClass} />

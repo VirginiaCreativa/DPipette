@@ -6,24 +6,24 @@
 		grid-template-columns: 85% 1fr;
 	}
 	.BoxVideo {
-		margin-bottom: 30px;
 		position: fixed;
+		margin-bottom: 30px;
 		width:100%;
 		max-width: 520px;
 		@media (min-width: 1920px) {
-			max-width: 600px
+			max-width: 600px;
 		}
 		@media (max-width: 1600px) {
-			max-width: 460px
+			max-width: 460px;
 		}
 		@media (max-width: 1440px) {
-			max-width: 420px
+			max-width: 420px;
 		}
 		@media (max-width: 1366px) {
-			max-width: 400px
+			max-width: 400px;
 		}
 		@media (max-width: 1280px) {
-			max-width: 340px
+			max-width: 340px;
 		}
 	}
 	.WrapperLeft {
