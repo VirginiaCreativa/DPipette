@@ -2,6 +2,7 @@
 
 .DocumentoMarker {
 	position: relative;
+	cursor: pointer;
 	.pinMarkerSelect {
 		display: block;
 		background-color: $red;
@@ -109,12 +110,17 @@
 			margin: 0;
 			padding: 0;
 			z-index: 1;
+			transition: all ease .3s;
+			opacity: 1;
 			&:hover {
-				.btnDeleteLeft {
-					display: flex;
-				}
+				.btnDeleteLeft,
 				.btnDeleteRight {
 					display: flex;
+					opacity: 1;
+				}
+				span {
+					display: none;
+					opacity: 0;
 				}
 			}
 			.btnDeleteLeft {
@@ -123,7 +129,7 @@
 					.bx-trash-alt {
 						color: $red;
 						position: relative;
-						top: -1px;
+						top: -3px;
 						left: -8px;
 						cursor: pointer;
 					}
@@ -131,15 +137,23 @@
 			}
 			.btnDeleteRight {
 				display: none;
+				opacity: 0;
 				:global {
 					.bx-trash-alt {
 						color: $red;
 						position: relative;
-						top: -1px;
+						top: -3px;
 						right: 36px;
 						cursor: pointer;
 					}
 				}
+			}
+			span {
+				position: absolute;
+				left: 6px;
+				bottom: 12px;
+				color: $gray_light;
+				font-size: 0.8rem;
 			}
 			.pinMarker {
 				display: block;
